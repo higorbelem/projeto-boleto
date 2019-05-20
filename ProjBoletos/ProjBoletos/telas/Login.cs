@@ -39,7 +39,7 @@ namespace ProjBoletos.telas {
         }
 
         private bool logar(string cnpj, string senha) {
-            var client = new RestClient("http://localhost/proj-boletos/logarCedente.php");
+            var client = new RestClient("http://localhost/projeto-boletos-server/logarCedente.php");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
             var request = new RestRequest("text/plain");
@@ -92,6 +92,10 @@ namespace ProjBoletos.telas {
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) {
+
+        }
+
+        private void buttonTeste1_Load(object sender, EventArgs e) {
 
         }
     }

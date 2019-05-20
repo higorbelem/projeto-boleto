@@ -66,6 +66,7 @@
             this.buttonTeste1.Name = "buttonTeste1";
             this.buttonTeste1.Size = new System.Drawing.Size(147, 36);
             this.buttonTeste1.TabIndex = 2;
+            this.buttonTeste1.Load += new System.EventHandler(this.buttonTeste1_Load);
             this.buttonTeste1.Click += new System.EventHandler(this.buttonTeste1_click);
             // 
             // box1

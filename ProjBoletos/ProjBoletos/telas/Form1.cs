@@ -64,7 +64,7 @@ namespace ProjBoletos {
         }
 
         private string getAllSacadoAsync(string id) {
-            var client = new RestClient("http://localhost/proj-boletos/getAllSacado.php");
+            var client = new RestClient("http://localhost/projeto-boletos-server/getAllSacado.php");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
             var request = new RestRequest("text/plain");
