@@ -15,7 +15,7 @@ namespace ProjBoletos.components {
         public Color normalColor = ColorTranslator.FromHtml("#434549");
         public Color onEnterColor = ColorTranslator.FromHtml("#595c62");
         public Color onClickColor = ColorTranslator.FromHtml("#747881");
-
+        public Color titleColor = Color.White;
 
         public Color selectedColor = ColorTranslator.FromHtml("#3289d8");
 
@@ -113,12 +113,12 @@ namespace ProjBoletos.components {
 
             e.Graphics.FillRectangle(brush,rectangle);
             
-            Rectangle rectForString= new Rectangle(icon1.Size.Width + icon1.Location.X + distIconString, 0, this.Size.Width - icon1.Size.Width, this.Size.Height);
+            Rectangle rectForString= new Rectangle(icon1.Size.Width + icon1.Location.X + distIconString, 0, this.Size.Width - icon1.Size.Width, ClientRectangle.Height);
 
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Color.White), rectForString, sf);
+            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(titleColor), rectForString, sf);
 
             if (selected) {
                 int selectedWidth = 7;

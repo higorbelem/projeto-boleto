@@ -87,6 +87,12 @@
     <Compile Include="components\PictureBoxWithInterpolationMode.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="components\RectangleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\RectangleButton.Designer.cs">
+      <DependentUpon>RectangleButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\RoundedRectangles.cs" />
     <Compile Include="components\Separator.cs">
       <SubType>UserControl</SubType>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\ParteCimaBoleto.resx">
       <DependentUpon>ParteCimaBoleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\RectangleButton.resx">
+      <DependentUpon>RectangleButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\Separator.resx">
       <DependentUpon>Separator.cs</DependentUpon>

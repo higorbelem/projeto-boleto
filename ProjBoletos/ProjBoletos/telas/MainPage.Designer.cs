@@ -43,7 +43,6 @@
             // 
             // sideBarFlowPanel
             // 
-            this.sideBarFlowPanel.AutoScroll = true;
             this.sideBarFlowPanel.BackColor = System.Drawing.Color.White;
             this.sideBarFlowPanel.Controls.Add(this.logoImage);
             this.sideBarFlowPanel.Controls.Add(this.separator1);
@@ -110,14 +109,13 @@
             // 
             // topBarFlowLayout
             // 
-            this.topBarFlowLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.topBarFlowLayout.BackColor = System.Drawing.Color.Gray;
             this.topBarFlowLayout.Controls.Add(this.accountButton);
             this.topBarFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.topBarFlowLayout.Location = new System.Drawing.Point(219, 12);
             this.topBarFlowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.topBarFlowLayout.Name = "topBarFlowLayout";
-            this.topBarFlowLayout.Size = new System.Drawing.Size(370, 50);
+            this.topBarFlowLayout.Size = new System.Drawing.Size(370, 40);
             this.topBarFlowLayout.TabIndex = 3;
             this.topBarFlowLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.topBarFlowLayout_Paint);
             // 
@@ -134,7 +132,7 @@
             // 
             this.dropMenu.Controls.Add(this.dropMenuButtonSair);
             this.dropMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.dropMenu.Location = new System.Drawing.Point(478, 79);
+            this.dropMenu.Location = new System.Drawing.Point(604, 0);
             this.dropMenu.Name = "dropMenu";
             this.dropMenu.Size = new System.Drawing.Size(200, 100);
             this.dropMenu.TabIndex = 4;
@@ -152,7 +150,7 @@
             // configControl
             // 
             this.configControl.BackColor = System.Drawing.Color.Snow;
-            this.configControl.Location = new System.Drawing.Point(138, 142);
+            this.configControl.Location = new System.Drawing.Point(367, 177);
             this.configControl.Name = "configControl";
             this.configControl.Size = new System.Drawing.Size(451, 410);
             this.configControl.TabIndex = 2;
@@ -161,6 +159,7 @@
             // 
             this.homeControl.BackColor = System.Drawing.Color.Snow;
             this.homeControl.Location = new System.Drawing.Point(260, 89);
+            this.homeControl.Margin = new System.Windows.Forms.Padding(0);
             this.homeControl.Name = "homeControl";
             this.homeControl.Size = new System.Drawing.Size(503, 498);
             this.homeControl.TabIndex = 1;
@@ -180,6 +179,7 @@
             this.Text = "Main";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.sideBarFlowPanel.ResumeLayout(false);
             this.sideBarFlowPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoImage)).EndInit();

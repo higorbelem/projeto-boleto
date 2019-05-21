@@ -21,11 +21,11 @@ namespace ProjBoletos.components {
         public PictureBoxWithInterpolationMode icon;
         public PictureBoxWithInterpolationMode dropIcon;
 
-        public int imagePadding = 12;
+        public int imagePadding = 8;
         public int distIconString = 5;
         public int marginLeftIcon = 5;
 
-        public int marginRightDropIcon = 30;
+        public int marginRightDropIcon = 10;
 
 
         public AccountButton() {

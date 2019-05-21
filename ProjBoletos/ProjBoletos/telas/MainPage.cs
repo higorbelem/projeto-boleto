@@ -17,41 +17,28 @@ namespace ProjBoletos.telas {
         private void Main_Load(object sender, EventArgs e) {
             bringClickedControl("home");
 
+            btnConfig.icon.Click += new EventHandler(btnConfig_click);
+            btnHome.icon.Click += new EventHandler(btnHome_click);
+            accountButton.icon.Click += new EventHandler(accountButton_click);
+            accountButton.dropIcon.Click += new EventHandler(accountButton_click);
+
             sideBarFlowPanel.BackColor = ColorTranslator.FromHtml("#434549");
-            sideBarFlowPanel.Size = new Size(200, Height);
 
             topBarFlowLayout.BackColor = ColorTranslator.FromHtml("#383a3d");
-            topBarFlowLayout.Location = new Point(sideBarFlowPanel.Width,0);
-            topBarFlowLayout.Size = new Size(Width - sideBarFlowPanel.Width, 50);
 
             accountButton.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             accountButton.dropIcon.Image = new Bitmap(Properties.Resources.icon_drop_arrow);
             accountButton.title = "Nome";
-            accountButton.Height = topBarFlowLayout.Height;
-
-            homeControl.Location = new Point(sideBarFlowPanel.Width,topBarFlowLayout.Height);
-            homeControl.Size = new Size(Width - sideBarFlowPanel.Width,Height - topBarFlowLayout.Height);
-            configControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
-            configControl.Size = new Size(Width - sideBarFlowPanel.Width, Height - topBarFlowLayout.Height);
 
             btnHome.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             btnHome.title = "HOME";
-            btnHome.Width = sideBarFlowPanel.Width;
-
-            separator1.Size = new Size(sideBarFlowPanel.Width, 30);
             
-            logoImage.Size = new Size(sideBarFlowPanel.Width, sideBarFlowPanel.Width );
 
             btnConfig.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             btnConfig.title = "CONFIGURAÇÕES";
-            btnConfig.Width = sideBarFlowPanel.Width;
-
-            dropMenu.Size = new Size(177, 0);
-            dropMenu.Location = new Point(Width - dropMenu.Width, topBarFlowLayout.Height);
+            
             dropMenu.Visible = false;
-
-            dropMenuButtonSair.Location = new Point(0,0);
-            dropMenuButtonSair.Size = new Size(dropMenu.Width,50);
+            
             dropMenuButtonSair.marginLeftIcon = 0;
             dropMenuButtonSair.distIconString = 0;
             dropMenuButtonSair.title = "SAIR";
@@ -60,6 +47,35 @@ namespace ProjBoletos.telas {
             timer.AutoReset = true;
             timer.SynchronizingObject = this;
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+        }
+
+        private void Main_Resize(object sender, EventArgs e) {
+            sideBarFlowPanel.Location = new Point(0, 0);
+            sideBarFlowPanel.Size = new Size(200, ClientRectangle.Height);
+            
+            topBarFlowLayout.Location = new Point(sideBarFlowPanel.Width, 0);
+            topBarFlowLayout.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, 35);
+            
+            accountButton.Height = topBarFlowLayout.Height;
+
+            homeControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
+            homeControl.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
+            configControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
+            configControl.Size = new Size(Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
+
+            btnHome.Width = sideBarFlowPanel.Width;
+
+            separator1.Size = new Size(sideBarFlowPanel.Width, 30);
+
+            logoImage.Size = new Size(sideBarFlowPanel.Width, sideBarFlowPanel.Width);
+
+            btnConfig.Width = sideBarFlowPanel.Width;
+
+            dropMenu.Size = new Size(177, 0);
+            dropMenu.Location = new Point(ClientRectangle.Width - dropMenu.Width, topBarFlowLayout.Height);
+
+            dropMenuButtonSair.Location = new Point(0, 0);
+            dropMenuButtonSair.Size = new Size(dropMenu.Width, 50);
         }
 
         private void timer_Elapsed(object sender, ElapsedEventArgs e) {
