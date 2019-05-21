@@ -20,7 +20,7 @@ namespace ProjBoletos.telas {
             meuTextboxSenha.hint = "SENHA";
             meuTextboxSenha.isPassword = true;
 
-            box1.radius = 10;
+            box1.radius = 3;
             box1.shadowSize = 5;
 
             this.KeyDown += new KeyEventHandler(Login_KeyDown);
@@ -71,9 +71,9 @@ namespace ProjBoletos.telas {
 
             if (result) {
                 this.Hide();
-                Form1 form1 = new Form1();
-                form1.Closed += (s, args) => this.Close();
-                form1.Show();
+                MainPage mainPage = new MainPage();
+                mainPage.Closed += (s, args) => this.Close();
+                mainPage.Show();
             }
 
             Console.WriteLine(meuTextboxCnpj.txtBox.Text);

@@ -24,3 +24,10 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.testes.MeuButton.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.Box.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.MeuTextbox.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.MainPage.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.SidebarButton.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.HomeControl.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.ConfigControl.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.AccountButton.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.Separator.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.MainCard.resources

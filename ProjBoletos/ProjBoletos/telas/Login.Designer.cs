@@ -37,7 +37,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BackgroundImage = global::ProjBoletos.Properties.Resources.logo2;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(336, 94);
+            this.pictureBox1.Location = new System.Drawing.Point(364, 94);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(215, 155);
             this.pictureBox1.TabIndex = 8;
@@ -46,7 +46,7 @@
             // meuTextboxSenha
             // 
             this.meuTextboxSenha.BackColor = System.Drawing.Color.White;
-            this.meuTextboxSenha.Location = new System.Drawing.Point(345, 309);
+            this.meuTextboxSenha.Location = new System.Drawing.Point(373, 309);
             this.meuTextboxSenha.Name = "meuTextboxSenha";
             this.meuTextboxSenha.Size = new System.Drawing.Size(196, 39);
             this.meuTextboxSenha.TabIndex = 1;
@@ -54,7 +54,7 @@
             // meuTextboxCnpj
             // 
             this.meuTextboxCnpj.BackColor = System.Drawing.Color.White;
-            this.meuTextboxCnpj.Location = new System.Drawing.Point(345, 264);
+            this.meuTextboxCnpj.Location = new System.Drawing.Point(373, 264);
             this.meuTextboxCnpj.Name = "meuTextboxCnpj";
             this.meuTextboxCnpj.Size = new System.Drawing.Size(196, 39);
             this.meuTextboxCnpj.TabIndex = 0;
@@ -62,7 +62,7 @@
             // buttonTeste1
             // 
             this.buttonTeste1.BackColor = System.Drawing.Color.White;
-            this.buttonTeste1.Location = new System.Drawing.Point(370, 372);
+            this.buttonTeste1.Location = new System.Drawing.Point(398, 372);
             this.buttonTeste1.Name = "buttonTeste1";
             this.buttonTeste1.Size = new System.Drawing.Size(147, 36);
             this.buttonTeste1.TabIndex = 2;
@@ -72,7 +72,7 @@
             // box1
             // 
             this.box1.BackColor = System.Drawing.Color.Transparent;
-            this.box1.Location = new System.Drawing.Point(281, 31);
+            this.box1.Location = new System.Drawing.Point(309, 31);
             this.box1.Name = "box1";
             this.box1.Size = new System.Drawing.Size(324, 462);
             this.box1.TabIndex = 7;

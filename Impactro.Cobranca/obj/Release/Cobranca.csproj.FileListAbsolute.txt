@@ -1,0 +1,2 @@
+C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Cobranca.csprojAssemblyReference.cache
+C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Cobranca.csproj.CoreCompileInputs.cache

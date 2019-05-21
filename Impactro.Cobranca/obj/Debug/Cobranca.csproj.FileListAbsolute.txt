@@ -10,3 +10,4 @@ C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\bin\Debug\Impactro.Cobra
 C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Debug\Cobranca.csproj.CoreCompileInputs.cache
 C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Debug\Impactro.Cobranca.dll
 C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Debug\Impactro.Cobranca.pdb
+C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Debug\Cobranca.csprojAssemblyReference.cache
