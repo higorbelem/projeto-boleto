@@ -153,6 +153,18 @@
     <Compile Include="telas\mainPageControls\HomeControl.Designer.cs">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabBoletos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabBoletos.Designer.cs">
+      <DependentUpon>TabBoletos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabMedicoes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabMedicoes.Designer.cs">
+      <DependentUpon>TabMedicoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="testes\drawTeste.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,7 @@
     <Compile Include="testes\TESTE.Designer.cs">
       <DependentUpon>TESTE.cs</DependentUpon>
     </Compile>
+    <Compile Include="utils\ServerConfig.cs" />
     <EmbeddedResource Include="components\AccountButton.resx">
       <DependentUpon>AccountButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,6 +232,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabBoletos.resx">
+      <DependentUpon>TabBoletos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabMedicoes.resx">
+      <DependentUpon>TabMedicoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="testes\drawTeste.resx">
       <DependentUpon>drawTeste.cs</DependentUpon>

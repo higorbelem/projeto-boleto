@@ -15,7 +15,7 @@ namespace ProjBoletos.components {
         public Color onClickColor = ColorTranslator.FromHtml("#747881");
 
         public Color unselectedTitleColor = ColorTranslator.FromHtml("#8c8c8c");
-        public Color selectedTitleColor = ColorTranslator.FromHtml("#666666");
+        public Color selectedTitleColor = ColorTranslator.FromHtml("#404040");
         public Color atualTitleColor = ColorTranslator.FromHtml("#8c8c8c");
 
         public string title = "LOGARA";
@@ -104,20 +104,11 @@ namespace ProjBoletos.components {
             }
             e.Graphics.DrawString(title, new Font("Ebrima", 12), new SolidBrush(atualTitleColor), rectangle, sf);
 
-            
-
-            /*GraphicsPath path = RoundedRectangles.Create(rectangle, 5);
-
-            Brush brush = new SolidBrush(atualColor);
-
-            e.Graphics.FillPath(brush, path);
-            e.Graphics.DrawPath(new Pen(brush), path);
-
-            StringFormat sf = new StringFormat();
-            sf.LineAlignment = StringAlignment.Center;
-            sf.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("LOGAR", new Font("Arial", 10, FontStyle.Bold), new SolidBrush(Color.White), ClientRectangle, sf);
-            */
+            if (selected) {
+                int selectedWidth = 3;
+                Rectangle rectSelected = new Rectangle(0, ClientRectangle.Height - selectedWidth, ClientRectangle.Width, selectedWidth);
+                e.Graphics.FillRectangle(new SolidBrush(unselectedTitleColor), rectSelected);
+            }
         }
     }
 }

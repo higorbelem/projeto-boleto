@@ -23,51 +23,13 @@
         /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent() {
-            this.mainCard4 = new ProjBoletos.components.MainCard();
-            this.mainCard3 = new ProjBoletos.components.MainCard();
-            this.mainCard2 = new ProjBoletos.components.MainCard();
-            this.mainCard1 = new ProjBoletos.components.MainCard();
             this.tabMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.tabMedicoes = new ProjBoletos.components.RectangleButton();
             this.tabBoletos = new ProjBoletos.components.RectangleButton();
+            this.tabMedicoesWindow = new ProjBoletos.telas.mainPageControls.HomeTabs.TabMedicoes();
+            this.tabBoletosWindow = new ProjBoletos.telas.mainPageControls.HomeTabs.TabBoletos();
             this.tabMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mainCard4
-            // 
-            this.mainCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(69)))), ((int)(((byte)(73)))));
-            this.mainCard4.Location = new System.Drawing.Point(1015, 295);
-            this.mainCard4.Margin = new System.Windows.Forms.Padding(0);
-            this.mainCard4.Name = "mainCard4";
-            this.mainCard4.Size = new System.Drawing.Size(293, 220);
-            this.mainCard4.TabIndex = 3;
-            // 
-            // mainCard3
-            // 
-            this.mainCard3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(69)))), ((int)(((byte)(73)))));
-            this.mainCard3.Location = new System.Drawing.Point(684, 295);
-            this.mainCard3.Margin = new System.Windows.Forms.Padding(0);
-            this.mainCard3.Name = "mainCard3";
-            this.mainCard3.Size = new System.Drawing.Size(293, 220);
-            this.mainCard3.TabIndex = 2;
-            // 
-            // mainCard2
-            // 
-            this.mainCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(69)))), ((int)(((byte)(73)))));
-            this.mainCard2.Location = new System.Drawing.Point(343, 295);
-            this.mainCard2.Margin = new System.Windows.Forms.Padding(0);
-            this.mainCard2.Name = "mainCard2";
-            this.mainCard2.Size = new System.Drawing.Size(293, 220);
-            this.mainCard2.TabIndex = 1;
-            // 
-            // mainCard1
-            // 
-            this.mainCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(69)))), ((int)(((byte)(73)))));
-            this.mainCard1.Location = new System.Drawing.Point(24, 295);
-            this.mainCard1.Margin = new System.Windows.Forms.Padding(0);
-            this.mainCard1.Name = "mainCard1";
-            this.mainCard1.Size = new System.Drawing.Size(293, 220);
-            this.mainCard1.TabIndex = 0;
             // 
             // tabMenu
             // 
@@ -86,6 +48,7 @@
             this.tabMedicoes.Name = "tabMedicoes";
             this.tabMedicoes.Size = new System.Drawing.Size(240, 100);
             this.tabMedicoes.TabIndex = 0;
+            this.tabMedicoes.Click += new System.EventHandler(this.tabMedicoes_Click);
             // 
             // tabBoletos
             // 
@@ -94,17 +57,34 @@
             this.tabBoletos.Name = "tabBoletos";
             this.tabBoletos.Size = new System.Drawing.Size(240, 100);
             this.tabBoletos.TabIndex = 1;
+            this.tabBoletos.Load += new System.EventHandler(this.tabBoletos_Load);
+            this.tabBoletos.Click += new System.EventHandler(this.tabBoletos_Click);
+            // 
+            // tabMedicoesWindow
+            // 
+            this.tabMedicoesWindow.AutoScroll = true;
+            this.tabMedicoesWindow.BackColor = System.Drawing.SystemColors.Control;
+            this.tabMedicoesWindow.Location = new System.Drawing.Point(49, 218);
+            this.tabMedicoesWindow.Name = "tabMedicoesWindow";
+            this.tabMedicoesWindow.Size = new System.Drawing.Size(2000, 2000);
+            this.tabMedicoesWindow.TabIndex = 6;
+            // 
+            // tabBoletosWindow
+            // 
+            this.tabBoletosWindow.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBoletosWindow.Location = new System.Drawing.Point(27, 144);
+            this.tabBoletosWindow.Name = "tabBoletosWindow";
+            this.tabBoletosWindow.Size = new System.Drawing.Size(473, 228);
+            this.tabBoletosWindow.TabIndex = 5;
             // 
             // HomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.tabMedicoesWindow);
+            this.Controls.Add(this.tabBoletosWindow);
             this.Controls.Add(this.tabMenu);
-            this.Controls.Add(this.mainCard4);
-            this.Controls.Add(this.mainCard3);
-            this.Controls.Add(this.mainCard2);
-            this.Controls.Add(this.mainCard1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "HomeControl";
             this.Size = new System.Drawing.Size(2000, 2000);
@@ -116,13 +96,10 @@
         }
 
         #endregion
-
-        private components.MainCard mainCard1;
-        private components.MainCard mainCard2;
-        private components.MainCard mainCard3;
-        private components.MainCard mainCard4;
         private System.Windows.Forms.FlowLayoutPanel tabMenu;
         private components.RectangleButton tabMedicoes;
         private components.RectangleButton tabBoletos;
+        private HomeTabs.TabBoletos tabBoletosWindow;
+        private HomeTabs.TabMedicoes tabMedicoesWindow;
     }
 }

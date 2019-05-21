@@ -1,5 +1,6 @@
 ﻿using Impactro.Cobranca;
 using Newtonsoft.Json;
+using ProjBoletos.utils;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace ProjBoletos.telas {
         }
 
         private bool logar(string cnpj, string senha) {
-            var client = new RestClient("http://localhost/projeto-boletos-server/logarCedente.php");
+            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/logarCedente.php");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
             var request = new RestRequest("text/plain");

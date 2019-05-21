@@ -126,6 +126,7 @@
             this.accountButton.Name = "accountButton";
             this.accountButton.Size = new System.Drawing.Size(177, 50);
             this.accountButton.TabIndex = 0;
+            this.accountButton.Load += new System.EventHandler(this.accountButton_Load);
             this.accountButton.Click += new System.EventHandler(this.accountButton_click);
             // 
             // dropMenu

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Impactro.Cobranca;
+using Newtonsoft.Json;
+using System;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
@@ -9,9 +11,19 @@ namespace ProjBoletos.telas {
         System.Timers.Timer timer;
 
         bool animationToOpen = true;
+        
+        CedenteInfo cedente = new CedenteInfo();
 
         public MainPage() {
             InitializeComponent();
+
+            var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+            cedente = JsonConvert.DeserializeObject<CedenteInfo>(cedenteJson);
+
+            if (cedente == null) {
+                Application.Exit();
+            }
+
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -28,7 +40,7 @@ namespace ProjBoletos.telas {
 
             accountButton.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             accountButton.dropIcon.Image = new Bitmap(Properties.Resources.icon_drop_arrow);
-            accountButton.title = "Nome";
+            accountButton.title = cedente.Cedente;
 
             btnHome.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             btnHome.title = "HOME";
@@ -162,6 +174,10 @@ namespace ProjBoletos.telas {
         }
 
         private void dropMenuButtonSair_Load(object sender, EventArgs e) {
+
+        }
+
+        private void accountButton_Load(object sender, EventArgs e) {
 
         }
     }
