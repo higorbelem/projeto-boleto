@@ -24,10 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.tabMenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabMedicoes = new ProjBoletos.components.RectangleButton();
-            this.tabBoletos = new ProjBoletos.components.RectangleButton();
+            this.boletosCustomScrollbar = new CustomControls.CustomScrollbar();
+            this.medicoesCustomScrollbar = new CustomControls.CustomScrollbar();
             this.tabMedicoesWindow = new ProjBoletos.telas.mainPageControls.HomeTabs.TabMedicoes();
             this.tabBoletosWindow = new ProjBoletos.telas.mainPageControls.HomeTabs.TabBoletos();
+            this.tabMedicoes = new ProjBoletos.components.RectangleButton();
+            this.tabBoletos = new ProjBoletos.components.RectangleButton();
             this.tabMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,6 +42,59 @@
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.Size = new System.Drawing.Size(693, 100);
             this.tabMenu.TabIndex = 4;
+            // 
+            // boletosCustomScrollbar
+            // 
+            this.boletosCustomScrollbar.ChannelColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(166)))), ((int)(((byte)(3)))));
+            this.boletosCustomScrollbar.LargeChange = 10;
+            this.boletosCustomScrollbar.Location = new System.Drawing.Point(850, 124);
+            this.boletosCustomScrollbar.Maximum = 100;
+            this.boletosCustomScrollbar.Minimum = 0;
+            this.boletosCustomScrollbar.MinimumSize = new System.Drawing.Size(96, 248);
+            this.boletosCustomScrollbar.Name = "boletosCustomScrollbar";
+            this.boletosCustomScrollbar.Size = new System.Drawing.Size(96, 248);
+            this.boletosCustomScrollbar.SmallChange = 1;
+            this.boletosCustomScrollbar.TabIndex = 8;
+            this.boletosCustomScrollbar.Value = 0;
+            this.boletosCustomScrollbar.Scroll += new System.EventHandler(this.boletosCustomScrollbar_Scroll);
+            // 
+            // medicoesCustomScrollbar
+            // 
+            this.medicoesCustomScrollbar.ChannelColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(166)))), ((int)(((byte)(3)))));
+            this.medicoesCustomScrollbar.LargeChange = 10;
+            this.medicoesCustomScrollbar.Location = new System.Drawing.Point(748, 38);
+            this.medicoesCustomScrollbar.Maximum = 100;
+            this.medicoesCustomScrollbar.Minimum = 0;
+            this.medicoesCustomScrollbar.MinimumSize = new System.Drawing.Size(96, 248);
+            this.medicoesCustomScrollbar.Name = "medicoesCustomScrollbar";
+            this.medicoesCustomScrollbar.Size = new System.Drawing.Size(96, 248);
+            this.medicoesCustomScrollbar.SmallChange = 1;
+            this.medicoesCustomScrollbar.TabIndex = 7;
+            this.medicoesCustomScrollbar.Value = 0;
+            this.medicoesCustomScrollbar.Scroll += new System.EventHandler(this.medicoesCustomScrollbar_Scroll);
+            // 
+            // tabMedicoesWindow
+            // 
+            this.tabMedicoesWindow.AutoScroll = true;
+            this.tabMedicoesWindow.BackColor = System.Drawing.SystemColors.Control;
+            this.tabMedicoesWindow.Location = new System.Drawing.Point(141, 324);
+            this.tabMedicoesWindow.Margin = new System.Windows.Forms.Padding(0);
+            this.tabMedicoesWindow.Name = "tabMedicoesWindow";
+            this.tabMedicoesWindow.Size = new System.Drawing.Size(2000, 2000);
+            this.tabMedicoesWindow.TabIndex = 6;
+            this.tabMedicoesWindow.Scroll += new System.Windows.Forms.ScrollEventHandler(this.tabMedicoesWindow_Scroll);
+            this.tabMedicoesWindow.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.tabMedicoesWindow_MouseWheel);
+            // 
+            // tabBoletosWindow
+            // 
+            this.tabBoletosWindow.AutoScroll = true;
+            this.tabBoletosWindow.BackColor = System.Drawing.SystemColors.Control;
+            this.tabBoletosWindow.Location = new System.Drawing.Point(27, 144);
+            this.tabBoletosWindow.Margin = new System.Windows.Forms.Padding(0);
+            this.tabBoletosWindow.Name = "tabBoletosWindow";
+            this.tabBoletosWindow.Size = new System.Drawing.Size(2000, 2000);
+            this.tabBoletosWindow.TabIndex = 5;
+            this.tabBoletosWindow.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.tabBoletosWindow_MouseWheel);
             // 
             // tabMedicoes
             // 
@@ -60,28 +115,13 @@
             this.tabBoletos.Load += new System.EventHandler(this.tabBoletos_Load);
             this.tabBoletos.Click += new System.EventHandler(this.tabBoletos_Click);
             // 
-            // tabMedicoesWindow
-            // 
-            this.tabMedicoesWindow.AutoScroll = true;
-            this.tabMedicoesWindow.BackColor = System.Drawing.SystemColors.Control;
-            this.tabMedicoesWindow.Location = new System.Drawing.Point(49, 218);
-            this.tabMedicoesWindow.Name = "tabMedicoesWindow";
-            this.tabMedicoesWindow.Size = new System.Drawing.Size(2000, 2000);
-            this.tabMedicoesWindow.TabIndex = 6;
-            // 
-            // tabBoletosWindow
-            // 
-            this.tabBoletosWindow.BackColor = System.Drawing.SystemColors.Control;
-            this.tabBoletosWindow.Location = new System.Drawing.Point(27, 144);
-            this.tabBoletosWindow.Name = "tabBoletosWindow";
-            this.tabBoletosWindow.Size = new System.Drawing.Size(473, 228);
-            this.tabBoletosWindow.TabIndex = 5;
-            // 
             // HomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.boletosCustomScrollbar);
+            this.Controls.Add(this.medicoesCustomScrollbar);
             this.Controls.Add(this.tabMedicoesWindow);
             this.Controls.Add(this.tabBoletosWindow);
             this.Controls.Add(this.tabMenu);
@@ -101,5 +141,7 @@
         private components.RectangleButton tabBoletos;
         private HomeTabs.TabBoletos tabBoletosWindow;
         private HomeTabs.TabMedicoes tabMedicoesWindow;
+        private CustomControls.CustomScrollbar medicoesCustomScrollbar;
+        private CustomControls.CustomScrollbar boletosCustomScrollbar;
     }
 }

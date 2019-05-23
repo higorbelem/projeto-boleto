@@ -13,15 +13,16 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
         int quantCards = 3;
         int spaceBetweenCards = 20;
+        int cardHeight = 220;
 
         Padding padding = new Padding(40, 20, 40, 40);
 
-        int cardHeight = 220;
-
-        Rectangle newSize;
+        public Panel panel;
 
         public TabBoletos() {
             InitializeComponent();
+
+            panel = panel1;
         }
 
         private void TabBoletos_Load(object sender, EventArgs e) {
@@ -42,7 +43,12 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
         }
 
         private void TabBoletos_Resize(object sender, EventArgs e) {
-            newSize = new Rectangle(padding.Left, padding.Top, Width - padding.Right * 2, Height - padding.Bottom * 2);
+            panel1.Location = new Point(0, 0);
+            panel1.Size = new Size(Width, panel1.Height);
+            panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
+            panel1.MaximumSize = new Size(ClientRectangle.Width, 0);
+
+            Rectangle newSize = new Rectangle(padding.Left,padding.Top,panel1.Width - padding.Left - padding.Right, panel1.Height - padding.Top - padding.Bottom);
 
             int cardWidth = (newSize.Width - (spaceBetweenCards * (quantCards - 1))) / quantCards;
 

@@ -40,7 +40,7 @@ namespace ProjBoletos.telas {
         }
 
         private bool logar(string cnpj, string senha) {
-            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/logarCedente.php");
+            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getCedente.php");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
             var request = new RestRequest("text/plain");
@@ -50,14 +50,16 @@ namespace ProjBoletos.telas {
             var response = client.Post(request);
             var content = response.Content; // raw content as string
 
-            if (!content.Equals("erro")) {
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
                 //CedenteInfo cedente = JsonConvert.DeserializeObject<CedenteInfo>(content);
 
-                Properties.Settings.Default["cedenteAtual"] = content;
-                Properties.Settings.Default["logado"] = true;
-                Properties.Settings.Default.Save();
+                if (!content.Equals("erro")) {
+                    Properties.Settings.Default["cedenteAtual"] = content;
+                    Properties.Settings.Default["logado"] = true;
+                    Properties.Settings.Default.Save();
 
-                return true;
+                    return true;
+                }
             }
 
             Properties.Settings.Default["cedenteAtual"] = "";
@@ -68,7 +70,6 @@ namespace ProjBoletos.telas {
 
         public void buttonTeste1_click(object sender, EventArgs e) {
             bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
-            Console.WriteLine(result);
 
             if (result) {
                 this.Hide();
@@ -76,8 +77,6 @@ namespace ProjBoletos.telas {
                 mainPage.Closed += (s, args) => this.Close();
                 mainPage.Show();
             }
-
-            Console.WriteLine(meuTextboxCnpj.txtBox.Text);
         }
 
         private void label1_Click(object sender, EventArgs e) {

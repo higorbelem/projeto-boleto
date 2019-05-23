@@ -8,24 +8,42 @@ using System.Threading.Tasks;
 namespace ProjBoletos.modelos {
     class Sacado {
 
-        public SacadoInfo sacado { get; set; }
-        public List<BoletoInfo> boletos = new List<BoletoInfo>();
+        public string id { get; set; }
+        public string nome { get; set; }
+        public string email { get; set; }
+        public string documento { get; set; }
+        public string avalista { get; set; }
+        public string avalistaDocumento { get; set; }
+
+        public Sacado(string id, string nome, string email, string documento, string avalista, string avalistaDocumento) {
+            this.id = id;
+            this.nome = nome;
+            this.email = email;
+            this.documento = documento;
+            this.avalista = avalista;
+            this.avalistaDocumento = avalistaDocumento;
+        }
 
         public Sacado() {
+
         }
 
-        public Sacado(SacadoInfo sacado) {
-            this.sacado = sacado;
-        }
+        public static SacadoInfo makeSacadoInfo(Sacado sacado, Casa casa) {
+            SacadoInfo sacadoInfo = new SacadoInfo();
 
-        public Sacado(SacadoInfo sacado, List<BoletoInfo> boletos) {
-            this.sacado = sacado;
-            this.boletos = boletos;
-        }
+            sacadoInfo.Avalista = sacado.avalista;
+            sacadoInfo.AvalistaDocumento = sacado.avalistaDocumento;
+            sacadoInfo.Documento = sacado.documento;
+            sacadoInfo.Email = sacado.email;
+            sacadoInfo.SacadoCodigo = sacado.id;
+            sacadoInfo.Sacado = sacado.nome;
 
-        public void addBoleto(BoletoInfo boletoInfo) {
-            boletos.Add(boletoInfo);
-        }
+            sacadoInfo.Endereco = casa.rua + ", " + casa.numero;
+            sacadoInfo.Bairro = casa.bairro;
+            sacadoInfo.Cidade = casa.cidade;
+            sacadoInfo.Cep = casa.cep;
 
+            return sacadoInfo;
+        }
     }
 }

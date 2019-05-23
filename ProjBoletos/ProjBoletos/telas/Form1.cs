@@ -35,7 +35,7 @@ namespace ProjBoletos {
 
         private void Form1_Load(object sender, EventArgs e) {
 
-            var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+            /*var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
             cedente = JsonConvert.DeserializeObject<CedenteInfo>(cedenteJson);
 
             var sacadoJson = getAllSacadoAsync(cedente.Id);
@@ -48,10 +48,10 @@ namespace ProjBoletos {
                     criarBoleto((qBol+1)+"", "1543", 200+((qBol+1)*20), new DateTime(2019, 06, 20))
                 }));
                 qBol += 2;
-            }
+            }*/
 
             //so para mostrar na tela 
-            boletoForm1.MakeBoleto(cedente,sacados[0].sacado,sacados[0].boletos[0]);
+            //boletoForm1.MakeBoleto(cedente,sacados[0].sacado,sacados[0].boletos[0]);
 
             //Form frm = new frmBasico();
             //frm.ShowDialog();
@@ -100,7 +100,6 @@ namespace ProjBoletos {
             objBoleto.LocalPagamento = "Pague Preferencialmente no BANCO NOSSA CAIXA S.A. ou na rede bancária até o vencimento";
 
             return objBoleto;
-
             /*boletoForm1.MakeBoleto(cedenteInfo, sacadoInfo, objBoleto);
 
             Console.WriteLine("Codigo de barras: " + boletoForm1.Boleto.CodigoBarras);
@@ -130,7 +129,7 @@ namespace ProjBoletos {
         void pDoc_PrintPageUnico(object sender, PrintPageEventArgs e) {
             try {
 
-                ParteCimaBoleto parteCimaBoleto = new ParteCimaBoleto();
+               /* ParteCimaBoleto parteCimaBoleto = new ParteCimaBoleto();
                 parteCimaBoleto.Size = new System.Drawing.Size(300, 160);
                 parteCimaBoleto.print(e.Graphics);
 
@@ -154,7 +153,7 @@ namespace ProjBoletos {
                     }
                 }
                 
-                if (!e.HasMorePages) nRegI = 0;
+                if (!e.HasMorePages) nRegI = 0;*/
 
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);

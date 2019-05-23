@@ -1,5 +1,6 @@
 ﻿using Impactro.Cobranca;
 using Newtonsoft.Json;
+using ProjBoletos.modelos;
 using System;
 using System.Drawing;
 using System.Timers;
@@ -12,18 +13,17 @@ namespace ProjBoletos.telas {
 
         bool animationToOpen = true;
         
-        CedenteInfo cedente = new CedenteInfo();
+        Cedente cedente = new Cedente();
 
         public MainPage() {
             InitializeComponent();
 
             var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
-            cedente = JsonConvert.DeserializeObject<CedenteInfo>(cedenteJson);
+            cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
 
             if (cedente == null) {
                 Application.Exit();
             }
-
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -40,7 +40,7 @@ namespace ProjBoletos.telas {
 
             accountButton.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             accountButton.dropIcon.Image = new Bitmap(Properties.Resources.icon_drop_arrow);
-            accountButton.title = cedente.Cedente;
+            accountButton.title = cedente.nome;
 
             btnHome.icon.Image = new Bitmap(Properties.Resources.icon_person1);
             btnHome.title = "HOME";

@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -41,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,6 +68,9 @@
     </Compile>
     <Compile Include="components\Box.Designer.cs">
       <DependentUpon>Box.cs</DependentUpon>
+    </Compile>
+    <Compile Include="components\CustomScrollbar.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="components\MainCard.cs">
       <SubType>UserControl</SubType>
@@ -106,6 +113,11 @@
     <Compile Include="components\SidebarButton.Designer.cs">
       <DependentUpon>SidebarButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="modelos\Casa.cs" />
+    <Compile Include="modelos\Cedente.cs" />
+    <Compile Include="modelos\Conta.cs" />
+    <Compile Include="modelos\Medicao.cs" />
+    <Compile Include="modelos\medidor.cs" />
     <Compile Include="modelos\parteCimaBoletoModel.cs" />
     <Compile Include="modelos\Sacado.cs" />
     <Compile Include="Settings.cs" />
@@ -183,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\Box.resx">
       <DependentUpon>Box.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\CustomScrollbar.resx">
+      <DependentUpon>CustomScrollbar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\MainCard.resx">
       <DependentUpon>MainCard.cs</DependentUpon>

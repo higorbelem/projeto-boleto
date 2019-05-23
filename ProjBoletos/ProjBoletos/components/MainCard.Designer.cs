@@ -46,6 +46,7 @@
             this.Name = "MainCard";
             this.Size = new System.Drawing.Size(373, 262);
             this.Load += new System.EventHandler(this.MainCard_Load);
+            this.Resize += new System.EventHandler(this.MainCard_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.icon)).EndInit();
             this.ResumeLayout(false);
 

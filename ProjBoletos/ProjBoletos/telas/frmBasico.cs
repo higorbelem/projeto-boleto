@@ -398,5 +398,9 @@ namespace BoletoForm2
             // salva o boleto em uma imagem
             blt.Save("teste.png",0);
         }
+
+        private void frmBasico_Load_1(object sender, EventArgs e) {
+
+        }
     }
 }

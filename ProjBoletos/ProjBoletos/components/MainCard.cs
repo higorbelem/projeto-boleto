@@ -93,5 +93,9 @@ namespace ProjBoletos.components {
 
             e.Graphics.FillRectangle(new SolidBrush(ascentColor), new Rectangle(0,Height-10,Width,10));
         }
+
+        private void MainCard_Resize(object sender, EventArgs e) {
+            Invalidate();
+        }
     }
 }
