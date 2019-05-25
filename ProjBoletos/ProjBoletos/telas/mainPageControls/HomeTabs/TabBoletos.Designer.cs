@@ -61,6 +61,7 @@
             this.panel1.Controls.Add(this.mainCard2);
             this.panel1.Controls.Add(this.mainCard3);
             this.panel1.Location = new System.Drawing.Point(63, 63);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1152, 3013);
             this.panel1.TabIndex = 4;
@@ -80,6 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TabBoletos";
             this.Size = new System.Drawing.Size(2000, 2000);
             this.Load += new System.EventHandler(this.TabBoletos_Load);

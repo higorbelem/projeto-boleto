@@ -69,6 +69,18 @@
     <Compile Include="components\Box.Designer.cs">
       <DependentUpon>Box.cs</DependentUpon>
     </Compile>
+    <Compile Include="components\CustomListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\CustomListView.Designer.cs">
+      <DependentUpon>CustomListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="components\CustomListViewItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\CustomListViewItem.Designer.cs">
+      <DependentUpon>CustomListViewItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\CustomScrollbar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +207,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\Box.resx">
       <DependentUpon>Box.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\CustomListView.resx">
+      <DependentUpon>CustomListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\CustomListViewItem.resx">
+      <DependentUpon>CustomListViewItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\CustomScrollbar.resx">
       <DependentUpon>CustomScrollbar.cs</DependentUpon>

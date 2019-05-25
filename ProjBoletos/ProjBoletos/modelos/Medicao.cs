@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class Medicao {
+    public class Medicao {
 
         public string id { get; set; }
         public string medicao { get; set; }

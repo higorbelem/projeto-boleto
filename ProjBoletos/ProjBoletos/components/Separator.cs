@@ -25,7 +25,7 @@ namespace ProjBoletos.components {
             base.OnPaint(e);
             //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            e.Graphics.DrawLine(new Pen(color),new Point(0,Height/2),new Point(Width,Height/2));
+            e.Graphics.DrawLine(new Pen(color),new Point(0,ClientRectangle.Height/2),new Point(ClientRectangle.Width, ClientRectangle.Height / 2));
         }
     }
 }

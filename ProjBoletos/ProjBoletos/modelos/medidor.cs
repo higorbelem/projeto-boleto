@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class medidor {
+    public class medidor {
 
         public string id { get; set; }
         public string nome { get; set; }

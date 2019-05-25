@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class Sacado {
+    public class Sacado {
 
         public string id { get; set; }
         public string nome { get; set; }

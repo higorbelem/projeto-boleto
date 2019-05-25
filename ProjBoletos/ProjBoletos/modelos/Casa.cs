@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class Casa {
+    public class Casa {
 
         public string id { get; set; }
         public string bairro { get; set; }

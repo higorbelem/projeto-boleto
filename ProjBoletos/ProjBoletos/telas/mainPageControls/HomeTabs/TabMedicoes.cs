@@ -42,6 +42,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }
             buscarMedicoes(cedente.id);
 
+            customListView.UpdateList(medicoes);
+
             int medicoesNoPrazo = 0;
             int mmedicoesNoPrazoHoje = 0;
             int medicoesPertoDeVencer = 0;
@@ -125,8 +127,10 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             mainCard3.Size = new Size(cardWidth, cardHeight);
 
             //medicoesFlowLayout.Controls.Add();
-            medicoesFlowLayout.Size = new Size(newSize.Width, 80); //0
-            medicoesFlowLayout.Location = new Point(newSize.X, mainCard1.Location.Y + mainCard1.Height + 40);
+            customListView.Size = new Size(newSize.Width, 80); //0
+            customListView.MinimumSize = new Size(newSize.Width, 0); //0
+            customListView.MaximumSize = new Size(newSize.Width, 0); //0
+            customListView.Location = new Point(newSize.X, mainCard1.Location.Y + mainCard1.Height + 40);
         }
 
         private void label3_Click(object sender, EventArgs e) {
@@ -147,7 +151,6 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
                 if (!content.Equals("erro")) {
-                    
                     medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
 
                     return true;

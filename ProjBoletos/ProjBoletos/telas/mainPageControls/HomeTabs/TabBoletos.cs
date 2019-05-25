@@ -44,7 +44,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
         private void TabBoletos_Resize(object sender, EventArgs e) {
             panel1.Location = new Point(0, 0);
-            panel1.Size = new Size(Width, panel1.Height);
+            panel1.Size = new Size(ClientRectangle.Width, panel1.Height);
             panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
             panel1.MaximumSize = new Size(ClientRectangle.Width, 0);
 
