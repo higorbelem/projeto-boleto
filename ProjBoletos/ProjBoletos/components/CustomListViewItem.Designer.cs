@@ -23,12 +23,22 @@
         /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent() {
+            this.btn = new ProjBoletos.testes.MeuButton();
             this.SuspendLayout();
+            // 
+            // btn
+            // 
+            this.btn.Location = new System.Drawing.Point(3, 38);
+            this.btn.Name = "btn";
+            this.btn.Size = new System.Drawing.Size(128, 42);
+            this.btn.TabIndex = 0;
+            this.btn.Click += new System.EventHandler(this.btn_Click);
             // 
             // CustomListViewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CustomListViewItem";
             this.Load += new System.EventHandler(this.CustomListViewItem_Load);
@@ -37,5 +47,7 @@
         }
 
         #endregion
+
+        private testes.MeuButton btn;
     }
 }

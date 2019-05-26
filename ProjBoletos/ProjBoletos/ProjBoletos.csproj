@@ -201,6 +201,7 @@
     <Compile Include="testes\TESTE.Designer.cs">
       <DependentUpon>TESTE.cs</DependentUpon>
     </Compile>
+    <Compile Include="utils\Colors.cs" />
     <Compile Include="utils\ServerConfig.cs" />
     <EmbeddedResource Include="components\AccountButton.resx">
       <DependentUpon>AccountButton.cs</DependentUpon>

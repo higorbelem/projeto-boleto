@@ -27,6 +27,8 @@ namespace ProjBoletos.components {
 
         public string hint = "";
 
+        public bool isEmpty = true;
+
         public MeuTextbox() {
             InitializeComponent();
             
@@ -49,7 +51,6 @@ namespace ProjBoletos.components {
             if(isPassword) textBox1.PasswordChar = '\0';
 
             textBox1.TextAlign = HorizontalAlignment.Center;
-
 
             txtBox = textBox1;
         }
@@ -83,6 +84,8 @@ namespace ProjBoletos.components {
                 textBox1.ForeColor = colorNormal;
                 textBox1.Font = fontNormal;
 
+                isEmpty = false;
+
                 if (isPassword) textBox1.PasswordChar = '*';
             }
         }
@@ -92,6 +95,9 @@ namespace ProjBoletos.components {
                 textBox1.Text = hint;
                 textBox1.ForeColor = colorHint;
                 textBox1.Font = fontHint;
+
+                isEmpty = true;
+
                 if (isPassword) textBox1.PasswordChar = '\0';
             }
         }

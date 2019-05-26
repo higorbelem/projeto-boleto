@@ -16,6 +16,8 @@ namespace ProjBoletos.modelos {
         public Sacado sacado;
         public Casa casa;
 
+        public int nivelAtraso = 0;
+
         public Medicao(string id, string medicao, DateTime dataMedicao, string boletoGerado, medidor medidor, Sacado sacado, Casa casa) {
             this.id = id;
             this.medicao = medicao;

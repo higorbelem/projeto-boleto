@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
     public partial class TabBoletos : UserControl {
@@ -26,6 +27,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
         }
 
         private void TabBoletos_Load(object sender, EventArgs e) {
+            panel1.BackColor = Colors.bg;
+            BackColor = Colors.bg;
+
             mainCard1.title = "Boletos recentes";
             mainCard1.numString = "41";
             mainCard1.notifString = "10";

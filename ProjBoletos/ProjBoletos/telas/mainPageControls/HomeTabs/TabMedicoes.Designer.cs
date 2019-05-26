@@ -28,6 +28,7 @@
             this.mainCard1 = new ProjBoletos.components.MainCard();
             this.mainCard2 = new ProjBoletos.components.MainCard();
             this.mainCard3 = new ProjBoletos.components.MainCard();
+            this.gerarTodasBtn = new ProjBoletos.testes.MeuButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -35,6 +36,7 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.gerarTodasBtn);
             this.panel1.Controls.Add(this.customListView);
             this.panel1.Controls.Add(this.mainCard1);
             this.panel1.Controls.Add(this.mainCard2);
@@ -48,8 +50,7 @@
             // customListView
             // 
             this.customListView.AutoSize = true;
-            this.customListView.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.customListView.Location = new System.Drawing.Point(0, 243);
+            this.customListView.Location = new System.Drawing.Point(130, 403);
             this.customListView.Margin = new System.Windows.Forms.Padding(0);
             this.customListView.Name = "customListView";
             this.customListView.Size = new System.Drawing.Size(640, 500);
@@ -76,6 +77,13 @@
             this.mainCard3.Size = new System.Drawing.Size(190, 262);
             this.mainCard3.TabIndex = 2;
             // 
+            // gerarTodasBtn
+            // 
+            this.gerarTodasBtn.Location = new System.Drawing.Point(254, 320);
+            this.gerarTodasBtn.Name = "gerarTodasBtn";
+            this.gerarTodasBtn.Size = new System.Drawing.Size(150, 80);
+            this.gerarTodasBtn.TabIndex = 6;
+            // 
             // TabMedicoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,5 +108,6 @@
         private components.MainCard mainCard1;
         private components.CustomListView customListView;
         private System.Windows.Forms.Panel panel1;
+        private testes.MeuButton gerarTodasBtn;
     }
 }

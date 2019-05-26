@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.modelos;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class CustomListView : UserControl {
@@ -26,6 +27,7 @@ namespace ProjBoletos.components {
             medicoes = medicoes1;
 
             CustomListViewItem customListViewItemCabecalho = new CustomListViewItem();
+            customListViewItemCabecalho.isCabecalho = true;
             customListViewItemCabecalho.Size = new Size(ClientRectangle.Width, 50);
             customListViewItemCabecalho.addValor("DATA DA MEDIÇÂO", "1,5");
             customListViewItemCabecalho.addValor("ENDEREÇO", "3");
@@ -42,6 +44,20 @@ namespace ProjBoletos.components {
                 customListViewItem.addValor(medicao.casa.rua + ", " + medicao.casa.numero,"3");
                 customListViewItem.addValor(medicao.sacado.nome, "3");
                 customListViewItem.addValor(medicao.medicao, "1,5");
+                customListViewItem.medicao = medicao;
+
+                switch (medicao.nivelAtraso){
+                    case 0:
+                        customListViewItem.circleColor = Colors.noPrazo;
+                        break;
+                    case 1:
+                        customListViewItem.circleColor = Colors.pertoDeVencer;
+                        break;
+                    case 2:
+                        customListViewItem.circleColor = Colors.atrasado;
+                        break;
+                }
+
                 flowLayoutPanel.Controls.Add(customListViewItem);
             }
 

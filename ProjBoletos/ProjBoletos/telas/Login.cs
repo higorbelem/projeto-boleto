@@ -53,13 +53,21 @@ namespace ProjBoletos.telas {
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
                 //CedenteInfo cedente = JsonConvert.DeserializeObject<CedenteInfo>(content);
 
-                if (!content.Equals("erro")) {
+                if (!content.Contains("erro-login")) {
                     Properties.Settings.Default["cedenteAtual"] = content;
                     Properties.Settings.Default["logado"] = true;
                     Properties.Settings.Default.Save();
 
                     return true;
+                } else{
+                    labelErroLogin.Visible = true;
+                    labelErroConexao.Visible = false;
+                    labelErroVazio.Visible = false;
                 }
+            }else{
+                labelErroConexao.Visible = true;
+                labelErroLogin.Visible = false;
+                labelErroVazio.Visible = false;
             }
 
             Properties.Settings.Default["cedenteAtual"] = "";
@@ -69,14 +77,25 @@ namespace ProjBoletos.telas {
         }
 
         public void buttonTeste1_click(object sender, EventArgs e) {
-            bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
+            if (!meuTextboxCnpj.isEmpty && !meuTextboxSenha.isEmpty) {
+                bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
 
-            if (result) {
-                this.Hide();
-                MainPage mainPage = new MainPage();
-                mainPage.Closed += (s, args) => this.Close();
-                mainPage.Show();
+                if (result) {
+                    this.Hide();
+                    MainPage mainPage = new MainPage();
+                    mainPage.Closed += (s, args) => this.Close();
+                    mainPage.Show();
+                }
+            }else{
+                labelErroVazio.Visible = true;
+                labelErroLogin.Visible = false;
+                labelErroConexao.Visible = false;
             }
+        }
+
+        public static bool IsNullOrEmpty(String value)
+        {
+            return (value == null || value.Length == 0);
         }
 
         private void label1_Click(object sender, EventArgs e) {

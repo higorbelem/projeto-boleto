@@ -20,6 +20,9 @@ namespace ProjBoletos.testes {
 
         Color atualColor;
 
+        public String title = "LOGAR";
+        public int cornerRadius = 5;
+
         public MeuButton() {
             InitializeComponent();
 
@@ -67,7 +70,7 @@ namespace ProjBoletos.testes {
 
             Rectangle rectangle = new Rectangle(1, 1, this.Size.Width-2, this.Size.Height-2);
 
-            GraphicsPath path = RoundedRectangles.Create(rectangle , 5);
+            GraphicsPath path = RoundedRectangles.Create(rectangle , cornerRadius);
 
             Brush brush = new SolidBrush(atualColor);
 
@@ -77,7 +80,7 @@ namespace ProjBoletos.testes {
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("LOGAR", new Font("Arial", 10, FontStyle.Bold), new SolidBrush(Color.White), ClientRectangle, sf);
+            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Color.White), ClientRectangle, sf);
         }
     }
 }
