@@ -63,6 +63,7 @@
             this.gerarTodasBtn.Name = "gerarTodasBtn";
             this.gerarTodasBtn.Size = new System.Drawing.Size(150, 80);
             this.gerarTodasBtn.TabIndex = 6;
+            this.gerarTodasBtn.Click += new System.EventHandler(this.gerarTodosBtn_Click);
             // 
             // customListView
             // 

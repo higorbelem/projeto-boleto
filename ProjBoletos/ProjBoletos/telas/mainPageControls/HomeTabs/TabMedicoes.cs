@@ -44,76 +44,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                 Application.Exit();
             }
             buscarMedicoes(cedente.id);
-
-            int medicoesNoPrazo = 0;
-            int mmedicoesNoPrazoHoje = 0;
-            int medicoesPertoDeVencer = 0;
-            int medicoesPertoDeVencerHoje = 0;
-            int medicoesAtrasadas = 0;
-            int medicoesAtrasadasHoje = 0;
-
-            for (int i = 0; i < medicoes.Count; i++) {
-                if (medicoes[i].boletoGerado.Equals("0")) {
-                    int diaVencimento = Int32.Parse(medicoes[i].casa.diaVencimento);
-
-                    DateTime vencimento = medicoes[i].dataMedicao;
-
-                    if (diaVencimento < medicoes[i].dataMedicao.Day) {
-                        vencimento = new DateTime(vencimento.Year, vencimento.Month + 1, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
-                    } else {
-                        vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
-                    }
-
-                    //medicoes atrasadas
-                    if (DateTime.Today.CompareTo(vencimento) > 0) {
-                        medicoesAtrasadas++;
-                        medicoes[i].nivelAtraso = 2;
-                        if (DateTime.Today.Year == medicoes[i].dataMedicao.Year && DateTime.Today.Month == medicoes[i].dataMedicao.Month && DateTime.Today.Day == medicoes[i].dataMedicao.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                            medicoesAtrasadasHoje++;
-                        }
-
-                        continue;
-                    }
-
-                    //medicoes perto do vencimento
-                    if (DateTime.Today.CompareTo(vencimento.AddDays(-5)) >= 0) {
-                        medicoesPertoDeVencer++;
-                        medicoes[i].nivelAtraso = 1;
-                        if (DateTime.Today.Year == medicoes[i].dataMedicao.Year && DateTime.Today.Month == medicoes[i].dataMedicao.Month && DateTime.Today.Day == medicoes[i].dataMedicao.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                            medicoesPertoDeVencerHoje++;
-                        }
-
-                        continue;
-                    }
-
-                    //medicoes no prazo
-                    medicoesNoPrazo++;
-                    medicoes[i].nivelAtraso = 0;
-                    if (DateTime.Today.Year == medicoes[i].dataMedicao.Year && DateTime.Today.Month == medicoes[i].dataMedicao.Month && DateTime.Today.Day == medicoes[i].dataMedicao.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                        mmedicoesNoPrazoHoje++;
-                    }
-                }
-            }
-
+            atualizarCards(medicoes);
             customListView.UpdateList(medicoes);
+
+            customListView.update += () =>{
+                buscarMedicoes(cedente.id);
+                atualizarCards(medicoes);
+                customListView.UpdateList(medicoes);
+            };
 
             gerarTodasBtn.title = "GERAR TODAS";
             gerarTodasBtn.cornerRadius = 20;
-
-            mainCard1.title = "Medições no prazo";
-            mainCard1.numString = medicoesNoPrazo+"";
-            mainCard1.notifString = mmedicoesNoPrazoHoje+"";
-            mainCard1.ascentColor = Colors.noPrazo;
-
-            mainCard2.title = "Medições perto de vencer";
-            mainCard2.numString = medicoesPertoDeVencer+"";
-            mainCard2.notifString = medicoesPertoDeVencerHoje+"";
-            mainCard2.ascentColor = Colors.pertoDeVencer;
-
-            mainCard3.title = "Medições atrasadas";
-            mainCard3.numString = medicoesAtrasadas+"";
-            mainCard3.notifString = medicoesAtrasadasHoje+"";
-            mainCard3.ascentColor = Colors.atrasado;
         }
 
         private void TabMedicoes_Resize(object sender, EventArgs e) {
@@ -150,6 +91,98 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
         private void label3_Click(object sender, EventArgs e) {
 
+        }
+
+        private void gerarTodosBtn_Click(object sender, EventArgs e){
+            var resultMessageBox = MessageBox.Show("Gerar todos boletos?", "", MessageBoxButtons.YesNo);
+
+            if (resultMessageBox == DialogResult.Yes)
+            {
+                var result = gerarMedicoes(cedente.id);
+
+                if (result)
+                {
+                    customListView.update();
+                }
+            }
+        }
+
+        private void atualizarCards(List<Medicao> medicoes1)
+        {
+            int medicoesNoPrazo = 0;
+            int mmedicoesNoPrazoHoje = 0;
+            int medicoesPertoDeVencer = 0;
+            int medicoesPertoDeVencerHoje = 0;
+            int medicoesAtrasadas = 0;
+            int medicoesAtrasadasHoje = 0;
+
+            for (int i = 0; i < medicoes1.Count; i++)
+            {
+                if (medicoes1[i].boletoGerado.Equals("0"))
+                {
+                    int diaVencimento = Int32.Parse(medicoes1[i].casa.diaVencimento);
+
+                    DateTime vencimento = medicoes1[i].dataMedicao;
+
+                    if (diaVencimento < medicoes1[i].dataMedicao.Day)
+                    {
+                        vencimento = new DateTime(vencimento.Year, vencimento.Month + 1, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                    }
+                    else
+                    {
+                        vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                    }
+
+                    //medicoes atrasadas
+                    if (DateTime.Today.CompareTo(vencimento) > 0)
+                    {
+                        medicoesAtrasadas++;
+                        medicoes1[i].nivelAtraso = 2;
+                        if (DateTime.Today.Year == medicoes1[i].dataMedicao.Year && DateTime.Today.Month == medicoes1[i].dataMedicao.Month && DateTime.Today.Day == medicoes1[i].dataMedicao.Day)
+                        { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                            medicoesAtrasadasHoje++;
+                        }
+
+                        continue;
+                    }
+
+                    //medicoes perto do vencimento
+                    if (DateTime.Today.CompareTo(vencimento.AddDays(-5)) >= 0)
+                    {
+                        medicoesPertoDeVencer++;
+                        medicoes1[i].nivelAtraso = 1;
+                        if (DateTime.Today.Year == medicoes1[i].dataMedicao.Year && DateTime.Today.Month == medicoes1[i].dataMedicao.Month && DateTime.Today.Day == medicoes1[i].dataMedicao.Day)
+                        { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                            medicoesPertoDeVencerHoje++;
+                        }
+
+                        continue;
+                    }
+
+                    //medicoes no prazo
+                    medicoesNoPrazo++;
+                    medicoes1[i].nivelAtraso = 0;
+                    if (DateTime.Today.Year == medicoes1[i].dataMedicao.Year && DateTime.Today.Month == medicoes1[i].dataMedicao.Month && DateTime.Today.Day == medicoes1[i].dataMedicao.Day)
+                    { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                        mmedicoesNoPrazoHoje++;
+                    }
+                }
+            }
+
+            mainCard1.title = "Medições no prazo";
+            mainCard1.numString = medicoesNoPrazo + "";
+            mainCard1.notifString = mmedicoesNoPrazoHoje + "";
+            mainCard1.ascentColor = Colors.noPrazo;
+
+            mainCard2.title = "Medições perto de vencer";
+            mainCard2.numString = medicoesPertoDeVencer + "";
+            mainCard2.notifString = medicoesPertoDeVencerHoje + "";
+            mainCard2.ascentColor = Colors.pertoDeVencer;
+
+            mainCard3.title = "Medições atrasadas";
+            mainCard3.numString = medicoesAtrasadas + "";
+            mainCard3.notifString = medicoesAtrasadasHoje + "";
+            mainCard3.ascentColor = Colors.atrasado;
         }
 
         private bool buscarMedicoes(string idCedente) {
@@ -190,6 +223,45 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             login.Show();
 
             return false;
+        }
+
+        private bool gerarMedicoes(string idCedente)
+        {
+            //loading1.Visible = true;
+
+            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/gerarTodosBoletos.php");
+            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+            var request = new RestRequest("text/plain");
+            request.AddParameter("cedente-id", idCedente);
+
+            var response = client.Post(request);
+
+            var content = response.Content; // raw content as string
+
+            //loading1.Visible = false;
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                if (!content.Equals("erro"))
+                {
+
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public void nada()
+        {
+
         }
     }
 }

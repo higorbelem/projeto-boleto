@@ -11,22 +11,29 @@ using ProjBoletos.modelos;
 using ProjBoletos.utils;
 using BoletoForm2;
 using ProjBoletos.telas;
+using RestSharp;
+using ProjBoletos.telas.mainPageControls.HomeTabs;
 
 namespace ProjBoletos.components {
     public partial class CustomListView : UserControl {
 
         List<Medicao> medicoes;
 
+        public delegate void UpdateEvent();
+        public UpdateEvent update;
+
         public CustomListView() {
             InitializeComponent();
         }
 
         private void CustomListView_Load(object sender, EventArgs e) {
-            
+            //MessageBox.Show("asdasd","asdasd",MessageBoxButtons.YesNo);
         }
 
         public void UpdateList(List<Medicao> medicoes1) {
             medicoes = medicoes1;
+
+            flowLayoutPanel.Controls.Clear();
 
             CustomListViewItem customListViewItemCabecalho = new CustomListViewItem();
             customListViewItemCabecalho.isCabecalho = true;
@@ -37,7 +44,9 @@ namespace ProjBoletos.components {
             customListViewItemCabecalho.addValor("MEDIÇÂO", "1,5");
             flowLayoutPanel.Controls.Add(customListViewItemCabecalho);
 
-            flowLayoutPanel.Controls.Add(new Separator());
+            flowLayoutPanel.Controls.Add(new Separator() {
+                Size = new Size(ClientRectangle.Width, 20)
+            });
 
             if (medicoes.Count == 0){
                 flowLayoutPanel.Controls.Add(new Label() {
@@ -71,7 +80,15 @@ namespace ProjBoletos.components {
                 }
 
                 customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
+                    var resultMessageBox = MessageBox.Show("Gerar o boleto desta medição?", "", MessageBoxButtons.YesNo);
 
+                    if (resultMessageBox == DialogResult.Yes){
+                        var result = gerarBoletos(medicao.id);
+
+                        if (result){
+                            update();
+                        }
+                    }
                 });
 
                 customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
@@ -96,6 +113,42 @@ namespace ProjBoletos.components {
             for (int i = 2; i < flowLayoutPanel.Controls.Count; i++){
                 flowLayoutPanel.Controls[i].Size = new Size(ClientRectangle.Width, 50);
             }
+        }
+
+        private bool gerarBoletos(string idMedicao)
+        {
+            //loading1.Visible = true;
+
+            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/gerarBoletos.php");
+            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+            var request = new RestRequest("text/plain");
+            request.AddParameter("medicao-id", idMedicao);
+
+            var response = client.Post(request);
+
+            var content = response.Content; // raw content as string
+
+            //loading1.Visible = false;
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                if (!content.Equals("erro"))
+                {
+                    
+
+                    return true;
+                }
+                else
+                {
+                    
+
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }
