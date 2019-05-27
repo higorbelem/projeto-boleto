@@ -18,12 +18,15 @@ namespace ProjBoletos.telas {
         public MainPage() {
             InitializeComponent();
 
+            DoubleBuffered = true;
+
             var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
             cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
 
             if (cedente == null) {
                 Application.Exit();
             }
+
         }
 
         private void Main_Load(object sender, EventArgs e) {
@@ -179,6 +182,14 @@ namespace ProjBoletos.telas {
 
         private void accountButton_Load(object sender, EventArgs e) {
 
+        }
+
+        protected override CreateParams CreateParams {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
         }
     }
 }

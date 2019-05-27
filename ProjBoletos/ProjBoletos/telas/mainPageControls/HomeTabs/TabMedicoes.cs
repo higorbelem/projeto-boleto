@@ -29,7 +29,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
         public TabMedicoes() {
             InitializeComponent();
 
-            //Console.Write(medicoes.Count);
+            loading1.Visible = false;
 
             panel = panel1;
         }
@@ -117,6 +117,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
         }
 
         private void TabMedicoes_Resize(object sender, EventArgs e) {
+            loading1.Size = new Size(300,300);
+            loading1.Location = new Point((ClientRectangle.Width/2) - (loading1.Width/2),(ClientRectangle.Height/2) - (loading1.Height/2));
+
             panel1.Location = new Point(0, 0);
             panel1.Size = new Size(ClientRectangle.Width, panel1.Height);
             panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
@@ -150,6 +153,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
         }
 
         private bool buscarMedicoes(string idCedente) {
+            loading1.Visible = true;
+
             var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosMedicoes.php");
             // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
@@ -160,12 +165,18 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
             var content = response.Content; // raw content as string
 
+            loading1.Visible = false;
+
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
                 if (!content.Equals("erro")) {
                     medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
 
                     return true;
+                }else{
+                    medicoes = new List<Medicao>();
+                    
+                    return false;
                 }
             }
 

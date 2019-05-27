@@ -21,16 +21,23 @@ namespace ProjBoletos.components {
         public Color circleColor = Color.Transparent;
 
         public Medicao medicao;
+        public MeuButton btnGerar, btnVer;
 
         public CustomListViewItem() {
             InitializeComponent();
 
             valores = new List<string[]>();
+
+            btnVer = btnVer1;
+            btnGerar = btnGerar1;
         }
 
         private void CustomListViewItem_Load(object sender, EventArgs e) {
-            btn.title = "GERAR";
-            btn.cornerRadius = 2;
+            btnGerar1.title = "GERAR";
+            btnGerar1.cornerRadius = 2;
+
+            btnVer1.title = "VER";
+            btnVer1.cornerRadius = 2;
 
         }
 
@@ -45,16 +52,20 @@ namespace ProjBoletos.components {
             Rectangle circleRect = new Rectangle(0, 0, ClientRectangle.Height, ClientRectangle.Height);
 
             if (isCabecalho) {
-                btn.Visible = false;
+                btnGerar1.Visible = false;
+                btnVer1.Visible = false;
             }
             else{
                 e.Graphics.FillEllipse(new SolidBrush(circleColor), new Rectangle(circleRect.X + 17, circleRect.Y + 17, circleRect.Width - 34, circleRect.Height - 34));
             }
 
-            btn.Size = new Size(100,ClientRectangle.Height - 10);
-            btn.Location = new Point(ClientRectangle.Width-btn.Width,5);
+            btnVer1.Size = new Size(50, ClientRectangle.Height - 10);
+            btnVer1.Location = new Point(ClientRectangle.Width - btnVer1.Width, 5);
 
-            Rectangle newSize = new Rectangle(circleRect.Width,0,ClientRectangle.Width - btn.Width - circleRect.Width,ClientRectangle.Height);
+            btnGerar1.Size = new Size(100,ClientRectangle.Height - 10);
+            btnGerar1.Location = new Point(btnVer1.Location.X - btnGerar1.Width - 5,5);
+
+            Rectangle newSize = new Rectangle(circleRect.Width,0,ClientRectangle.Width - btnGerar1.Width - circleRect.Width,ClientRectangle.Height);
 
             //e.Graphics.FillRectangle(new SolidBrush(Color.Red),new Rectangle(0,0,ClientRectangle.Width,ClientRectangle.Height));
             int sizeColumns = newSize.X;
@@ -75,7 +86,7 @@ namespace ProjBoletos.components {
                 StringFormat sf = new StringFormat();
                 sf.LineAlignment = StringAlignment.Center;
                 sf.Alignment = StringAlignment.Near;
-                e.Graphics.DrawString(valores[i][0], new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Colors.primaryText), stringRectangle, sf);
+                e.Graphics.DrawString(valores[i][0], Fonts.mainBold10, new SolidBrush(Colors.primaryText), stringRectangle, sf);
 
                 sizeColumns += rectangle.Width;
             }

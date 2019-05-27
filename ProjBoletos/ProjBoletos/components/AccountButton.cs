@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class AccountButton : UserControl {
@@ -132,7 +133,7 @@ namespace ProjBoletos.components {
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Color.White), rectForString, sf);
+            e.Graphics.DrawString(title, Fonts.mainBold10, new SolidBrush(Color.White), rectForString, sf);
             
         }
     }

@@ -31,6 +31,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "Box";
             this.Load += new System.EventHandler(this.Box_Load);
+            this.Resize += new System.EventHandler(this.Box_Resize);
             this.ResumeLayout(false);
 
         }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class MeuTextbox : UserControl {
@@ -22,8 +23,8 @@ namespace ProjBoletos.components {
         Color colorHint = Color.FromArgb(100, 100, 100);
         Color colorNormal = Color.FromArgb(20, 20, 20);
 
-        Font fontHint = new Font("Arial", 8, FontStyle.Bold);
-        Font fontNormal = new Font("Arial", 10);
+        Font fontHint = Fonts.mainBold8;
+        Font fontNormal = Fonts.main10;
 
         public string hint = "";
 

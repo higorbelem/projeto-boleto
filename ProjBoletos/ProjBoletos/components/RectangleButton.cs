@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class RectangleButton : UserControl {
@@ -102,7 +103,7 @@ namespace ProjBoletos.components {
             } else {
                 atualTitleColor = unselectedTitleColor;
             }
-            e.Graphics.DrawString(title, new Font("Ebrima", 12), new SolidBrush(atualTitleColor), rectangle, sf);
+            e.Graphics.DrawString(title, Fonts.main12, new SolidBrush(atualTitleColor), rectangle, sf);
 
             if (selected) {
                 int selectedWidth = 3;

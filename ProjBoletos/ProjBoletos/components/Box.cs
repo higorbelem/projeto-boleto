@@ -14,6 +14,7 @@ namespace ProjBoletos.components {
 
         public int radius = 20;
         public int shadowSize = 10;
+        public Color color = Color.White;
 
         public Box() {
             InitializeComponent();
@@ -34,10 +35,12 @@ namespace ProjBoletos.components {
 
             GraphicsPath path = RoundedRectangles.Create(rectangle, radius);
 
-            Brush brush = new SolidBrush(Color.White);
+            Brush brush = new SolidBrush(color);
 
             e.Graphics.FillPath(brush, path);
             e.Graphics.DrawPath(new Pen(brush), path);
+
+            e.Graphics.Dispose();
         }
 
         private Rectangle drawShadow(int tamanho, PaintEventArgs e) {
@@ -63,6 +66,11 @@ namespace ProjBoletos.components {
             }
 
             return rectangleAtual;
+        }
+
+        private void Box_Resize(object sender, EventArgs e)
+        {
+            Invalidate();
         }
     }
 }

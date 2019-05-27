@@ -1,4 +1,6 @@
-﻿namespace ProjBoletos.telas {
+﻿using ProjBoletos.utils;
+
+namespace ProjBoletos.telas {
     partial class Login {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +40,7 @@
             // box1
             // 
             this.box1.BackColor = System.Drawing.Color.Transparent;
-            this.box1.Location = new System.Drawing.Point(311, 31);
+            this.box1.Location = new System.Drawing.Point(313, 31);
             this.box1.Name = "box1";
             this.box1.Size = new System.Drawing.Size(299, 441);
             this.box1.TabIndex = 7;
@@ -48,7 +50,7 @@
             // buttonTeste1
             // 
             this.buttonTeste1.BackColor = System.Drawing.Color.White;
-            this.buttonTeste1.Location = new System.Drawing.Point(399, 354);
+            this.buttonTeste1.Location = new System.Drawing.Point(401, 354);
             this.buttonTeste1.Name = "buttonTeste1";
             this.buttonTeste1.Size = new System.Drawing.Size(122, 33);
             this.buttonTeste1.TabIndex = 2;
@@ -58,7 +60,7 @@
             // meuTextboxCnpj
             // 
             this.meuTextboxCnpj.BackColor = System.Drawing.Color.White;
-            this.meuTextboxCnpj.Location = new System.Drawing.Point(375, 264);
+            this.meuTextboxCnpj.Location = new System.Drawing.Point(377, 264);
             this.meuTextboxCnpj.Name = "meuTextboxCnpj";
             this.meuTextboxCnpj.Size = new System.Drawing.Size(171, 39);
             this.meuTextboxCnpj.TabIndex = 0;
@@ -66,7 +68,7 @@
             // meuTextboxSenha
             // 
             this.meuTextboxSenha.BackColor = System.Drawing.Color.White;
-            this.meuTextboxSenha.Location = new System.Drawing.Point(375, 309);
+            this.meuTextboxSenha.Location = new System.Drawing.Point(377, 309);
             this.meuTextboxSenha.Name = "meuTextboxSenha";
             this.meuTextboxSenha.Size = new System.Drawing.Size(171, 39);
             this.meuTextboxSenha.TabIndex = 1;
@@ -76,7 +78,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BackgroundImage = global::ProjBoletos.Properties.Resources.logo2;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(353, 94);
+            this.pictureBox1.Location = new System.Drawing.Point(355, 94);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(215, 155);
             this.pictureBox1.TabIndex = 8;
@@ -86,11 +88,11 @@
             // 
             this.labelErroConexao.AutoSize = true;
             this.labelErroConexao.BackColor = System.Drawing.Color.White;
-            this.labelErroConexao.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelErroConexao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.labelErroConexao.ForeColor = System.Drawing.Color.Red;
             this.labelErroConexao.Location = new System.Drawing.Point(353, 404);
             this.labelErroConexao.Name = "labelErroConexao";
-            this.labelErroConexao.Size = new System.Drawing.Size(215, 15);
+            this.labelErroConexao.Size = new System.Drawing.Size(218, 13);
             this.labelErroConexao.TabIndex = 9;
             this.labelErroConexao.Text = "Verifique sua conexão com a internet";
             this.labelErroConexao.Visible = false;
@@ -99,11 +101,11 @@
             // 
             this.labelErroLogin.AutoSize = true;
             this.labelErroLogin.BackColor = System.Drawing.Color.White;
-            this.labelErroLogin.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelErroLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.labelErroLogin.ForeColor = System.Drawing.Color.Red;
-            this.labelErroLogin.Location = new System.Drawing.Point(392, 404);
+            this.labelErroLogin.Location = new System.Drawing.Point(391, 404);
             this.labelErroLogin.Name = "labelErroLogin";
-            this.labelErroLogin.Size = new System.Drawing.Size(137, 15);
+            this.labelErroLogin.Size = new System.Drawing.Size(142, 13);
             this.labelErroLogin.TabIndex = 10;
             this.labelErroLogin.Text = "Cnpj ou senha incorreta";
             this.labelErroLogin.Visible = false;
@@ -112,11 +114,11 @@
             // 
             this.labelErroVazio.AutoSize = true;
             this.labelErroVazio.BackColor = System.Drawing.Color.White;
-            this.labelErroVazio.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelErroVazio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.labelErroVazio.ForeColor = System.Drawing.Color.Red;
-            this.labelErroVazio.Location = new System.Drawing.Point(367, 404);
+            this.labelErroVazio.Location = new System.Drawing.Point(368, 404);
             this.labelErroVazio.Name = "labelErroVazio";
-            this.labelErroVazio.Size = new System.Drawing.Size(186, 15);
+            this.labelErroVazio.Size = new System.Drawing.Size(189, 13);
             this.labelErroVazio.TabIndex = 11;
             this.labelErroVazio.Text = "Nenhum campo pode ficar vazio";
             this.labelErroVazio.Visible = false;

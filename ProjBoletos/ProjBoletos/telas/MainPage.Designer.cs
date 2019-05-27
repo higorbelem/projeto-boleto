@@ -1,4 +1,6 @@
-﻿namespace ProjBoletos.telas {
+﻿using ProjBoletos.utils;
+
+namespace ProjBoletos.telas {
     partial class MainPage {
         /// <summary>
         /// Required designer variable.
@@ -80,7 +82,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Ebrima", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = Fonts.mainBold10;
             this.label1.ForeColor = System.Drawing.Color.LightGray;
             this.label1.Location = new System.Drawing.Point(15, 104);
             this.label1.Margin = new System.Windows.Forms.Padding(15, 10, 0, 10);

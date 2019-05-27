@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class SidebarButton : UserControl {
@@ -17,7 +18,7 @@ namespace ProjBoletos.components {
         public Color onClickColor = ColorTranslator.FromHtml("#747881");
         public Color titleColor = Color.White;
 
-        public Color selectedColor = ColorTranslator.FromHtml("#3289d8");
+        public Color selectedColor = Colors.accent1;
 
         public string title = "LOGARA";
 
@@ -118,7 +119,7 @@ namespace ProjBoletos.components {
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(titleColor), rectForString, sf);
+            e.Graphics.DrawString(title, Fonts.mainBold10, new SolidBrush(titleColor), rectForString, sf);
 
             if (selected) {
                 int selectedWidth = 7;

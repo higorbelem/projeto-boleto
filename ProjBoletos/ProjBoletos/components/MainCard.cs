@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
     public partial class MainCard : UserControl {
@@ -72,7 +73,7 @@ namespace ProjBoletos.components {
             if (!notifString.Equals("0")) {
                 e.Graphics.FillEllipse(new SolidBrush(ColorTranslator.FromHtml("#e6353e")), notifRect);
                 
-                e.Graphics.DrawString(notifString, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Color.White), notifRect, sfNotif);
+                e.Graphics.DrawString(notifString,Fonts.mainBold10, new SolidBrush(Color.White), notifRect, sfNotif);
             }
 
             Size imgSize = new Size(110,110);
@@ -82,16 +83,18 @@ namespace ProjBoletos.components {
             StringFormat sfImgNumber = new StringFormat();
             sfImgNumber.LineAlignment = StringAlignment.Center;
             sfImgNumber.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString(numString, new Font("Ebrima", 35, FontStyle.Bold), new SolidBrush(ascentColor), imgRect, sfImgNumber);
+            e.Graphics.DrawString(numString, Fonts.mainBold35, new SolidBrush(ascentColor), new Rectangle(imgRect.X, imgRect.Y + 10, imgRect.Width, imgRect.Height), sfImgNumber);
 
 
             Rectangle tituloRect = new Rectangle(20,notifRect.Y,Width-notifRect.Width-notifPadding,notifRect.Height);
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(title, new Font("Ebrima", 14), new SolidBrush(Color.White), tituloRect, sf);
+            e.Graphics.DrawString(title, Fonts.main14, new SolidBrush(Color.White), tituloRect, sf);
 
             e.Graphics.FillRectangle(new SolidBrush(ascentColor), new Rectangle(0,Height-10,Width,10));
+
+            e.Graphics.Dispose();
         }
 
         private void MainCard_Resize(object sender, EventArgs e) {

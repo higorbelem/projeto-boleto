@@ -84,6 +84,12 @@
     <Compile Include="components\CustomScrollbar.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="components\Loading.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\MainCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -189,6 +195,12 @@
     <Compile Include="telas\mainPageControls\HomeTabs\TabMedicoes.Designer.cs">
       <DependentUpon>TabMedicoes.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\MedicaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\MedicaoForm.Designer.cs">
+      <DependentUpon>MedicaoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="testes\drawTeste.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +214,7 @@
       <DependentUpon>TESTE.cs</DependentUpon>
     </Compile>
     <Compile Include="utils\Colors.cs" />
+    <Compile Include="utils\Fonts.cs" />
     <Compile Include="utils\ServerConfig.cs" />
     <EmbeddedResource Include="components\AccountButton.resx">
       <DependentUpon>AccountButton.cs</DependentUpon>
@@ -217,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\CustomScrollbar.resx">
       <DependentUpon>CustomScrollbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\MainCard.resx">
       <DependentUpon>MainCard.cs</DependentUpon>
@@ -273,6 +289,9 @@
     <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabMedicoes.resx">
       <DependentUpon>TabMedicoes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="telas\MedicaoForm.resx">
+      <DependentUpon>MedicaoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="testes\drawTeste.resx">
       <DependentUpon>drawTeste.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +346,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\icon_boleto_300x300.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\asd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

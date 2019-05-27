@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.modelos;
 using ProjBoletos.utils;
+using BoletoForm2;
+using ProjBoletos.telas;
 
 namespace ProjBoletos.components {
     public partial class CustomListView : UserControl {
@@ -37,6 +39,16 @@ namespace ProjBoletos.components {
 
             flowLayoutPanel.Controls.Add(new Separator());
 
+            if (medicoes.Count == 0){
+                flowLayoutPanel.Controls.Add(new Label() {
+                    Text = "Não há medições",
+                    Font = Fonts.mainBold10,
+                    ForeColor = Colors.primaryText,
+                    Size = new Size(ClientRectangle.Width, 50),
+                    TextAlign = ContentAlignment.MiddleCenter
+                });
+            }
+
             foreach (Medicao medicao in medicoes) {
                 CustomListViewItem customListViewItem = new CustomListViewItem();
                 customListViewItem.Size = new Size(ClientRectangle.Width, 50);
@@ -58,6 +70,15 @@ namespace ProjBoletos.components {
                         break;
                 }
 
+                customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
+
+                });
+
+                customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
+                    MedicaoForm medicaoForm = new MedicaoForm(medicao);
+                    medicaoForm.Show();
+                });
+
                 flowLayoutPanel.Controls.Add(customListViewItem);
             }
 
@@ -71,8 +92,8 @@ namespace ProjBoletos.components {
                 flowLayoutPanel.Controls[0].Size = new Size(ClientRectangle.Width, 50);
                 flowLayoutPanel.Controls[1].Size = new Size(ClientRectangle.Width, 10);
             }
-
-            for (int i = 2; i <  flowLayoutPanel.Controls.Count; i++) {
+            
+            for (int i = 2; i < flowLayoutPanel.Controls.Count; i++){
                 flowLayoutPanel.Controls[i].Size = new Size(ClientRectangle.Width, 50);
             }
         }

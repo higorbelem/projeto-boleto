@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using ProjBoletos.components;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.testes {
     public partial class MeuButton : UserControl {
@@ -80,7 +81,7 @@ namespace ProjBoletos.testes {
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString(title, new Font("Ebrima", 10, FontStyle.Bold), new SolidBrush(Color.White), ClientRectangle, sf);
+            e.Graphics.DrawString(title, Fonts.mainBold10, new SolidBrush(Color.White), ClientRectangle, sf);
         }
     }
 }
