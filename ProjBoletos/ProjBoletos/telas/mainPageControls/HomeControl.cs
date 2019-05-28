@@ -108,10 +108,12 @@ namespace ProjBoletos.telas.mainPageControls {
         }
 
         private void tabMedicoes_Click(object sender, EventArgs e) {
+            tabMedicoesWindow.updateCustomViewList();
             bringClickedTab("medicoes");
         }
 
         private void tabBoletos_Click(object sender, EventArgs e) {
+            tabBoletosWindow.updateCustomViewList();
             bringClickedTab("boletos");
         }
 

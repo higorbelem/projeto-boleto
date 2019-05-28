@@ -121,6 +121,9 @@
     <Compile Include="Comum\TesteNET.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BoletoForm.resx">
+      <DependentUpon>BoletoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BoletoWeb.bmp" />
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ using ProjBoletos.modelos;
 using Newtonsoft.Json;
 using RestSharp;
 using ProjBoletos.utils;
+using Newtonsoft.Json.Converters;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
     public partial class TabMedicoes : UserControl {
@@ -48,13 +49,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             customListView.UpdateList(medicoes);
 
             customListView.update += () =>{
-                buscarMedicoes(cedente.id);
-                atualizarCards(medicoes);
-                customListView.UpdateList(medicoes);
+                updateCustomViewList();
             };
 
             gerarTodasBtn.title = "GERAR TODAS";
             gerarTodasBtn.cornerRadius = 20;
+        }
+
+        public void updateCustomViewList(){
+            buscarMedicoes(cedente.id);
+            atualizarCards(medicoes);
+            customListView.UpdateList(medicoes);
         }
 
         private void TabMedicoes_Resize(object sender, EventArgs e) {
@@ -169,17 +174,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                 }
             }
 
-            mainCard1.title = "Medições no prazo";
+            mainCard1.title = "MEDIÇÕES NO PRAZO";
             mainCard1.numString = medicoesNoPrazo + "";
             mainCard1.notifString = mmedicoesNoPrazoHoje + "";
             mainCard1.ascentColor = Colors.noPrazo;
 
-            mainCard2.title = "Medições perto de vencer";
+            mainCard2.title = "MEDICÕES PERTO DE VENCER";
             mainCard2.numString = medicoesPertoDeVencer + "";
             mainCard2.notifString = medicoesPertoDeVencerHoje + "";
             mainCard2.ascentColor = Colors.pertoDeVencer;
 
-            mainCard3.title = "Medições atrasadas";
+            mainCard3.title = "MEDICÕES ATRASADAS";
             mainCard3.numString = medicoesAtrasadas + "";
             mainCard3.notifString = medicoesAtrasadasHoje + "";
             mainCard3.ascentColor = Colors.atrasado;
@@ -193,6 +198,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
             var request = new RestRequest("text/plain");
             request.AddParameter("cedente-id", idCedente);
+            request.AddParameter("is-boleto", 0);
 
             var response = client.Post(request);
 

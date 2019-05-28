@@ -26,8 +26,8 @@
             this.mainCard1 = new ProjBoletos.components.MainCard();
             this.mainCard3 = new ProjBoletos.components.MainCard();
             this.mainCard2 = new ProjBoletos.components.MainCard();
+            this.customListView = new ProjBoletos.components.CustomListView(ProjBoletos.components.CustomListView.COD_BOLETO);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.customListView);
             this.panel1.Controls.Add(this.mainCard1);
             this.panel1.Controls.Add(this.mainCard2);
             this.panel1.Controls.Add(this.mainCard3);
@@ -66,14 +66,13 @@
             this.panel1.Size = new System.Drawing.Size(1152, 3013);
             this.panel1.TabIndex = 4;
             // 
-            // label1
+            // customListView
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(561, 3000);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.customListView.AutoSize = true;
+            this.customListView.Location = new System.Drawing.Point(370, 355);
+            this.customListView.Name = "customListView";
+            this.customListView.Size = new System.Drawing.Size(380, 201);
+            this.customListView.TabIndex = 5;
             // 
             // TabBoletos
             // 
@@ -99,6 +98,6 @@
         private components.MainCard mainCard3;
         private components.MainCard mainCard2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private components.CustomListView customListView;
     }
 }

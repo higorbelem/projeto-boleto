@@ -22,8 +22,16 @@ namespace ProjBoletos.components {
         public delegate void UpdateEvent();
         public UpdateEvent update;
 
-        public CustomListView() {
+        public static int COD_MEDICAO = 1;
+        public static int COD_BOLETO= 2;
+        public static int COD_REMESSA = 3;
+
+        private int currentTabCod;
+
+        public CustomListView(int tabCod) {
             InitializeComponent();
+
+            currentTabCod = tabCod;
         }
 
         private void CustomListView_Load(object sender, EventArgs e) {
@@ -79,21 +87,32 @@ namespace ProjBoletos.components {
                         break;
                 }
 
+                if (currentTabCod == COD_BOLETO){
+                    customListViewItem.btnGerar.Size = new Size(0,0);
+                    customListViewItem.btnGerar.Visible = false;
+                }
                 customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
                     var resultMessageBox = MessageBox.Show("Gerar o boleto desta medição?", "", MessageBoxButtons.YesNo);
 
-                    if (resultMessageBox == DialogResult.Yes){
+                    if (resultMessageBox == DialogResult.Yes)
+                    {
                         var result = gerarBoletos(medicao.id);
 
-                        if (result){
+                        if (result)
+                        {
                             update();
                         }
                     }
                 });
 
                 customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
-                    MedicaoForm medicaoForm = new MedicaoForm(medicao);
-                    medicaoForm.Show();
+                    if (currentTabCod == COD_MEDICAO){
+                        MedicaoForm medicaoForm = new MedicaoForm(medicao);
+                        medicaoForm.Show();
+                    }else if (currentTabCod == COD_BOLETO){
+                        BoletoForm boletoForm = new BoletoForm();
+                        boletoForm.Show();
+                    }
                 });
 
                 flowLayoutPanel.Controls.Add(customListViewItem);

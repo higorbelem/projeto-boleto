@@ -90,7 +90,7 @@ namespace ProjBoletos.components {
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(title, Fonts.main14, new SolidBrush(Color.White), tituloRect, sf);
+            e.Graphics.DrawString(title, Fonts.main12, new SolidBrush(Color.White), tituloRect, sf);
 
             e.Graphics.FillRectangle(new SolidBrush(ascentColor), new Rectangle(0,Height-10,Width,10));
 

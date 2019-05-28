@@ -97,9 +97,16 @@ namespace Impactro.WindowsControls
 
         private void InitializeComponent()
         {
+            this.SuspendLayout();
+            // 
+            // BoletoForm
+            // 
             this.BackColor = System.Drawing.Color.White;
             this.Name = "BoletoForm";
             this.Size = new System.Drawing.Size(640, 680);
+            this.Load += new System.EventHandler(this.BoletoForm_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -145,6 +152,11 @@ namespace Impactro.WindowsControls
             Boleto.Render(g, tamanhoDaParteDeCima);
 
             return true;
+        }
+
+        private void BoletoForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

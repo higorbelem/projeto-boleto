@@ -33,9 +33,9 @@ namespace ProjBoletos.telas {
 
         private void Login_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                if (buttonTeste1.Focused) {
+                //if (buttonTeste1.Focused) {
                     buttonTeste1_click(sender, e);
-                }
+                //}
             }
         }
 
