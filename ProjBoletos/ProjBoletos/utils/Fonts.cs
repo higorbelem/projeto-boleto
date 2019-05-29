@@ -10,6 +10,7 @@ namespace ProjBoletos.utils
     public static class Fonts
     {
 
+        public static Font mainBold7 = new Font("Montserrat", 7, FontStyle.Bold);
         public static Font mainBold8 = new Font("Montserrat", 8, FontStyle.Bold);
         public static Font mainBold10 = new Font("Montserrat", 10, FontStyle.Bold);
         public static Font mainBold12 = new Font("Montserrat", 12, FontStyle.Bold);
@@ -17,6 +18,7 @@ namespace ProjBoletos.utils
         public static Font mainBold20 = new Font("Montserrat", 20, FontStyle.Bold);
         public static Font mainBold35 = new Font("Montserrat", 35, FontStyle.Bold);
 
+        public static Font main7 = new Font("Montserrat", 7);
         public static Font main8 = new Font("Montserrat", 8);
         public static Font main10 = new Font("Montserrat", 10);
         public static Font main12 = new Font("Montserrat", 12);

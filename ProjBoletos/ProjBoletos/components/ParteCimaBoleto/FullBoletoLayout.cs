@@ -42,7 +42,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
             }
             else
             {
-                boletoForm1.MakeBoleto(Cedente.makeCedenteInfo(cedente, contaSelecionada, medicao.carteiraSelecionada, "", medicao.convenioSelecionado), Sacado.makeSacadoInfo(medicao.sacado, medicao.casa), geraBoleto());
+                boletoForm1.MakeBoleto(Cedente.makeCedenteInfo(cedente, contaSelecionada, medicao.carteiraSelecionada, ""), Sacado.makeSacadoInfo(medicao.sacado, medicao.casa), geraBoleto());
             }
         }
 

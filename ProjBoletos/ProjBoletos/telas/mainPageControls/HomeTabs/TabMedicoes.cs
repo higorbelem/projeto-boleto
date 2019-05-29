@@ -108,7 +108,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                 //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada);
 
-                var result = gerarMedicoes(cedente.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada, gerarBoletoDialog.convenioSelecionado);
+                var result = gerarMedicoes(cedente.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
 
                 if (result)
                 {
@@ -247,7 +247,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             return false;
         }
 
-        private bool gerarMedicoes(string idCedente, string contaIndex, string carteira, string convenio)
+        private bool gerarMedicoes(string idCedente, string contaIndex, string carteira)
         {
             //loading1.Visible = true;
 
@@ -257,7 +257,6 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             var request = new RestRequest("text/plain");
             request.AddParameter("cedente-id", idCedente);
             request.AddParameter("carteira", carteira);
-            request.AddParameter("convenio", convenio);
             request.AddParameter("conta_index", contaIndex);
 
             var response = client.Post(request);

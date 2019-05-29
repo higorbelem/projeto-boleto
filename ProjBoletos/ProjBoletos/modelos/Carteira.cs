@@ -11,13 +11,11 @@ namespace ProjBoletos.modelos
 
         public string carteira { get; set; }
         public string descricao { get; set; }
-        public string convenioBB { get; set; }
 
-        public Carteira(string carteira,string convenioBB, string descricao)
+        public Carteira(string carteira, string descricao)
         {
             this.carteira = carteira;
             this.descricao = descricao;
-            this.convenioBB = convenioBB;
         }
 
         public Carteira()

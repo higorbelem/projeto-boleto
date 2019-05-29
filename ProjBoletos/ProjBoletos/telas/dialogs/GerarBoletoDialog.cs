@@ -21,82 +21,68 @@ namespace ProjBoletos.telas.dialogs
         public Cedente cedente;
 
         private List<Carteira> carteirasItau = new List<Carteira>(){
-            new Carteira("102","0","Sem Registro Com Emissão Integral - Carnê"),
-            new Carteira("103","0","Sem Registro Com Emissão/Entrega - Carnê"),
-            new Carteira("104","0","Escritural Eletrônica - Carnê"),
-            new Carteira("105","0","Escritural Eletrônica - Dólar - Carnê"),
-            new Carteira("106","0","S/Registro C/Emissão/Entrega-15 dígitos-Carnê"),
-            new Carteira("107","0","S/Registro C/Emissão Integral-15 Posições-Carnê"),
-            new Carteira("108","0","Direta Eletrônica Emissão Integral - Carnê"),
-            new Carteira("109","0","Direta Eletrônica Sem Emissão - Simples"),
-            new Carteira("110","0","Direta Eletrônica Sem Emissão - Simples"),
-            new Carteira("111","0","Direta Eletrônica Sem Emissão - Simples"),
-            new Carteira("112","0","Escritural Eletrônica - simples / contratual"),
-            new Carteira("113","0","Escritural Eletrônica - TR - Carnê"),
-            new Carteira("114","0","Escritural Eletrônica - Seguros"),
-            new Carteira("115","0","Carteira 115"),
-            new Carteira("120","0","S/Registro Emissão Integral C/IOF 2% - Carnê"),
-            new Carteira("121","0"," Direta Eletrônica Emissão Parcial - Simples/Contra"),
-            new Carteira("122","0","S/Registro S/Emissão 15 Dígitos C/IOF 2%"),
-            new Carteira("126","0","Direta Eletrônica Sem Emissão - Seguros"),
-            new Carteira("129","0","S/Registro Emissão Parcial Seguros C/IOF 2%"),
-            new Carteira("131","0","Direta Eletrônica c/ Valor em Aberto"),
-            new Carteira("139","0","S/Registro Emissão Parcial Seguros C/IOF 4%"),
-            new Carteira("140","0","S/Registro Emissão Integral C/IOF 4% - Carnê"),
-            new Carteira("141","0","S/Registro Emissão Integral C/IOF 7% - Carnê"),
-            new Carteira("142","0","S/Registro S/Emissão 15 DÍGITOS C/IOF 4%"),
-            new Carteira("143","0","S/Registro S/Emissão 15 DÍGITOS C/IOF 7%"),
-            new Carteira("146","0","Descrição Não Disponível"),
-            new Carteira("147","0","Escritural Eletrônica - Dólar"),
-            new Carteira("150","0","Direta Eletrônica Sem Emissão - Dólar"),
-            new Carteira("166","0","Escritural Eletrônica - TR"),
-            new Carteira("168","0","Direta Eletrônica Sem Emissão - TR"),
-            new Carteira("169","0","S/Registro Emissão Parcial Seguros C/IOF 7%"),
-            new Carteira("172","0","Sem Registro Com Emissão Integra"),
-            new Carteira("173","0"," Sem Registro Com Emissão/Entrega"),
-            new Carteira("174","0","Sem Registro Emissão Parcial Com Protesto Borderô"),
-            new Carteira("175","0","Sem Registro Sem Emissão"),
+            new Carteira("102","Sem Registro Com Emissão Integral - Carnê"),
+            new Carteira("103","Sem Registro Com Emissão/Entrega - Carnê"),
+            new Carteira("104","Escritural Eletrônica - Carnê"),
+            new Carteira("105","Escritural Eletrônica - Dólar - Carnê"),
+            new Carteira("106","S/Registro C/Emissão/Entrega-15 dígitos-Carnê"),
+            new Carteira("107","S/Registro C/Emissão Integral-15 Posições-Carnê"),
+            new Carteira("108","Direta Eletrônica Emissão Integral - Carnê"),
+            new Carteira("109","Direta Eletrônica Sem Emissão - Simples"),
+            new Carteira("110","Direta Eletrônica Sem Emissão - Simples"),
+            new Carteira("111","Direta Eletrônica Sem Emissão - Simples"),
+            new Carteira("112","Escritural Eletrônica - simples / contratual"),
+            new Carteira("113","Escritural Eletrônica - TR - Carnê"),
+            new Carteira("114","Escritural Eletrônica - Seguros"),
+            new Carteira("115","Carteira 115"),
+            new Carteira("120","S/Registro Emissão Integral C/IOF 2% - Carnê"),
+            new Carteira("121"," Direta Eletrônica Emissão Parcial - Simples/Contra"),
+            new Carteira("122","S/Registro S/Emissão 15 Dígitos C/IOF 2%"),
+            new Carteira("126","Direta Eletrônica Sem Emissão - Seguros"),
+            new Carteira("129","S/Registro Emissão Parcial Seguros C/IOF 2%"),
+            new Carteira("131","Direta Eletrônica c/ Valor em Aberto"),
+            new Carteira("139","S/Registro Emissão Parcial Seguros C/IOF 4%"),
+            new Carteira("140","S/Registro Emissão Integral C/IOF 4% - Carnê"),
+            new Carteira("141","S/Registro Emissão Integral C/IOF 7% - Carnê"),
+            new Carteira("142","S/Registro S/Emissão 15 DÍGITOS C/IOF 4%"),
+            new Carteira("143","S/Registro S/Emissão 15 DÍGITOS C/IOF 7%"),
+            new Carteira("146","Descrição Não Disponível"),
+            new Carteira("147","Escritural Eletrônica - Dólar"),
+            new Carteira("150","Direta Eletrônica Sem Emissão - Dólar"),
+            new Carteira("166","Escritural Eletrônica - TR"),
+            new Carteira("168","Direta Eletrônica Sem Emissão - TR"),
+            new Carteira("169","S/Registro Emissão Parcial Seguros C/IOF 7%"),
+            new Carteira("172","Sem Registro Com Emissão Integra"),
+            new Carteira("173"," Sem Registro Com Emissão/Entrega"),
+            new Carteira("174","Sem Registro Emissão Parcial Com Protesto Borderô"),
+            new Carteira("175","Sem Registro Sem Emissão"),
         };
         private List<Carteira> carteirasBradesco = new List<Carteira>() {
-            new Carteira("02","0","Carteira 02"),
-            new Carteira("03","0","Carteira 03"),
-            new Carteira("04","0","Pré-Impressos"),
-            new Carteira("05","0","Recebimento Programado Bradesco - RPB"),
-            new Carteira("06","0","Sem Registro"),
-            new Carteira("07","0","Carteira 07"),
-            new Carteira("09","0","Com Registro"),
-            new Carteira("12","0","Carteira 12"),
-            new Carteira("16","0","Sem Registro com Protesto"),
-            new Carteira("17","0","Carteira 17"),
-            new Carteira("19","0","Com Registro"),
-            new Carteira("22","0","Sem Registro - Pagável somente no Bradescos")
+            new Carteira("02","Carteira 02"),
+            new Carteira("03","Carteira 03"),
+            new Carteira("04","Pré-Impressos"),
+            new Carteira("05","Recebimento Programado Bradesco - RPB"),
+            new Carteira("06","Sem Registro"),
+            new Carteira("07","Carteira 07"),
+            new Carteira("09","Com Registro"),
+            new Carteira("12","Carteira 12"),
+            new Carteira("16","Sem Registro com Protesto"),
+            new Carteira("17","Carteira 17"),
+            new Carteira("19","Com Registro"),
+            new Carteira("22","Sem Registro - Pagável somente no Bradescos")
         };
         private List<Carteira> carteirasBB = new List<Carteira>() {
-            new Carteira("11","0","Cobrança Simples - Com Registro"),
-            new Carteira("11","0000","Cobrança Simples - C/Registro Convênio 4 dígitos"),
-            new Carteira("12","0","Cobrança Indexada - Com Registro"),
-            new Carteira("12","0000","Cobrança Indexada - C/Registro Convênio 4 dígitos"),
-            new Carteira("12","0000000","Cobrança Indexada - C/Registro Convênio 7 dígitos"),
-            new Carteira("15","0","Cobrança de Prêmios de Seguro - Com Registro"),
-            new Carteira("15","0000","Cob.Prêmios Seguro - C/Registro Convênio 4 dígitos"),
-            new Carteira("16","0","Cobranca Simples"),
-            new Carteira("16","00000000000000000","Cobranca Simples - Nosso Número 17 Dígitos"),
-            new Carteira("16","0000","Cobranca Simples - Convênio 4 dígitos"),
-            new Carteira("17","0","Cobranca Direta Especial - Com Registro"),
-            new Carteira("17","0000","Cob. Direta Esp. - C/Registro Convênio 4 dígitos"),
-            new Carteira("17","0000000","Cob. Direta Esp. - C/Registro Convênio 7 dígitos"),
-            new Carteira("18","0","Cobranca Simples - Nosso Número 11 Dígitos"),
-            new Carteira("18","00000000000000000","Cobranca Simples - Nosso Número 17 Dígitos"),
-            new Carteira("18","0000","Cobranca Simples - Convênio 4 dígitos"),
-            new Carteira("18","0000000","Cobranca Simples - Convênio 7 dígitos"),
-            new Carteira("31","0","Cobrança Caucionada/Vinculada - Com Registro"),
-            new Carteira("31","0000","Cob.Cauc./Vinc. - C/Registro Convênio 4 dígitos"),
-            new Carteira("51","0","Cobrança Descontada - Com Registro"),
-            new Carteira("51","0000","Cob. Descontada - C/Registro Convênio 4 dígitoss")
+            //new Carteira("11","Cobrança Simples"),
+            //new Carteira("12","Cobrança Indexada"),
+            //new Carteira("15","Cobrança Prêmios Seguro"),
+            new Carteira("16","Cobranca Simples"),
+            //new Carteira("17","Cobranca Direta Especial"),
+            new Carteira("18","Cobranca Simples"),
+            //new Carteira("31","Cobrança Cauc./Vinc."),
+            //new Carteira("51","Cobrança Descontada")
         };
 
         public string carteiraSelecionada = "";
-        public string convenioSelecionado = "";
         public string contaSelecionadaIndex = "";
 
         public GerarBoletoDialog(Cedente  cedente)
@@ -137,14 +123,7 @@ namespace ProjBoletos.telas.dialogs
 
                     if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")) {
                         foreach (Carteira carteira in carteirasBB) {
-                            if (carteira.convenioBB.Equals("0"))
-                            {
-                                comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
-                            }
-                            else
-                            {
-                                comboBoxCarteiras.Items.Add(carteira.carteira + "-" + carteira.convenioBB + " - " + carteira.descricao);
-                            }
+                            comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
                         }
                     }
                     else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")) {
@@ -171,17 +150,14 @@ namespace ProjBoletos.telas.dialogs
                 if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")){
 
                     carteiraSelecionada = carteirasBB[comboBoxCarteiras.SelectedIndex - 1].carteira;
-                    convenioSelecionado = carteirasBB[comboBoxCarteiras.SelectedIndex - 1].convenioBB;
 
                 }
                 else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")){
 
-                    convenioSelecionado = "0";
                     carteiraSelecionada = carteirasBradesco[comboBoxCarteiras.SelectedIndex - 1].carteira;
 
                 }else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("341")){
 
-                    convenioSelecionado = "0";
                     carteiraSelecionada = carteirasItau[comboBoxCarteiras.SelectedIndex - 1].carteira;
 
                 }else{

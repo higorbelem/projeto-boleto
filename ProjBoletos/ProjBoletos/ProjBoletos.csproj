@@ -102,6 +102,18 @@
     <Compile Include="components\MeuTextbox.Designer.cs">
       <DependentUpon>MeuTextbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesEndereco.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesEndereco.Designer.cs">
+      <DependentUpon>DetalhesEndereco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesFatura.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesFatura.Designer.cs">
+      <DependentUpon>DetalhesFatura.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\ParteCimaBoleto\FullBoletoLayout.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,6 +275,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\BoletoHeader.resx">
       <DependentUpon>BoletoHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\ParteCimaBoleto\DetalhesEndereco.resx">
+      <DependentUpon>DetalhesEndereco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\ParteCimaBoleto\DetalhesFatura.resx">
+      <DependentUpon>DetalhesFatura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\FullBoletoLayout.resx">
       <DependentUpon>FullBoletoLayout.cs</DependentUpon>

@@ -14,7 +14,12 @@ namespace ProjBoletos.components {
               All = TopLeft | TopRight | BottomLeft | BottomRight
         }
 
-        public static GraphicsPath Create(int x, int y, int width, int height, int radius, bool topLeft, bool topRight, bool bottomLeft, bool bottomRight) {
+        public static GraphicsPath Create(Rectangle rect, int radius, bool topLeft, bool topRight, bool bottomLeft, bool bottomRight) {
+            return Create(rect.X,rect.Y,rect.Width,rect.Height,radius,topLeft,topRight,bottomLeft,bottomRight);
+        }
+
+        public static GraphicsPath Create(int x, int y, int width, int height, int radius, bool topLeft, bool topRight, bool bottomLeft, bool bottomRight)
+        {
             int xw = x + width;
             int yh = y + height;
             int xwr = xw - radius;
@@ -29,9 +34,12 @@ namespace ProjBoletos.components {
             p.StartFigure();
 
             //Top Left Corner
-            if (topLeft) {
+            if (topLeft)
+            {
                 p.AddArc(x, y, r2, r2, 180, 90);
-            } else {
+            }
+            else
+            {
                 p.AddLine(x, yr, x, y);
                 p.AddLine(x, y, xr, y);
             }
@@ -40,9 +48,12 @@ namespace ProjBoletos.components {
             p.AddLine(xr, y, xwr, y);
 
             //Top Right Corner
-            if (topRight) {
+            if (topRight)
+            {
                 p.AddArc(xwr2, y, r2, r2, 270, 90);
-            } else {
+            }
+            else
+            {
                 p.AddLine(xwr, y, xw, y);
                 p.AddLine(xw, y, xw, yr);
             }
@@ -51,9 +62,12 @@ namespace ProjBoletos.components {
             p.AddLine(xw, yr, xw, yhr);
 
             //Bottom Right Corner
-            if (bottomRight) {
+            if (bottomRight)
+            {
                 p.AddArc(xwr2, yhr2, r2, r2, 0, 90);
-            } else {
+            }
+            else
+            {
                 p.AddLine(xw, yhr, xw, yh);
                 p.AddLine(xw, yh, xwr, yh);
             }
@@ -62,9 +76,12 @@ namespace ProjBoletos.components {
             p.AddLine(xwr, yh, xr, yh);
 
             //Bottom Left Corner
-            if (bottomLeft) {
+            if (bottomLeft)
+            {
                 p.AddArc(x, yhr2, r2, r2, 90, 90);
-            } else {
+            }
+            else
+            {
                 p.AddLine(xr, yh, x, yh);
                 p.AddLine(x, yh, x, yhr);
             }
@@ -76,7 +93,7 @@ namespace ProjBoletos.components {
             return p;
         }
 
-        public static GraphicsPath Create(int x, int y, int width, int height, int radius, RectangleCorners corners)
+            public static GraphicsPath Create(int x, int y, int width, int height, int radius, RectangleCorners corners)
         {
               int xw = x + width;
               int yh = y + height;

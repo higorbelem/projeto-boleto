@@ -47,7 +47,7 @@ namespace ProjBoletos.modelos {
             contas = new List<Conta>();
         }
 
-        public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo, string convenio) {
+        public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo) {
             CedenteInfo cedenteInfo = new CedenteInfo();
 
             cedenteInfo.Agencia = conta.agencia;
@@ -58,7 +58,7 @@ namespace ProjBoletos.modelos {
             cedenteInfo.CIP = conta.cip;
             cedenteInfo.Modalidade = conta.modalidade;
             
-            cedenteInfo.Convenio = convenio;
+            cedenteInfo.Convenio = conta.convenio;
 
             cedenteInfo.Cedente = cedente.nome;
             cedenteInfo.CedenteCOD = cedente.id;

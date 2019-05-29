@@ -25,9 +25,6 @@ namespace ProjBoletos.modelos {
         //[JsonIgnore]
         public string carteiraSelecionada = "";
 
-
-        public string convenioSelecionado = "";
-
         //[JsonIgnore]
         public string contaSelecionadaIndex = "";
 

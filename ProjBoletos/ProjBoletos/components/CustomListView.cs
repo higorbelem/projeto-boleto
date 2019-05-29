@@ -109,7 +109,7 @@ namespace ProjBoletos.components {
                     if (resultMessageBox == DialogResult.OK)
                     {
                         //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada + " " + gerarBoletoDialog.convenioSelecionado);
-                        var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada, gerarBoletoDialog.convenioSelecionado);
+                        var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
 
                         if (result)
                         {
@@ -159,7 +159,7 @@ namespace ProjBoletos.components {
             }
         }
 
-        private bool gerarBoletos(string idMedicao, string contaIndex, string carteira, string convenio)
+        private bool gerarBoletos(string idMedicao, string contaIndex, string carteira)
         {
             //loading1.Visible = true;
 
@@ -169,7 +169,6 @@ namespace ProjBoletos.components {
             var request = new RestRequest("text/plain");
             request.AddParameter("medicao-id", idMedicao);
             request.AddParameter("carteira", carteira);
-            request.AddParameter("convenio", convenio);
             request.AddParameter("conta_index", contaIndex);
 
             var response = client.Post(request);
