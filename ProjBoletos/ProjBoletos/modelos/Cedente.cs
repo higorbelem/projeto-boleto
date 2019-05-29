@@ -6,29 +6,39 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class Cedente {
+    public class Cedente {
 
         public string id { get; set; }
         public string nome { get; set; }
         public string usoBanco { get; set; }
         public string useSantander { get; set; }
-        public string endereco { get; set; }
-        public string praca { get; set; }
         public string cnpj { get; set; }
         public string informacoes { get; set; }
+        public string contato { get; set; }
+        public string uf { get; set; }
+        public string cidade { get; set; }
+        public string bairro { get; set; }
+        public string rua { get; set; }
+        public string numero { get; set; }
+        public string cep { get; set; }
 
         public List<Conta> contas { get; set; }
 
-        public Cedente(string id, string nome, string usoBanco, string useSantander, string endereco, string praca, string cnpj, string informacoes) {
+        public Cedente(string id, string nome, string usoBanco, string useSantander, string uf, string cidade, string bairro, string rua, string numero, string cep, string cnpj, string informacoes, string contato)
+        {
             this.id = id;
             this.nome = nome;
             this.usoBanco = usoBanco;
             this.useSantander = useSantander;
-            this.endereco = endereco;
-            this.praca = praca;
+            this.uf = uf;
+            this.cidade = cidade;
+            this.bairro = bairro;
+            this.rua = rua;
+            this.numero = numero;
+            this.cep = cep;
             this.cnpj = cnpj;
             this.informacoes = informacoes;
-            this.contas = contas;
+            this.contato = contato;
 
             contas = new List<Conta>();
         }
@@ -37,7 +47,7 @@ namespace ProjBoletos.modelos {
             contas = new List<Conta>();
         }
 
-        public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo) {
+        public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo, string convenio) {
             CedenteInfo cedenteInfo = new CedenteInfo();
 
             cedenteInfo.Agencia = conta.agencia;
@@ -47,14 +57,15 @@ namespace ProjBoletos.modelos {
             cedenteInfo.Conta = conta.conta;
             cedenteInfo.CIP = conta.cip;
             cedenteInfo.Modalidade = conta.modalidade;
-            cedenteInfo.Convenio = conta.convenio;
+            
+            cedenteInfo.Convenio = convenio;
 
             cedenteInfo.Cedente = cedente.nome;
             cedenteInfo.CedenteCOD = cedente.id;
             cedenteInfo.CNPJ = cedente.cnpj;
             cedenteInfo.CodCedente = cedente.id;
-            cedenteInfo.Endereco = cedente.endereco;
-            cedenteInfo.Praca = cedente.praca;
+            cedenteInfo.Endereco = cedente.rua + ", " + cedente.numero;
+            cedenteInfo.Praca = cedente.bairro;
             cedenteInfo.Informacoes = cedente.informacoes;
             cedenteInfo.useSantander = cedente.useSantander.Equals("1");
             cedenteInfo.UsoBanco = cedente.usoBanco;

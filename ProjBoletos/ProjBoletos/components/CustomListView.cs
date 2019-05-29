@@ -13,11 +13,14 @@ using BoletoForm2;
 using ProjBoletos.telas;
 using RestSharp;
 using ProjBoletos.telas.mainPageControls.HomeTabs;
+using ProjBoletos.telas.dialogs;
+using Newtonsoft.Json;
 
 namespace ProjBoletos.components {
     public partial class CustomListView : UserControl {
 
         List<Medicao> medicoes;
+        Cedente cedente;
 
         public delegate void UpdateEvent();
         public UpdateEvent update;
@@ -32,6 +35,13 @@ namespace ProjBoletos.components {
             InitializeComponent();
 
             currentTabCod = tabCod;
+
+            var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+            cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
+            if (cedente == null)
+            {
+                Application.Exit();
+            }
         }
 
         private void CustomListView_Load(object sender, EventArgs e) {
@@ -91,8 +101,23 @@ namespace ProjBoletos.components {
                     customListViewItem.btnGerar.Size = new Size(0,0);
                     customListViewItem.btnGerar.Visible = false;
                 }
+
                 customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
-                    var resultMessageBox = MessageBox.Show("Gerar o boleto desta medição?", "", MessageBoxButtons.YesNo);
+                    GerarBoletoDialog gerarBoletoDialog = new GerarBoletoDialog(cedente);
+                    var resultMessageBox = gerarBoletoDialog.ShowDialog();
+
+                    if (resultMessageBox == DialogResult.OK)
+                    {
+                        //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada + " " + gerarBoletoDialog.convenioSelecionado);
+                        var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada, gerarBoletoDialog.convenioSelecionado);
+
+                        if (result)
+                        {
+                            update();
+                        }
+                    }
+
+                    /*var resultMessageBox = MessageBox.Show("Gerar o boleto desta medição?", "", MessageBoxButtons.YesNo);
 
                     if (resultMessageBox == DialogResult.Yes)
                     {
@@ -102,7 +127,7 @@ namespace ProjBoletos.components {
                         {
                             update();
                         }
-                    }
+                    }*/
                 });
 
                 customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
@@ -110,7 +135,7 @@ namespace ProjBoletos.components {
                         MedicaoForm medicaoForm = new MedicaoForm(medicao);
                         medicaoForm.Show();
                     }else if (currentTabCod == COD_BOLETO){
-                        BoletoForm boletoForm = new BoletoForm();
+                        BoletoForm boletoForm = new BoletoForm(medicao);
                         boletoForm.Show();
                     }
                 });
@@ -134,7 +159,7 @@ namespace ProjBoletos.components {
             }
         }
 
-        private bool gerarBoletos(string idMedicao)
+        private bool gerarBoletos(string idMedicao, string contaIndex, string carteira, string convenio)
         {
             //loading1.Visible = true;
 
@@ -143,6 +168,9 @@ namespace ProjBoletos.components {
 
             var request = new RestRequest("text/plain");
             request.AddParameter("medicao-id", idMedicao);
+            request.AddParameter("carteira", carteira);
+            request.AddParameter("convenio", convenio);
+            request.AddParameter("conta_index", contaIndex);
 
             var response = client.Post(request);
 
@@ -152,17 +180,12 @@ namespace ProjBoletos.components {
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-
                 if (!content.Equals("erro"))
                 {
-                    
-
                     return true;
                 }
                 else
                 {
-                    
-
                     return false;
                 }
             }

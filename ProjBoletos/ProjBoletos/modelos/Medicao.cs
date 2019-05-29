@@ -22,6 +22,15 @@ namespace ProjBoletos.modelos {
 
         public int nivelAtraso = 0;
 
+        //[JsonIgnore]
+        public string carteiraSelecionada = "";
+
+
+        public string convenioSelecionado = "";
+
+        //[JsonIgnore]
+        public string contaSelecionadaIndex = "";
+
         public Medicao(string id, string medicao, DateTime dataMedicao, string boletoGerado, DateTime dataBoletoGerado, medidor medidor, Sacado sacado, Casa casa, int nivelAtraso)
         {
             this.id = id;

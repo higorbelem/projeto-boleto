@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.components.ParteCimaBoleto;
+using ProjBoletos.modelos;
 
 namespace ProjBoletos {
     public partial class ParteCimaBoleto : UserControl {
 
+        private Cedente cedente;
 
         public ParteCimaBoleto() {
             InitializeComponent();
@@ -19,6 +21,11 @@ namespace ProjBoletos {
 
         private void ParteCimaBoleto_Load(object sender, EventArgs e) {
 
+        }
+
+        public void MakeBoleto(Cedente cedente)
+        {
+            this.cedente = cedente;
         }
 
         public void print(Graphics g) {
@@ -34,7 +41,7 @@ namespace ProjBoletos {
         }
 
         private void paint(Graphics g) {
-            new BoletoHeader(new Rectangle(1,15,ClientRectangle.Width - 2 , (int)(ClientRectangle.Height*0.1))).render(g);
+            new BoletoHeader(new Rectangle(1,15,ClientRectangle.Width - 2 , (int)(ClientRectangle.Height*0.1)), cedente).render(g);
         }
     }
 }

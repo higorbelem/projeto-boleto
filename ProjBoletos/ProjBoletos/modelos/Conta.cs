@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjBoletos.modelos {
-    class Conta {
+    public class Conta {
 
         public string id { get; set; }
         public string banco { get; set; }

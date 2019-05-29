@@ -139,6 +139,7 @@
     <Compile Include="components\SidebarButton.Designer.cs">
       <DependentUpon>SidebarButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="modelos\Carteira.cs" />
     <Compile Include="modelos\Casa.cs" />
     <Compile Include="modelos\Cedente.cs" />
     <Compile Include="modelos\Conta.cs" />
@@ -152,6 +153,12 @@
     </Compile>
     <Compile Include="telas\BoletoForm.Designer.cs">
       <DependentUpon>BoletoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\dialogs\GerarBoletoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\dialogs\GerarBoletoDialog.Designer.cs">
+      <DependentUpon>GerarBoletoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="telas\Form1.cs">
       <SubType>Form</SubType>
@@ -274,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\BoletoForm.resx">
       <DependentUpon>BoletoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\dialogs\GerarBoletoDialog.resx">
+      <DependentUpon>GerarBoletoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

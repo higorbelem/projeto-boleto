@@ -40,7 +40,7 @@
             this.boletoForm1.Location = new System.Drawing.Point(0, 92);
             this.boletoForm1.Margin = new System.Windows.Forms.Padding(0);
             this.boletoForm1.Name = "boletoForm1";
-            this.boletoForm1.Size = new System.Drawing.Size(364, 190);
+            this.boletoForm1.Size = new System.Drawing.Size(348, 190);
             this.boletoForm1.TabIndex = 0;
             this.boletoForm1.tamanhoDaParteDeCima = 0;
             // 
@@ -54,7 +54,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(364, 282);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(348, 282);
             this.flowLayoutPanel1.TabIndex = 2;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
@@ -76,7 +76,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FullBoletoLayout";
-            this.Size = new System.Drawing.Size(740, 728);
+            this.Size = new System.Drawing.Size(534, 436);
             this.Load += new System.EventHandler(this.FullBoletoLayout_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FullBoletoLayout_Paint);
             this.Resize += new System.EventHandler(this.FullBoletoLayout_Resize);

@@ -12,6 +12,7 @@ namespace ProjBoletos.utils
 
         public static Color bg = ColorTranslator.FromHtml("#f9f9f9");
         public static Color bg2 = ColorTranslator.FromHtml("#f2f2f2");
+        public static Color bg3 = ColorTranslator.FromHtml("#e6e6e6");
         public static Color headerText = ColorTranslator.FromHtml("#303336");
         public static Color secondaryHeaderText = ColorTranslator.FromHtml("#494d50");
         public static Color primaryText = ColorTranslator.FromHtml("#6e7377");
