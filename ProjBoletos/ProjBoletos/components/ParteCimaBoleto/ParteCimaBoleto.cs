@@ -46,7 +46,7 @@ namespace ProjBoletos {
         }
 
         public void print(Graphics g, Rectangle rect) {
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            //g.SmoothingMode = SmoothingMode.AntiAlias;
             setSizes(rect);
             paint(g);
         }

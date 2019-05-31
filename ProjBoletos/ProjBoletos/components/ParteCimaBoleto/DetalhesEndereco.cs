@@ -67,31 +67,31 @@ namespace ProjBoletos.components.ParteCimaBoleto
             format.Alignment = StringAlignment.Near;
 
             StringFormat formatValor = new StringFormat();
-            formatValor.LineAlignment = StringAlignment.Center;
+            formatValor.LineAlignment = StringAlignment.Far;
             formatValor.Alignment = StringAlignment.Near;
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rectHeader, radius,true,true,false,false);
             g.FillPath(new SolidBrush(Colors.boletoLines),path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1.5f), path);
+            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
             g.DrawString("Detalhes de Endereçamento", Fonts.mainBold8, new SolidBrush(Colors.bg), rectHeader, formatHeader);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1.5f),rect1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, 1),rect1);
             g.DrawString("Nome", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1Padding, format);
             g.DrawString(valor1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1.5f), rect2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2);
             g.DrawString("Endereço", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2Padding, format);
             g.DrawString(valor2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1.5f), rect3_1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect3_1);
             g.DrawString("Bairro", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_1Padding, format);
             g.DrawString(valor3_1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1.5f), rect3_2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect3_2);
             g.DrawString("Cidade/UF", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_2Padding, format);
             g.DrawString(valor3_2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1.5f), rect4);
+            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect4);
             g.DrawString("CEP", Fonts.main7, new SolidBrush(Colors.boletoLines), rect4Padding, format);
             g.DrawString(valor4, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect4Padding, formatValor);
 

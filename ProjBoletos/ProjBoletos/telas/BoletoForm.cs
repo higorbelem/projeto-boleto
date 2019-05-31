@@ -57,12 +57,21 @@ namespace ProjBoletos.telas
         private void button1_Click(object sender, EventArgs e)
         {
             PrintDocument pDoc = new PrintDocument();
-            pDoc.DefaultPageSettings.PaperSize = new PaperSize("A4",1000, (int)(1000 * Math.Sqrt(2)));
+            //pDoc.DefaultPageSettings.PaperSize = new PaperSize("A4",850, (int)(850 * Math.Sqrt(2)));
             pDoc.PrintPage += new PrintPageEventHandler(pDoc_PrintPageUnico);
+
+            IEnumerable<PaperSize> paperSizes = pDoc.PrinterSettings.PaperSizes.Cast<PaperSize>();
+            PaperSize sizeA4 = paperSizes.First<PaperSize>(size => size.Kind == PaperKind.A4); // setting paper size to A4 size
+            pDoc.DefaultPageSettings.PaperSize = sizeA4;
+            pDoc.OriginAtMargins = false; //true = soft margins, false = hard margins
 
             //pDoc.DefaultPageSettings.Landscape = true;
 
             PrintDialog dlgPrinter = new PrintDialog();
+            dlgPrinter.AllowSomePages = true;
+            dlgPrinter.Document = pDoc;
+            dlgPrinter.AllowPrintToFile = true;
+
             PrintPreviewDialog ppw = new PrintPreviewDialog();
             ppw.Document = pDoc;
             ppw.MdiParent = this.MdiParent;
@@ -93,6 +102,7 @@ namespace ProjBoletos.telas
             try
             {
                 fullBoletoLayout1.MakeBoleto(cedente, medicao);
+                //fullBoletoLayout1.print(e.Graphics, new Rectangle((int)e.PageSettings.PrintableArea.X, (int)e.PageSettings.PrintableArea.Y, (int)e.PageSettings.PrintableArea.Width, (int)e.PageSettings.PrintableArea.Height));
                 fullBoletoLayout1.print(e.Graphics, e.PageBounds);
             }
             catch (Exception ex)

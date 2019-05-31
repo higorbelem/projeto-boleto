@@ -34,7 +34,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         public void render(Graphics g)
         {
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rect, radius, true, true, true, true);
-            g.DrawPath(new Pen(Colors.boletoLines), path);
+            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
         }
     }
 }

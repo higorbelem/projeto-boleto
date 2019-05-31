@@ -60,11 +60,11 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rectHeader, radius, true, true, false, false);
             g.FillPath(new SolidBrush(Colors.boletoLines), path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1.5f), path);
+            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
             g.DrawString("Consumo dos últimos 12 meses", Fonts.mainBold8, new SolidBrush(Colors.bg), rectHeader, formatHeader);
 
             path = RoundedRectangles.Create(rectBody, radius, false, false, true, true);
-            g.DrawPath(new Pen(Colors.boletoLines, 1.5f), path);
+            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
 
             int xAtual = rectBodyPadding.X;
             int maiorValor = 0;

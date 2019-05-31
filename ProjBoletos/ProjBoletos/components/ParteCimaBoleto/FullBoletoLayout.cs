@@ -89,7 +89,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
             //boletoForm1.Size = new Size(rect.Width, (int)(rect.Height * 0.43));
             //boletoForm1.Boleto.Escala = (rect.Width) / 170d;
             boletoForm1.PrintType = PrintTypes.Documet;
-            boletoForm1.Print(g, 133, 17.7);
+            boletoForm1.Print(g, 137, 14.6);
         }
 
         private void FullBoletoLayout_Paint(object sender, PaintEventArgs e)
