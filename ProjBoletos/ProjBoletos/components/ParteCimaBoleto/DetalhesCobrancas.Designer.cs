@@ -1,5 +1,7 @@
-﻿namespace ProjBoletos {
-    partial class ParteCimaBoleto {
+﻿namespace ProjBoletos.components.ParteCimaBoleto
+{
+    partial class DetalhesCobrancas
+    {
         /// <summary> 
         /// Variável de designer necessária.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Limpar os recursos que estão sendo usados.
         /// </summary>
         /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,16 +26,16 @@
         /// Método necessário para suporte ao Designer - não modifique 
         /// o conteúdo deste método com o editor de código.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             this.SuspendLayout();
             // 
-            // ParteCimaBoleto
+            // DetalhesCobrancas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ParteCimaBoleto";
-            this.Load += new System.EventHandler(this.ParteCimaBoleto_Load);
-            this.Resize += new System.EventHandler(this.ParteCimaBoleto_Resize);
+            this.Name = "DetalhesCobrancas";
+            this.Load += new System.EventHandler(this.DetalhesCobrancas_Load);
             this.ResumeLayout(false);
 
         }

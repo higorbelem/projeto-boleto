@@ -584,7 +584,7 @@
             Calculao código de Barras e a linha digitável (IPTE)
             </summary>
         </member>
-        <member name="M:Impactro.Cobranca.Boleto.Desenha(System.IntPtr,System.Int32)">
+        <member name="M:Impactro.Cobranca.Boleto.Desenha(System.IntPtr,System.Int32,System.Int32)">
             <summary>
             Desenha a imagem do boleto em um coponente de imagem COM do Windows hDC
             </summary>
@@ -611,7 +611,7 @@
             Cria a imagem do tamanho correto ( Adicionado novos recursos por Alexandre Savelli Bencz )
             </summary>
         </member>
-        <member name="M:Impactro.Cobranca.Boleto.Save(System.String,System.Int32)">
+        <member name="M:Impactro.Cobranca.Boleto.Save(System.String,System.Int32,System.Int32)">
             <summary>
             Salva a imagem do boleto em um arquivo de imagem ( corrigido por Alexandre Savelli Bencz )
             </summary>
@@ -1429,7 +1429,7 @@
             </summary>
             <param name="e"></param>
         </member>
-        <member name="M:Impactro.WindowsControls.BoletoForm.Print(System.Drawing.Graphics,System.Int32)">
+        <member name="M:Impactro.WindowsControls.BoletoForm.Print(System.Drawing.Graphics,System.Int32,System.Double)">
             <summary>
             Imprime o boleto em uma dispositivo grafico (imagem ou impressora)
             </summary>

@@ -75,10 +75,21 @@ namespace ProjBoletos.components.ParteCimaBoleto
             boletoForm1.Size = new Size(Width, (int)(Width * Math.Sqrt(2) * 0.43));
             boletoForm1.Boleto.Escala = (Width) / 170d;
 
-            Console.WriteLine(parteCimaBoleto1.Location.X + " " + parteCimaBoleto1.Location.Y);
-
             parteCimaBoleto1.Invalidate();
             boletoForm1.Invalidate();
+        }
+
+        public void print(Graphics g, Rectangle rect)
+        {
+            Rectangle rectParteCima = new Rectangle(0, 0, rect.Width, (int)(rect.Height * 0.57));
+            parteCimaBoleto1.print(g, rectParteCima);
+
+            boletoForm1.Boleto.ExibeReciboSacado = false;
+            //boletoForm1.Location = new Point(0, rectParteCima.Height + rectParteCima.Y);
+            //boletoForm1.Size = new Size(rect.Width, (int)(rect.Height * 0.43));
+            //boletoForm1.Boleto.Escala = (rect.Width) / 170d;
+            boletoForm1.PrintType = PrintTypes.Documet;
+            boletoForm1.Print(g, 133, 17.7);
         }
 
         private void FullBoletoLayout_Paint(object sender, PaintEventArgs e)

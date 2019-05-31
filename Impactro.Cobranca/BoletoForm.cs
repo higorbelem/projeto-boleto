@@ -21,6 +21,7 @@ namespace Impactro.WindowsControls
         private System.ComponentModel.Container components = null;
     
         public int tamanhoDaParteDeCima { get; set; }
+        public int escala { get; set; }
 
         /// <summary>
         /// Informa o Tipo de impressão, para ajuste de resolução
@@ -121,7 +122,7 @@ namespace Impactro.WindowsControls
             PrintType = PrintTypes.Image;
             try
             {
-                Print(e.Graphics, tamanhoDaParteDeCima);
+                Print(e.Graphics, tamanhoDaParteDeCima, escala);
             }
             catch (Exception ex)
             {
@@ -132,15 +133,16 @@ namespace Impactro.WindowsControls
         /// <summary>
         /// Imprime o boleto em uma dispositivo grafico (imagem ou impressora)
         /// </summary>
-        public bool Print(Graphics g, int tamanhoDaParteDeCima)
+        public bool Print(Graphics g, int tamanhoDaParteDeCima, double escala)
         {
             // Seleciona as margens e escada de acordo com o tipo de documento
             if (PrintType == PrintTypes.Documet)
             {
                 g.PageUnit = GraphicsUnit.Document;
-                Boleto.Escala = 300d / 25.4d;
+                //Boleto.Escala = 300d / 25.4d;
+                Boleto.Escala = escala;
                 // diciona uma margem de 2cm
-                g.TranslateTransform((float)(20 * Boleto.Escala), (float)(20 * Boleto.Escala)); // + Boleto.CedenteLogoHeight - 9));
+                //g.TranslateTransform((float)(20 * Boleto.Escala), (float)(20 * Boleto.Escala)); // + Boleto.CedenteLogoHeight - 9));
             }
             else
             {

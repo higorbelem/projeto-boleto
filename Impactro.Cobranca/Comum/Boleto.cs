@@ -354,7 +354,7 @@ namespace Impactro.Cobranca
         /// <summary>
         /// Desenha a imagem do boleto em um coponente de imagem COM do Windows hDC
         /// </summary>
-        public void Desenha(IntPtr hDC, int tamanhoDaParteDeCima)
+        public void Desenha(IntPtr hDC, int tamanhoDaParteDeCima, int escala)
         {
             try
             {
@@ -363,7 +363,7 @@ namespace Impactro.Cobranca
 
                 Impactro.WindowsControls.BoletoForm wBol = new WindowsControls.BoletoForm(this);
                 Graphics g = Graphics.FromHdc(hDC);
-                wBol.Print(g, tamanhoDaParteDeCima);
+                wBol.Print(g, tamanhoDaParteDeCima, escala);
             }
             catch (Exception ex)
             {
@@ -457,7 +457,7 @@ namespace Impactro.Cobranca
         /// <summary>
         /// Salva a imagem do boleto em um arquivo de imagem ( corrigido por Alexandre Savelli Bencz )
         /// </summary>
-        public void Save(string cFileName, int tamanhoDaParteDeCima)
+        public void Save(string cFileName, int tamanhoDaParteDeCima, int escala)
         {
             try
             {
@@ -470,7 +470,7 @@ namespace Impactro.Cobranca
                 img.SetResolution(DPI, DPI);
                 Graphics g = Graphics.FromImage(img);
                 g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                wBol.Print(g, tamanhoDaParteDeCima);
+                wBol.Print(g, tamanhoDaParteDeCima, escala);
                 img.Save(cFileName, ImageSave);
             }
             catch (Exception ex)

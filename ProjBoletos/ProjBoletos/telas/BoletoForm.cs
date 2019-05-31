@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,53 @@ namespace ProjBoletos.telas
 
             fullBoletoLayout1.Location = new Point(0,0);
             fullBoletoLayout1.Size = new Size(panel1.Width - SystemInformation.VerticalScrollBarWidth, panel1.Height);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PrintDocument pDoc = new PrintDocument();
+            pDoc.DefaultPageSettings.PaperSize = new PaperSize("A4",1000, (int)(1000 * Math.Sqrt(2)));
+            pDoc.PrintPage += new PrintPageEventHandler(pDoc_PrintPageUnico);
+
+            //pDoc.DefaultPageSettings.Landscape = true;
+
+            PrintDialog dlgPrinter = new PrintDialog();
+            PrintPreviewDialog ppw = new PrintPreviewDialog();
+            ppw.Document = pDoc;
+            ppw.MdiParent = this.MdiParent;
+            ppw.WindowState = FormWindowState.Maximized;
+
+            ToolStripButton b = new ToolStripButton();
+            //b.Image = Properties.Resources.PrintIcon;
+            b.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            b.Click += (object sender1 , EventArgs e1) => {
+                if (dlgPrinter.ShowDialog() == DialogResult.OK)
+                {
+                    pDoc.Print();
+                }
+            };
+            ((ToolStrip)(ppw.Controls[1])).Items.RemoveAt(0);
+            ((ToolStrip)(ppw.Controls[1])).Items.Insert(0, b);
+
+            ppw.ShowDialog();
+
+            /*if (dlgPrinter.ShowDialog() == DialogResult.OK)
+            {
+                pDoc.Print();
+            }*/
+        }
+
+        void pDoc_PrintPageUnico(object sender, PrintPageEventArgs e)
+        {
+            try
+            {
+                fullBoletoLayout1.MakeBoleto(cedente, medicao);
+                fullBoletoLayout1.print(e.Graphics, e.PageBounds);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

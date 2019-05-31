@@ -102,6 +102,12 @@
     <Compile Include="components\MeuTextbox.Designer.cs">
       <DependentUpon>MeuTextbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesCobrancas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\DetalhesCobrancas.Designer.cs">
+      <DependentUpon>DetalhesCobrancas.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\ParteCimaBoleto\DetalhesEndereco.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,6 +128,18 @@
     </Compile>
     <Compile Include="components\ParteCimaBoleto\BoletoHeader.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\GraficoBarrasBoleto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\GraficoBarrasBoleto.Designer.cs">
+      <DependentUpon>GraficoBarrasBoleto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\IdentificacaoFaturamento.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ParteCimaBoleto\IdentificacaoFaturamento.Designer.cs">
+      <DependentUpon>IdentificacaoFaturamento.cs</DependentUpon>
     </Compile>
     <Compile Include="components\ParteCimaBoleto\ParteCimaBoleto.cs">
       <SubType>UserControl</SubType>
@@ -276,6 +294,9 @@
     <EmbeddedResource Include="components\ParteCimaBoleto\BoletoHeader.resx">
       <DependentUpon>BoletoHeader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="components\ParteCimaBoleto\DetalhesCobrancas.resx">
+      <DependentUpon>DetalhesCobrancas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\DetalhesEndereco.resx">
       <DependentUpon>DetalhesEndereco.cs</DependentUpon>
     </EmbeddedResource>
@@ -284,6 +305,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\FullBoletoLayout.resx">
       <DependentUpon>FullBoletoLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\ParteCimaBoleto\GraficoBarrasBoleto.resx">
+      <DependentUpon>GraficoBarrasBoleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\ParteCimaBoleto\IdentificacaoFaturamento.resx">
+      <DependentUpon>IdentificacaoFaturamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\ParteCimaBoleto\ParteCimaBoleto.resx">
       <DependentUpon>ParteCimaBoleto.cs</DependentUpon>

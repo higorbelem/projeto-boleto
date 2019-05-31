@@ -191,7 +191,7 @@ namespace BoletoForm2
 
                //DESENHAR PARTE DE CIMADO BOLETO AQUI
 
-                bol.Print(e.Graphics,0);
+                bol.Print(e.Graphics,0,0);
 
                 
 
@@ -230,7 +230,7 @@ namespace BoletoForm2
                 bol.Boleto.Carne = chkCarne.Checked;
                 // bol.Boleto.RenderBoleto=new BoletoCarne(); // Na pratica definir como carne é a mesma coisa que instanciar a classe de carne no RenderBoleto
                 PrintRecibo(bol);
-                bol.Print(e.Graphics,0);
+                bol.Print(e.Graphics,0,0);
 
                 nReg++;
                 e.HasMorePages = nReg < tbDados.Rows.Count;
@@ -396,7 +396,7 @@ namespace BoletoForm2
                 }
             }
             // salva o boleto em uma imagem
-            blt.Save("teste.png",0);
+            blt.Save("teste.png",0,0);
         }
 
         private void frmBasico_Load_1(object sender, EventArgs e) {

@@ -19,6 +19,7 @@ using Impactro.WindowsControls;
 using RestSharp;
 using System.Drawing.Printing;
 using ProjBoletos.modelos;
+using ProjBoletos.components.ParteCimaBoleto;
 
 namespace ProjBoletos {
     public partial class Form1 : Form {
@@ -128,6 +129,10 @@ namespace ProjBoletos {
 
         void pDoc_PrintPageUnico(object sender, PrintPageEventArgs e) {
             try {
+
+                //FullBoletoLayout fullBoletoLayout = new FullBoletoLayout();
+                //fullBoletoLayout.MakeBoleto()
+                //fullBoletoLayout.print(e.Graphics);
 
                /* ParteCimaBoleto parteCimaBoleto = new ParteCimaBoleto();
                 parteCimaBoleto.Size = new System.Drawing.Size(300, 160);
