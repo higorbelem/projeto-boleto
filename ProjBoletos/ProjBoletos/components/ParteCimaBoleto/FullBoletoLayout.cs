@@ -67,13 +67,18 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
             //flowLayoutPanel1.MaximumSize = new Size(ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth, 0);
 
-            parteCimaBoleto1.Location = new Point(0,0);
-            parteCimaBoleto1.Size = new Size(Width, (int)(Width * Math.Sqrt(2) *0.57));
+            setSizes();
+        }
+
+        public void setSizes()
+        {
+            parteCimaBoleto1.Location = new Point(0, 0);
+            parteCimaBoleto1.Size = new Size(ClientRectangle.Width, (int)(ClientRectangle.Width * Math.Sqrt(2) * 0.57));
 
             boletoForm1.Boleto.ExibeReciboSacado = false;
             boletoForm1.Location = new Point(0, parteCimaBoleto1.Height + parteCimaBoleto1.Location.Y);
-            boletoForm1.Size = new Size(Width, (int)(Width * Math.Sqrt(2) * 0.43));
-            boletoForm1.Boleto.Escala = (Width) / 170d;
+            boletoForm1.Size = new Size(ClientRectangle.Width, (int)(ClientRectangle.Width * Math.Sqrt(2) * 0.43));
+            boletoForm1.Boleto.Escala = (ClientRectangle.Width) / 170d;
 
             parteCimaBoleto1.Invalidate();
             boletoForm1.Invalidate();

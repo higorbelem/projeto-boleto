@@ -19,6 +19,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private Rectangle rectHeader, rectBody, rectBodyPadding;
 
         private int radius;
+        private float lineWidth;
 
         private List<string[]> valores = new List<string[]>() {
             new string[]{"7","02/19"},
@@ -35,12 +36,13 @@ namespace ProjBoletos.components.ParteCimaBoleto
             new string[]{"6","01/20"}
         };
 
-        public GraficoBarrasBoleto(Rectangle rect, int radius)
+        public GraficoBarrasBoleto(Rectangle rect, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.rect = rect;
             this.radius = radius;
+            this.lineWidth = lineWidth;
             
             rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
             rectBody = new Rectangle(rect.X,rectHeader.Y + rectHeader.Height,rect.Width,rect.Height-rectHeader.Height);
@@ -60,11 +62,11 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rectHeader, radius, true, true, false, false);
             g.FillPath(new SolidBrush(Colors.boletoLines), path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Consumo dos últimos 12 meses", Fonts.mainBold8, new SolidBrush(Colors.bg), rectHeader, formatHeader);
 
             path = RoundedRectangles.Create(rectBody, radius, false, false, true, true);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
 
             int xAtual = rectBodyPadding.X;
             int maiorValor = 0;

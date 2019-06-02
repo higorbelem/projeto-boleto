@@ -26,12 +26,14 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private int paddingTopBottom = 2;
 
         private int radius;
+        private float lineWidth;
 
-        public DetalhesFatura(Rectangle rect, int radius)
+        public DetalhesFatura(Rectangle rect, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.radius = radius;
+            this.lineWidth = lineWidth;
 
             rect1 = new Rectangle(rect.X, rect.Y, rect.Width / 5, rect.Height);
             rect2 = new Rectangle(rect1.X + rect1.Width, rect.Y, rect.Width / 5, rect.Height);
@@ -57,26 +59,26 @@ namespace ProjBoletos.components.ParteCimaBoleto
             formatValor.Alignment = StringAlignment.Center;
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rect1, radius, true, false, true, false);
-            g.DrawPath(new Pen(Colors.boletoLines,1), path);
+            g.DrawPath(new Pen(Colors.boletoLines,lineWidth), path);
             g.DrawString("Inscrição", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1Padding, format);
             g.DrawString(valor1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2);
             g.DrawString("N°. Fatura", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2Padding, format);
             g.DrawString(valor2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect3);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect3);
             g.DrawString("Mês Referencia", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3Padding, format);
             g.DrawString(valor3, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3Padding, formatValor);
 
             g.FillRectangle(new SolidBrush(Colors.bg3), rect4);
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect4);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect4);
             g.DrawString("Vencimento", Fonts.main7, new SolidBrush(Colors.boletoLines), rect4Padding, format);
             g.DrawString(valor4, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect4Padding, formatValor);
 
             path = RoundedRectangles.Create(rect5, radius, false,true,false,true);
             g.FillPath(new SolidBrush(Colors.bg3), path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Total da Conta", Fonts.main7, new SolidBrush(Colors.boletoLines), rect5Padding, format);
             g.DrawString(valor5, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect5Padding, formatValor);
         }

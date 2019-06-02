@@ -17,13 +17,15 @@ namespace ProjBoletos.components.ParteCimaBoleto
         Rectangle rect;
 
         private int radius;
+        private float lineWidth;
 
-        public DetalhesCobrancas(Rectangle rect, int radius)
+        public DetalhesCobrancas(Rectangle rect, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.rect = rect;
             this.radius = radius;
+            this.lineWidth = lineWidth;
         }
 
         private void DetalhesCobrancas_Load(object sender, EventArgs e)
@@ -34,7 +36,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         public void render(Graphics g)
         {
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rect, radius, true, true, true, true);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
         }
     }
 }

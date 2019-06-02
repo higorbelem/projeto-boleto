@@ -18,6 +18,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private Rectangle rect1_1Padding, rect1_2Padding, rect1_3Padding, rect1_4Padding, rect2_1Padding, rect2_2Padding, rect2_3Padding, rect2_4Padding, rect3_1Padding, rect3_2Padding;
 
         private int radius;
+        private float lineWidth;
 
         private int paddingLeftRight = 8;
         private int paddingTopBottom = 2;
@@ -33,11 +34,12 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private string valor3_1 = "asdasd";
         private string valor3_2 = "asdasd";
 
-        public IdentificacaoFaturamento(Rectangle rect, int radius)
+        public IdentificacaoFaturamento(Rectangle rect, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.radius = radius;
+            this.lineWidth = lineWidth;
 
             rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
             rect1_1 = new Rectangle(rect.X,rectHeader.Y + rectHeader.Height, rect.Width/4, (rect.Height - rectHeader.Height) / 3);
@@ -84,48 +86,48 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rectHeader, radius, true, true, false, false);
             g.FillPath(new SolidBrush(Colors.boletoLines), path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Identificação do Faturamento", Fonts.mainBold8, new SolidBrush(Colors.bg), rectHeader, formatHeader);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines,1),rect1_1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth),rect1_1);
             g.DrawString("Leitura Atual", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1_1Padding, format);
             g.DrawString(valor1_1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1_1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect1_2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect1_2);
             g.DrawString("Leitura Anterior", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1_2Padding, format);
             g.DrawString(valor1_2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1_2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect1_3);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect1_3);
             g.DrawString("Consumo", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1_3Padding, format);
             g.DrawString(valor1_3, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1_3Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect1_4);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect1_4);
             g.DrawString("Esgoto (%)", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1_4Padding, format);
             g.DrawString(valor1_4, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1_4Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2_1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2_1);
             g.DrawString("Data da Leitura", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2_1Padding, format);
             g.DrawString(valor2_1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2_1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2_2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2_2);
             g.DrawString("Ocorrência", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2_2Padding, format);
             g.DrawString(valor2_2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2_2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2_3);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2_3);
             g.DrawString("Média", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2_3Padding, format);
             g.DrawString(valor2_3, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2_3Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2_4);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2_4);
             g.DrawString("Cód. Deb. Auto.", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2_4Padding, format);
             g.DrawString(valor2_4, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2_4Padding, formatValor);
 
             path = RoundedRectangles.Create(rect3_1, radius, false, false, true, false);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("N°.Hidrômetro", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_1Padding, format);
             g.DrawString(valor3_1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_1Padding, formatValor);
 
             path = RoundedRectangles.Create(rect3_2, radius, false, false, false, true);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Categoria de Consumo", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_2Padding, format);
             g.DrawString(valor3_2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_2Padding, formatValor);
         }

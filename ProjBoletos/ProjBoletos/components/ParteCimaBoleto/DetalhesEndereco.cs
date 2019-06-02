@@ -18,6 +18,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private Rectangle rect1Padding, rect2Padding, rect3_1Padding, rect3_2Padding, rect4Padding, rect5Padding;
 
         private int radius;
+        private float lineWidth;
 
         private int paddingLeftRight = 8;
         private int paddingTopBottom = 2;
@@ -29,11 +30,12 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private string valor4 = "456608-035";
         private string valor5 = "Proximo á nada";
 
-        public DetalhesEndereco(Rectangle rect, int radius)
+        public DetalhesEndereco(Rectangle rect, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.radius = radius;
+            this.lineWidth = lineWidth;
 
             rectHeader = new Rectangle(rect.X,rect.Y,rect.Width, 20);
             rect1 = new Rectangle(rect.X,rectHeader.Y + rectHeader.Height, rect.Width, (rect.Height-rectHeader.Height)/5);
@@ -72,31 +74,31 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
             System.Drawing.Drawing2D.GraphicsPath path = RoundedRectangles.Create(rectHeader, radius,true,true,false,false);
             g.FillPath(new SolidBrush(Colors.boletoLines),path);
-            g.DrawPath(new Pen(Colors.boletoLines, 1), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Detalhes de Endereçamento", Fonts.mainBold8, new SolidBrush(Colors.bg), rectHeader, formatHeader);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1),rect1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth),rect1);
             g.DrawString("Nome", Fonts.main7, new SolidBrush(Colors.boletoLines), rect1Padding, format);
             g.DrawString(valor1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect2);
             g.DrawString("Endereço", Fonts.main7, new SolidBrush(Colors.boletoLines), rect2Padding, format);
             g.DrawString(valor2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect3_1);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect3_1);
             g.DrawString("Bairro", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_1Padding, format);
             g.DrawString(valor3_1, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_1Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect3_2);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect3_2);
             g.DrawString("Cidade/UF", Fonts.main7, new SolidBrush(Colors.boletoLines), rect3_2Padding, format);
             g.DrawString(valor3_2, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect3_2Padding, formatValor);
 
-            g.DrawRectangle(new Pen(Colors.boletoLines, 1), rect4);
+            g.DrawRectangle(new Pen(Colors.boletoLines, lineWidth), rect4);
             g.DrawString("CEP", Fonts.main7, new SolidBrush(Colors.boletoLines), rect4Padding, format);
             g.DrawString(valor4, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect4Padding, formatValor);
 
             path = RoundedRectangles.Create(rect5, radius, false, false, true, true);
-            g.DrawPath(new Pen(Colors.boletoLines), path);
+            g.DrawPath(new Pen(Colors.boletoLines, lineWidth), path);
             g.DrawString("Referência", Fonts.main7, new SolidBrush(Colors.boletoLines), rect5Padding, format);
             g.DrawString(valor5, Fonts.mainBold10, new SolidBrush(Colors.boletoTextValor), rect5Padding, formatValor);
         }

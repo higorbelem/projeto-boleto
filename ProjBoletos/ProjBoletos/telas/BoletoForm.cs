@@ -79,7 +79,7 @@ namespace ProjBoletos.telas
 
             ToolStripButton b = new ToolStripButton();
             //b.Image = Properties.Resources.PrintIcon;
-            b.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            //b.DisplayStyle = ToolStripItemDisplayStyle.Image;
             b.Click += (object sender1 , EventArgs e1) => {
                 if (dlgPrinter.ShowDialog() == DialogResult.OK)
                 {
@@ -90,6 +90,8 @@ namespace ProjBoletos.telas
             ((ToolStrip)(ppw.Controls[1])).Items.Insert(0, b);
 
             ppw.ShowDialog();
+            
+            fullBoletoLayout1.setSizes();
 
             /*if (dlgPrinter.ShowDialog() == DialogResult.OK)
             {

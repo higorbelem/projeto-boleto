@@ -17,6 +17,7 @@ namespace ProjBoletos {
         private Cedente cedente;
 
         private int cornersRadius = 10;
+        private float lineWidth = 0.5f;
 
         private int spaceBetweenElements = 7;
 
@@ -64,19 +65,19 @@ namespace ProjBoletos {
             boletoHeader = new BoletoHeader(rectBoletoHeader, cedente);
 
             Rectangle rectDetalhesFatura = new Rectangle(1, rectBoletoHeader.Y + rectBoletoHeader.Height + spaceBetweenElements, rect.Width - 2, (int)(rect.Height * 0.07));
-            detalhesFatura = new DetalhesFatura(rectDetalhesFatura, cornersRadius);
+            detalhesFatura = new DetalhesFatura(rectDetalhesFatura, cornersRadius, lineWidth);
 
             Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.3));
-            detalhesEndereco = new DetalhesEndereco(rectDetalhesEndereco, cornersRadius);
+            detalhesEndereco = new DetalhesEndereco(rectDetalhesEndereco, cornersRadius, lineWidth);
 
             Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.19));
-            identificacaoFaturamento = new IdentificacaoFaturamento(rectIdentificacaoFaturamento, cornersRadius);
+            identificacaoFaturamento = new IdentificacaoFaturamento(rectIdentificacaoFaturamento, cornersRadius, lineWidth);
 
             Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.2));
-            barrasBoleto = new GraficoBarrasBoleto(rectGraficoBarrasBoleto, cornersRadius);
+            barrasBoleto = new GraficoBarrasBoleto(rectGraficoBarrasBoleto, cornersRadius, lineWidth);
 
             Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.31));
-            detalhesCobrancas = new DetalhesCobrancas(rectDetalhesCobrancas, cornersRadius);
+            detalhesCobrancas = new DetalhesCobrancas(rectDetalhesCobrancas, cornersRadius, lineWidth);
         }
 
         private void paint(Graphics g) {
