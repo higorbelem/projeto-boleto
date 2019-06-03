@@ -102,7 +102,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                     if (diaVencimento < medicoes1[i].dataMedicao.Day)
                     {
-                        vencimento = new DateTime(vencimento.Year, vencimento.Month + 1, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                        vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
                     }
                     else
                     {

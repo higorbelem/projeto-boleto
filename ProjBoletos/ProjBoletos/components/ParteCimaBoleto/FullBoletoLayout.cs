@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.modelos;
 using Impactro.Cobranca;
+using RestSharp;
+using ProjBoletos.utils;
+using Newtonsoft.Json;
 
 namespace ProjBoletos.components.ParteCimaBoleto
 {
@@ -17,14 +20,27 @@ namespace ProjBoletos.components.ParteCimaBoleto
 
         public int padding = 50;
 
-        public FullBoletoLayout()
+        private List<Medicao> medicoesAnteriores;
+
+        private ProjBoletos.ParteCimaBoleto parteCimaBoleto1;
+
+        public FullBoletoLayout(Cedente cedente, Medicao medicao)
         {
             InitializeComponent();
-        }
 
-        public void MakeBoleto(Cedente cedente, Medicao medicao)
-        {
-            parteCimaBoleto1.MakeBoleto(cedente);
+            medicoesAnteriores = getMedicoesAnteriores(medicao.casa.id, medicao.dataMedicao.ToString("yy/MM/dd HH:mm:ss"));
+
+            parteCimaBoleto1 = new ProjBoletos.ParteCimaBoleto(cedente, medicao, medicoesAnteriores);
+
+            this.parteCimaBoleto1.BackColor = System.Drawing.SystemColors.Control;
+            this.parteCimaBoleto1.Location = new System.Drawing.Point(0, 0);
+            this.parteCimaBoleto1.Margin = new System.Windows.Forms.Padding(0);
+            this.parteCimaBoleto1.Name = "parteCimaBoleto1";
+            this.parteCimaBoleto1.Size = new System.Drawing.Size(265, 92);
+            this.parteCimaBoleto1.TabIndex = 1;
+
+            flowLayoutPanel1.Controls.Add(parteCimaBoleto1);
+            flowLayoutPanel1.Controls.Add(boletoForm1);
 
             Conta contaSelecionada = null;
             foreach (Conta conta in cedente.contas)
@@ -45,6 +61,35 @@ namespace ProjBoletos.components.ParteCimaBoleto
                 boletoForm1.MakeBoleto(Cedente.makeCedenteInfo(cedente, contaSelecionada, medicao.carteiraSelecionada, ""), Sacado.makeSacadoInfo(medicao.sacado, medicao.casa), geraBoleto());
             }
         }
+
+        /*public void MakeBoleto(Cedente cedente, Medicao medicao)
+        {
+
+            medicoesAnteriores = getMedicoesAnteriores(medicao.casa.id,medicao.dataMedicao.ToString());
+
+            //Console.WriteLine("asdadas: " + medicoes.Count);
+
+            //parteCimaBoleto1.MakeBoleto(cedente, medicao, medicoesAnteriores);
+
+            Conta contaSelecionada = null;
+            foreach (Conta conta in cedente.contas)
+            {
+                if (conta.id == medicao.contaSelecionadaIndex)
+                {
+                    contaSelecionada = conta;
+                    break;
+                }
+            }
+
+            if (contaSelecionada == null)
+            {
+                MessageBox.Show("", "Algum erro ocorreu, tente novamente mais tarde", MessageBoxButtons.OK);
+            }
+            else
+            {
+                boletoForm1.MakeBoleto(Cedente.makeCedenteInfo(cedente, contaSelecionada, medicao.carteiraSelecionada, ""), Sacado.makeSacadoInfo(medicao.sacado, medicao.casa), geraBoleto());
+            }
+        }*/
 
         public BoletoInfo geraBoleto()
         {
@@ -105,6 +150,41 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private List<Medicao> getMedicoesAnteriores(string casaId, string dataMedicao)
+        {
+            //Console.WriteLine(dataMedicao);
+
+            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getMedicoesAnteriores.php");
+            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+            var request = new RestRequest("text/plain");
+            request.AddParameter("casa-id", casaId);
+            request.AddParameter("data-medicao", dataMedicao);
+
+            var response = client.Post(request);
+
+            var content = response.Content; // raw content as string
+
+            List<Medicao> medicoes = null;
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                if (!content.Equals("erro"))
+                {
+                    medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
+
+                    return medicoes;
+                }
+                else
+                {
+                    return medicoes;
+                }
+            }
+
+            return medicoes;
         }
     }
 }

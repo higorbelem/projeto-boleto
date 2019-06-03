@@ -28,6 +28,19 @@ namespace ProjBoletos.components.ParteCimaBoleto
             this.lineWidth = lineWidth;
         }
 
+        public DetalhesCobrancas(int radius, float lineWidth)
+        {
+            InitializeComponent();
+           
+            this.radius = radius;
+            this.lineWidth = lineWidth;
+        }
+
+        public void setRect(Rectangle rect)
+        {
+            this.rect = rect;
+        }
+
         private void DetalhesCobrancas_Load(object sender, EventArgs e)
         {
 

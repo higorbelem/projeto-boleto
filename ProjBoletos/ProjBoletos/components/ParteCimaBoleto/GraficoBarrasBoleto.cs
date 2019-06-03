@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.utils;
+using ProjBoletos.modelos;
 
 namespace ProjBoletos.components.ParteCimaBoleto
 {
@@ -22,7 +23,7 @@ namespace ProjBoletos.components.ParteCimaBoleto
         private float lineWidth;
 
         private List<string[]> valores = new List<string[]>() {
-            new string[]{"7","02/19"},
+            /*new string[]{"7","02/19"},
             new string[]{"9","03/19"},
             new string[]{"6","04/19"},
             new string[]{"7","05/19"},
@@ -33,19 +34,77 @@ namespace ProjBoletos.components.ParteCimaBoleto
             new string[]{"10","10/19"},
             new string[]{"7","11/19"},
             new string[]{"7","12/19"},
-            new string[]{"6","01/20"}
+            new string[]{"6","01/20"}*/
         };
 
-        public GraficoBarrasBoleto(Rectangle rect, int radius, float lineWidth)
+        /*public GraficoBarrasBoleto(Rectangle rect, Medicao medicao, List<Medicao> medicoesAnteriores, int radius, float lineWidth)
         {
             InitializeComponent();
 
             this.rect = rect;
             this.radius = radius;
             this.lineWidth = lineWidth;
+
+            int diaVencimento = Int32.Parse(medicao.casa.diaVencimento);
+
+            for(int i = medicoesAnteriores.Count - 1; i >= 0 ; i--){
+                DateTime vencimento = medicoesAnteriores[i].dataMedicao;
+
+                if (diaVencimento < medicoesAnteriores[i].dataMedicao.Day){
+                    vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                }else{
+                    vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                }
+
+                int x = 0;
+                if (i > 0){
+                    x = Int32.Parse(medicoesAnteriores[i - 1].medicao);
+                }
+                valores.Add(new string[] { ""+(Int32.Parse(medicoesAnteriores[i].medicao) - x), vencimento.Month + "/" + vencimento.Year});
+            }
             
             rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
             rectBody = new Rectangle(rect.X,rectHeader.Y + rectHeader.Height,rect.Width,rect.Height-rectHeader.Height);
+
+            rectBodyPadding = new Rectangle(rect.X + 5, rectHeader.Y + rectHeader.Height + 5, rect.Width - 10, rect.Height - rectHeader.Height - 10);
+        }*/
+
+        public GraficoBarrasBoleto(Medicao medicao, List<Medicao> medicoesAnteriores, int radius, float lineWidth)
+        {
+            InitializeComponent();
+
+            this.radius = radius;
+            this.lineWidth = lineWidth;
+
+            int diaVencimento = Int32.Parse(medicao.casa.diaVencimento);
+
+            if (medicoesAnteriores != null) {
+                for (int i = medicoesAnteriores.Count - 1; i >= 0; i--) {
+                    DateTime vencimento = medicoesAnteriores[i].dataMedicao;
+
+                    if (diaVencimento < medicoesAnteriores[i].dataMedicao.Day)
+                    {
+                        vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                    }
+                    else
+                    {
+                        vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                    }
+
+                    int x = 0;
+                    if (i < medicoesAnteriores.Count - 1)
+                    {
+                        x = Int32.Parse(medicoesAnteriores[i + 1].medicao);
+                    }
+                    valores.Add(new string[] { "" + (Int32.Parse(medicoesAnteriores[i].medicao) - x), vencimento.Month + "/" + vencimento.Year });
+                }
+            }
+        }
+
+        public void setRect(Rectangle rect)
+        {
+            rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
+            rectBody = new Rectangle(rect.X, rectHeader.Y + rectHeader.Height, rect.Width, rect.Height - rectHeader.Height);
 
             rectBodyPadding = new Rectangle(rect.X + 5, rectHeader.Y + rectHeader.Height + 5, rect.Width - 10, rect.Height - rectHeader.Height - 10);
         }

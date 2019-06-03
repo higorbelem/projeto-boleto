@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.fullBoletoLayout1 = new ProjBoletos.components.ParteCimaBoleto.FullBoletoLayout();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -37,22 +36,10 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.fullBoletoLayout1);
             this.panel1.Location = new System.Drawing.Point(23, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(433, 244);
             this.panel1.TabIndex = 1;
-            // 
-            // fullBoletoLayout1
-            // 
-            this.fullBoletoLayout1.AutoSize = true;
-            this.fullBoletoLayout1.BackColor = System.Drawing.SystemColors.Control;
-            this.fullBoletoLayout1.Location = new System.Drawing.Point(0, 0);
-            this.fullBoletoLayout1.Margin = new System.Windows.Forms.Padding(0);
-            this.fullBoletoLayout1.Name = "fullBoletoLayout1";
-            this.fullBoletoLayout1.Size = new System.Drawing.Size(292, 412);
-            this.fullBoletoLayout1.TabIndex = 0;
-            this.fullBoletoLayout1.Load += new System.EventHandler(this.fullBoletoLayout1_Load);
             // 
             // button1
             // 
@@ -85,7 +72,6 @@
 
         #endregion
 
-        private components.ParteCimaBoleto.FullBoletoLayout fullBoletoLayout1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
     }

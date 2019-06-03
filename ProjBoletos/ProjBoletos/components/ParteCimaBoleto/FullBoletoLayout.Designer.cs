@@ -30,7 +30,6 @@
         {
             this.boletoForm1 = new Impactro.WindowsControls.BoletoForm();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.parteCimaBoleto1 = new ProjBoletos.ParteCimaBoleto();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +42,12 @@
             this.boletoForm1.Size = new System.Drawing.Size(348, 190);
             this.boletoForm1.TabIndex = 0;
             this.boletoForm1.tamanhoDaParteDeCima = 0;
+            this.boletoForm1.Boleto.ExibeReciboSacado = false;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.parteCimaBoleto1);
-            this.flowLayoutPanel1.Controls.Add(this.boletoForm1);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -57,15 +55,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(348, 282);
             this.flowLayoutPanel1.TabIndex = 2;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
-            // 
-            // parteCimaBoleto1
-            // 
-            this.parteCimaBoleto1.BackColor = System.Drawing.SystemColors.Control;
-            this.parteCimaBoleto1.Location = new System.Drawing.Point(0, 0);
-            this.parteCimaBoleto1.Margin = new System.Windows.Forms.Padding(0);
-            this.parteCimaBoleto1.Name = "parteCimaBoleto1";
-            this.parteCimaBoleto1.Size = new System.Drawing.Size(265, 92);
-            this.parteCimaBoleto1.TabIndex = 1;
             // 
             // FullBoletoLayout
             // 
@@ -89,7 +78,6 @@
         #endregion
 
         private Impactro.WindowsControls.BoletoForm boletoForm1;
-        private ProjBoletos.ParteCimaBoleto parteCimaBoleto1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

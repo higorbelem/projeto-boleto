@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace ProjBoletos.components.ParteCimaBoleto{
     class BoletoHeader : UserControl{
 
-        private Rectangle rect;
+        public Rectangle rect;
         private Rectangle leftRect;
         private Rectangle centerRect;
         private Rectangle rightRect;
@@ -26,6 +26,18 @@ namespace ProjBoletos.components.ParteCimaBoleto{
             rightRect = new Rectangle(centerRect.X + centerRect.Width, rect.Y, rect.Width / 4*1, rect.Height);
 
             this.cedente = cedente;
+        }
+
+        public BoletoHeader(Cedente cedente)
+        {
+            this.cedente = cedente;
+        }
+
+        public void setRect(Rectangle rect){
+            this.rect = rect;
+            leftRect = new Rectangle(rect.X, rect.Y, rect.Width / 4, rect.Height);
+            centerRect = new Rectangle(leftRect.X + leftRect.Width, rect.Y, rect.Width / 4 * 2, rect.Height);
+            rightRect = new Rectangle(centerRect.X + centerRect.Width, rect.Y, rect.Width / 4 * 1, rect.Height);
         }
 
         public void render(Graphics g) {

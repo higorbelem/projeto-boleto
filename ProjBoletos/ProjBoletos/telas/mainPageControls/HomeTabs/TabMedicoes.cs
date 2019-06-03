@@ -128,8 +128,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }*/
         }
 
-        private void atualizarCards(List<Medicao> medicoes1)
-        {
+        private void atualizarCards(List<Medicao> medicoes1){
             int medicoesNoPrazo = 0;
             int mmedicoesNoPrazoHoje = 0;
             int medicoesPertoDeVencer = 0;
@@ -137,20 +136,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             int medicoesAtrasadas = 0;
             int medicoesAtrasadasHoje = 0;
 
-            for (int i = 0; i < medicoes1.Count; i++)
-            {
-                if (medicoes1[i].boletoGerado.Equals("0"))
-                {
+            for (int i = 0; i < medicoes1.Count; i++){
+                if (medicoes1[i].boletoGerado.Equals("0")){
                     int diaVencimento = Int32.Parse(medicoes1[i].casa.diaVencimento);
 
                     DateTime vencimento = medicoes1[i].dataMedicao;
 
-                    if (diaVencimento < medicoes1[i].dataMedicao.Day)
-                    {
-                        vencimento = new DateTime(vencimento.Year, vencimento.Month + 1, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
-                    }
-                    else
-                    {
+                    if (diaVencimento < medicoes1[i].dataMedicao.Day){
+                        //Console.WriteLine("mes antes" + vencimento.Month);
+                        vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+                        //Console.WriteLine("mes dps" + vencimento.Month);
+                    }else{
                         vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
                     }
 

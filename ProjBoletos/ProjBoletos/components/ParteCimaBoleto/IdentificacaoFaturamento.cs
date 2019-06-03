@@ -65,6 +65,41 @@ namespace ProjBoletos.components.ParteCimaBoleto
             rect3_2Padding = new Rectangle(rect3_1.X + rect3_1.Width + paddingLeftRight, rect2_1.Y + rect2_1.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
         }
 
+        public IdentificacaoFaturamento(int radius, float lineWidth)
+        {
+            InitializeComponent();
+
+            this.radius = radius;
+            this.lineWidth = lineWidth;
+
+        }
+
+        public void setRect(Rectangle rect)
+        {
+            rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
+            rect1_1 = new Rectangle(rect.X, rectHeader.Y + rectHeader.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect1_2 = new Rectangle(rect1_1.X + rect1_1.Width, rectHeader.Y + rectHeader.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect1_3 = new Rectangle(rect1_2.X + rect1_2.Width, rectHeader.Y + rectHeader.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect1_4 = new Rectangle(rect1_3.X + rect1_3.Width, rectHeader.Y + rectHeader.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect2_1 = new Rectangle(rect.X, rect1_1.Y + rect1_1.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect2_2 = new Rectangle(rect2_1.X + rect2_1.Width, rect1_1.Y + rect1_1.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect2_3 = new Rectangle(rect2_2.X + rect2_2.Width, rect1_1.Y + rect1_1.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect2_4 = new Rectangle(rect2_3.X + rect2_3.Width, rect1_1.Y + rect1_1.Height, rect.Width / 4, (rect.Height - rectHeader.Height) / 3);
+            rect3_1 = new Rectangle(rect.X, rect2_1.Y + rect2_1.Height, rect.Width / 2, (rect.Height - rectHeader.Height) / 3);
+            rect3_2 = new Rectangle(rect3_1.X + rect3_1.Width, rect2_1.Y + rect2_1.Height, rect.Width / 2, (rect.Height - rectHeader.Height) / 3);
+
+            rect1_1Padding = new Rectangle(rect.X + paddingLeftRight, rectHeader.Y + rectHeader.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect1_2Padding = new Rectangle(rect1_1.X + rect1_1.Width + paddingLeftRight, rectHeader.Y + rectHeader.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect1_3Padding = new Rectangle(rect1_2.X + rect1_2.Width + paddingLeftRight, rectHeader.Y + rectHeader.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect1_4Padding = new Rectangle(rect1_3.X + rect1_3.Width + paddingLeftRight, rectHeader.Y + rectHeader.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect2_1Padding = new Rectangle(rect.X + paddingLeftRight, rect1_1.Y + rect1_1.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect2_2Padding = new Rectangle(rect2_1.X + rect2_1.Width + paddingLeftRight, rect1_1.Y + rect1_1.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect2_3Padding = new Rectangle(rect2_2.X + rect2_2.Width + paddingLeftRight, rect1_1.Y + rect1_1.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect2_4Padding = new Rectangle(rect2_3.X + rect2_3.Width + paddingLeftRight, rect1_1.Y + rect1_1.Height + paddingTopBottom, rect.Width / 4 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect3_1Padding = new Rectangle(rect.X + paddingLeftRight, rect2_1.Y + rect2_1.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+            rect3_2Padding = new Rectangle(rect3_1.X + rect3_1.Width + paddingLeftRight, rect2_1.Y + rect2_1.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
+        }
+
         private void IdentificacaoFaturamento_Load(object sender, EventArgs e)
         {
 

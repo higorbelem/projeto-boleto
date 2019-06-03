@@ -14,7 +14,6 @@ using System.Drawing.Drawing2D;
 namespace ProjBoletos {
     public partial class ParteCimaBoleto : UserControl {
 
-        private Cedente cedente;
 
         private int cornersRadius = 10;
         private float lineWidth = 0.5f;
@@ -27,9 +26,19 @@ namespace ProjBoletos {
         private IdentificacaoFaturamento identificacaoFaturamento;
         private GraficoBarrasBoleto barrasBoleto;
         private DetalhesCobrancas detalhesCobrancas;
+        
 
-        public ParteCimaBoleto() {
+        public ParteCimaBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores) {
             InitializeComponent();
+
+            //setSizes(ClientRectangle);
+
+            boletoHeader = new BoletoHeader(cedente);
+            detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth);
+            detalhesEndereco = new DetalhesEndereco(cornersRadius, lineWidth);
+            identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth);
+            barrasBoleto = new GraficoBarrasBoleto(medicao, medicoesAnteriores, cornersRadius, lineWidth);
+            detalhesCobrancas = new DetalhesCobrancas(cornersRadius, lineWidth);
         }
 
         private void ParteCimaBoleto_Resize(object sender, EventArgs e)
@@ -41,10 +50,13 @@ namespace ProjBoletos {
 
         }
 
-        public void MakeBoleto(Cedente cedente)
+        /*public void MakeBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores)
         {
+            //Console.WriteLine("asdadhgdscvaivckdgvckausdf "+medicao.medicao);
             this.cedente = cedente;
-        }
+            this.medicoesAnteriores = medicoesAnteriores;
+            this.medicao = medicao;
+        }*/
 
         public void print(Graphics g, Rectangle rect) {
             //g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -62,22 +74,22 @@ namespace ProjBoletos {
         private void setSizes(Rectangle rect)
         {
             Rectangle rectBoletoHeader = new Rectangle(1, 15, rect.Width - 2, (int)(rect.Height * 0.1));
-            boletoHeader = new BoletoHeader(rectBoletoHeader, cedente);
+            boletoHeader.setRect(rectBoletoHeader);
 
             Rectangle rectDetalhesFatura = new Rectangle(1, rectBoletoHeader.Y + rectBoletoHeader.Height + spaceBetweenElements, rect.Width - 2, (int)(rect.Height * 0.07));
-            detalhesFatura = new DetalhesFatura(rectDetalhesFatura, cornersRadius, lineWidth);
+            detalhesFatura.setRect(rectDetalhesFatura);
 
             Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.3));
-            detalhesEndereco = new DetalhesEndereco(rectDetalhesEndereco, cornersRadius, lineWidth);
+            detalhesEndereco.setRect(rectDetalhesEndereco);
 
             Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.19));
-            identificacaoFaturamento = new IdentificacaoFaturamento(rectIdentificacaoFaturamento, cornersRadius, lineWidth);
+            identificacaoFaturamento.setRect(rectIdentificacaoFaturamento);
 
             Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.2));
-            barrasBoleto = new GraficoBarrasBoleto(rectGraficoBarrasBoleto, cornersRadius, lineWidth);
+            barrasBoleto.setRect(rectGraficoBarrasBoleto);
 
             Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.31));
-            detalhesCobrancas = new DetalhesCobrancas(rectDetalhesCobrancas, cornersRadius, lineWidth);
+            detalhesCobrancas.setRect(rectDetalhesCobrancas);
         }
 
         private void paint(Graphics g) {

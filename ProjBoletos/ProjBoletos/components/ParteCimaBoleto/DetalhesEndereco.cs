@@ -53,6 +53,33 @@ namespace ProjBoletos.components.ParteCimaBoleto
             rect5Padding = new Rectangle(rect.X + paddingLeftRight, rect4.Y + rect4.Height + paddingTopBottom, rect.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
         }
 
+        public DetalhesEndereco(int radius, float lineWidth)
+        {
+            InitializeComponent();
+
+            this.radius = radius;
+            this.lineWidth = lineWidth;
+
+        }
+
+        public void setRect(Rectangle rect)
+        {
+            rectHeader = new Rectangle(rect.X, rect.Y, rect.Width, 20);
+            rect1 = new Rectangle(rect.X, rectHeader.Y + rectHeader.Height, rect.Width, (rect.Height - rectHeader.Height) / 5);
+            rect2 = new Rectangle(rect.X, rect1.Y + rect1.Height, rect.Width, (rect.Height - rectHeader.Height) / 5);
+            rect3_1 = new Rectangle(rect.X, rect2.Y + rect2.Height, rect.Width / 2, (rect.Height - rectHeader.Height) / 5);
+            rect3_2 = new Rectangle(rect3_1.X + rect3_1.Width, rect2.Y + rect2.Height, rect.Width - rect3_1.Width, (rect.Height - rectHeader.Height) / 5);
+            rect4 = new Rectangle(rect.X, rect3_2.Y + rect3_2.Height, rect.Width, (rect.Height - rectHeader.Height) / 5);
+            rect5 = new Rectangle(rect.X, rect4.Y + rect4.Height, rect.Width, (rect.Height - rectHeader.Height) / 5);
+
+            rect1Padding = new Rectangle(rect.X + paddingLeftRight, rectHeader.Y + rectHeader.Height + paddingTopBottom, rect.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+            rect2Padding = new Rectangle(rect.X + paddingLeftRight, rect1.Y + rect1.Height + paddingTopBottom, rect.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+            rect3_1Padding = new Rectangle(rect.X + paddingLeftRight, rect2.Y + rect2.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+            rect3_2Padding = new Rectangle(rect3_1.X + rect3_1.Width + paddingLeftRight, rect2.Y + rect2.Height + paddingTopBottom, rect.Width - rect3_1.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+            rect4Padding = new Rectangle(rect.X + paddingLeftRight, rect3_2.Y + rect3_2.Height + paddingTopBottom, rect.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+            rect5Padding = new Rectangle(rect.X + paddingLeftRight, rect4.Y + rect4.Height + paddingTopBottom, rect.Width - paddingLeftRight * 2, ((rect.Height - rectHeader.Height) / 5) - paddingTopBottom * 2);
+        }
+
         private void DetalhesEndereco_Load(object sender, EventArgs e)
         {
 

@@ -48,6 +48,30 @@ namespace ProjBoletos.components.ParteCimaBoleto
             rect5Padding = new Rectangle(rect4.X + rect4.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
         }
 
+        public DetalhesFatura(int radius, float lineWidth)
+        {
+            InitializeComponent();
+
+            this.radius = radius;
+            this.lineWidth = lineWidth;
+            
+        }
+
+        public void setRect(Rectangle rect)
+        {
+            rect1 = new Rectangle(rect.X, rect.Y, rect.Width / 5, rect.Height);
+            rect2 = new Rectangle(rect1.X + rect1.Width, rect.Y, rect.Width / 5, rect.Height);
+            rect3 = new Rectangle(rect2.X + rect2.Width, rect.Y, rect.Width / 5, rect.Height);
+            rect4 = new Rectangle(rect3.X + rect3.Width, rect.Y, rect.Width / 5, rect.Height);
+            rect5 = new Rectangle(rect4.X + rect4.Width, rect.Y, rect.Width / 5, rect.Height);
+
+            rect1Padding = new Rectangle(rect.X + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
+            rect2Padding = new Rectangle(rect1.X + rect1.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
+            rect3Padding = new Rectangle(rect2.X + rect2.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
+            rect4Padding = new Rectangle(rect3.X + rect3.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
+            rect5Padding = new Rectangle(rect4.X + rect4.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
+        }
+
         public void render(Graphics g)
         {
             StringFormat format = new StringFormat();

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProjBoletos.components.ParteCimaBoleto;
 using ProjBoletos.modelos;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,12 @@ namespace ProjBoletos.telas
         private Medicao medicao;
         private Cedente cedente;
 
+        private FullBoletoLayout fullBoletoLayout;
+
         public BoletoForm(Medicao medicao)
         {
             InitializeComponent();
-
+            
             this.medicao = medicao;
 
             var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
@@ -32,7 +35,21 @@ namespace ProjBoletos.telas
                 Application.Exit();
             }
             //Console.WriteLine(medicao.contaSelecionadaIndex + " " + medicao.carteiraSelecionada);
-            fullBoletoLayout1.MakeBoleto(cedente,medicao);
+            //fullBoletoLayout1.MakeBoleto(cedente,medicao);
+
+            fullBoletoLayout = new FullBoletoLayout(cedente, medicao);
+
+            fullBoletoLayout.AutoSize = true;
+            fullBoletoLayout.BackColor = System.Drawing.SystemColors.Control;
+            fullBoletoLayout.Location = new System.Drawing.Point(0, 0);
+            fullBoletoLayout.Margin = new System.Windows.Forms.Padding(0);
+            fullBoletoLayout.Name = "fullBoletoLayout1";
+            fullBoletoLayout.Size = new System.Drawing.Size(292, 412);
+            fullBoletoLayout.TabIndex = 0;
+            fullBoletoLayout.Load += new System.EventHandler(this.fullBoletoLayout1_Load);
+
+            panel1.Controls.Add(fullBoletoLayout);
+
         }
 
         private void BoletoForm_Load(object sender, EventArgs e)
@@ -50,8 +67,8 @@ namespace ProjBoletos.telas
             panel1.Location = new Point(1,1);
             panel1.Size = new Size(ClientRectangle.Width + SystemInformation.VerticalScrollBarWidth - 2,ClientRectangle.Height-2);
 
-            fullBoletoLayout1.Location = new Point(0,0);
-            fullBoletoLayout1.Size = new Size(panel1.Width - SystemInformation.VerticalScrollBarWidth, panel1.Height);
+            fullBoletoLayout.Location = new Point(0,0);
+            fullBoletoLayout.Size = new Size(panel1.Width - SystemInformation.VerticalScrollBarWidth, panel1.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -91,7 +108,7 @@ namespace ProjBoletos.telas
 
             ppw.ShowDialog();
             
-            fullBoletoLayout1.setSizes();
+            fullBoletoLayout.setSizes();
 
             /*if (dlgPrinter.ShowDialog() == DialogResult.OK)
             {
@@ -103,9 +120,9 @@ namespace ProjBoletos.telas
         {
             try
             {
-                fullBoletoLayout1.MakeBoleto(cedente, medicao);
+                //fullBoletoLayout.MakeBoleto(cedente, medicao);
                 //fullBoletoLayout1.print(e.Graphics, new Rectangle((int)e.PageSettings.PrintableArea.X, (int)e.PageSettings.PrintableArea.Y, (int)e.PageSettings.PrintableArea.Width, (int)e.PageSettings.PrintableArea.Height));
-                fullBoletoLayout1.print(e.Graphics, e.PageBounds);
+                fullBoletoLayout.print(e.Graphics, e.PageBounds);
             }
             catch (Exception ex)
             {
