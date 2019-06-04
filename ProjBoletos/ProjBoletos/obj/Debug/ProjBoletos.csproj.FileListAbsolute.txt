@@ -48,3 +48,4 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.ParteCimaBoleto.IdentificacaoFaturamento.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.ParteCimaBoleto.GraficoBarrasBoleto.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.ParteCimaBoleto.DetalhesCobrancas.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.GerarRemessaDialog.resources

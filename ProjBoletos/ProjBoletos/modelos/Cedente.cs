@@ -47,6 +47,16 @@ namespace ProjBoletos.modelos {
             contas = new List<Conta>();
         }
 
+        public Conta getContaById(string id){
+            foreach (Conta conta in contas){
+                if (conta.id.Equals(id)){
+                    return conta;
+                }
+            }
+
+            return null;
+        }
+
         public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo) {
             CedenteInfo cedenteInfo = new CedenteInfo();
 

@@ -28,6 +28,7 @@
             this.mainCard2 = new ProjBoletos.components.MainCard();
             this.customListView = new ProjBoletos.components.CustomListView(ProjBoletos.components.CustomListView.COD_BOLETO);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGerarRemessa = new ProjBoletos.testes.MeuButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.btnGerarRemessa);
             this.panel1.Controls.Add(this.customListView);
             this.panel1.Controls.Add(this.mainCard1);
             this.panel1.Controls.Add(this.mainCard2);
@@ -74,6 +76,14 @@
             this.customListView.Size = new System.Drawing.Size(380, 201);
             this.customListView.TabIndex = 5;
             // 
+            // btnGerarRemessa
+            // 
+            this.btnGerarRemessa.Location = new System.Drawing.Point(437, 376);
+            this.btnGerarRemessa.Name = "btnGerarRemessa";
+            this.btnGerarRemessa.Size = new System.Drawing.Size(150, 150);
+            this.btnGerarRemessa.TabIndex = 4;
+            this.btnGerarRemessa.Click += new System.EventHandler(this.btnGerarRemessa_Click);
+            // 
             // TabBoletos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,7 +96,6 @@
             this.Load += new System.EventHandler(this.TabBoletos_Load);
             this.Resize += new System.EventHandler(this.TabBoletos_Resize);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,6 +107,7 @@
         private components.MainCard mainCard3;
         private components.MainCard mainCard2;
         private System.Windows.Forms.Panel panel1;
+        private testes.MeuButton btnGerarRemessa;
         private components.CustomListView customListView;
     }
 }

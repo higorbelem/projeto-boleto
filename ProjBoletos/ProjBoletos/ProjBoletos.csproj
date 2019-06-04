@@ -176,6 +176,7 @@
     <Compile Include="modelos\Medicao.cs" />
     <Compile Include="modelos\medidor.cs" />
     <Compile Include="modelos\parteCimaBoletoModel.cs" />
+    <Compile Include="modelos\Remessa.cs" />
     <Compile Include="modelos\Sacado.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="telas\BoletoForm.cs">
@@ -189,6 +190,12 @@
     </Compile>
     <Compile Include="telas\dialogs\GerarBoletoDialog.Designer.cs">
       <DependentUpon>GerarBoletoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\dialogs\GerarRemessaDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\dialogs\GerarRemessaDialog.Designer.cs">
+      <DependentUpon>GerarRemessaDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="telas\Form1.cs">
       <SubType>Form</SubType>
@@ -329,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\dialogs\GerarBoletoDialog.resx">
       <DependentUpon>GerarBoletoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\dialogs\GerarRemessaDialog.resx">
+      <DependentUpon>GerarRemessaDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

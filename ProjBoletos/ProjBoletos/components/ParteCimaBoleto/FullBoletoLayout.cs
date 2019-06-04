@@ -42,15 +42,15 @@ namespace ProjBoletos.components.ParteCimaBoleto
             flowLayoutPanel1.Controls.Add(parteCimaBoleto1);
             flowLayoutPanel1.Controls.Add(boletoForm1);
 
-            Conta contaSelecionada = null;
-            foreach (Conta conta in cedente.contas)
+            Conta contaSelecionada = cedente.getContaById(medicao.contaSelecionadaIndex);
+            /*foreach (Conta conta in cedente.contas)
             {
                 if (conta.id == medicao.contaSelecionadaIndex)
                 {
                     contaSelecionada = conta;
                     break;
                 }
-            }
+            }*/
 
             if (contaSelecionada == null)
             {

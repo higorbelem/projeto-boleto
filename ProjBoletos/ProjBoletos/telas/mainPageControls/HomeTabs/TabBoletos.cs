@@ -11,200 +11,239 @@ using ProjBoletos.utils;
 using ProjBoletos.modelos;
 using Newtonsoft.Json;
 using RestSharp;
+using ProjBoletos.telas.dialogs;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
-    public partial class TabBoletos : UserControl {
+   public partial class TabBoletos : UserControl {
 
-        int quantCards = 3;
-        int spaceBetweenCards = 20;
-        int cardHeight = 220;
+      int quantCards = 3;
+      int spaceBetweenCards = 20;
+      int cardHeight = 220;
 
-        Padding padding = new Padding(40, 20, 40, 40);
+      Padding padding = new Padding(40, 20, 40, 40);
 
-        public Panel panel;
+      public Panel panel;
 
-        Cedente cedente;
-        List<Medicao> medicoes;
+      Cedente cedente;
+      List<Medicao> medicoes;
 
-        public TabBoletos() {
-            InitializeComponent();
+      public TabBoletos() {
+         InitializeComponent();
 
-            panel = panel1;
-        }
+         panel = panel1;
+      }
 
-        private void TabBoletos_Load(object sender, EventArgs e) {
-            panel1.BackColor = Colors.bg;
-            BackColor = Colors.bg;
+      private void TabBoletos_Load(object sender, EventArgs e) {
+         panel1.BackColor = Colors.bg;
+         BackColor = Colors.bg;
 
-            var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
-            cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
-            if (cedente == null)
-            {
-                Application.Exit();
+         var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+         cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
+         if (cedente == null) {
+            Application.Exit();
+         }
+
+         updateCustomViewList();
+
+         customListView.update += () => {
+            updateCustomViewList();
+         };
+
+         btnGerarRemessa.title = "GERAR REMESSA";
+         btnGerarRemessa.cornerRadius = 20;
+      }
+
+      public void updateCustomViewList() {
+         buscarMedicoes(cedente.id);
+         atualizarCards(medicoes);
+         customListView.UpdateList(medicoes);
+      }
+
+      private void TabBoletos_Resize(object sender, EventArgs e) {
+         panel1.Location = new Point(0, 0);
+         panel1.Size = new Size(ClientRectangle.Width, panel1.Height);
+         panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
+         panel1.MaximumSize = new Size(ClientRectangle.Width, 0);
+
+         Rectangle newSize = new Rectangle(padding.Left, padding.Top, panel1.Width - padding.Left - padding.Right, panel1.Height - padding.Top - padding.Bottom);
+
+         int cardWidth = (newSize.Width - (spaceBetweenCards * (quantCards - 1))) / quantCards;
+
+         mainCard1.Location = new Point(newSize.X, newSize.Y);
+         mainCard1.Size = new Size(cardWidth, cardHeight);
+
+         mainCard2.Location = new Point(newSize.X + cardWidth + spaceBetweenCards, newSize.Y);
+         mainCard2.Size = new Size(cardWidth, cardHeight);
+
+         mainCard3.Location = new Point(newSize.X + cardWidth * 2 + spaceBetweenCards * 2, newSize.Y);
+         mainCard3.Size = new Size(cardWidth, cardHeight);
+
+         btnGerarRemessa.Size = new Size(170, 40);
+         btnGerarRemessa.Location = new Point((newSize.Width / 2) - (btnGerarRemessa.Width / 2), mainCard1.Location.Y + mainCard1.Height + 20);
+
+         customListView.Size = new Size(newSize.Width, 80); //0
+         customListView.MinimumSize = new Size(newSize.Width, 0); //0
+         customListView.MaximumSize = new Size(newSize.Width, 0); //0
+         customListView.Location = new Point(newSize.X, btnGerarRemessa.Location.Y + btnGerarRemessa.Height + 20);
+      }
+
+      private void atualizarCards(List<Medicao> medicoes1) {
+         int medicoesNoPrazo = 0;
+         int mmedicoesNoPrazoHoje = 0;
+         int medicoesPertoDeVencer = 0;
+         int medicoesPertoDeVencerHoje = 0;
+         int medicoesAtrasadas = 0;
+         int medicoesAtrasadasHoje = 0;
+
+         for (int i = 0; i < medicoes1.Count; i++) {
+            if (medicoes1[i].boletoGerado.Equals("1")) {
+               int diaVencimento = Int32.Parse(medicoes1[i].casa.diaVencimento);
+
+               DateTime vencimento = medicoes1[i].dataMedicao;
+
+               if (diaVencimento < medicoes1[i].dataMedicao.Day) {
+                  vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+               } else {
+                  vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
+               }
+
+               //medicoes atrasadas
+               if (DateTime.Today.CompareTo(vencimento) > 0) {
+                  medicoesAtrasadas++;
+                  medicoes1[i].nivelAtraso = 2;
+                  if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                     medicoesAtrasadasHoje++;
+                  }
+
+                  continue;
+               }
+
+               //medicoes perto do vencimento
+               if (DateTime.Today.CompareTo(vencimento.AddDays(-5)) >= 0) {
+                  medicoesPertoDeVencer++;
+                  medicoes1[i].nivelAtraso = 1;
+                  if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                     medicoesPertoDeVencerHoje++;
+                  }
+
+                  continue;
+               }
+
+               //medicoes no prazo
+               medicoesNoPrazo++;
+               medicoes1[i].nivelAtraso = 0;
+               if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
+                  mmedicoesNoPrazoHoje++;
+               }
             }
-            buscarMedicoes(cedente.id);
-            atualizarCards(medicoes);
-            customListView.UpdateList(medicoes);
+         }
 
-            customListView.update += () =>{
-                updateCustomViewList();
-            };
-        }
+         mainCard1.title = "BOLETOS NO PRAZO";
+         mainCard1.numString = medicoesNoPrazo + "";
+         mainCard1.notifString = mmedicoesNoPrazoHoje + "";
+         mainCard1.ascentColor = Colors.noPrazo;
 
-        public void updateCustomViewList(){
-            buscarMedicoes(cedente.id);
-            atualizarCards(medicoes);
-            customListView.UpdateList(medicoes);
-        }
+         mainCard2.title = "BOLETOS PERTO DE VENCER";
+         mainCard2.numString = medicoesPertoDeVencer + "";
+         mainCard2.notifString = medicoesPertoDeVencerHoje + "";
+         mainCard2.ascentColor = Colors.pertoDeVencer;
 
-        private void TabBoletos_Resize(object sender, EventArgs e) {
-            panel1.Location = new Point(0, 0);
-            panel1.Size = new Size(ClientRectangle.Width, panel1.Height);
-            panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
-            panel1.MaximumSize = new Size(ClientRectangle.Width, 0);
+         mainCard3.title = "BOLETOS ATRASADOS";
+         mainCard3.numString = medicoesAtrasadas + "";
+         mainCard3.notifString = medicoesAtrasadasHoje + "";
+         mainCard3.ascentColor = Colors.atrasado;
+      }
 
-            Rectangle newSize = new Rectangle(padding.Left,padding.Top,panel1.Width - padding.Left - padding.Right, panel1.Height - padding.Top - padding.Bottom);
+      private bool buscarMedicoes(string idCedente) {
+         //loading1.Visible = true;
 
-            int cardWidth = (newSize.Width - (spaceBetweenCards * (quantCards - 1))) / quantCards;
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosMedicoes.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
-            mainCard1.Location = new Point(newSize.X, newSize.Y);
-            mainCard1.Size = new Size(cardWidth, cardHeight);
+         var request = new RestRequest("text/plain");
+         request.AddParameter("cedente-id", idCedente);
+         request.AddParameter("is-boleto", 1);
 
-            mainCard2.Location = new Point(newSize.X + cardWidth + spaceBetweenCards, newSize.Y);
-            mainCard2.Size = new Size(cardWidth, cardHeight);
+         var response = client.Post(request);
 
-            mainCard3.Location = new Point(newSize.X + cardWidth * 2 + spaceBetweenCards * 2, newSize.Y);
-            mainCard3.Size = new Size(cardWidth, cardHeight);
+         var content = response.Content; // raw content as string
 
-            customListView.Size = new Size(newSize.Width, 80); //0
-            customListView.MinimumSize = new Size(newSize.Width, 0); //0
-            customListView.MaximumSize = new Size(newSize.Width, 0); //0
-            customListView.Location = new Point(newSize.X, mainCard1.Location.Y + mainCard1.Height + 20);
-        }
+         //loading1.Visible = false;
 
-        private void atualizarCards(List<Medicao> medicoes1)
-        {
-            int medicoesNoPrazo = 0;
-            int mmedicoesNoPrazoHoje = 0;
-            int medicoesPertoDeVencer = 0;
-            int medicoesPertoDeVencerHoje = 0;
-            int medicoesAtrasadas = 0;
-            int medicoesAtrasadasHoje = 0;
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
-            for (int i = 0; i < medicoes1.Count; i++)
-            {
-                if (medicoes1[i].boletoGerado.Equals("1"))
-                {
-                    int diaVencimento = Int32.Parse(medicoes1[i].casa.diaVencimento);
+            if (!content.Equals("erro")) {
+               medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
 
-                    DateTime vencimento = medicoes1[i].dataMedicao;
+               return true;
+            } else {
+               medicoes = new List<Medicao>();
 
-                    if (diaVencimento < medicoes1[i].dataMedicao.Day)
-                    {
-                        vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
-                    }
-                    else
-                    {
-                        vencimento = new DateTime(vencimento.Year, vencimento.Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
-                    }
-
-                    //medicoes atrasadas
-                    if (DateTime.Today.CompareTo(vencimento) > 0)
-                    {
-                        medicoesAtrasadas++;
-                        medicoes1[i].nivelAtraso = 2;
-                        if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day)
-                        { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                            medicoesAtrasadasHoje++;
-                        }
-
-                        continue;
-                    }
-
-                    //medicoes perto do vencimento
-                    if (DateTime.Today.CompareTo(vencimento.AddDays(-5)) >= 0)
-                    {
-                        medicoesPertoDeVencer++;
-                        medicoes1[i].nivelAtraso = 1;
-                        if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day)
-                        { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                            medicoesPertoDeVencerHoje++;
-                        }
-
-                        continue;
-                    }
-
-                    //medicoes no prazo
-                    medicoesNoPrazo++;
-                    medicoes1[i].nivelAtraso = 0;
-                    if (DateTime.Today.Year == medicoes1[i].dataBoletoGerado.Year && DateTime.Today.Month == medicoes1[i].dataBoletoGerado.Month && DateTime.Today.Day == medicoes1[i].dataBoletoGerado.Day)
-                    { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                        mmedicoesNoPrazoHoje++;
-                    }
-                }
+               return false;
             }
+         }
 
-            mainCard1.title = "BOLETOS NO PRAZO";
-            mainCard1.numString = medicoesNoPrazo + "";
-            mainCard1.notifString = mmedicoesNoPrazoHoje + "";
-            mainCard1.ascentColor = Colors.noPrazo;
+         Properties.Settings.Default["cedenteAtual"] = "";
+         Properties.Settings.Default["logado"] = false;
+         Properties.Settings.Default.Save();
 
-            mainCard2.title = "BOLETOS PERTO DE VENCER";
-            mainCard2.numString = medicoesPertoDeVencer + "";
-            mainCard2.notifString = medicoesPertoDeVencerHoje + "";
-            mainCard2.ascentColor = Colors.pertoDeVencer;
+         this.Hide();
+         Login login = new Login();
+         //login.Closed += (s, args) => this.Close();
+         login.Show();
 
-            mainCard3.title = "BOLETOS ATRASADOS";
-            mainCard3.numString = medicoesAtrasadas + "";
-            mainCard3.notifString = medicoesAtrasadasHoje + "";
-            mainCard3.ascentColor = Colors.atrasado;
-        }
+         return false;
+      }
 
-        private bool buscarMedicoes(string idCedente)
-        {
-            //loading1.Visible = true;
+      private void btnGerarRemessa_Click(object sender, EventArgs e) {
+         List<Remessa> remessas = new List<Remessa>();
 
-            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosMedicoes.php");
-            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+         foreach (Medicao medicao in medicoes) {
+            Conta contaSelecionada = cedente.getContaById(medicao.contaSelecionadaIndex);
 
-            var request = new RestRequest("text/plain");
-            request.AddParameter("cedente-id", idCedente);
-            request.AddParameter("is-boleto", 1);
+            if (remessas.Count <= 0) {
+               Remessa remessa = new Remessa(contaSelecionada.conta, medicao.carteiraSelecionada);
+               remessa.medicoes.Add(medicao);
 
-            var response = client.Post(request);
+               remessas.Add(remessa);
+            } else {
+               bool addNewRemessa = true;
+               foreach (Remessa remessa in remessas) {
+                  if (remessa.conta.Equals(contaSelecionada.conta) && remessa.carteira.Equals(medicao.carteiraSelecionada)) {
+                     remessa.medicoes.Add(medicao);
+                     addNewRemessa = false;
+                     break;
+                  }
+               }
 
-            var content = response.Content; // raw content as string
+               if (addNewRemessa) {
+                  Remessa remessa = new Remessa(contaSelecionada.conta, medicao.carteiraSelecionada);
+                  remessa.medicoes.Add(medicao);
 
-            //loading1.Visible = false;
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-
-                if (!content.Equals("erro"))
-                {
-                    medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
-
-                    return true;
-                }
-                else
-                {
-                    medicoes = new List<Medicao>();
-
-                    return false;
-                }
+                  remessas.Add(remessa);
+               }
             }
+         }
 
-            Properties.Settings.Default["cedenteAtual"] = "";
-            Properties.Settings.Default["logado"] = false;
-            Properties.Settings.Default.Save();
+         GerarRemessaDialog gerarBoletoDialog = new GerarRemessaDialog(remessas,Parent.FindForm());
+         var res = gerarBoletoDialog.ShowDialog();
+         
+         Parent.FindForm().Activate();
 
-            this.Hide();
-            Login login = new Login();
-            //login.Closed += (s, args) => this.Close();
-            login.Show();
+         if (res == DialogResult.Cancel) {
 
-            return false;
-        }
-    }
+         }else if (res == DialogResult.OK) {
+
+         }
+
+         /*foreach (Remessa remessa in remessas) {
+            Console.WriteLine("--------------------------------\n");
+            foreach (Medicao medicao in remessa.medicoes) {
+               Console.Write("remessa_conta: " + remessa.conta + "  remessa_carteira: " + remessa.carteira + "  medicao: " + medicao.medicao + "\n");
+            }
+            Console.WriteLine("--------------------------------\n");
+         }*/
+      }
+   }
 }

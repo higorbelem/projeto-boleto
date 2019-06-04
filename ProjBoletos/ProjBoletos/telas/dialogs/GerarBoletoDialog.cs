@@ -13,14 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjBoletos.telas.dialogs
-{
-    public partial class GerarBoletoDialog : Form
-    {
+namespace ProjBoletos.telas.dialogs {
+   public partial class GerarBoletoDialog : Form {
 
-        public Cedente cedente;
+      public Cedente cedente;
 
-        private List<Carteira> carteirasItau = new List<Carteira>(){
+      private List<Carteira> carteirasItau = new List<Carteira>(){
             new Carteira("102","Sem Registro Com Emissão Integral - Carnê"),
             new Carteira("103","Sem Registro Com Emissão/Entrega - Carnê"),
             new Carteira("104","Escritural Eletrônica - Carnê"),
@@ -57,7 +55,7 @@ namespace ProjBoletos.telas.dialogs
             new Carteira("174","Sem Registro Emissão Parcial Com Protesto Borderô"),
             new Carteira("175","Sem Registro Sem Emissão"),
         };
-        private List<Carteira> carteirasBradesco = new List<Carteira>() {
+      private List<Carteira> carteirasBradesco = new List<Carteira>() {
             new Carteira("02","Carteira 02"),
             new Carteira("03","Carteira 03"),
             new Carteira("04","Pré-Impressos"),
@@ -71,7 +69,7 @@ namespace ProjBoletos.telas.dialogs
             new Carteira("19","Com Registro"),
             new Carteira("22","Sem Registro - Pagável somente no Bradescos")
         };
-        private List<Carteira> carteirasBB = new List<Carteira>() {
+      private List<Carteira> carteirasBB = new List<Carteira>() {
             //new Carteira("11","Cobrança Simples"),
             //new Carteira("12","Cobrança Indexada"),
             //new Carteira("15","Cobrança Prêmios Seguro"),
@@ -82,109 +80,127 @@ namespace ProjBoletos.telas.dialogs
             //new Carteira("51","Cobrança Descontada")
         };
 
-        public string carteiraSelecionada = "";
-        public string contaSelecionadaIndex = "";
+      public string carteiraSelecionada = "";
+      public string contaSelecionadaIndex = "";
 
-        public GerarBoletoDialog(Cedente  cedente)
-        {
-            InitializeComponent();
+      public GerarBoletoDialog(Cedente cedente) {
+         InitializeComponent();
 
-            this.cedente = cedente;
-        }
+         this.cedente = cedente;
+      }
 
-        private void GerarBoletoDialog_Load(object sender, EventArgs e)
-        {
+      private void GerarBoletoDialog_Load(object sender, EventArgs e) {
 
-            btnFechar.title = "FECHAR";
-            btnFechar.cornerRadius = 5;
-            btnOk.title = "OK";
-            btnOk.cornerRadius = 5;
+         btnFechar.title = "FECHAR";
+         btnFechar.cornerRadius = 5;
+         btnOk.title = "OK";
+         btnOk.cornerRadius = 5;
 
-            label1.Text = "DADOS ADICIONAIS";
-            label1.Font = Fonts.mainBold14;
-            label1.BackColor = Colors.bg3;
-            label1.Location = new Point((ClientRectangle.Width/2)-(label1.Width/2), label1.Location.Y);
+         label1.Text = "DADOS ADICIONAIS";
+         label1.Font = Fonts.mainBold14;
+         label1.BackColor = Colors.bg3;
+         label1.Location = new Point((ClientRectangle.Width / 2) - (label1.Width / 2), label1.Location.Y);
 
-            comboBoxContas.Items.Add("--Escolha uma conta--");
-            comboBoxContas.SelectedIndex = 0;
-            comboBoxCarteiras.Items.Add("--Escolha uma carteira--");
-            comboBoxCarteiras.SelectedIndex = 0;
+         comboBoxContas.Items.Add("--Escolha uma conta--");
+         comboBoxContas.SelectedIndex = 0;
+         comboBoxCarteiras.Items.Add("--Escolha uma carteira--");
+         comboBoxCarteiras.SelectedIndex = 0;
 
-            foreach (Conta conta in cedente.contas){
-                comboBoxContas.Items.Add(conta.banco + " " + conta.agencia + " " + conta.conta);
+         foreach (Conta conta in cedente.contas) {
+            comboBoxContas.Items.Add(conta.banco + " " + conta.agencia + " " + conta.conta);
+         }
+
+         comboBoxContas.SelectionChangeCommitted += new EventHandler((object sender1, EventArgs e1) => {
+            if (comboBoxContas.SelectedIndex > 0) {
+
+               comboBoxCarteiras.Items.Clear();
+               comboBoxCarteiras.Items.Add("--Escolha uma carteira--");
+               comboBoxCarteiras.SelectedIndex = 0;
+
+               if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")) {
+                  foreach (Carteira carteira in carteirasBB) {
+                     comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
+                  }
+               } else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")) {
+                  foreach (Carteira carteira in carteirasBradesco) {
+                     comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
+                  }
+               } else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("341")) {
+                  foreach (Carteira carteira in carteirasItau) {
+                     comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
+                  }
+               }
+            }
+         });
+
+         //comboBox1.SelectedIndex
+      }
+      private void btnOk_Click(object sender, EventArgs e) {
+         if (comboBoxContas.SelectedIndex == 0 || comboBoxCarteiras.SelectedIndex == 0) {
+            MessageBox.Show("Alguma opção ficou vazia", "Atenção", MessageBoxButtons.OK);
+         } else {
+
+            if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")) {
+
+               carteiraSelecionada = carteirasBB[comboBoxCarteiras.SelectedIndex - 1].carteira;
+
+            } else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")) {
+
+               carteiraSelecionada = carteirasBradesco[comboBoxCarteiras.SelectedIndex - 1].carteira;
+
+            } else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("341")) {
+
+               carteiraSelecionada = carteirasItau[comboBoxCarteiras.SelectedIndex - 1].carteira;
+
+            } else {
+               this.DialogResult = DialogResult.Cancel;
+               this.Close();
             }
 
-            comboBoxContas.SelectionChangeCommitted += new EventHandler((object sender1, EventArgs e1) => {
-                if (comboBoxContas.SelectedIndex > 0) {
+            contaSelecionadaIndex = cedente.contas[comboBoxContas.SelectedIndex - 1].id;
 
-                    comboBoxCarteiras.Items.Clear();
-                    comboBoxCarteiras.Items.Add("--Escolha uma carteira--");
-                    comboBoxCarteiras.SelectedIndex = 0;
-
-                    if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")) {
-                        foreach (Carteira carteira in carteirasBB) {
-                            comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
-                        }
-                    }
-                    else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")) {
-                        foreach (Carteira carteira in carteirasBradesco) {
-                            comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
-                        }
-                    }
-                    else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("341")) {
-                        foreach (Carteira carteira in carteirasItau) {
-                            comboBoxCarteiras.Items.Add(carteira.carteira + " - " + carteira.descricao);
-                        }
-                    }
-                }
-            });
-
-            //comboBox1.SelectedIndex
-        }
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (comboBoxContas.SelectedIndex == 0 || comboBoxCarteiras.SelectedIndex == 0){
-                MessageBox.Show("Alguma opção ficou vazia", "Atenção", MessageBoxButtons.OK);
-            }else{
-
-                if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")){
-
-                    carteiraSelecionada = carteirasBB[comboBoxCarteiras.SelectedIndex - 1].carteira;
-
-                }
-                else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("237")){
-
-                    carteiraSelecionada = carteirasBradesco[comboBoxCarteiras.SelectedIndex - 1].carteira;
-
-                }else if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("341")){
-
-                    carteiraSelecionada = carteirasItau[comboBoxCarteiras.SelectedIndex - 1].carteira;
-
-                }else{
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
-                
-                contaSelecionadaIndex = cedente.contas[comboBoxContas.SelectedIndex - 1].id;
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-        }
-
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.OK;
             this.Close();
-        }
+         }
+      }
 
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+      private void btnFechar_Click(object sender, EventArgs e) {
+         this.DialogResult = DialogResult.Cancel;
+         this.Close();
+      }
 
-            GraphicsPath path = RoundedRectangles.Create(new Rectangle(1,1,ClientRectangle.Width-2,ClientRectangle.Height-2), 5);
+      protected override void OnPaintBackground(PaintEventArgs e) {
+         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            e.Graphics.FillPath(new SolidBrush(Colors.bg3), path);
-        }
-    }
+         GraphicsPath path = RoundedRectangles.Create(new Rectangle(1, 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2), 5,true,true, true, true);
+
+         e.Graphics.FillPath(new SolidBrush(Colors.bg3), path);
+      }
+
+      protected override CreateParams CreateParams {
+         get {
+            const int CS_DROPSHADOW = 0x20000;
+            CreateParams cp = base.CreateParams;
+            cp.ClassStyle |= CS_DROPSHADOW;
+            return cp;
+         }
+      }
+
+      protected override void WndProc(ref Message m) {
+         const UInt32 WM_NCACTIVATE = 0x0086;
+
+         if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
+            //Application.OpenForms[parentForm.Name].Focus();
+            //Console.WriteLine(parentForm.Name);
+
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+            //parentForm.Show();
+
+            //ParentForm
+         } else {
+            base.WndProc(ref m);
+         }
+      }
+   }
 }
