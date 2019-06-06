@@ -203,14 +203,14 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Conta contaSelecionada = cedente.getContaById(medicao.contaSelecionadaIndex);
 
             if (remessas.Count <= 0) {
-               Remessa remessa = new Remessa(contaSelecionada.conta, medicao.carteiraSelecionada);
+               Remessa remessa = new Remessa(contaSelecionada, medicao.carteiraSelecionada);
                remessa.medicoes.Add(medicao);
 
                remessas.Add(remessa);
             } else {
                bool addNewRemessa = true;
                foreach (Remessa remessa in remessas) {
-                  if (remessa.conta.Equals(contaSelecionada.conta) && remessa.carteira.Equals(medicao.carteiraSelecionada)) {
+                  if (remessa.conta.conta.Equals(contaSelecionada.conta) && remessa.carteira.Equals(medicao.carteiraSelecionada)) {
                      remessa.medicoes.Add(medicao);
                      addNewRemessa = false;
                      break;
@@ -218,7 +218,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                }
 
                if (addNewRemessa) {
-                  Remessa remessa = new Remessa(contaSelecionada.conta, medicao.carteiraSelecionada);
+                  Remessa remessa = new Remessa(contaSelecionada, medicao.carteiraSelecionada);
                   remessa.medicoes.Add(medicao);
 
                   remessas.Add(remessa);
@@ -226,7 +226,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }
          }
 
-         GerarRemessaDialog gerarBoletoDialog = new GerarRemessaDialog(remessas,Parent.FindForm());
+         GerarRemessaDialog gerarBoletoDialog = new GerarRemessaDialog(remessas, cedente, Parent.FindForm());
          var res = gerarBoletoDialog.ShowDialog();
          
          Parent.FindForm().Activate();

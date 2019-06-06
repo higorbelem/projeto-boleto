@@ -139,10 +139,10 @@ namespace ProjBoletos.components {
             customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
                if (currentTabCod == COD_MEDICAO) {
                   MedicaoForm medicaoForm = new MedicaoForm(medicao);
-                  medicaoForm.Show();
+                  medicaoForm.ShowDialog();
                } else if (currentTabCod == COD_BOLETO) {
                   BoletoForm boletoForm = new BoletoForm(medicao);
-                  boletoForm.Show();
+                  boletoForm.ShowDialog();
                }
             });
 

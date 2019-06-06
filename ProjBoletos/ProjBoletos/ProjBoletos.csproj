@@ -169,6 +169,7 @@
     <Compile Include="components\SidebarButton.Designer.cs">
       <DependentUpon>SidebarButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="modelos\Boleto.cs" />
     <Compile Include="modelos\Carteira.cs" />
     <Compile Include="modelos\Casa.cs" />
     <Compile Include="modelos\Cedente.cs" />
@@ -437,6 +438,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\asd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\backButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -73,6 +73,16 @@ namespace ProjBoletos.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backButton {
+            get {
+                object obj = ResourceManager.GetObject("backButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_boleto {
             get {
                 object obj = ResourceManager.GetObject("icon_boleto", resourceCulture);

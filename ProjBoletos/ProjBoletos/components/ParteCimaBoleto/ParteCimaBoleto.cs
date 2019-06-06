@@ -12,97 +12,98 @@ using ProjBoletos.modelos;
 using System.Drawing.Drawing2D;
 
 namespace ProjBoletos {
-    public partial class ParteCimaBoleto : UserControl {
+   public partial class ParteCimaBoleto : UserControl {
 
 
-        private int cornersRadius = 10;
-        private float lineWidth = 0.5f;
+      private int cornersRadius = 10;
+      private float lineWidth = 0.5f;
 
-        private int spaceBetweenElements = 7;
+      private int spaceBetweenElements = 7;
 
-        private BoletoHeader boletoHeader;
-        private DetalhesFatura detalhesFatura;
-        private DetalhesEndereco detalhesEndereco;
-        private IdentificacaoFaturamento identificacaoFaturamento;
-        private GraficoBarrasBoleto barrasBoleto;
-        private DetalhesCobrancas detalhesCobrancas;
-        
+      private BoletoHeader boletoHeader;
+      private DetalhesFatura detalhesFatura;
+      private DetalhesEndereco detalhesEndereco;
+      private IdentificacaoFaturamento identificacaoFaturamento;
+      private GraficoBarrasBoleto barrasBoleto;
+      private DetalhesCobrancas detalhesCobrancas;
 
-        public ParteCimaBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores) {
-            InitializeComponent();
+      public ParteCimaBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores) {
+         InitializeComponent();
 
-            //setSizes(ClientRectangle);
+         //setSizes(ClientRectangle);
+         Medicao medicaoAnterior = null;
+         if (medicoesAnteriores != null) {
+            medicaoAnterior = medicoesAnteriores.First();
+         }
 
-            boletoHeader = new BoletoHeader(cedente);
-            detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth);
-            detalhesEndereco = new DetalhesEndereco(cornersRadius, lineWidth);
-            identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth);
-            barrasBoleto = new GraficoBarrasBoleto(medicao, medicoesAnteriores, cornersRadius, lineWidth);
-            detalhesCobrancas = new DetalhesCobrancas(cornersRadius, lineWidth);
-        }
+         boletoHeader = new BoletoHeader(cedente);
+         detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth, cedente, medicao, medicaoAnterior);
+         detalhesEndereco = new DetalhesEndereco(cornersRadius, lineWidth, medicao);
+         identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth, medicao, medicaoAnterior, cedente);
+         barrasBoleto = new GraficoBarrasBoleto(medicao, medicoesAnteriores, cornersRadius, lineWidth);
+         detalhesCobrancas = new DetalhesCobrancas(cornersRadius, lineWidth);
+      }
 
-        private void ParteCimaBoleto_Resize(object sender, EventArgs e)
-        {
-            setSizes(ClientRectangle);
-        }
+      private void ParteCimaBoleto_Resize(object sender, EventArgs e) {
+         setSizes(ClientRectangle);
+      }
 
-        private void ParteCimaBoleto_Load(object sender, EventArgs e) {
+      private void ParteCimaBoleto_Load(object sender, EventArgs e) {
 
-        }
+      }
 
-        /*public void MakeBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores)
-        {
-            //Console.WriteLine("asdadhgdscvaivckdgvckausdf "+medicao.medicao);
-            this.cedente = cedente;
-            this.medicoesAnteriores = medicoesAnteriores;
-            this.medicao = medicao;
-        }*/
+      /*public void MakeBoleto(Cedente cedente, Medicao medicao, List<Medicao> medicoesAnteriores)
+      {
+          //Console.WriteLine("asdadhgdscvaivckdgvckausdf "+medicao.medicao);
+          this.cedente = cedente;
+          this.medicoesAnteriores = medicoesAnteriores;
+          this.medicao = medicao;
+      }*/
 
-        public void print(Graphics g, Rectangle rect) {
-            //g.SmoothingMode = SmoothingMode.AntiAlias;
-            setSizes(rect);
-            paint(g);
-        }
+      public void print(Graphics g, Rectangle rect) {
+         //g.SmoothingMode = SmoothingMode.AntiAlias;
+         setSizes(rect);
+         paint(g);
+      }
 
-        protected override void OnPaint(PaintEventArgs e) {
-            base.OnPaint(e);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            paint(e.Graphics);
-        }
+      protected override void OnPaint(PaintEventArgs e) {
+         base.OnPaint(e);
+         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-        private void setSizes(Rectangle rect)
-        {
-            Rectangle rectBoletoHeader = new Rectangle(1, 15, rect.Width - 2, (int)(rect.Height * 0.1));
-            boletoHeader.setRect(rectBoletoHeader);
+         paint(e.Graphics);
+      }
 
-            Rectangle rectDetalhesFatura = new Rectangle(1, rectBoletoHeader.Y + rectBoletoHeader.Height + spaceBetweenElements, rect.Width - 2, (int)(rect.Height * 0.07));
-            detalhesFatura.setRect(rectDetalhesFatura);
+      private void setSizes(Rectangle rect) {
+         Rectangle rectBoletoHeader = new Rectangle(1, 15, rect.Width - 2, (int)(rect.Height * 0.1));
+         boletoHeader.setRect(rectBoletoHeader);
 
-            Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.3));
-            detalhesEndereco.setRect(rectDetalhesEndereco);
+         Rectangle rectDetalhesFatura = new Rectangle(1, rectBoletoHeader.Y + rectBoletoHeader.Height + spaceBetweenElements, rect.Width - 2, (int)(rect.Height * 0.07));
+         detalhesFatura.setRect(rectDetalhesFatura);
 
-            Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.19));
-            identificacaoFaturamento.setRect(rectIdentificacaoFaturamento);
+         Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.3));
+         detalhesEndereco.setRect(rectDetalhesEndereco);
 
-            Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.2));
-            barrasBoleto.setRect(rectGraficoBarrasBoleto);
+         Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.19));
+         identificacaoFaturamento.setRect(rectIdentificacaoFaturamento);
 
-            Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.31));
-            detalhesCobrancas.setRect(rectDetalhesCobrancas);
-        }
+         Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.2));
+         barrasBoleto.setRect(rectGraficoBarrasBoleto);
 
-        private void paint(Graphics g) {
-            //e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(1,1,ClientRectangle.Width-2,ClientRectangle.Height-2));
+         Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.31));
+         detalhesCobrancas.setRect(rectDetalhesCobrancas);
+      }
 
-            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(1, 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2));
+      private void paint(Graphics g) {
+         //e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(1,1,ClientRectangle.Width-2,ClientRectangle.Height-2));
 
-            boletoHeader.render(g);
-            detalhesFatura.render(g);
-            detalhesEndereco.render(g);
-            identificacaoFaturamento.render(g);
-            barrasBoleto.render(g);
-            detalhesCobrancas.render(g);
-        }
-    }
+         g.FillRectangle(new SolidBrush(Color.White), new Rectangle(1, 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2));
+
+         boletoHeader.render(g);
+         detalhesFatura.render(g);
+         detalhesEndereco.render(g);
+         identificacaoFaturamento.render(g);
+         barrasBoleto.render(g);
+         detalhesCobrancas.render(g);
+      }
+   }
 }

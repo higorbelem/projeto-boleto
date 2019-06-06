@@ -83,6 +83,14 @@ namespace ProjBoletos.telas.dialogs {
       public string carteiraSelecionada = "";
       public string contaSelecionadaIndex = "";
 
+      public const int WM_NCLBUTTONDOWN = 0xA1;
+      public const int HT_CAPTION = 0x2;
+
+      [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+      public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+      [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+      public static extern bool ReleaseCapture();
+
       public GerarBoletoDialog(Cedente cedente) {
          InitializeComponent();
 
@@ -91,15 +99,25 @@ namespace ProjBoletos.telas.dialogs {
 
       private void GerarBoletoDialog_Load(object sender, EventArgs e) {
 
-         btnFechar.title = "FECHAR";
-         btnFechar.cornerRadius = 5;
+         BackColor = Colors.bg3;
+
+         panelTopBar.BackColor = Colors.bgDark2;
+         panelTopBar.Location = new Point(ClientRectangle.X, ClientRectangle.Y);
+         panelTopBar.Size = new Size(ClientRectangle.Width, 60);
+         panelTopBar.Margin = new Padding(0);
+
+         backButtonImg.Location = new Point(panelTopBar.Location.X + 20, panelTopBar.Location.Y + 20);
+         backButtonImg.Size = new Size(panelTopBar.Height - 40, panelTopBar.Height - 40);
+
+         labelTitle.Text = "GERAR BOLETO";
+         labelTitle.Location = new Point(panelTopBar.Location.X, panelTopBar.Location.Y);
+         labelTitle.Size = new Size(panelTopBar.Width, panelTopBar.Height);
+         labelTitle.TextAlign = ContentAlignment.MiddleCenter;
+         labelTitle.Font = Fonts.mainBold14;
+         labelTitle.ForeColor = Colors.bg;
+         
          btnOk.title = "OK";
          btnOk.cornerRadius = 5;
-
-         label1.Text = "DADOS ADICIONAIS";
-         label1.Font = Fonts.mainBold14;
-         label1.BackColor = Colors.bg3;
-         label1.Location = new Point((ClientRectangle.Width / 2) - (label1.Width / 2), label1.Location.Y);
 
          comboBoxContas.Items.Add("--Escolha uma conta--");
          comboBoxContas.SelectedIndex = 0;
@@ -169,13 +187,13 @@ namespace ProjBoletos.telas.dialogs {
          this.Close();
       }
 
-      protected override void OnPaintBackground(PaintEventArgs e) {
+      /*protected override void OnPaintBackground(PaintEventArgs e) {
          e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
          GraphicsPath path = RoundedRectangles.Create(new Rectangle(1, 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2), 5,true,true, true, true);
 
          e.Graphics.FillPath(new SolidBrush(Colors.bg3), path);
-      }
+      }*/
 
       protected override CreateParams CreateParams {
          get {
@@ -186,21 +204,27 @@ namespace ProjBoletos.telas.dialogs {
          }
       }
 
-      protected override void WndProc(ref Message m) {
+      private void backButtonImg_Click(object sender, EventArgs e) {
+         this.Close();
+         this.DialogResult = DialogResult.Cancel;
+      }
+
+      private void labelTitle_MouseDown(object sender, MouseEventArgs e) {
+         if (e.Button == MouseButtons.Left) {
+            ReleaseCapture();
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+         }
+      }
+
+      /*protected override void WndProc(ref Message m) {
          const UInt32 WM_NCACTIVATE = 0x0086;
 
          if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
-            //Application.OpenForms[parentForm.Name].Focus();
-            //Console.WriteLine(parentForm.Name);
-
             this.Close();
             this.DialogResult = DialogResult.Cancel;
-            //parentForm.Show();
-
-            //ParentForm
          } else {
             base.WndProc(ref m);
          }
-      }
+      }*/
    }
 }
