@@ -45,9 +45,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          if (cedente == null) {
             Application.Exit();
          }
-         buscarMedicoes(cedente.id);
-         atualizarCards(medicoes);
-         customListView.UpdateList(medicoes);
+
+         updateCustomViewList();
 
          customListView.update += () => {
             updateCustomViewList();
@@ -220,6 +219,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                return true;
             } else {
+               //MessageBox.Show(content);
                medicoes = new List<Medicao>();
 
                return false;

@@ -231,9 +231,11 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          
          Parent.FindForm().Activate();
 
-         if (res == DialogResult.Cancel) {
+         updateCustomViewList();
 
-         }else if (res == DialogResult.OK) {
+         if (res == DialogResult.OK) {
+
+         }else if (res == DialogResult.Cancel) {
 
          }
 

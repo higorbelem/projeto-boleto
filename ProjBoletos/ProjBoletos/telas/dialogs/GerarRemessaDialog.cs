@@ -41,6 +41,16 @@ namespace ProjBoletos.telas.dialogs {
          this.cedente = cedente;
       }
 
+      public void refresh() {
+         flowLayoutPanel1.Controls.Clear();
+         GerarRemessaDialog_Load(null, null);
+
+         if (flowLayoutPanel1.Controls.Count == 0) {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+         }
+      }
+
       private void GerarRemessaDialog_Load(object sender, EventArgs e) {
          BackColor = Colors.bg3;
 
@@ -182,7 +192,12 @@ namespace ProjBoletos.telas.dialogs {
             btnGerarRemessa.Click += new EventHandler((object s1, EventArgs e1) => {
                var remessaTxt = gerarRemessa(remessa);
 
-               MessageBox.Show(remessaTxt);
+               bool res = enviarRemessaServer(remessaTxt, remessa.medicoes);
+
+               if (res) {
+                  remessas.Remove(remessa);
+                  refresh();
+               }
             });
 
             flow.Controls.Add(btnGerarRemessa);
@@ -240,12 +255,30 @@ namespace ProjBoletos.telas.dialogs {
       }
 
       private void btnGerarTodos_Click(object sender, EventArgs e) {
-         StringBuilder stringBuilder = new StringBuilder();
+
+         bool todasRemessasGeradas = true;
+
+         foreach (Remessa remessa in remessas) {
+            string remessaString = gerarRemessa(remessa);
+
+            if (todasRemessasGeradas) {
+               todasRemessasGeradas = enviarRemessaServer(remessaString, remessa.medicoes);
+            } else {
+               enviarRemessaServer(remessaString, remessa.medicoes);
+            }
+         }
+
+         if (todasRemessasGeradas) {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+         }
+
+         /*StringBuilder stringBuilder = new StringBuilder();
          foreach (Remessa remessa in remessas) {
             stringBuilder.Append(gerarRemessa(remessa));
          }
 
-         MessageBox.Show(stringBuilder.ToString());
+         MessageBox.Show(stringBuilder.ToString());*/
       }
 
       protected override CreateParams CreateParams {
@@ -269,13 +302,17 @@ namespace ProjBoletos.telas.dialogs {
          }
       }
 
-      private bool enviarRemessaServer(string idCedente) {
-         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosMedicoes.php");
+      private bool enviarRemessaServer(string remessa, List<Medicao> medicoes) {
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/gerarRemessa.php");
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
-         request.AddParameter("cedente-id", idCedente);
-         request.AddParameter("is-boleto", 0);
+         request.AddParameter("arquivo-remessa", remessa);
+
+         foreach (Medicao medicao in medicoes) {
+            request.AddParameter("id-boletos[]", medicao.id);
+         }
+         //request.AddParameter("id-boletos[]", 10);
 
          var response = client.Post(request);
 
