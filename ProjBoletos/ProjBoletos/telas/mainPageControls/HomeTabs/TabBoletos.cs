@@ -197,20 +197,20 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       private void btnGerarRemessa_Click(object sender, EventArgs e) {
-         List<Remessa> remessas = new List<Remessa>();
+         List<RemessaModelDialog> remessas = new List<RemessaModelDialog>();
 
          foreach (Medicao medicao in medicoes) {
             Conta contaSelecionada = cedente.getContaById(medicao.contaSelecionadaIndex);
 
             if (remessas.Count <= 0) {
-               Remessa remessa = new Remessa(contaSelecionada, medicao.carteiraSelecionada);
+               RemessaModelDialog remessa = new RemessaModelDialog(contaSelecionada, medicao.carteiraSelecionada);
                remessa.medicoes.Add(medicao);
 
                remessas.Add(remessa);
             } else {
                bool addNewRemessa = true;
-               foreach (Remessa remessa in remessas) {
-                  if (remessa.conta.conta.Equals(contaSelecionada.conta) && remessa.carteira.Equals(medicao.carteiraSelecionada)) {
+               foreach (RemessaModelDialog remessa in remessas) {
+                  if (remessa.conta.agencia.Equals(contaSelecionada.agencia) && remessa.conta.conta.Equals(contaSelecionada.conta) && remessa.carteira.Equals(medicao.carteiraSelecionada)) {
                      remessa.medicoes.Add(medicao);
                      addNewRemessa = false;
                      break;
@@ -218,7 +218,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                }
 
                if (addNewRemessa) {
-                  Remessa remessa = new Remessa(contaSelecionada, medicao.carteiraSelecionada);
+                  RemessaModelDialog remessa = new RemessaModelDialog(contaSelecionada, medicao.carteiraSelecionada);
                   remessa.medicoes.Add(medicao);
 
                   remessas.Add(remessa);

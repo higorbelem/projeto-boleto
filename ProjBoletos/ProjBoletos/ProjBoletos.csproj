@@ -178,6 +178,7 @@
     <Compile Include="modelos\medidor.cs" />
     <Compile Include="modelos\parteCimaBoletoModel.cs" />
     <Compile Include="modelos\Remessa.cs" />
+    <Compile Include="modelos\RemessaModelDialog.cs" />
     <Compile Include="modelos\Sacado.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="telas\BoletoForm.cs">
@@ -253,6 +254,12 @@
     </Compile>
     <Compile Include="telas\mainPageControls\HomeTabs\TabMedicoes.Designer.cs">
       <DependentUpon>TabMedicoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabRemessas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\HomeTabs\TabRemessas.Designer.cs">
+      <DependentUpon>TabRemessas.cs</DependentUpon>
     </Compile>
     <Compile Include="telas\MedicaoForm.cs">
       <SubType>Form</SubType>
@@ -377,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabMedicoes.resx">
       <DependentUpon>TabMedicoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabRemessas.resx">
+      <DependentUpon>TabRemessas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\MedicaoForm.resx">
       <DependentUpon>MedicaoForm.cs</DependentUpon>

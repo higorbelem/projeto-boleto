@@ -21,7 +21,7 @@ using System.Windows.Forms;
 namespace ProjBoletos.telas.dialogs {
    public partial class GerarRemessaDialog : Form {
 
-      private List<Remessa> remessas;
+      private List<RemessaModelDialog> remessas;
       private Form parentForm;
       private Cedente cedente;
 
@@ -33,7 +33,7 @@ namespace ProjBoletos.telas.dialogs {
       [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
       public static extern bool ReleaseCapture();
 
-      public GerarRemessaDialog(List<Remessa> remessas, Cedente cedente, Form parentForm) {
+      public GerarRemessaDialog(List<RemessaModelDialog> remessas, Cedente cedente, Form parentForm) {
          InitializeComponent();
 
          this.remessas = remessas;
@@ -80,7 +80,7 @@ namespace ProjBoletos.telas.dialogs {
          flowLayoutPanel1.Size = new Size(ClientRectangle.Width + SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height - flowLayoutPanel1.Location.Y);
 
          int indexI = 0;
-         foreach (Remessa remessa in remessas) {
+         foreach (RemessaModelDialog remessa in remessas) {
             FlowLayoutPanel flow = new FlowLayoutPanel() {
                BackColor = Colors.bg2,
                Size = new Size(flowLayoutPanel1.Width - SystemInformation.VerticalScrollBarWidth, 0),
@@ -215,7 +215,7 @@ namespace ProjBoletos.telas.dialogs {
          e.Graphics.FillPath(new SolidBrush(Colors.bg3), path);
       }*/
 
-      public string gerarRemessa(Remessa remessa) {
+      public string gerarRemessa(RemessaModelDialog remessa) {
          LayoutBancos r = new LayoutBancos();
          r.Init(Cedente.makeCedenteInfo(cedente, remessa.conta, remessa.carteira, ""));
          r.Lote = 55;
@@ -258,7 +258,7 @@ namespace ProjBoletos.telas.dialogs {
 
          bool todasRemessasGeradas = true;
 
-         foreach (Remessa remessa in remessas) {
+         foreach (RemessaModelDialog remessa in remessas) {
             string remessaString = gerarRemessa(remessa);
 
             if (todasRemessasGeradas) {
