@@ -11,6 +11,9 @@ using ProjBoletos.utils;
 using RestSharp;
 using ProjBoletos.modelos;
 using Newtonsoft.Json;
+using ProjBoletos.testes;
+using System.Drawing.Printing;
+using ProjBoletos.components.ParteCimaBoleto;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
    public partial class TabRemessas : UserControl {
@@ -26,6 +29,15 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       public Panel panel;
 
       bool buscaCompleta = false;
+      bool atualizacaoFlowCompleta = true;
+
+      int indexMedicao = 0;
+      int indexInicial = 0;
+      int indexMax = Int32.MaxValue;
+      int copias = 1;
+      int copiasVar = 1;
+      bool agrupado = false;
+      PrintRange printRange = PrintRange.AllPages;
 
       public TabRemessas() {
          InitializeComponent();
@@ -90,23 +102,28 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       public void atualizarFlow(List<Remessa> remessas) {
-         if (buscaCompleta) {
+         if (buscaCompleta && atualizacaoFlowCompleta) {
+            atualizacaoFlowCompleta = false;
+
             flowRemessas.Controls.Clear();
 
             for (int i = 0; i < remessas.Count; i += 2) {
-               Console.WriteLine(i);
 
                Panel panel = new Panel() {
-                  Size = new Size(flowRemessas.Width, 200)
+                  Size = new Size(flowRemessas.Width - 15, 200), //-15
+                  Margin = new Padding(0)
                };
 
-               panel.Controls.Add(criaPanelRemessa(new Point(panel.Location.X, panel.Location.Y), new Size(panel.Width / 2 - spaceBetweenCards/2, panel.Height), remessas[i]));
+               Rectangle rectPanel = new Rectangle(0,0, panel.Width / 2 - spaceBetweenCards / 2, panel.Height);
+               panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X, rectPanel.Y), new Size(rectPanel.Width, rectPanel.Height), remessas[i]));
                if (i + 1 < remessas.Count) {
-                  panel.Controls.Add(criaPanelRemessa(new Point(panel.Location.X + (panel.Width / 2 - spaceBetweenCards / 2) + spaceBetweenCards, panel.Location.Y), new Size(panel.Width / 2 - spaceBetweenCards / 2, panel.Height), remessas[i + 1]));
+                  panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X + rectPanel.Width + spaceBetweenCards, rectPanel.Y), new Size(panel.Width / 2 - spaceBetweenCards / 2 , panel.Height), remessas[i + 1]));
                }
 
                flowRemessas.Controls.Add(panel);
             }
+
+            atualizacaoFlowCompleta = true;
          }
       }
 
@@ -114,7 +131,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          Panel panel = new Panel() {
             Location = loc,
             Size = size,
-            BackColor = Colors.bg2
+            BackColor = Colors.bg2,
+            Margin = new Padding(0)
          };
 
          Rectangle rectLabelTop = new Rectangle(0,0,size.Width,20);
@@ -135,7 +153,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Location = new Point(rectLabelTop.X, rectLabelTop.Y),
             Size = new Size(rectLabelTop.Width, rectLabelTop.Height),
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false
+            AutoSize = false,
+            Margin = new Padding(0)
          });
 
          Rectangle rectLabelId = new Rectangle(0, rectLabelTop.Location.Y + rectLabelTop.Height, 80, 40);
@@ -147,7 +166,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Location = new Point(rectLabelId.X, rectLabelId.Y),
             Size = new Size(rectLabelId.Width, rectLabelId.Height),
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false
+            AutoSize = false,
+            Margin = new Padding(0)
          });
 
          Rectangle rectLabelBanco = new Rectangle(0, rectLabelTop.Location.Y + rectLabelTop.Height, size.Width, 40);
@@ -167,8 +187,161 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Location = new Point(rectLabelBanco.X, rectLabelBanco.Y),
             Size = new Size(rectLabelBanco.Width, rectLabelBanco.Height),
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false
+            AutoSize = false,
+            Margin = new Padding(0)
          });
+
+         Panel panelButtons = new Panel() {
+            Location = new Point(0, rectLabelBanco.Y + rectLabelBanco.Height),
+            Size = new Size(size.Width, 50),
+            Margin = new Padding(0)
+         };
+         string btnTxt1 = "";
+         string btnTxt2 = "";
+         string btnTxt3 = "";
+         if (remessa.enviado.Equals("1")) {
+            btnTxt1 = "LER RETORNO";
+            btnTxt2 = "IMPRIMIR";
+            btnTxt3 = "REMESSA NÂO FOI ENVIADA";
+         } else {
+            btnTxt1 = "ENVIAR ARQUIVO";
+            btnTxt2 = "IMPRIMIR";
+            btnTxt3 = "REMESSA FOI ENVIADA";
+         }
+         MeuButton mb1 = new MeuButton() {
+            title = btnTxt1,
+            Location = new Point(0, 0),
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height),
+            Margin = new Padding(0)
+         };
+         mb1.Click += new EventHandler((object s1, EventArgs e1) => {
+            if (remessa.enviado.Equals("1")) {
+
+            } else {
+
+            }
+         });
+         panelButtons.Controls.Add(mb1);
+         MeuButton mb2 = new MeuButton() {
+            title = btnTxt2,
+            Location = new Point(panelButtons.Width / 3, 0),
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height)
+         };
+         mb2.Click += new EventHandler((object s1, EventArgs e1) => {
+            PrintDocument pDoc = new PrintDocument();
+            //pDoc.DefaultPageSettings.PaperSize = new PaperSize("A4",850, (int)(850 * Math.Sqrt(2)));
+
+            pDoc.PrintPage += new PrintPageEventHandler((object s2, PrintPageEventArgs e2) => {
+               try {
+                  new FullBoletoLayout(cedente, remessa.medicoes[indexMedicao]).print(e2.Graphics, e2.PageBounds);
+
+                  bool hasMorePages = false;
+
+                  if (agrupado) {
+
+                     indexMedicao++;
+                     if (indexMedicao < remessa.medicoes.Count && indexMedicao <= indexMax) {
+                        hasMorePages = true;
+                     }
+
+                     e2.HasMorePages = hasMorePages;
+                     if (!e2.HasMorePages) {
+                        if (copiasVar > 1) {
+                           copiasVar--;
+                           e2.HasMorePages = true;
+                        }
+                        indexMedicao = indexInicial;
+                     }
+
+                  } else {
+
+                     if (copiasVar > 1) {
+                        copiasVar--;
+                     } else {
+                        indexMedicao++;
+                        copiasVar = copias;
+                     }
+
+                     if (indexMedicao < remessa.medicoes.Count && indexMedicao <= indexMax) {
+                        hasMorePages = true;
+                     }
+
+                     e2.HasMorePages = hasMorePages;
+                     if (!e2.HasMorePages) {
+                        indexMedicao = indexInicial;
+                     }
+
+                  }  
+               } catch (Exception ex) {
+                  MessageBox.Show(ex.Message);
+               }
+            });
+
+            IEnumerable<PaperSize> paperSizes = pDoc.PrinterSettings.PaperSizes.Cast<PaperSize>();
+            PaperSize sizeA4 = paperSizes.First<PaperSize>(size1 => size1.Kind == PaperKind.A4); // setting paper size to A4 size
+            pDoc.DefaultPageSettings.PaperSize = sizeA4;
+            pDoc.OriginAtMargins = false; //true = soft margins, false = hard margins
+
+            //pDoc.DefaultPageSettings.Landscape = true;
+
+            PrintDialog dlgPrinter = new PrintDialog();
+            dlgPrinter.AllowSomePages = true;
+            //dlgPrinter.UseEXDialog = true;
+            //dlgPrinter.AllowCurrentPage = true;
+            //dlgPrinter.AllowSelection = true;
+            //dlgPrinter.ShowHelp = true;
+            dlgPrinter.Document = pDoc;
+            //dlgPrinter.PrinterSettings.DefaultPageSettings.Margins = new Margins(20, 20, 20, 20);
+            //dlgPrinter.AllowPrintToFile = true;
+
+            PrintPreviewDialog ppw = new PrintPreviewDialog();
+            ppw.Document = pDoc;
+            //ppw.MdiParent = this.MdiParent;
+            ppw.WindowState = FormWindowState.Maximized;
+
+            ToolStripButton b = new ToolStripButton();
+            //b.Image = Properties.Resources.PrintIcon;
+            //b.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            b.Click += (object s2, EventArgs e2) => {
+               if (dlgPrinter.ShowDialog() == DialogResult.OK) {
+                  copias = dlgPrinter.PrinterSettings.Copies;
+                  copiasVar = copias;
+
+                  agrupado = dlgPrinter.PrinterSettings.Collate;
+
+                  if (dlgPrinter.PrinterSettings.PrintRange == PrintRange.AllPages) {
+                     indexInicial = 0;
+                     indexMax = remessa.medicoes.Count;
+                  } else if (dlgPrinter.PrinterSettings.PrintRange == PrintRange.SomePages) {
+                     indexInicial = dlgPrinter.PrinterSettings.FromPage;
+                     indexMax = dlgPrinter.PrinterSettings.ToPage;
+                  }
+
+                  indexMedicao = indexInicial;
+
+                  pDoc.Print();
+               }
+            };
+            ((ToolStrip)(ppw.Controls[1])).Items.RemoveAt(0);
+            ((ToolStrip)(ppw.Controls[1])).Items.Insert(0, b);
+
+            ppw.ShowDialog();
+         });
+         panelButtons.Controls.Add(mb2);
+         MeuButton mb3 = new MeuButton() {
+            title = btnTxt3,
+            Location = new Point((panelButtons.Width / 3) * 2, 0),
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height)
+         };
+         mb3.Click += new EventHandler((object s1, EventArgs e1) => {
+            if (remessa.enviado.Equals("1")) {
+
+            } else {
+
+            }
+         });
+         panelButtons.Controls.Add(mb3);
+         panel.Controls.Add(panelButtons);
 
          return panel;
       }
@@ -235,7 +408,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          flowRemessas.MinimumSize = new Size(newSize.Width, 0); //0
          flowRemessas.MaximumSize = new Size(newSize.Width, 0); //0
          flowRemessas.Location = new Point(newSize.X, mainCard1.Location.Y + mainCard1.Height + 20);
-         //atualizarFlow(remessas);
+
+         atualizarFlow(remessas);
+         Console.WriteLine(flowRemessas.Controls.Count); 
       }
    }
 }
