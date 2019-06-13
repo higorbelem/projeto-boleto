@@ -50,3 +50,4 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.ParteCimaBoleto.DetalhesCobrancas.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.GerarRemessaDialog.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.HomeTabs.TabRemessas.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.EnviarRemessaDialog.resources

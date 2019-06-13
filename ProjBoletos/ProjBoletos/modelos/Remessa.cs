@@ -11,6 +11,7 @@ namespace ProjBoletos.modelos {
       public string arquivoRemessa { get; set; }
       public string arquivoRetorno { get; set; }
       public string enviado { get; set; }
+      public DateTime dataEnvio { get; set; }
       public List<Medicao> medicoes { get; set; }
 
       public Remessa(string id, DateTime data, string arquivoRemessa, string arquivoRetorno, string enviado, List<Medicao> medicoes) {

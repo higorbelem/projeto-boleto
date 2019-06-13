@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.loading1 = new ProjBoletos.components.Loading();
             this.gerarTodasBtn = new ProjBoletos.testes.MeuButton();
             this.customListView = new ProjBoletos.components.CustomListView(ProjBoletos.components.CustomListView.COD_MEDICAO);
             this.mainCard1 = new ProjBoletos.components.MainCard();
@@ -37,7 +36,6 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.loading1);
             this.panel1.Controls.Add(this.gerarTodasBtn);
             this.panel1.Controls.Add(this.customListView);
             this.panel1.Controls.Add(this.mainCard1);
@@ -48,14 +46,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(934, 1513);
             this.panel1.TabIndex = 4;
-            // 
-            // loading1
-            // 
-            this.loading1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.loading1.Location = new System.Drawing.Point(383, 120);
-            this.loading1.Name = "loading1";
-            this.loading1.Size = new System.Drawing.Size(299, 262);
-            this.loading1.TabIndex = 5;
             // 
             // gerarTodasBtn
             // 
@@ -120,6 +110,5 @@
         private components.CustomListView customListView;
         private System.Windows.Forms.Panel panel1;
         private testes.MeuButton gerarTodasBtn;
-        private components.Loading loading1;
     }
 }

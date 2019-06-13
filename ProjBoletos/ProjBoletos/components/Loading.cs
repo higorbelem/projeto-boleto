@@ -12,81 +12,76 @@ using ProjBoletos.utils;
 using System.Timers;
 using System.Reflection;
 
-namespace ProjBoletos.components
-{
-    public partial class Loading : UserControl
-    {
+namespace ProjBoletos.components {
+   public partial class Loading : Form {
 
-        System.Timers.Timer timer;
-        int angle = 0;
+      System.Timers.Timer timer;
+      int angle = 0;
 
-        public Loading()
-        {
-            InitializeComponent();
-        }
+      private int tempoPassado = 0;
 
-        private void Loading_Load(object sender, EventArgs e)
-        {
-            BackColor = Colors.bg2;
+      public Loading() {
+         InitializeComponent();
 
-            label1.BackColor = Colors.bg2;
-            label1.ForeColor = Colors.primaryText;
+         DoubleBuffered = true;
+      }
 
-            timer = new System.Timers.Timer(8); //~60 FPS
-            timer.AutoReset = true;
-            timer.SynchronizingObject = this;
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            timer.Start();
-            
-        }
+      private void Loading_Load(object sender, EventArgs e) {
 
-        private void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            angle += 5;
+         label1.BackColor = Colors.bg2;
+         label1.ForeColor = Colors.primaryText;
 
-            if (angle > 360)
-            {
-                angle = 0;
-            }
+         timer = new System.Timers.Timer(8); //~60 FPS
+         timer.AutoReset = true;
+         timer.SynchronizingObject = this;
+         timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+         timer.Start();
+      }
 
-            Invalidate();
-        }
+      private void timer_Elapsed(object sender, ElapsedEventArgs e) {
+         angle += 5;
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+         if (angle > 360) {
+            angle = 0;
+         }
 
-            int x = ClientRectangle.Width / 2;
-            int y = ClientRectangle.Height / 2;
-            
-            int length = 70;
+         tempoPassado++;
 
-            Point point1 = new Point(x, y);
+         Invalidate();
+      }
 
-            int sizeElipse = 20;
-            int sizeElipseDimin = 0;
+      protected override void OnPaintBackground(PaintEventArgs e) {
+         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            for (double i = angle; i > -360; i-=22.5) {
-                Point point2 = new Point((int)(x + Math.Cos(Radian(i)) * length), (int)(y + Math.Sin(Radian(i)) * length));
-                e.Graphics.FillEllipse(new SolidBrush(Colors.accent1), new Rectangle(point2.X - ((sizeElipse - sizeElipseDimin) / 2), point2.Y - ((sizeElipse - sizeElipseDimin) / 2), (sizeElipse - sizeElipseDimin), (sizeElipse - sizeElipseDimin)));
-                sizeElipseDimin += 1;
-            }
+         e.Graphics.FillRectangle(new SolidBrush(Colors.bg2), new Rectangle(0,0,ClientRectangle.Width-1,ClientRectangle.Height-1));
 
-            label1.Location = new Point((ClientRectangle.Width/2)-(label1.Width/2), (int)(y + Math.Sin(Radian(90)) * length) + 20);
+         int x = ClientRectangle.Width / 2;
+         int y = ClientRectangle.Height / 2;
 
-            /*StringFormat sf = new StringFormat();
-            sf.LineAlignment = StringAlignment.Center;
-            sf.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString("Aguarde...", new Font("Ebrima", 12, FontStyle.Bold), new SolidBrush(Colors.primaryText), new Rectangle(0, (int)(y + Math.Sin(Radian(90)) * length),ClientRectangle.Width,70), sf);
-            */
+         int length = 70;
 
-            e.Graphics.Dispose();
+         Point point1 = new Point(x, y);
 
-            //e.Graphics.DrawLine(new Pen(Color.Black),point1,point2);
-            //e.Graphics.DrawLine(new Pen(Color.Black),new Point(ClientRectangle.Width/2,ClientRectangle.Height/2),EndPoint(90));
-        }
+         int sizeElipse = 20;
+         int sizeElipseDimin = 0;
 
-        private double Radian(double angle) { return (Math.PI / 180.0) * angle; }
-    }
+         for (double i = angle; i > -360; i -= 22.5) {
+            Point point2 = new Point((int)(x + Math.Cos(Radian(i)) * length), (int)(y + Math.Sin(Radian(i)) * length));
+            e.Graphics.FillEllipse(new SolidBrush(Colors.accent1), new Rectangle(point2.X - ((sizeElipse - sizeElipseDimin) / 2), point2.Y - ((sizeElipse - sizeElipseDimin) / 2), (sizeElipse - sizeElipseDimin), (sizeElipse - sizeElipseDimin)));
+            sizeElipseDimin += 1;
+         }
+
+         label1.Location = new Point((ClientRectangle.Width / 2) - (label1.Width / 2), (int)(y + Math.Sin(Radian(90)) * length) + 20);
+         
+      }
+
+      private double Radian(double angle) {
+         return (Math.PI / 180.0) * angle;
+      }
+
+      public async void closeLoading() {
+         await Task.Delay(200);
+         Close();
+      }
+   }
 }

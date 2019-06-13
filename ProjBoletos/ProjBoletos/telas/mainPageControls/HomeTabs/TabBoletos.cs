@@ -12,6 +12,7 @@ using ProjBoletos.modelos;
 using Newtonsoft.Json;
 using RestSharp;
 using ProjBoletos.telas.dialogs;
+using ProjBoletos.components;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
@@ -28,10 +29,14 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       Cedente cedente;
       List<Medicao> medicoes;
 
+      Loading loading;
+
       public TabBoletos() {
          InitializeComponent();
 
          panel = panel1;
+
+         loading = new Loading();
       }
 
       private void TabBoletos_Load(object sender, EventArgs e) {

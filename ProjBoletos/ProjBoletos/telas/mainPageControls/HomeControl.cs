@@ -156,7 +156,7 @@ namespace ProjBoletos.telas.mainPageControls {
       }
 
       private void tabRemessas_Click(object sender, EventArgs e) {
-         //tabBoletosWindow.updateCustomViewList();
+         tabRemessasWindow.updatePage();
          bringClickedTab("remessas");
       }
 

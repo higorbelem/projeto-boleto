@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using ProjBoletos.testes;
 using System.Drawing.Printing;
 using ProjBoletos.components.ParteCimaBoleto;
+using ProjBoletos.telas.dialogs;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
    public partial class TabRemessas : UserControl {
@@ -37,7 +38,6 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       int copias = 1;
       int copiasVar = 1;
       bool agrupado = false;
-      PrintRange printRange = PrintRange.AllPages;
 
       public TabRemessas() {
          InitializeComponent();
@@ -218,7 +218,15 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             if (remessa.enviado.Equals("1")) {
 
             } else {
+               //MessageBox.Show(remessa.arquivoRemessa);
+               EnviarRemessaDialog enviarRemessaDialog = new EnviarRemessaDialog(remessa, cedente);
+               var res = enviarRemessaDialog.ShowDialog();
 
+               if (res == DialogResult.OK) {
+                  if (setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"))) {
+                     updatePage();
+                  }
+               }
             }
          });
          panelButtons.Controls.Add(mb1);
@@ -334,10 +342,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Size = new Size(panelButtons.Width / 3, panelButtons.Height)
          };
          mb3.Click += new EventHandler((object s1, EventArgs e1) => {
-            if (remessa.enviado.Equals("1")) {
-
-            } else {
-
+            bool res = setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"));
+            if (res) {
+               updatePage();
             }
          });
          panelButtons.Controls.Add(mb3);
@@ -384,6 +391,34 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          Login login = new Login();
          //login.Closed += (s, args) => this.Close();
          login.Show();*/
+
+         return false;
+      }
+
+      private bool setarRemessasEnviada(string idRemessa, bool enviada) {
+
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/setRemessaEnviada.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+         var request = new RestRequest("text/plain");
+         request.AddParameter("id-remessa", idRemessa);
+         request.AddParameter("enviada", enviada ? 1 : 0);
+
+         var response = client.Post(request);
+
+         var content = response.Content; // raw content as string
+
+
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+
+            if (!content.Equals("erro")) {
+               return true;
+            } else {
+               return false;
+            }
+         } else {
+            MessageBox.Show("Houve um erro. Http status Code: " + response.StatusCode);
+         }
 
          return false;
       }
