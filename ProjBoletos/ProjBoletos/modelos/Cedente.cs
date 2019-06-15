@@ -23,6 +23,7 @@ namespace ProjBoletos.modelos {
       public string cep { get; set; }
       public double valorPorMetroCubico { get; set; }
       public float esgoto { get; set; }
+      public string email { get; set; }
 
       public List<Conta> contas { get; set; }
 

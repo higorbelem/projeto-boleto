@@ -80,23 +80,23 @@ namespace ProjBoletos {
          Rectangle rectDetalhesFatura = new Rectangle(1, rectBoletoHeader.Y + rectBoletoHeader.Height + spaceBetweenElements, rect.Width - 2, (int)(rect.Height * 0.07));
          detalhesFatura.setRect(rectDetalhesFatura);
 
-         Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.3));
+         Rectangle rectDetalhesEndereco = new Rectangle(1, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, (rect.Width / 2) - spaceBetweenElements / 2 - 2, (int)(rect.Height * 0.3));
          detalhesEndereco.setRect(rectDetalhesEndereco);
 
-         Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.19));
+         Rectangle rectIdentificacaoFaturamento = new Rectangle(rectDetalhesEndereco.X + rectDetalhesEndereco.Width + spaceBetweenElements, rectDetalhesFatura.Y + rectDetalhesFatura.Height + spaceBetweenElements, (rect.Width / 2) - spaceBetweenElements / 2 - 2, (int)(rect.Height * 0.19));
          identificacaoFaturamento.setRect(rectIdentificacaoFaturamento);
 
-         Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.2));
+         Rectangle rectGraficoBarrasBoleto = new Rectangle(1, rectDetalhesEndereco.Y + rectDetalhesEndereco.Height + spaceBetweenElements, (rect.Width / 2) - spaceBetweenElements / 2 - 2, (int)(rect.Height * 0.2));
          barrasBoleto.setRect(rectGraficoBarrasBoleto);
 
-         Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, ((rect.Width - 2) / 2) - spaceBetweenElements / 2, (int)(rect.Height * 0.31));
+         Rectangle rectDetalhesCobrancas = new Rectangle(rectGraficoBarrasBoleto.X + rectGraficoBarrasBoleto.Width + spaceBetweenElements, rectIdentificacaoFaturamento.Y + rectIdentificacaoFaturamento.Height + spaceBetweenElements, (rect.Width / 2) - spaceBetweenElements / 2 - 2, (int)(rect.Height * 0.31));
          detalhesCobrancas.setRect(rectDetalhesCobrancas);
       }
 
       private void paint(Graphics g) {
          //e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(1,1,ClientRectangle.Width-2,ClientRectangle.Height-2));
 
-         g.FillRectangle(new SolidBrush(Color.White), new Rectangle(1, 1, ClientRectangle.Width - 2, ClientRectangle.Height - 2));
+         g.FillRectangle(new SolidBrush(Color.White), new Rectangle(0, 0, ClientRectangle.Width, ClientRectangle.Height));
 
          boletoHeader.render(g);
          detalhesFatura.render(g);

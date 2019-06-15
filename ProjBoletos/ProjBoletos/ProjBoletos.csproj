@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -186,6 +189,12 @@
     </Compile>
     <Compile Include="telas\BoletoForm.Designer.cs">
       <DependentUpon>BoletoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\dialogs\EnviarEmailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\dialogs\EnviarEmailDialog.Designer.cs">
+      <DependentUpon>EnviarEmailDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="telas\dialogs\EnviarRemessaDialog.cs">
       <SubType>Form</SubType>
@@ -347,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\BoletoForm.resx">
       <DependentUpon>BoletoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\dialogs\EnviarEmailDialog.resx">
+      <DependentUpon>EnviarEmailDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\dialogs\EnviarRemessaDialog.resx">
       <DependentUpon>EnviarRemessaDialog.cs</DependentUpon>

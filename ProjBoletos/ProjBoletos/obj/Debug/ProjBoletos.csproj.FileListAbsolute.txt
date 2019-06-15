@@ -51,3 +51,6 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.GerarRemessaDialog.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.HomeTabs.TabRemessas.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.EnviarRemessaDialog.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsharp.dll
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsharp.xml
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.EnviarEmailDialog.resources

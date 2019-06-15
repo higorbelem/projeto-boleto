@@ -15,6 +15,10 @@ using ProjBoletos.testes;
 using System.Drawing.Printing;
 using ProjBoletos.components.ParteCimaBoleto;
 using ProjBoletos.telas.dialogs;
+using System.Net.Mail;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
    public partial class TabRemessas : UserControl {
@@ -48,6 +52,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       private void TabRemessas_Load(object sender, EventArgs e) {
 
          panel1.BackColor = Colors.bg;
+         flowRemessas.BackColor = Colors.bg;
          BackColor = Colors.bg;
 
          var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
@@ -91,9 +96,10 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       public void updatePage() {
+         buscaCompleta = false;
          var res = buscarRemessas(cedente.id);
 
-         if (res) {
+         if (res == System.Net.HttpStatusCode.OK) {
             buscaCompleta = true;
             atualizarCards(remessas);
             atualizarFlow(remessas);
@@ -102,32 +108,48 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       public void atualizarFlow(List<Remessa> remessas) {
+
          if (buscaCompleta && atualizacaoFlowCompleta) {
+            
             atualizacaoFlowCompleta = false;
 
             flowRemessas.Controls.Clear();
 
-            for (int i = 0; i < remessas.Count; i += 2) {
+            if (remessas.Count > 0) {
+               for (int i = 0; i < remessas.Count; i += 2) {
 
-               Panel panel = new Panel() {
-                  Size = new Size(flowRemessas.Width - 15, 200), //-15
-                  Margin = new Padding(0)
-               };
+                  Panel panel = new Panel() {
+                     Size = new Size(flowRemessas.Width, 360), //-15
+                     Margin = new Padding(0)
+                  };
 
-               Rectangle rectPanel = new Rectangle(0,0, panel.Width / 2 - spaceBetweenCards / 2, panel.Height);
-               panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X, rectPanel.Y), new Size(rectPanel.Width, rectPanel.Height), remessas[i]));
-               if (i + 1 < remessas.Count) {
-                  panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X + rectPanel.Width + spaceBetweenCards, rectPanel.Y), new Size(panel.Width / 2 - spaceBetweenCards / 2 , panel.Height), remessas[i + 1]));
+                  System.Drawing.Rectangle rectPanel = new System.Drawing.Rectangle(0, 0, panel.Width / 2 - spaceBetweenCards / 2, panel.Height);
+                  panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X, rectPanel.Y), new Size(rectPanel.Width, rectPanel.Height), remessas[i], 10));
+                  if (i + 1 < remessas.Count) {
+                     panel.Controls.Add(criaPanelRemessa(new Point(rectPanel.X + rectPanel.Width + spaceBetweenCards, rectPanel.Y), new Size(panel.Width / 2 - spaceBetweenCards / 2, panel.Height), remessas[i + 1], 10));
+                  }
+
+                  flowRemessas.Controls.Add(panel);
                }
-
-               flowRemessas.Controls.Add(panel);
+            } else {
+               flowRemessas.Controls.Add(new Label() {
+                  Text = "Não há Remessas",
+                  BackColor = Colors.bg,
+                  ForeColor = Colors.primaryText,
+                  Font = Fonts.mainBold10,
+                  Location = new Point(0,0),
+                  Size = new Size(flowRemessas.Width, 50),
+                  TextAlign = ContentAlignment.MiddleCenter,
+                  AutoSize = false,
+                  Margin = new Padding(0)
+               });
             }
 
             atualizacaoFlowCompleta = true;
          }
       }
 
-      public Panel criaPanelRemessa(Point loc, Size size, Remessa remessa) {
+      public Panel criaPanelRemessa(Point loc, Size size, Remessa remessa, int padding) {
          Panel panel = new Panel() {
             Location = loc,
             Size = size,
@@ -135,7 +157,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          };
 
-         Rectangle rectLabelTop = new Rectangle(0,0,size.Width,20);
+         System.Drawing.Rectangle rectLabelTop = new System.Drawing.Rectangle(0,0,size.Width,20);
          string labelText = "";
          Color labelBackColor;
          if (remessa.enviado.Equals("1")) {
@@ -157,7 +179,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          });
 
-         Rectangle rectLabelId = new Rectangle(0, rectLabelTop.Location.Y + rectLabelTop.Height, 80, 40);
+         System.Drawing.Rectangle outsidePadding = new System.Drawing.Rectangle(padding,rectLabelTop.Y + rectLabelTop.Height, size.Width - padding*2, 0);
+
+         System.Drawing.Rectangle rectLabelId = new System.Drawing.Rectangle(outsidePadding.X, outsidePadding.Y, 80, 60);
          panel.Controls.Add(new Label() {
             Text = "#" + remessa.id,
             BackColor = Colors.bg2,
@@ -170,20 +194,20 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          });
 
-         Rectangle rectLabelBanco = new Rectangle(0, rectLabelTop.Location.Y + rectLabelTop.Height, size.Width, 40);
+         System.Drawing.Rectangle rectLabelBanco = new System.Drawing.Rectangle(outsidePadding.X, outsidePadding.Y, outsidePadding.Width, 60);
          string labelBancoText = "";
          if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("001")) {
-            labelBancoText = "Banco Do Brasil";
+            labelBancoText = "BANCO DO BRASIL";
          } else if(cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("341")){
-            labelBancoText = "Itaú";
+            labelBancoText = "ITAÚ";
          } else if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("237")){
-            labelBancoText = "Bradesco";
+            labelBancoText = "BRADESCO";
          }
          panel.Controls.Add(new Label() {
             Text = labelBancoText,
             BackColor = Colors.bg2,
             ForeColor = Colors.primaryText,
-            Font = Fonts.mainBold12,
+            Font = Fonts.mainBold14,
             Location = new Point(rectLabelBanco.X, rectLabelBanco.Y),
             Size = new Size(rectLabelBanco.Width, rectLabelBanco.Height),
             TextAlign = ContentAlignment.MiddleCenter,
@@ -191,49 +215,188 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          });
 
+         Panel panelInfoData = new Panel() {
+            Location = new Point(outsidePadding.X, rectLabelBanco.Y + rectLabelBanco.Height),
+            Size = new Size(outsidePadding.Width, 30),
+            Margin = new Padding(0)
+         };
+         panelInfoData.Controls.Add(new Label() {
+            Text = "DARA DA REMESSAS",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.mainBold10,
+            Location = new Point(0, 0),
+            Size = new Size(panelInfoData.Width/2, panelInfoData.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panelInfoData.Controls.Add(new Label() {
+            Text = remessa.data.ToString("dd/MM/yyyy"),
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.main10,
+            Location = new Point(panelInfoData.Width / 2, 0),
+            Size = new Size(panelInfoData.Width / 2, panelInfoData.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panel.Controls.Add(panelInfoData);
+
+         Panel panelInfoQuatBoletos = new Panel() {
+            Location = new Point(outsidePadding.X, panelInfoData.Location.Y + panelInfoData.Height),
+            Size = new Size(outsidePadding.Width, 30),
+            Margin = new Padding(0)
+         };
+         panelInfoQuatBoletos.Controls.Add(new Label() {
+            Text = "QUANTIDADE DE BOLETOS",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.mainBold10,
+            Location = new Point(0, 0),
+            Size = new Size(panelInfoQuatBoletos.Width / 2, panelInfoQuatBoletos.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panelInfoQuatBoletos.Controls.Add(new Label() {
+            Text = remessa.medicoes.Count + "",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.main10,
+            Location = new Point(panelInfoQuatBoletos.Width / 2, 0),
+            Size = new Size(panelInfoQuatBoletos.Width / 2, panelInfoQuatBoletos.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panel.Controls.Add(panelInfoQuatBoletos);
+
+         Panel panelInfoAgencia = new Panel() {
+            Location = new Point(outsidePadding.X, panelInfoQuatBoletos.Location.Y + panelInfoQuatBoletos.Height),
+            Size = new Size(outsidePadding.Width, 30),
+            Margin = new Padding(0)
+         };
+         panelInfoAgencia.Controls.Add(new Label() {
+            Text = "AGÊNCIA",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.mainBold10,
+            Location = new Point(0, 0),
+            Size = new Size(panelInfoAgencia.Width / 2, panelInfoAgencia.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panelInfoAgencia.Controls.Add(new Label() {
+            Text = cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).agencia,
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.main10,
+            Location = new Point(panelInfoAgencia.Width / 2, 0),
+            Size = new Size(panelInfoAgencia.Width / 2, panelInfoAgencia.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panel.Controls.Add(panelInfoAgencia);
+
+         Panel panelInfoConta = new Panel() {
+            Location = new Point(outsidePadding.X, panelInfoAgencia.Location.Y + panelInfoAgencia.Height),
+            Size = new Size(outsidePadding.Width, 30),
+            Margin = new Padding(0)
+         };
+         panelInfoConta.Controls.Add(new Label() {
+            Text = "CONTA",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.mainBold10,
+            Location = new Point(0, 0),
+            Size = new Size(panelInfoConta.Width / 2, panelInfoConta.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panelInfoConta.Controls.Add(new Label() {
+            Text = cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).conta,
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.main10,
+            Location = new Point(panelInfoConta.Width / 2, 0),
+            Size = new Size(panelInfoConta.Width / 2, panelInfoConta.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panel.Controls.Add(panelInfoConta);
+
+         Panel panelInfoCarteira = new Panel() {
+            Location = new Point(outsidePadding.X, panelInfoConta.Location.Y + panelInfoConta.Height),
+            Size = new Size(outsidePadding.Width, 30),
+            Margin = new Padding(0)
+         };
+         panelInfoCarteira.Controls.Add(new Label() {
+            Text = "CARTEIRA",
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.mainBold10,
+            Location = new Point(0, 0),
+            Size = new Size(panelInfoCarteira.Width / 2, panelInfoCarteira.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panelInfoCarteira.Controls.Add(new Label() {
+            Text = remessa.medicoes[0].carteiraSelecionada,
+            BackColor = Colors.bg2,
+            ForeColor = Colors.primaryText,
+            Font = Fonts.main10,
+            Location = new Point(panelInfoCarteira.Width / 2, 0),
+            Size = new Size(panelInfoCarteira.Width / 2, panelInfoCarteira.Height),
+            TextAlign = ContentAlignment.MiddleLeft,
+            AutoSize = false,
+            Margin = new Padding(0)
+         });
+         panel.Controls.Add(panelInfoCarteira);
+
          Panel panelButtons = new Panel() {
-            Location = new Point(0, rectLabelBanco.Y + rectLabelBanco.Height),
-            Size = new Size(size.Width, 50),
+            Location = new Point(outsidePadding.X, panelInfoCarteira.Location.Y + panelInfoCarteira.Height + 20),
+            Size = new Size(outsidePadding.Width, 100),
             Margin = new Padding(0)
          };
          string btnTxt1 = "";
          string btnTxt2 = "";
          string btnTxt3 = "";
+         string btnTxt4 = "";
          if (remessa.enviado.Equals("1")) {
-            btnTxt1 = "LER RETORNO";
+            btnTxt1 = "ENVIAR POR EMAIL";
             btnTxt2 = "IMPRIMIR";
             btnTxt3 = "REMESSA NÂO FOI ENVIADA";
+            btnTxt4 = "LER RETORNO";
          } else {
-            btnTxt1 = "ENVIAR ARQUIVO";
+            btnTxt1 = "ENVIAR POR EMAIL";
             btnTxt2 = "IMPRIMIR";
             btnTxt3 = "REMESSA FOI ENVIADA";
+            btnTxt4 = "ENVIAR ARQUIVO";
          }
          MeuButton mb1 = new MeuButton() {
             title = btnTxt1,
             Location = new Point(0, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height),
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2),
             Margin = new Padding(0)
          };
          mb1.Click += new EventHandler((object s1, EventArgs e1) => {
-            if (remessa.enviado.Equals("1")) {
 
-            } else {
-               //MessageBox.Show(remessa.arquivoRemessa);
-               EnviarRemessaDialog enviarRemessaDialog = new EnviarRemessaDialog(remessa, cedente);
-               var res = enviarRemessaDialog.ShowDialog();
+            EnviarEmailDialog enviarEmailDialog = new EnviarEmailDialog(cedente, remessa);
+            enviarEmailDialog.ShowDialog();
 
-               if (res == DialogResult.OK) {
-                  if (setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"))) {
-                     updatePage();
-                  }
-               }
-            }
          });
          panelButtons.Controls.Add(mb1);
          MeuButton mb2 = new MeuButton() {
             title = btnTxt2,
             Location = new Point(panelButtons.Width / 3, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height)
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
          };
          mb2.Click += new EventHandler((object s1, EventArgs e1) => {
             PrintDocument pDoc = new PrintDocument();
@@ -339,7 +502,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          MeuButton mb3 = new MeuButton() {
             title = btnTxt3,
             Location = new Point((panelButtons.Width / 3) * 2, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height)
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
          };
          mb3.Click += new EventHandler((object s1, EventArgs e1) => {
             bool res = setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"));
@@ -348,12 +511,33 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }
          });
          panelButtons.Controls.Add(mb3);
+         MeuButton mb4 = new MeuButton() {
+            title = btnTxt4,
+            Location = new Point(0, mb3.Location.Y + mb3.Height),
+            Size = new Size(panelButtons.Width, panelButtons.Height/2)
+         };
+         mb4.Click += new EventHandler((object s1, EventArgs e1) => {
+            if (remessa.enviado.Equals("1")) {
+
+            } else {
+               //MessageBox.Show(remessa.arquivoRemessa);
+               EnviarRemessaDialog enviarRemessaDialog = new EnviarRemessaDialog(remessa, cedente);
+               var res = enviarRemessaDialog.ShowDialog();
+
+               if (res == DialogResult.OK) {
+                  if (setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"))) {
+                     updatePage();
+                  }
+               }
+            }
+         });
+         panelButtons.Controls.Add(mb4);
          panel.Controls.Add(panelButtons);
 
          return panel;
       }
 
-      private bool buscarRemessas(string idCedente) {
+      private System.Net.HttpStatusCode buscarRemessas(string idCedente) {
          //loading1.Visible = true;
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosRemessa.php");
@@ -373,11 +557,11 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             if (!content.Equals("erro")) {
                remessas = JsonConvert.DeserializeObject<List<Remessa>>(content);
 
-               return true;
+               return response.StatusCode;
             } else {
                remessas = new List<Remessa>();
 
-               return false;
+               return response.StatusCode;
             }
          } else {
             MessageBox.Show("Houve um erro ao resgatar as remessas. Http status Code: " + response.StatusCode);
@@ -392,7 +576,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          //login.Closed += (s, args) => this.Close();
          login.Show();*/
 
-         return false;
+         return response.StatusCode;
       }
 
       private bool setarRemessasEnviada(string idRemessa, bool enviada) {
@@ -429,7 +613,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          panel1.MinimumSize = new Size(ClientRectangle.Width, 0);
          panel1.MaximumSize = new Size(ClientRectangle.Width, 0);
 
-         Rectangle newSize = new Rectangle(padding.Left, padding.Top, panel1.Width - padding.Left - padding.Right, panel1.Height - padding.Top - padding.Bottom);
+         System.Drawing.Rectangle newSize = new System.Drawing.Rectangle(padding.Left, padding.Top, panel1.Width - padding.Left - padding.Right, panel1.Height - padding.Top - padding.Bottom);
 
          int cardWidth = (newSize.Width - (spaceBetweenCards * (quantCards - 1))) / quantCards;
 
@@ -445,7 +629,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          flowRemessas.Location = new Point(newSize.X, mainCard1.Location.Y + mainCard1.Height + 20);
 
          atualizarFlow(remessas);
-         Console.WriteLine(flowRemessas.Controls.Count); 
+         //Console.WriteLine(flowRemessas.Controls.Count); 
       }
    }
 }

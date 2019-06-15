@@ -27,6 +27,7 @@
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnviarRemessaDialog));
          this.labelTitle = new System.Windows.Forms.Label();
          this.panelTopBar = new System.Windows.Forms.Panel();
+         this.backButtonImg = new PictureBoxWithInterpolationMode();
          this.textBoxRemessa = new System.Windows.Forms.TextBox();
          this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
          this.btnAbrirArquivo = new ProjBoletos.testes.MeuButton();
@@ -34,7 +35,6 @@
          this.btnJaEnviei = new ProjBoletos.testes.MeuButton();
          this.textBoxCaminho = new ProjBoletos.components.MeuTextbox();
          this.btnCopiar = new ProjBoletos.testes.MeuButton();
-         this.backButtonImg = new PictureBoxWithInterpolationMode();
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
@@ -57,6 +57,18 @@
          this.panelTopBar.Size = new System.Drawing.Size(200, 60);
          this.panelTopBar.TabIndex = 3;
          this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+         // 
+         // backButtonImg
+         // 
+         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
+         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
+         this.backButtonImg.Name = "backButtonImg";
+         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
+         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+         this.backButtonImg.TabIndex = 0;
+         this.backButtonImg.TabStop = false;
+         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
          // textBoxRemessa
          // 
@@ -106,18 +118,6 @@
          this.btnCopiar.Size = new System.Drawing.Size(77, 37);
          this.btnCopiar.TabIndex = 6;
          this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
-         // 
-         // backButtonImg
-         // 
-         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
-         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
-         this.backButtonImg.Name = "backButtonImg";
-         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
-         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-         this.backButtonImg.TabIndex = 0;
-         this.backButtonImg.TabStop = false;
-         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
          // EnviarRemessaDialog
          // 
