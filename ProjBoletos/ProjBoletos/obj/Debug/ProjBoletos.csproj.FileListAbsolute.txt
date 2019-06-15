@@ -54,3 +54,4 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsharp.dll
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsharp.xml
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.EnviarEmailDialog.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.ClienteControl.resources

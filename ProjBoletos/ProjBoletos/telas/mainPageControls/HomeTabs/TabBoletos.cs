@@ -29,14 +29,10 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       Cedente cedente;
       List<Medicao> medicoes;
 
-      Loading loading;
-
       public TabBoletos() {
          InitializeComponent();
 
          panel = panel1;
-
-         loading = new Loading();
       }
 
       private void TabBoletos_Load(object sender, EventArgs e) {
@@ -62,7 +58,69 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       public void updateCustomViewList() {
          buscarMedicoes(cedente.id);
          atualizarCards(medicoes);
-         customListView.UpdateList(medicoes);
+
+         customListView.vazioText = "Não há boletos";
+         List<CustomListViewItem> items = new List<CustomListViewItem>();
+
+         CustomListViewItem customListViewItemCabecalho = new CustomListViewItem();
+         customListViewItemCabecalho.isCabecalho = true;
+         customListViewItemCabecalho.Size = new Size(ClientRectangle.Width, 50);
+         customListViewItemCabecalho.addValor("DATA", "2");
+         customListViewItemCabecalho.addValor("ENDEREÇO", "3");
+         customListViewItemCabecalho.addValor("CLIENTE", "3");
+         items.Add(customListViewItemCabecalho);
+
+         foreach (Medicao medicao in medicoes) {
+            CustomListViewItem customListViewItem = new CustomListViewItem();
+            customListViewItem.Size = new Size(ClientRectangle.Width, 50);
+            customListViewItem.addValor(medicao.dataBoletoGerado.ToString(), "2");
+            customListViewItem.addValor(medicao.casa.rua + ", " + medicao.casa.numero, "3");
+            customListViewItem.addValor(medicao.sacado.nome, "3");
+            customListViewItem.medicao = medicao;
+
+            switch (medicao.nivelAtraso) {
+               case 0:
+                  customListViewItem.circleColor = Colors.noPrazo;
+                  break;
+               case 1:
+                  customListViewItem.circleColor = Colors.pertoDeVencer;
+                  break;
+               case 2:
+                  customListViewItem.circleColor = Colors.atrasado;
+                  break;
+            }
+
+
+            customListViewItem.btnGerar.title = "GERAR";
+            customListViewItem.btnGerar.Size = new Size(0, 0);
+            customListViewItem.btnGerar.Visible = false;
+
+            customListViewItem.btnVer.title = "VER";
+
+            customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
+               GerarBoletoDialog gerarBoletoDialog = new GerarBoletoDialog(cedente);
+               var resultMessageBox = gerarBoletoDialog.ShowDialog();
+
+               Parent.FindForm().Activate();
+
+               if (resultMessageBox == DialogResult.OK) {
+                  //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada + " " + gerarBoletoDialog.convenioSelecionado);
+                  var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
+
+                  if (result) {
+                     customListView.update();
+                  }
+               }
+            });
+
+            customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
+               BoletoForm boletoForm = new BoletoForm(medicao);
+               boletoForm.ShowDialog();
+            });
+
+            items.Add(customListViewItem);
+         }
+         customListView.UpdateList(items);
       }
 
       private void TabBoletos_Resize(object sender, EventArgs e) {
@@ -233,14 +291,14 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
          GerarRemessaDialog gerarBoletoDialog = new GerarRemessaDialog(remessas, cedente, Parent.FindForm());
          var res = gerarBoletoDialog.ShowDialog();
-         
+
          Parent.FindForm().Activate();
 
          updateCustomViewList();
 
          if (res == DialogResult.OK) {
 
-         }else if (res == DialogResult.Cancel) {
+         } else if (res == DialogResult.Cancel) {
 
          }
 
@@ -251,6 +309,34 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }
             Console.WriteLine("--------------------------------\n");
          }*/
+      }
+
+      private bool gerarBoletos(string idMedicao, string contaIndex, string carteira) {
+         //loading1.Visible = true;
+
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/gerarBoletos.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+         var request = new RestRequest("text/plain");
+         request.AddParameter("medicao-id", idMedicao);
+         request.AddParameter("carteira", carteira);
+         request.AddParameter("conta_index", contaIndex);
+
+         var response = client.Post(request);
+
+         var content = response.Content; // raw content as string
+
+         //loading1.Visible = false;
+
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+            if (!content.Equals("erro")) {
+               return true;
+            } else {
+               return false;
+            }
+         }
+
+         return false;
       }
    }
 }

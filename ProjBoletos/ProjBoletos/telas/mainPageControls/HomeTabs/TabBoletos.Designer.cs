@@ -26,7 +26,7 @@
             this.mainCard1 = new ProjBoletos.components.MainCard();
             this.mainCard3 = new ProjBoletos.components.MainCard();
             this.mainCard2 = new ProjBoletos.components.MainCard();
-            this.customListView = new ProjBoletos.components.CustomListView(ProjBoletos.components.CustomListView.COD_BOLETO);
+            this.customListView = new ProjBoletos.components.CustomListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnGerarRemessa = new ProjBoletos.testes.MeuButton();
             this.panel1.SuspendLayout();

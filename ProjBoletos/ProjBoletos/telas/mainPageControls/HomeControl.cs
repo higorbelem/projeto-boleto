@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.telas.mainPageControls {
    public partial class HomeControl : UserControl {
@@ -21,7 +22,7 @@ namespace ProjBoletos.telas.mainPageControls {
          //int cardWidth = (this.Width / quantCards) - (spaceBetweenCards / 2);
          bringClickedTab("medicoes");
 
-         tabMenu.BackColor = ColorTranslator.FromHtml("#e6e6e6");
+         tabMenu.BackColor = Colors.bg3;
 
          tabMedicoes.normalColor = ColorTranslator.FromHtml("#e6e6e6");
          tabMedicoes.onEnterColor = ColorTranslator.FromHtml("#d9d9d9");
@@ -43,7 +44,7 @@ namespace ProjBoletos.telas.mainPageControls {
       private void HomeControl_Resize(object sender, EventArgs e) {
 
          tabMenu.Location = new Point(0, 0);
-         tabMenu.Size = new Size(ClientRectangle.Width, 70);
+         tabMenu.Size = new Size(ClientRectangle.Width, 60);
 
          tabMedicoes.Size = new Size(150, tabMenu.Height);
          tabMedicoes.Margin = new Padding(20, 0, 0, 0);

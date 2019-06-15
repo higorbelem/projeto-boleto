@@ -33,10 +33,10 @@ namespace ProjBoletos.components {
         }
 
         private void CustomListViewItem_Load(object sender, EventArgs e) {
-            btnGerar1.title = "GERAR";
+            //btnGerar1.title = "GERAR";
             btnGerar1.cornerRadius = 2;
 
-            btnVer1.title = "VER";
+            //btnVer1.title = "VER";
             btnVer1.cornerRadius = 2;
 
         }
@@ -59,7 +59,7 @@ namespace ProjBoletos.components {
                 e.Graphics.FillEllipse(new SolidBrush(circleColor), new Rectangle(circleRect.X + 17, circleRect.Y + 17, circleRect.Width - 34, circleRect.Height - 34));
             }
 
-            btnVer1.Size = new Size(50, ClientRectangle.Height - 10);
+            btnVer1.Size = new Size(70, ClientRectangle.Height - 10);
             btnVer1.Location = new Point(ClientRectangle.Width - btnVer1.Width, 5);
 
             btnGerar1.Size = new Size(100,ClientRectangle.Height - 10);

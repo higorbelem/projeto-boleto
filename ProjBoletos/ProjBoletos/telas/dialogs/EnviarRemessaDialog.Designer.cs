@@ -33,7 +33,7 @@
          this.btnAbrirArquivo = new ProjBoletos.testes.MeuButton();
          this.btnAbrirSite = new ProjBoletos.testes.MeuButton();
          this.btnJaEnviei = new ProjBoletos.testes.MeuButton();
-         this.textBoxCaminho = new ProjBoletos.components.MeuTextbox();
+         this.textBoxCaminho = new ProjBoletos.components.MeuTextbox(false);
          this.btnCopiar = new ProjBoletos.testes.MeuButton();
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();

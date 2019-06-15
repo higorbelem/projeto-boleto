@@ -49,8 +49,6 @@ namespace ProjBoletos.components {
          textBox1.Location = new Point(10, (Size.Height / 2) - (textBox1.Size.Height / 2));
          textBox1.Size = new Size(this.Size.Width - 20, this.Size.Height - 20);
 
-         textBox1.GotFocus += RemoveText;
-         textBox1.LostFocus += AddText;
          if (useHint) {
             textBox1.Text = hint;
             textBox1.ForeColor = colorHint;
@@ -59,6 +57,9 @@ namespace ProjBoletos.components {
             textBox1.ForeColor = colorNormal;
             textBox1.Font = fontNormal;
          }
+
+         textBox1.GotFocus += RemoveText;
+         textBox1.LostFocus += AddText;
          
          textBox1.BackColor = backColor;
 

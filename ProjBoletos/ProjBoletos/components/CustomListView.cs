@@ -19,22 +19,18 @@ using Newtonsoft.Json;
 namespace ProjBoletos.components {
    public partial class CustomListView : UserControl {
 
-      List<Medicao> medicoes;
+      //List<Medicao> medicoes;
+      List<CustomListViewItem> items;
       Cedente cedente;
 
       public delegate void UpdateEvent();
+
       public UpdateEvent update;
 
-      public static int COD_MEDICAO = 1;
-      public static int COD_BOLETO = 2;
-      public static int COD_REMESSA = 3;
+      public string vazioText = "";
 
-      private int currentTabCod;
-
-      public CustomListView(int tabCod) {
+      public CustomListView() {
          InitializeComponent();
-
-         currentTabCod = tabCod;
 
          var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
          cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
@@ -47,12 +43,13 @@ namespace ProjBoletos.components {
          //MessageBox.Show("asdasd","asdasd",MessageBoxButtons.YesNo);
       }
 
-      public void UpdateList(List<Medicao> medicoes1) {
-         medicoes = medicoes1;
+      public void UpdateList(List<CustomListViewItem> items/*List<Medicao> medicoes1*/) {
+         //medicoes = medicoes1;
+         this.items = items;
 
          flowLayoutPanel.Controls.Clear();
 
-         CustomListViewItem customListViewItemCabecalho = new CustomListViewItem();
+         /*CustomListViewItem customListViewItemCabecalho = new CustomListViewItem();
          customListViewItemCabecalho.isCabecalho = true;
          customListViewItemCabecalho.Size = new Size(ClientRectangle.Width, 50);
          customListViewItemCabecalho.addValor("DATA DA MEDIÇÂO", "1,5");
@@ -63,18 +60,26 @@ namespace ProjBoletos.components {
 
          flowLayoutPanel.Controls.Add(new Separator() {
             Size = new Size(ClientRectangle.Width, 20)
-         });
+         });*/
 
-         if (medicoes.Count == 0) {
-            string text = "";
-            if (currentTabCod == COD_MEDICAO) {
-               text = "Não há medições";
-            } else if (currentTabCod == COD_BOLETO) {
-               text = "Não há boletos";
+         for (int i = 0; i < items.Count; i++) {
+            if (i == 1) {
+               flowLayoutPanel.Controls.Add(new Separator() {
+                  Size = new Size(ClientRectangle.Width, 20)
+               });
             }
+            items[i].Size = new Size(ClientRectangle.Width, 50);
+            flowLayoutPanel.Controls.Add(items[i]);
+         }
+         if (items.Count == 1) {
+            flowLayoutPanel.Controls.Add(new Separator() {
+               Size = new Size(ClientRectangle.Width, 20)
+            });
+         }
 
+         if (items.Count == 1) {
             flowLayoutPanel.Controls.Add(new Label() {
-               Text = text,
+               Text = vazioText,
                Font = Fonts.mainBold10,
                ForeColor = Colors.primaryText,
                Size = new Size(ClientRectangle.Width, 50),
@@ -82,7 +87,7 @@ namespace ProjBoletos.components {
             });
          }
 
-         foreach (Medicao medicao in medicoes) {
+         /*foreach (Medicao medicao in medicoes) {
             CustomListViewItem customListViewItem = new CustomListViewItem();
             customListViewItem.Size = new Size(ClientRectangle.Width, 50);
             customListViewItem.addValor(medicao.dataMedicao.ToString(), "1,5");
@@ -122,18 +127,6 @@ namespace ProjBoletos.components {
                      update();
                   }
                }
-
-               /*var resultMessageBox = MessageBox.Show("Gerar o boleto desta medição?", "", MessageBoxButtons.YesNo);
-
-               if (resultMessageBox == DialogResult.Yes)
-               {
-                   var result = gerarBoletos(medicao.id);
-
-                   if (result)
-                   {
-                       update();
-                   }
-               }*/
             });
 
             customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
@@ -147,7 +140,7 @@ namespace ProjBoletos.components {
             });
 
             flowLayoutPanel.Controls.Add(customListViewItem);
-         }
+         }*/
       }
 
       private void CustomListView_Resize(object sender, EventArgs e) {
@@ -164,32 +157,5 @@ namespace ProjBoletos.components {
          }
       }
 
-      private bool gerarBoletos(string idMedicao, string contaIndex, string carteira) {
-         //loading1.Visible = true;
-
-         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/gerarBoletos.php");
-         // client.Authenticator = new HttpBasicAuthenticator(username, password);
-
-         var request = new RestRequest("text/plain");
-         request.AddParameter("medicao-id", idMedicao);
-         request.AddParameter("carteira", carteira);
-         request.AddParameter("conta_index", contaIndex);
-
-         var response = client.Post(request);
-
-         var content = response.Content; // raw content as string
-
-         //loading1.Visible = false;
-
-         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-            if (!content.Equals("erro")) {
-               return true;
-            } else {
-               return false;
-            }
-         }
-
-         return false;
-      }
    }
 }

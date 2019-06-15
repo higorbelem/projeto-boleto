@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
             this.gerarTodasBtn = new ProjBoletos.testes.MeuButton();
-            this.customListView = new ProjBoletos.components.CustomListView(ProjBoletos.components.CustomListView.COD_MEDICAO);
+            this.customListView = new ProjBoletos.components.CustomListView();
             this.mainCard1 = new ProjBoletos.components.MainCard();
             this.mainCard2 = new ProjBoletos.components.MainCard();
             this.mainCard3 = new ProjBoletos.components.MainCard();

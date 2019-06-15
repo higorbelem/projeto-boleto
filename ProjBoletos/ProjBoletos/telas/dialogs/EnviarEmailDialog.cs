@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using ProjBoletos.components;
 using ProjBoletos.components.ParteCimaBoleto;
 using ProjBoletos.modelos;
 using ProjBoletos.utils;
@@ -59,6 +60,7 @@ namespace ProjBoletos.telas.dialogs {
          labelTitle.Font = Fonts.mainBold14;
          labelTitle.ForeColor = Colors.bg;
          labelTitle.Margin = new Padding(0);
+         labelTitle.Select();
 
          label1.TextAlign = ContentAlignment.MiddleCenter;
          label1.Font = Fonts.mainBold12;
@@ -99,26 +101,38 @@ namespace ProjBoletos.telas.dialogs {
 
       private void btnEnviar_Click(object sender, EventArgs e) {
          if (!txtBoxSenha.isEmpty) {
-            MailAddress from = new MailAddress(cedente.email, cedente.nome);
-            //smtp.gmail.com     smtp.office365.com    smtp.live.com   smtp-mail.outlook.com
-            SmtpClient mailClient = new SmtpClient("smtp-mail.outlook.com");
-            mailClient.Port = 587;
-            mailClient.UseDefaultCredentials = false;
-            mailClient.EnableSsl = true;
-            mailClient.Credentials = new System.Net.NetworkCredential(cedente.email, txtBoxSenha.txtBox.Text);
-            
+            Loading loading = new Loading();
+            loading.task = new Task(new Action(() => {
+               MailAddress from = new MailAddress(cedente.email, cedente.nome);
+               //smtp.gmail.com     smtp.office365.com    smtp.live.com   smtp-mail.outlook.com
+               SmtpClient mailClient = new SmtpClient("smtp-mail.outlook.com");
+               mailClient.Port = 587;
+               mailClient.UseDefaultCredentials = false;
+               mailClient.EnableSsl = true;
+               mailClient.Credentials = new System.Net.NetworkCredential(cedente.email, txtBoxSenha.txtBox.Text);
+               
+               bool resultEmail = SendEmail(mailClient, from, remessa, loading);
+               loading.terminou = true;
+               loading.terminouBem = resultEmail;
+            }));
 
-            //cc.Add(new MailAddress("Someone@domain.topleveldomain", "Name and stuff")); 
-            SendEmail(mailClient, from, remessa);
+            var res = loading.ShowDialog();
+
+            if (res == DialogResult.OK) {
+               this.Close();
+               this.DialogResult = DialogResult.OK;
+            }
          } else {
             MessageBox.Show("Campo de senha vazio");
          }
       }
 
-      protected void SendEmail(SmtpClient mailClient, MailAddress _from, Remessa remessa) {
-
+      protected bool SendEmail(SmtpClient mailClient, MailAddress _from, Remessa remessa, Loading loading) {
+         int x = 0;
          foreach (Medicao medicao in remessa.medicoes) {
-            //SmtpClient mailClient = new SmtpClient(mailHost);
+            loading.text = x + " BOLETOS DE " + remessa.medicoes.Count + " ENVIADOS";
+            x++;
+
             MailMessage msgMail;
             msgMail = new MailMessage();
             msgMail.From = _from;
@@ -127,38 +141,31 @@ namespace ProjBoletos.telas.dialogs {
             msgMail.Body = "asdadasd";
             msgMail.IsBodyHtml = true;
             msgMail.Attachments.Add(new Attachment(criarPdf(medicao)));
-
-            mailClient.SendCompleted += new SendCompletedEventHandler((object sender, AsyncCompletedEventArgs args) => {
-               
-            });
-
-            //mailClient.Send(msgMail);
+            
             try {
                mailClient.Send(msgMail);
-
             }catch (SmtpException ex) {
                Console.WriteLine("{0}", ex.StatusCode);
                if (ex.StatusCode == SmtpStatusCode.MustIssueStartTlsFirst) {
-                  MessageBox.Show("Senha e/ou email incorretos" + cedente.email + "  " + txtBoxSenha.txtBox.Text, "Falha ao mandar email");
+                  MessageBox.Show("Senha e/ou email incorretos", "Falha ao mandar email");
                }else if (ex.StatusCode == SmtpStatusCode.GeneralFailure) {
                   MessageBox.Show("Verifique sua internet","Falha ao mandar email");
                } else {
                   MessageBox.Show(ex.Message, "Falha ao mandar email");
                }
                msgMail.Dispose();
-               return;
+               return false;
             } catch (Exception ex) {
                Console.WriteLine("{0} / {1}", ex.HResult, SmtpStatusCode.ClientNotPermitted);
                //Console.WriteLine("Exception caught in RetryIfBusy(): {0}",ex.ToString());
                msgMail.Dispose();
-               return;
+               return false;
             }
 
             msgMail.Dispose();
          }
 
-         this.Close();
-         this.DialogResult = DialogResult.OK;
+         return true;
       }
 
       public string criarPdf(Medicao medicao) {

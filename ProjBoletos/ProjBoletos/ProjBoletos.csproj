@@ -246,6 +246,12 @@
     <Compile Include="telas\MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\ClienteControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\ClienteControl.Designer.cs">
+      <DependentUpon>ClienteControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\mainPageControls\ConfigControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -393,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\ClienteControl.resx">
+      <DependentUpon>ClienteControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\ConfigControl.resx">
       <DependentUpon>ConfigControl.cs</DependentUpon>

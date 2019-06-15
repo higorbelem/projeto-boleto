@@ -26,11 +26,11 @@
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnviarEmailDialog));
          this.labelTitle = new System.Windows.Forms.Label();
          this.panelTopBar = new System.Windows.Forms.Panel();
+         this.backButtonImg = new PictureBoxWithInterpolationMode();
          this.label1 = new System.Windows.Forms.Label();
          this.btnEnviar = new ProjBoletos.testes.MeuButton();
          this.txtBoxSenha = new ProjBoletos.components.MeuTextbox();
-         this.txtBoxEmail = new ProjBoletos.components.MeuTextbox();
-         this.backButtonImg = new PictureBoxWithInterpolationMode();
+         this.txtBoxEmail = new ProjBoletos.components.MeuTextbox(false);
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
@@ -53,6 +53,18 @@
          this.panelTopBar.Size = new System.Drawing.Size(200, 60);
          this.panelTopBar.TabIndex = 4;
          this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+         // 
+         // backButtonImg
+         // 
+         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
+         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
+         this.backButtonImg.Name = "backButtonImg";
+         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
+         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+         this.backButtonImg.TabIndex = 0;
+         this.backButtonImg.TabStop = false;
+         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
          // label1
          // 
@@ -85,18 +97,6 @@
          this.txtBoxEmail.Name = "txtBoxEmail";
          this.txtBoxEmail.Size = new System.Drawing.Size(476, 41);
          this.txtBoxEmail.TabIndex = 5;
-         // 
-         // backButtonImg
-         // 
-         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
-         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
-         this.backButtonImg.Name = "backButtonImg";
-         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
-         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-         this.backButtonImg.TabIndex = 0;
-         this.backButtonImg.TabStop = false;
-         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
          // EnviarEmailDialog
          // 

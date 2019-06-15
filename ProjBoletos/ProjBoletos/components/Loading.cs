@@ -20,6 +20,12 @@ namespace ProjBoletos.components {
 
       private int tempoPassado = 0;
 
+      public Task task = null;
+      public string text = "Aguarde...";
+      
+      public bool terminou = false;
+      public bool terminouBem = false;
+
       public Loading() {
          InitializeComponent();
 
@@ -31,6 +37,10 @@ namespace ProjBoletos.components {
          label1.BackColor = Colors.bg2;
          label1.ForeColor = Colors.primaryText;
 
+         if (task != null) {
+            task.Start();
+         }
+
          timer = new System.Timers.Timer(8); //~60 FPS
          timer.AutoReset = true;
          timer.SynchronizingObject = this;
@@ -38,7 +48,20 @@ namespace ProjBoletos.components {
          timer.Start();
       }
 
-      private void timer_Elapsed(object sender, ElapsedEventArgs e) {
+      private async void timer_Elapsed(object sender, ElapsedEventArgs e) {
+         if (terminou) {
+            await Task.Delay(200);
+            if (terminouBem) {
+               Close();
+               DialogResult = DialogResult.OK;
+            } else {
+               Close();
+               DialogResult = DialogResult.Cancel;
+            }
+         }
+
+         label1.Text = text;
+
          angle += 5;
 
          if (angle > 360) {
@@ -53,7 +76,7 @@ namespace ProjBoletos.components {
       protected override void OnPaintBackground(PaintEventArgs e) {
          e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-         e.Graphics.FillRectangle(new SolidBrush(Colors.bg2), new Rectangle(0,0,ClientRectangle.Width-1,ClientRectangle.Height-1));
+         e.Graphics.FillRectangle(new SolidBrush(Colors.bg2), new Rectangle(-1,-1,ClientRectangle.Width + 1,ClientRectangle.Height + 1));
 
          int x = ClientRectangle.Width / 2;
          int y = ClientRectangle.Height / 2;

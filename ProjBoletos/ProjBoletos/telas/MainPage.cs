@@ -33,6 +33,7 @@ namespace ProjBoletos.telas {
       private void Main_Load(object sender, EventArgs e) {
          bringClickedControl("home");
 
+         btnCliente.icon.Click += new EventHandler(btnCliente_click);
          btnConfig.icon.Click += new EventHandler(btnConfig_click);
          btnHome.icon.Click += new EventHandler(btnHome_click);
          accountButton.icon.Click += new EventHandler(accountButton_click);
@@ -52,6 +53,9 @@ namespace ProjBoletos.telas {
 
          btnConfig.icon.Image = new Bitmap(Properties.Resources.icon_person1);
          btnConfig.title = "CONFIGURAÇÕES";
+
+         btnCliente.icon.Image = new Bitmap(Properties.Resources.icon_person1);
+         btnCliente.title = "CLIENTES";
 
          dropMenu.Visible = false;
 
@@ -76,6 +80,8 @@ namespace ProjBoletos.telas {
 
          homeControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
          homeControl.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
+         clientControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
+         clientControl.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
          configControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
          configControl.Size = new Size(Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
 
@@ -86,6 +92,8 @@ namespace ProjBoletos.telas {
          logoImage.Size = new Size(sideBarFlowPanel.Width, sideBarFlowPanel.Width);
 
          btnConfig.Width = sideBarFlowPanel.Width;
+
+         btnCliente.Width = sideBarFlowPanel.Width;
 
          dropMenu.Size = new Size(177, 0);
          dropMenu.Location = new Point(ClientRectangle.Width - dropMenu.Width, topBarFlowLayout.Height);
@@ -148,6 +156,10 @@ namespace ProjBoletos.telas {
          bringClickedControl("config");
       }
 
+      public void btnCliente_click(object sender, EventArgs e) {
+         bringClickedControl("cliente");
+      }
+
       private void label1_Click(object sender, EventArgs e) {
 
       }
@@ -156,14 +168,25 @@ namespace ProjBoletos.telas {
          if (control.Equals("home")) {
             homeControl.Visible = true;
             configControl.Visible = false;
+            clientControl.Visible = false;
             btnHome.selected = true;
          } else {
             btnHome.selected = false;
          }
 
+         if (control.Equals("cliente")) {
+            homeControl.Visible = false;
+            configControl.Visible = false;
+            clientControl.Visible = true;
+            btnCliente.selected = true;
+         } else {
+            btnCliente.selected = false;
+         }
+
          if (control.Equals("config")) {
             homeControl.Visible = false;
             configControl.Visible = true;
+            clientControl.Visible = false;
             btnConfig.selected = true;
          } else {
             btnConfig.selected = false;
@@ -171,6 +194,7 @@ namespace ProjBoletos.telas {
 
          btnHome.Invalidate();
          btnConfig.Invalidate();
+         btnCliente.Invalidate();
       }
 
       private void topBarFlowLayout_Paint(object sender, PaintEventArgs e) {
