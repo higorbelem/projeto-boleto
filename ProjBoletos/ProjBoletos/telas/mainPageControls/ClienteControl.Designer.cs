@@ -27,6 +27,7 @@
          this.btnSearch = new ProjBoletos.testes.MeuButton();
          this.txtBoxSearch = new ProjBoletos.components.MeuTextbox();
          this.customListView = new ProjBoletos.components.CustomListView();
+         this.btnAdicionar = new ProjBoletos.testes.MeuButton();
          this.panelTop.SuspendLayout();
          this.SuspendLayout();
          // 
@@ -63,12 +64,21 @@
          this.customListView.Size = new System.Drawing.Size(380, 201);
          this.customListView.TabIndex = 1;
          // 
+         // btnGerarRemessa
+         // 
+         this.btnAdicionar.Location = new System.Drawing.Point(437, 376);
+         this.btnAdicionar.Name = "btnGerarRemessa";
+         this.btnAdicionar.Size = new System.Drawing.Size(150, 150);
+         this.btnAdicionar.TabIndex = 4;
+         this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
+         // 
          // ClienteControl
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.Controls.Add(this.customListView);
          this.Controls.Add(this.panelTop);
+         this.Controls.Add(this.btnAdicionar);
+         this.Controls.Add(this.customListView);
          this.Name = "ClienteControl";
          this.Size = new System.Drawing.Size(429, 325);
          this.Load += new System.EventHandler(this.ClienteControl_Load);
@@ -84,6 +94,7 @@
       private System.Windows.Forms.Panel panelTop;
       private components.MeuTextbox txtBoxSearch;
       private testes.MeuButton btnSearch;
+      private testes.MeuButton btnAdicionar;
       private components.CustomListView customListView;
    }
 }

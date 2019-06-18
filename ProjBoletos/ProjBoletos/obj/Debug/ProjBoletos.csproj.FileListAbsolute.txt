@@ -55,3 +55,5 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsha
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\itextsharp.xml
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.EnviarEmailDialog.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.ClienteControl.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.AdicionarEditarClienteDialog.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.AdicionarEditarClienteCasaItem.resources

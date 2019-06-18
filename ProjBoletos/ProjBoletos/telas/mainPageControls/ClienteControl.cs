@@ -17,12 +17,20 @@ using Newtonsoft.Json;
 namespace ProjBoletos.telas.mainPageControls {
    public partial class ClienteControl : UserControl {
 
-      List<Sacado> sacados;
+      private List<Sacado> sacados;
+      private Cedente cedente;
 
       public ClienteControl() {
          InitializeComponent();
 
          txtBoxSearch.hint = "PESQUISE POR NOME OU DOCUMENTO";
+
+         var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+         cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
+
+         if (cedente == null) {
+            Application.Exit();
+         }
 
       }
 
@@ -31,6 +39,9 @@ namespace ProjBoletos.telas.mainPageControls {
          txtBoxSearch.BackColor = Colors.bg3;
 
          btnSearch.title = "PESQUISAR";
+
+         btnAdicionar.title = "ADICIONAR";
+         btnAdicionar.cornerRadius = 20;
 
          updateCustomViewList();
 
@@ -42,7 +53,7 @@ namespace ProjBoletos.telas.mainPageControls {
       public void updateCustomViewList() {
          Loading loading = new Loading();
          loading.task = new Task(new Action(() => {
-            var res = getSacados(txtBoxSearch.txtBox.Text);
+            var res = getSacados(txtBoxSearch.txtBox.Text, cedente.id);
 
             loading.terminou = true;
             loading.terminouBem = res;
@@ -56,18 +67,18 @@ namespace ProjBoletos.telas.mainPageControls {
          customListViewItemCabecalho.isCabecalho = true;
          customListViewItemCabecalho.Size = new Size(ClientRectangle.Width, 50);
          customListViewItemCabecalho.addValor("ID", "1");
-         customListViewItemCabecalho.addValor("NOME", "3");
-         customListViewItemCabecalho.addValor("DOCUMENTO", "3");
-         customListViewItemCabecalho.addValor("EMAIL", "3");
+         customListViewItemCabecalho.addValor("NOME", "4");
+         customListViewItemCabecalho.addValor("DOCUMENTO", "4");
+         customListViewItemCabecalho.addValor("EMAIL", "4");
          items.Add(customListViewItemCabecalho);
 
          foreach (Sacado sacado in sacados) {
             CustomListViewItem customListViewItem = new CustomListViewItem();
             customListViewItem.Size = new Size(ClientRectangle.Width, 50);
             customListViewItem.addValor(sacado.id, "1");
-            customListViewItem.addValor(sacado.nome, "3");
-            customListViewItem.addValor(sacado.documento, "3");
-            customListViewItem.addValor(sacado.email, "3");
+            customListViewItem.addValor(sacado.nome, "4");
+            customListViewItem.addValor(sacado.documento, "4");
+            customListViewItem.addValor(sacado.email, "4");
             //customListViewItem.medicao = medicao;
             customListViewItem.circleColor = Color.Transparent;
             customListViewItem.btnVer.title = "EDITAR";
@@ -96,13 +107,16 @@ namespace ProjBoletos.telas.mainPageControls {
          btnSearch.Location = new Point(txtBoxSearch.Location.X + txtBoxSearch.Width, panelTopPaddingTopBottom);
          btnSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.2), panelTop.Height - panelTopPaddingTopBottom * 2);
 
+         btnAdicionar.Size = new Size(300, 40);
+         btnAdicionar.Location = new Point(ClientRectangle.Width/2 - btnAdicionar.Width/2, panelTop.Location.Y + panelTop.Height + 20);
+
          customListView.Size = new Size(ClientRectangle.Width - 40, 80); //0
          customListView.MinimumSize = new Size(ClientRectangle.Width - 40, 0); //0
          customListView.MaximumSize = new Size(ClientRectangle.Width - 40, 0); //0
-         customListView.Location = new Point(20, panelTop.Location.Y + panelTop.Height + 20);
+         customListView.Location = new Point(20, btnAdicionar.Location.Y + btnAdicionar.Height + 20);
       }
 
-      private bool getSacados(string busca) {
+      private bool getSacados(string busca, string idCedente) {
          //loading1.Visible = true;
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/procuraSacado.php");
@@ -111,6 +125,7 @@ namespace ProjBoletos.telas.mainPageControls {
          var request = new RestRequest("text/plain");
          request.AddParameter("busca", busca);
          request.AddParameter("buscar-todos", txtBoxSearch.isEmpty ? "1" : "0");
+         request.AddParameter("id-cedente", idCedente);
 
          var response = client.Post(request);
 
@@ -133,6 +148,15 @@ namespace ProjBoletos.telas.mainPageControls {
 
       public void btnSearch_Click(object sender, EventArgs e) {
          updateCustomViewList();
+      }
+
+      public void btnAdicionar_Click(object sender, EventArgs e) {
+         AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, AdicionarEditarClienteDialog.DIALOG_MODE_ADICIONAR);
+         var resDialog = adicionarClienteDialog.ShowDialog();
+
+         if (resDialog == DialogResult.OK) {
+            updateCustomViewList();
+         }
       }
    }
 }

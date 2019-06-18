@@ -22,6 +22,7 @@ namespace ProjBoletos.utils {
       public static Color pertoDeVencer = ColorTranslator.FromHtml("#ff794d");
       public static Color noPrazo = ColorTranslator.FromHtml("#31efa1");
       public static Color accent1 = ColorTranslator.FromHtml("#3289d8");
+      public static Color accent2 = atrasado;
       public static Color accent1Secondary = ColorTranslator.FromHtml("#2575c1");
       public static Color boletoLines = ColorTranslator.FromHtml("#000000");
       public static Color boletoTextValor = ColorTranslator.FromHtml("#333333");

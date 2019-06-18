@@ -66,6 +66,12 @@
     <Compile Include="components\AccountButton.Designer.cs">
       <DependentUpon>AccountButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="components\AdicionarEditarClienteCasaItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\AdicionarEditarClienteCasaItem.Designer.cs">
+      <DependentUpon>AdicionarEditarClienteCasaItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\Box.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -190,6 +196,12 @@
     <Compile Include="telas\BoletoForm.Designer.cs">
       <DependentUpon>BoletoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\dialogs\AdicionarEditarClienteDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\dialogs\AdicionarEditarClienteDialog.Designer.cs">
+      <DependentUpon>AdicionarEditarClienteDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\dialogs\EnviarEmailDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,6 +318,9 @@
     <EmbeddedResource Include="components\AccountButton.resx">
       <DependentUpon>AccountButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="components\AdicionarEditarClienteCasaItem.resx">
+      <DependentUpon>AdicionarEditarClienteCasaItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="components\Box.resx">
       <DependentUpon>Box.cs</DependentUpon>
     </EmbeddedResource>
@@ -362,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\BoletoForm.resx">
       <DependentUpon>BoletoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\dialogs\AdicionarEditarClienteDialog.resx">
+      <DependentUpon>AdicionarEditarClienteDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\dialogs\EnviarEmailDialog.resx">
       <DependentUpon>EnviarEmailDialog.cs</DependentUpon>
@@ -481,6 +499,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\backButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\arrow_up .png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
