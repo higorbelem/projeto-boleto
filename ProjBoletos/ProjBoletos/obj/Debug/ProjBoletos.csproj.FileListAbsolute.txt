@@ -57,3 +57,5 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.ClienteControl.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.dialogs.AdicionarEditarClienteDialog.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.AdicionarEditarClienteCasaItem.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\QRCoder.dll
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\bin\Debug\System.Drawing.Common.dll

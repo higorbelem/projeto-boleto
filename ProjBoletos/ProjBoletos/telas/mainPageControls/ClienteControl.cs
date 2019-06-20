@@ -86,7 +86,12 @@ namespace ProjBoletos.telas.mainPageControls {
             customListViewItem.btnGerar.Visible = false;
 
             customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
+               AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, sacado, AdicionarEditarClienteDialog.DIALOG_MODE_EDITAR);
+               var resDialog = adicionarClienteDialog.ShowDialog();
 
+               if (resDialog == DialogResult.OK) {
+                  updateCustomViewList();
+               }
             });
 
             items.Add(customListViewItem);
@@ -136,6 +141,9 @@ namespace ProjBoletos.telas.mainPageControls {
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
             if (!content.Equals("erro")) {
                sacados = JsonConvert.DeserializeObject<List<Sacado>>(content);
+               /*foreach (Casa casa in sacados[0].casas) {
+                  Console.WriteLine(casa.id + " " + casa.numero + " " + casa.bairro + " " + casa.cep + " " + casa.cidade + " " + casa.diaVencimento);
+               }*/
                return true;
             } else {
                sacados = new List<Sacado>();
@@ -151,7 +159,7 @@ namespace ProjBoletos.telas.mainPageControls {
       }
 
       public void btnAdicionar_Click(object sender, EventArgs e) {
-         AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, AdicionarEditarClienteDialog.DIALOG_MODE_ADICIONAR);
+         AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, null, AdicionarEditarClienteDialog.DIALOG_MODE_ADICIONAR);
          var resDialog = adicionarClienteDialog.ShowDialog();
 
          if (resDialog == DialogResult.OK) {

@@ -32,11 +32,14 @@ namespace ProjBoletos.telas.dialogs {
 
       private int itemCasaPadding = 5;
 
-      public AdicionarEditarClienteDialog(Cedente cedente, int dialogMode) {
+      Sacado sacado;
+
+      public AdicionarEditarClienteDialog(Cedente cedente, Sacado sacado, int dialogMode) {
          InitializeComponent();
 
          this.dialogMode = dialogMode;
          this.cedente = cedente;
+         this.sacado = sacado;
 
          labelTitle.Select();
 
@@ -54,6 +57,7 @@ namespace ProjBoletos.telas.dialogs {
          }
 
          btnOk.title = "CONCLUIR";
+         btnAddCasa.title = "ADICIONAR";
       }
 
       private void AdicionarClienteDialog_Load(object sender, EventArgs e) {
@@ -87,6 +91,36 @@ namespace ProjBoletos.telas.dialogs {
          flowCasas.BackColor = Colors.bg2;
          flowCasas.Padding = new Padding(itemCasaPadding);
 
+         if (dialogMode == DIALOG_MODE_EDITAR) {
+            txtBoxNome.useHint = false;
+            txtBoxNome.txtBox.Text = sacado.nome;
+            txtBoxDocumento.useHint = false;
+            txtBoxDocumento.txtBox.Text = sacado.documento;
+            txtBoxEmail.useHint = false;
+            txtBoxEmail.txtBox.Text = sacado.email;
+
+            foreach (Casa casa in sacado.casas) {
+               AdicionarEditarClienteCasaItem item = new AdicionarEditarClienteCasaItem(casa.id, casa.diaVencimento,casa.bairro, casa.cep, casa.cidade, casa.numHidrometro, casa.numero, casa.referencia, casa.rua, casa.uf) {
+                  Location = new Point(0, 0),
+                  Size = new Size(flowCasas.Width - 35, 50)
+               };
+
+               item.btnDeletar.Click += new EventHandler((object s1, EventArgs e1) => {
+                  var res = sendPhpDeletaCasa(casa.id);
+
+                  if (res) {
+                     flowCasas.Controls.Remove(item);
+                  } else {
+                     MessageBox.Show("Algum erro aconteceu ao excluir a casa");
+                  }
+               });
+               flowCasas.Controls.Add(item);
+               flowCasas.Controls.SetChildIndex(item, flowCasas.Controls.IndexOf(btnAddCasa));
+            }
+         }
+
+         btnAddCasa.Size = new Size(flowCasas.Width - 35, 40);
+
          txtBoxDocumento.BackColor = Colors.bg3;
          txtBoxEmail.BackColor = Colors.bg3;
          txtBoxNome.BackColor = Colors.bg3;
@@ -114,12 +148,33 @@ namespace ProjBoletos.telas.dialogs {
       }
 
       private void btnOk_Click(object sender, EventArgs e) {
-         if (txtBoxDocumento.isEmpty || txtBoxEmail.isEmpty || txtBoxNome.isEmpty) {
-            MessageBox.Show("Algum campo esta vazio");
+
+         bool campoCasasVazio = false;
+         for (int i = 0; i < flowCasas.Controls.Count - 1; i++) {
+            if (((AdicionarEditarClienteCasaItem)flowCasas.Controls[i]).hasEmptyFields()) {
+               campoCasasVazio = true;
+               break;
+            }
+         }
+
+         bool camposVazios = txtBoxDocumento.isEmpty || txtBoxEmail.isEmpty || txtBoxNome.isEmpty || campoCasasVazio;
+
+         if (camposVazios || flowCasas.Controls.Count <= 1) {
+            if (camposVazios && flowCasas.Controls.Count <= 1) {
+               MessageBox.Show("Campos vazios e nenhuma casa adicionada");
+            } else {
+               if (camposVazios) {
+                  MessageBox.Show("Algum campo esta vazio");
+               }
+               if (flowCasas.Controls.Count <= 1) {
+                  MessageBox.Show("Adicione no mínimo uma casa");
+               }
+            }
+
          } else {
             Loading loading = new Loading();
             loading.task = new Task(new Action(() => {
-               var res = sendPhp(txtBoxNome.txtBox.Text, txtBoxDocumento.txtBox.Text, txtBoxEmail.txtBox.Text,dialogMode);
+               var res = sendPhp(txtBoxNome.txtBox.Text, txtBoxDocumento.txtBox.Text, txtBoxEmail.txtBox.Text, dialogMode);
 
                loading.terminou = true;
                loading.terminouBem = res;
@@ -138,13 +193,85 @@ namespace ProjBoletos.telas.dialogs {
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/adicionarEditarSacado.php");
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
-
+         
          var request = new RestRequest("text/plain");
          request.AddParameter("id-cedente", cedente.id);
+         if (sacado != null) {
+            request.AddParameter("id-sacado", sacado.id);
+         } else {
+            request.AddParameter("id-sacado", "");
+         }
          request.AddParameter("nome", nome);
          request.AddParameter("documento", documento);
          request.AddParameter("email", email);
          request.AddParameter("dialog-mode", dialogMode);
+
+         bool entrouAdd = false;
+         bool entrouEdit = false;
+
+         for (int i = 0; i < flowCasas.Controls.Count - 1; i++) {
+            AdicionarEditarClienteCasaItem item = (AdicionarEditarClienteCasaItem)flowCasas.Controls[i];
+            if (item.isItemToEdit) {
+               entrouEdit = true;
+               request.AddParameter("casas-edit[]",
+                  item.id + ";" +
+                  item.txtBoxBairro.txtBox.Text + ";" +
+                  item.txtBoxCep.txtBox.Text + ";" +
+                  item.txtBoxCidade.txtBox.Text + ";" +
+                  item.txtBoxHidrometro.txtBox.Text + ";" +
+                  item.txtBoxNumero.txtBox.Text + ";" +
+                  item.txtBoxReferencia.txtBox.Text + ";" +
+                  item.txtBoxRua.txtBox.Text + ";" +
+                  item.txtBoxUf.txtBox.Text + ";" +
+                  item.txtBoxVencimento.txtBox.Text);
+            } else {
+               entrouAdd = true;
+               request.AddParameter("casas-add[]",
+                  item.txtBoxBairro.txtBox.Text + ";" +
+                  item.txtBoxCep.txtBox.Text + ";" +
+                  item.txtBoxCidade.txtBox.Text + ";" +
+                  item.txtBoxHidrometro.txtBox.Text + ";" +
+                  item.txtBoxNumero.txtBox.Text + ";" +
+                  item.txtBoxReferencia.txtBox.Text + ";" +
+                  item.txtBoxRua.txtBox.Text + ";" +
+                  item.txtBoxUf.txtBox.Text + ";" +
+                  item.txtBoxVencimento.txtBox.Text);
+            }
+         }
+
+         if (!entrouAdd) {
+            request.AddParameter("casas-add[]", "");
+         }
+         if (!entrouEdit) {
+            request.AddParameter("casas-edit[]", "");
+         }
+
+         var response = client.Post(request);
+
+         var content = response.Content; // raw content as string
+
+         //loading1.Visible = false;
+         Console.WriteLine(content);
+
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+            if (!content.Equals("erro")) {
+               return true;
+            } else {
+               return false;
+            }
+         }
+
+         return false;
+      }
+
+      private bool sendPhpDeletaCasa(string idCasa) {
+         //loading1.Visible = true;
+
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/deletaCasa.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+         var request = new RestRequest("text/plain");
+         request.AddParameter("id-casa", idCasa);
 
          var response = client.Post(request);
 
@@ -166,7 +293,7 @@ namespace ProjBoletos.telas.dialogs {
       private void btnAddCasa_Click(object sender, EventArgs e) {
          AdicionarEditarClienteCasaItem adicionarEditarClienteCasaItem = new AdicionarEditarClienteCasaItem() {
             Location = new Point(0, 0),
-            Size = new Size(flowCasas.Width - 35,50)
+            Size = new Size(flowCasas.Width - 35, 50)
          };
          adicionarEditarClienteCasaItem.btnDeletar.Click += new EventHandler((object s1, EventArgs e1) => {
             flowCasas.Controls.Remove(adicionarEditarClienteCasaItem);

@@ -45,6 +45,17 @@ namespace ProjBoletos.components {
       private void MeuTextbox_Load(object sender, EventArgs e) {
          BackColor = Color.White;
 
+         if (!useHint) {
+            isEmpty = false;
+         }
+
+         toolTip1.AutoPopDelay = 2000;
+         toolTip1.InitialDelay = 300;
+         toolTip1.ReshowDelay = 300;
+         toolTip1.ShowAlways = true;
+         toolTip1.SetToolTip(this, hint);
+         toolTip1.SetToolTip(this.textBox1, hint);
+
          textBox1.Multiline = false;
          textBox1.Location = new Point(10, (Size.Height / 2) - (textBox1.Size.Height / 2));
          textBox1.Size = new Size(this.Size.Width - 20, this.Size.Height - 20);
@@ -94,7 +105,7 @@ namespace ProjBoletos.components {
       }
 
       public void RemoveText(object sender, EventArgs e) {
-         if (useHint) {
+         if (useHint || txtBox.ReadOnly == false) {
             if (textBox1.Text == hint) {
                textBox1.Text = "";
                textBox1.ForeColor = colorNormal;
@@ -108,7 +119,7 @@ namespace ProjBoletos.components {
       }
 
       public void AddText(object sender, EventArgs e) {
-         if (useHint) {
+         if (useHint || txtBox.ReadOnly == false) {
             if (string.IsNullOrWhiteSpace(textBox1.Text)) {
                textBox1.Text = hint;
                textBox1.ForeColor = colorHint;

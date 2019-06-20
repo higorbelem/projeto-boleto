@@ -52,71 +52,71 @@
          this.btnBuscarCep.Location = new System.Drawing.Point(353, 111);
          this.btnBuscarCep.Name = "btnBuscarCep";
          this.btnBuscarCep.Size = new System.Drawing.Size(150, 47);
-         this.btnBuscarCep.TabIndex = 11;
+         this.btnBuscarCep.TabIndex = 3;
          // 
          // txtBoxVencimento
          // 
          this.txtBoxVencimento.BackColor = System.Drawing.Color.White;
-         this.txtBoxVencimento.Location = new System.Drawing.Point(36, 391);
+         this.txtBoxVencimento.Location = new System.Drawing.Point(353, 404);
          this.txtBoxVencimento.Name = "txtBoxVencimento";
          this.txtBoxVencimento.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxVencimento.TabIndex = 10;
+         this.txtBoxVencimento.TabIndex = 11;
          // 
          // txtBoxHidrometro
          // 
          this.txtBoxHidrometro.BackColor = System.Drawing.Color.White;
-         this.txtBoxHidrometro.Location = new System.Drawing.Point(307, 349);
+         this.txtBoxHidrometro.Location = new System.Drawing.Point(69, 404);
          this.txtBoxHidrometro.Name = "txtBoxHidrometro";
          this.txtBoxHidrometro.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxHidrometro.TabIndex = 9;
+         this.txtBoxHidrometro.TabIndex = 10;
          // 
          // txtBoxReferencia
          // 
          this.txtBoxReferencia.BackColor = System.Drawing.Color.White;
-         this.txtBoxReferencia.Location = new System.Drawing.Point(36, 301);
+         this.txtBoxReferencia.Location = new System.Drawing.Point(36, 335);
          this.txtBoxReferencia.Name = "txtBoxReferencia";
-         this.txtBoxReferencia.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxReferencia.TabIndex = 8;
+         this.txtBoxReferencia.Size = new System.Drawing.Size(511, 45);
+         this.txtBoxReferencia.TabIndex = 9;
          // 
          // txtBoxUf
          // 
          this.txtBoxUf.BackColor = System.Drawing.Color.White;
-         this.txtBoxUf.Location = new System.Drawing.Point(307, 278);
+         this.txtBoxUf.Location = new System.Drawing.Point(307, 274);
          this.txtBoxUf.Name = "txtBoxUf";
          this.txtBoxUf.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxUf.TabIndex = 7;
+         this.txtBoxUf.TabIndex = 8;
          // 
          // txtBoxBairro
          // 
          this.txtBoxBairro.BackColor = System.Drawing.Color.White;
-         this.txtBoxBairro.Location = new System.Drawing.Point(307, 228);
+         this.txtBoxBairro.Location = new System.Drawing.Point(36, 223);
          this.txtBoxBairro.Name = "txtBoxBairro";
-         this.txtBoxBairro.Size = new System.Drawing.Size(240, 45);
+         this.txtBoxBairro.Size = new System.Drawing.Size(511, 45);
          this.txtBoxBairro.TabIndex = 6;
          // 
          // txtBoxRua
          // 
          this.txtBoxRua.BackColor = System.Drawing.Color.White;
-         this.txtBoxRua.Location = new System.Drawing.Point(307, 164);
+         this.txtBoxRua.Location = new System.Drawing.Point(48, 164);
          this.txtBoxRua.Name = "txtBoxRua";
          this.txtBoxRua.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxRua.TabIndex = 5;
+         this.txtBoxRua.TabIndex = 4;
          // 
          // txtBoxCidade
          // 
          this.txtBoxCidade.BackColor = System.Drawing.Color.White;
-         this.txtBoxCidade.Location = new System.Drawing.Point(25, 228);
+         this.txtBoxCidade.Location = new System.Drawing.Point(25, 274);
          this.txtBoxCidade.Name = "txtBoxCidade";
          this.txtBoxCidade.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxCidade.TabIndex = 4;
+         this.txtBoxCidade.TabIndex = 7;
          // 
          // txtBoxNumero
          // 
          this.txtBoxNumero.BackColor = System.Drawing.Color.White;
-         this.txtBoxNumero.Location = new System.Drawing.Point(36, 162);
+         this.txtBoxNumero.Location = new System.Drawing.Point(329, 164);
          this.txtBoxNumero.Name = "txtBoxNumero";
          this.txtBoxNumero.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxNumero.TabIndex = 3;
+         this.txtBoxNumero.TabIndex = 5;
          // 
          // txtBoxCep
          // 
@@ -174,7 +174,7 @@
       #endregion
 
       private PictureBoxWithInterpolationMode imgBtnOpenClose;
-      private System.Windows.Forms.Label labelFechado;
+      public System.Windows.Forms.Label labelFechado;
       public MeuTextbox txtBoxCep;
       public MeuTextbox txtBoxNumero;
       public MeuTextbox txtBoxCidade;

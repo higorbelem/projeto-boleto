@@ -28,17 +28,17 @@
          this.panelTopBar = new System.Windows.Forms.Panel();
          this.flowCasas = new System.Windows.Forms.FlowLayoutPanel();
          this.labelCasas = new System.Windows.Forms.Label();
+         this.panel1 = new System.Windows.Forms.Panel();
+         this.btnAddCasa = new ProjBoletos.testes.MeuButton();
          this.btnOk = new ProjBoletos.testes.MeuButton();
          this.txtBoxDocumento = new ProjBoletos.components.MeuTextbox();
          this.txtBoxEmail = new ProjBoletos.components.MeuTextbox();
          this.txtBoxNome = new ProjBoletos.components.MeuTextbox();
          this.backButtonImg = new PictureBoxWithInterpolationMode();
-         this.panel1 = new System.Windows.Forms.Panel();
-         this.btnAddCasa = new ProjBoletos.testes.MeuButton();
          this.panelTopBar.SuspendLayout();
          this.flowCasas.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.panel1.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
          // 
          // labelTitle
@@ -77,6 +77,23 @@
          this.labelCasas.Size = new System.Drawing.Size(447, 47);
          this.labelCasas.TabIndex = 1;
          this.labelCasas.Text = "CASAS";
+         // 
+         // panel1
+         // 
+         this.panel1.Controls.Add(this.flowCasas);
+         this.panel1.Location = new System.Drawing.Point(30, 253);
+         this.panel1.Margin = new System.Windows.Forms.Padding(0);
+         this.panel1.Name = "panel1";
+         this.panel1.Size = new System.Drawing.Size(444, 274);
+         this.panel1.TabIndex = 10;
+         // 
+         // btnAddCasa
+         // 
+         this.btnAddCasa.Location = new System.Drawing.Point(3, 3);
+         this.btnAddCasa.Name = "btnAddCasa";
+         this.btnAddCasa.Size = new System.Drawing.Size(150, 43);
+         this.btnAddCasa.TabIndex = 0;
+         this.btnAddCasa.Click += new System.EventHandler(this.btnAddCasa_Click);
          // 
          // btnOk
          // 
@@ -122,23 +139,6 @@
          this.backButtonImg.TabStop = false;
          this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
-         // panel1
-         // 
-         this.panel1.Controls.Add(this.flowCasas);
-         this.panel1.Location = new System.Drawing.Point(30, 253);
-         this.panel1.Margin = new System.Windows.Forms.Padding(0);
-         this.panel1.Name = "panel1";
-         this.panel1.Size = new System.Drawing.Size(444, 274);
-         this.panel1.TabIndex = 10;
-         // 
-         // btnAddCasa
-         // 
-         this.btnAddCasa.Location = new System.Drawing.Point(3, 3);
-         this.btnAddCasa.Name = "btnAddCasa";
-         this.btnAddCasa.Size = new System.Drawing.Size(150, 43);
-         this.btnAddCasa.TabIndex = 0;
-         this.btnAddCasa.Click += new System.EventHandler(this.btnAddCasa_Click);
-         // 
          // AdicionarEditarClienteDialog
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,8 +158,8 @@
          this.Load += new System.EventHandler(this.AdicionarClienteDialog_Load);
          this.panelTopBar.ResumeLayout(false);
          this.flowCasas.ResumeLayout(false);
-         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).EndInit();
          this.panel1.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).EndInit();
          this.ResumeLayout(false);
 
       }
