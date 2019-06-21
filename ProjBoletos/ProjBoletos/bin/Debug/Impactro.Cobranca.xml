@@ -4576,6 +4576,450 @@
             Número seqüencial do registro no arquivo
             </summary>
         </member>
+        <member name="T:Impactro.Layout.CNAB400BBConvenio6Pos">
+            <summary>
+            Gera o CNAB400 de Remessa de acordo com os padrões do Bradesco
+            Para facilitar o suporte e padronizar recursos e funcionalidades cada banco tera sua proprie classe e rotinas de geração
+            </summary>
+        </member>
+        <member name="M:Impactro.Layout.CNAB400BBConvenio6Pos.Remessa">
+            <summary>
+            Gera o aquivo baseado nas coleção de todas informações passada até o momento
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Impactro.Layout.CNAB400BBConvenio6Pos.Retorno(System.String)">
+            <summary>
+            Processa as informações baseado no conteudo de um arquivo CNAB
+            </summary>
+            <param name="cData">Conteudo do arquivo</param>
+        </member>
+        <member name="T:Impactro.Layout.CNAB400Header1BBConvenio6Pos">
+            <summary>
+            Header Geral do Arquivo Com convenio de 6 posicoes
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Controle_Registro">
+            <summary>
+            Tipo de Registro
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Operacao_Codigo">
+            <summary>
+            tipo de operação - remessa
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Operacao_Literal">
+            <summary>
+            Identificação por extenso do movimento
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Servico_Codido">
+            <summary>
+            identificação do tipo de serviço
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Servico_Leteral">
+            <summary>
+            identificação do tipo de serviço
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.ComplementoDoRegistro">
+            <summary>
+            Complemento do Registro:“Brancos” 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Agencia">
+            <summary>
+            Prefixo da Agência: Número da Agência onde está cadastrado oconvênio líder do cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.AgenciaDV">
+            <summary>
+            Dígito Verificador - D.V. - do Prefixo da Agência
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.ContaCorrente">
+            <summary>
+            Número da Conta Corrente: Número da conta onde está cadastrado o Convênio Líder do Cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.ContaCorrenteDV">
+            <summary>
+            Dígito Verificador - D.V. – do Número da Conta Corrente do Cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Cedente">
+            <summary>
+            Nome do Cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Banco_Codigo">
+            <summary>
+            Nº do banco na câmara de compensação
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Banco_Nome">
+            <summary>
+            Nome do Banco por Extenso
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Data">
+            <summary>
+            Data da Gravação do Arquivo
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Remessa">
+            <summary>
+            Seqüencial da Remessa
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Header1BBConvenio6Pos.Sequencia">
+            <summary>
+            Número seqüencial do registro no arquivo
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Identificador">
+            <summary>
+            Identificação do Registro Detalhe: 7 (sete) 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.CedenteTipo">
+            <summary>
+            Tipo de Inscrição do Cedente #obs: 22 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Documento">
+            <summary>
+            Número do CPF/CNPJ do Cedente 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Agencia">
+            <summary>
+            Prefixo da Agência #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.AgenciaDV">
+            <summary>
+            Dígito Verificador - D.V. - do Prefixo da Agência #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ContaCorrente">
+            <summary>
+            Número da Conta Corrente do Cedente #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ContaCorrenteDV">
+            <summary>
+            Dígito Verificador - D.V. - do Número da Conta Corrente do Cedente #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Convenio">
+            <summary>
+            Número do Convênio de Cobrança do Cedente #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.EmpresaCodigo">
+            <summary>
+            Código de Controle da Empresa #obs:23 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.NossoNumero">
+            <summary>
+            Nosso-Número #obs:06 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.DvNossoNumero">
+            <summary>
+            DV do Nosso-Número (módulo 11)
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Zeros1">
+            <summary>
+            Número da Prestação: 00 (Zeros) 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Zeros2">
+            <summary>
+            Grupo de Valor: 00 (Zeros) 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Brancos1">
+            <summary>
+            Complemento do Registro: Brancos 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Indicativo">
+            <summary>
+            Indicativo de Mensagem ou Sacador/Avalista #obs:13 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Bracos2">
+            <summary>
+            Prefixo do Título: Brancos 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Modalidade">
+            <summary>
+            Variação da Carteira #obs:02 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Caucao">
+            <summary>
+            Conta Caução: 0 (Zero) 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Zeros3">
+            <summary>
+            Código de responsabilidade: informar zeros 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.zero1">
+            <summary>
+            DV do código de responsabilidade: informarzero zero 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Bordero">
+            <summary>
+            Número do Borderô: 000000 (Zeros) 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.CarteiraTipo">
+            <summary>
+            Tipo de Cobrança #obs:24 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Carteira">
+            <summary>
+            Carteira de Cobrança #obs:25 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Comando">
+            <summary>
+            Comando #obs:20 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.NumeroDocumento">
+            <summary>
+            Seu Número/Número do Título Atribuído pelo Cedente 05 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.DataVencimento">
+            <summary>
+            Data de Vencimento #obs:08 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ValorDocumento">
+            <summary>
+            Valor do Título #obs:19 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.NumeroBanco">
+            <summary>
+            Número do Banco: 001 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.AgenciaCobradora">
+            <summary>
+            Prefixo da Agência Cobradora: 0000 #obs:26 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.AgenciaCobradoraDV">
+            <summary>
+            Dígito Verificador do Prefixo da Agência Cobradora: Brancos 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Especie">
+            <summary>
+            Espécie de Titulo #obs:07 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Aceite">
+            <summary>
+            Aceite do Título: #obs:27 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.DataDocumento">
+            <summary>
+            Data de Emissão: Informe no formato DDMMAA #obs:28 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Instrucao1">
+            <summary>
+            Instrução Codificada #obs:09 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Instrucao2">
+            <summary>
+            Instrução Codificada #obs:09 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.JurosValor">
+            <summary>
+            Juros de Mora por Dia de Atraso #obs:10 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.DataDesconto">
+            <summary>
+            Data Limite para Concessão de Desconto/Data de Operação do BBVendor/Juros de Mora. #obs:11 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ValorDesconto">
+            <summary>
+            Valor do Desconto #obs:29 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ValorIOF">
+            <summary>
+            Valor do IOF/Qtde Unidade Variável. #obs:30 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.ValorAbatimento">
+            <summary>
+            Valor do Abatimento #obs:31 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.SacadoTipo">
+            <summary>
+            Tipo de Inscrição do Sacado #obs:32 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.SacadoDocumento">
+            <summary>
+            Número do CNPJ ou CPF do Sacado #obs:33 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Sacado">
+            <summary>
+            Nome do Sacado 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Brancos3">
+            <summary>
+            Complemento do Registro: Brancos 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Endereco">
+            <summary>
+            Endereço do Sacado 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.CEP">
+            <summary>
+            CEP do Endereço do Sacado 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Cidade">
+            <summary>
+            Cidade do Sacado 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.UF">
+            <summary>
+            UF da Cidade do Sacado 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.IndicativoValor">
+            <summary>
+            (ver campo Indicativo) Observações/Mensagem ou Sacador/Avalista #obs:13 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.DiasProtesto">
+            <summary>
+            Número de Dias Para Protesto #obs:34 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Brancos4">
+            <summary>
+            Complemento do Registro: Brancos 
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Remessa1BBConvenio6Pos.Sequencia">
+            <summary>
+            Seqüencial de Registro #obs:35 
+            </summary>
+        </member>
+        <member name="T:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos">
+            <summary>
+            Estrutura de Retorno BB: Layout de Arquivo Retorno para convênios na faixa numérica entre 1.000.000 a 9.999.999 (Convênios de 7 posições)
+            banco_do_brasil_cnab400-retorno.pdf - Página 4
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.Controle_Registro">
+            <summary>
+            Tipo de Registro
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.Agencia">
+            <summary>
+            Prefixo da Agência
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.Conta">
+            <summary>
+            Número da Conta Corrente do Cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.Convenio">
+            <summary>
+            Número do Convênio de Cobrança do Cedente
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.Controle">
+            <summary>
+            Número de Controle do Participante
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.NossoNumero">
+            <summary>
+            Nosso-Número
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.TipoCobranca">
+            <summary>
+            Tipo de cobrança
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.TipoCobrancaAlterado">
+            <summary>
+            Tipo de cobrança específico para comando 72 (alteração de tipo de cobrança de títulos das carteiras 11 e 17)
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.DiasParaCalculos">
+            <summary>
+            Dias para cálculo
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.NaturezaRecebimento">
+            <summary>
+            Natureza do recebimento
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.PrefixoTitulo">
+            <summary>
+            Prefixo do Título
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.VariacaoCarteira">
+            <summary>
+            Variação da Carteira
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.ContaCaucao">
+            <summary>
+            Conta Caução
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.TaxaDesconto">
+            <summary>
+            Taxa para desconto
+            </summary>
+        </member>
+        <member name="F:Impactro.Layout.CNAB400Retorno7BBConvenio6Pos.TaxaIOF">
+            <summary>
+            Taxa IOF
+            </summary>
+        </member>
         <member name="T:Impactro.Layout.CNAB400BRB">
             <summary>
             Trata os arquivos CNAB400 do BRB 

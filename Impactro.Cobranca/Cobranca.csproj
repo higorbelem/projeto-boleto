@@ -97,6 +97,7 @@
     <Compile Include="Layout\CNAB240\CNAB240Caixa.cs" />
     <Compile Include="Layout\CNAB240\CNAB240Sicoob.cs" />
     <Compile Include="Layout\CNAB400\CNAB400Banestes.cs" />
+    <Compile Include="Layout\CNAB400\CNAB400BBConvenio6Pos .cs" />
     <Compile Include="Layout\CNAB400\CNAB400BRB.cs" />
     <Compile Include="Layout\CNAB400\CNAB400Sicredi.cs" />
     <Compile Include="Layout\CNAB400\CNAB400BB.cs" />

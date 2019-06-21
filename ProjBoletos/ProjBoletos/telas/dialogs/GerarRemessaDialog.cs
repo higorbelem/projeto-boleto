@@ -218,7 +218,7 @@ namespace ProjBoletos.telas.dialogs {
       public string gerarRemessa(RemessaModelDialog remessa) {
          LayoutBancos r = new LayoutBancos();
          r.Init(Cedente.makeCedenteInfo(cedente, remessa.conta, remessa.carteira, ""));
-         r.Lote = 55;
+         r.Lote = 55; //deveria ser o id da remessa porem a remessa ainda não foi inserida no BD
          //r.Lote = CobUtil.GetInt(txtLote.Text);
          //r.ShowDumpLine = chkDump.Checked;
 

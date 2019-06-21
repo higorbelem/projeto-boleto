@@ -13,109 +13,109 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProjBoletos.telas {
-    public partial class Login : Form {
-        public Login() {
-            InitializeComponent();
+   public partial class Login : Form {
+      public Login() {
+         InitializeComponent();
 
-            meuTextboxCnpj.hint = "CNPJ";
-            meuTextboxSenha.hint = "SENHA";
-            meuTextboxSenha.isPassword = true;
+         meuTextboxCnpj.hint = "CNPJ";
+         meuTextboxSenha.hint = "SENHA";
+         meuTextboxSenha.isPassword = true;
 
-            box1.radius = 3;
-            box1.shadowSize = 5;
+         box1.radius = 3;
+         box1.shadowSize = 5;
 
-            this.KeyDown += new KeyEventHandler(Login_KeyDown);
-        }
+         this.KeyDown += new KeyEventHandler(Login_KeyDown);
+      }
 
-        private void Login_Load(object sender, EventArgs e) {
-            //meuTextboxCnpj.Focus();
-        }
+      private void Login_Load(object sender, EventArgs e) {
+         //meuTextboxCnpj.Focus();
+      }
 
-        private void Login_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                //if (buttonTeste1.Focused) {
-                    buttonTeste1_click(sender, e);
-                //}
+      private void Login_KeyDown(object sender, KeyEventArgs e) {
+         if (e.KeyCode == Keys.Enter) {
+            //if (buttonTeste1.Focused) {
+            buttonTeste1_click(sender, e);
+            //}
+         }
+      }
+
+      private bool logar(string cnpj, string senha) {
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getCedente.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+         var request = new RestRequest("text/plain");
+         request.AddParameter("cnpj", cnpj);
+         request.AddParameter("senha", senha);
+
+         var response = client.Post(request);
+         var content = response.Content; // raw content as string
+
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+            //CedenteInfo cedente = JsonConvert.DeserializeObject<CedenteInfo>(content);
+
+            if (!content.Contains("erro-login")) {
+               //MessageBox.Show(content);
+               Properties.Settings.Default["cedenteAtual"] = content;
+               Properties.Settings.Default["logado"] = true;
+               Properties.Settings.Default.Save();
+
+               return true;
+            } else {
+               labelErroLogin.Visible = true;
+               labelErroConexao.Visible = false;
+               labelErroVazio.Visible = false;
             }
-        }
+         } else {
+            labelErroConexao.Visible = true;
+            labelErroLogin.Visible = false;
+            labelErroVazio.Visible = false;
+         }
 
-        private bool logar(string cnpj, string senha) {
-            var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getCedente.php");
-            // client.Authenticator = new HttpBasicAuthenticator(username, password);
+         Properties.Settings.Default["cedenteAtual"] = "";
+         Properties.Settings.Default["logado"] = false;
+         Properties.Settings.Default.Save();
+         return false;
+      }
 
-            var request = new RestRequest("text/plain");
-            request.AddParameter("cnpj", cnpj);
-            request.AddParameter("senha", senha);
+      public void buttonTeste1_click(object sender, EventArgs e) {
+         if (!meuTextboxCnpj.isEmpty && !meuTextboxSenha.isEmpty) {
+            bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
 
-            var response = client.Post(request);
-            var content = response.Content; // raw content as string
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-                //CedenteInfo cedente = JsonConvert.DeserializeObject<CedenteInfo>(content);
-
-                if (!content.Contains("erro-login")) {
-                    Properties.Settings.Default["cedenteAtual"] = content;
-                    Properties.Settings.Default["logado"] = true;
-                    Properties.Settings.Default.Save();
-
-                    return true;
-                } else{
-                    labelErroLogin.Visible = true;
-                    labelErroConexao.Visible = false;
-                    labelErroVazio.Visible = false;
-                }
-            }else{
-                labelErroConexao.Visible = true;
-                labelErroLogin.Visible = false;
-                labelErroVazio.Visible = false;
+            if (result) {
+               this.Hide();
+               MainPage mainPage = new MainPage();
+               mainPage.Closed += (s, args) => this.Close();
+               mainPage.Show();
             }
+         } else {
+            labelErroVazio.Visible = true;
+            labelErroLogin.Visible = false;
+            labelErroConexao.Visible = false;
+         }
+      }
 
-            Properties.Settings.Default["cedenteAtual"] = "";
-            Properties.Settings.Default["logado"] = false;
-            Properties.Settings.Default.Save();
-            return false;
-        }
+      public static bool IsNullOrEmpty(String value) {
+         return (value == null || value.Length == 0);
+      }
 
-        public void buttonTeste1_click(object sender, EventArgs e) {
-            if (!meuTextboxCnpj.isEmpty && !meuTextboxSenha.isEmpty) {
-                bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
+      private void label1_Click(object sender, EventArgs e) {
 
-                if (result) {
-                    this.Hide();
-                    MainPage mainPage = new MainPage();
-                    mainPage.Closed += (s, args) => this.Close();
-                    mainPage.Show();
-                }
-            }else{
-                labelErroVazio.Visible = true;
-                labelErroLogin.Visible = false;
-                labelErroConexao.Visible = false;
-            }
-        }
+      }
 
-        public static bool IsNullOrEmpty(String value)
-        {
-            return (value == null || value.Length == 0);
-        }
+      private void groupBox1_Enter(object sender, EventArgs e) {
 
-        private void label1_Click(object sender, EventArgs e) {
+      }
 
-        }
+      private void box1_Load(object sender, EventArgs e) {
 
-        private void groupBox1_Enter(object sender, EventArgs e) {
+      }
 
-        }
+      private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) {
 
-        private void box1_Load(object sender, EventArgs e) {
+      }
 
-        }
+      private void buttonTeste1_Load(object sender, EventArgs e) {
 
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) {
-
-        }
-
-        private void buttonTeste1_Load(object sender, EventArgs e) {
-
-        }
-    }
+      }
+   }
 }

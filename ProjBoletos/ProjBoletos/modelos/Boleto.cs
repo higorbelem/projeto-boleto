@@ -44,6 +44,8 @@ namespace ProjBoletos.modelos {
          boletoInfo.ValorAcrescimo = 0;
          boletoInfo.ValorOutras = 0;
          boletoInfo.Instrucoes = "Pague adasdasdasd";
+         boletoInfo.Instrucao1 = 0;
+         boletoInfo.Instrucao2 = 1;
          //BoletoInfo Boleto = new BoletoInfo();
          //boletoInfo.Especie = Especies.DS;
          return boletoInfo;

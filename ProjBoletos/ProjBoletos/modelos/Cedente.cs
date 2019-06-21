@@ -76,13 +76,13 @@ namespace ProjBoletos.modelos {
          cedenteInfo.Conta = conta.conta;
          cedenteInfo.CIP = conta.cip;
          cedenteInfo.Modalidade = conta.modalidade;
+         cedenteInfo.CedenteCOD = conta.codigoEmpresa;
+         cedenteInfo.CodCedente = conta.codigoEmpresa;
 
          cedenteInfo.Convenio = conta.convenio;
 
          cedenteInfo.Cedente = cedente.nome;
-         cedenteInfo.CedenteCOD = cedente.id;
          cedenteInfo.CNPJ = cedente.cnpj;
-         cedenteInfo.CodCedente = cedente.id;
          cedenteInfo.Endereco = cedente.rua + ", " + cedente.numero;
          cedenteInfo.Praca = cedente.bairro;
          cedenteInfo.Informacoes = cedente.informacoes;
