@@ -45,7 +45,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Application.Exit();
          }
 
-         updateCustomViewList();
+         //updateCustomViewList();
 
          customListView.update += () => {
             updateCustomViewList();
@@ -56,7 +56,16 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       public void updateCustomViewList() {
-         buscarMedicoes(cedente.id);
+         Loading loading = new Loading();
+         loading.task = new Task(new Action(() => {
+            bool result = buscarMedicoes(cedente.id);
+
+            loading.terminou = true;
+            loading.terminouBem = result;
+         }));
+
+         var res = loading.ShowDialog();
+
          atualizarCards(medicoes);
 
          customListView.vazioText = "Não há boletos";
@@ -90,7 +99,6 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                   break;
             }
 
-
             customListViewItem.btnGerar.title = "GERAR";
             customListViewItem.btnGerar.Size = new Size(0, 0);
             customListViewItem.btnGerar.Visible = false;
@@ -105,9 +113,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                if (resultMessageBox == DialogResult.OK) {
                   //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada + " " + gerarBoletoDialog.convenioSelecionado);
-                  var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
+                  Loading loading1 = new Loading();
+                  loading.task = new Task(new Action(() => {
+                     var result = gerarBoletos(medicao.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
 
-                  if (result) {
+                     loading.terminou = true;
+                     loading.terminouBem = result;
+                  }));
+
+                  var res1 = loading1.ShowDialog();
+                  
+                  if (res1 == DialogResult.OK) {
                      customListView.update();
                   }
                }

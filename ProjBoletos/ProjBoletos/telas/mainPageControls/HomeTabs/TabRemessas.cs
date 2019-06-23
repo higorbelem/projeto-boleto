@@ -19,6 +19,7 @@ using System.Net.Mail;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using ProjBoletos.components;
 
 namespace ProjBoletos.telas.mainPageControls.HomeTabs {
    public partial class TabRemessas : UserControl {
@@ -61,7 +62,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Application.Exit();
          }
 
-         updatePage();
+         //updatePage();
       }
 
       private void atualizarCards(List<Remessa> remessas) {
@@ -97,9 +98,18 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
       public void updatePage() {
          buscaCompleta = false;
-         var res = buscarRemessas(cedente.id);
 
-         if (res == System.Net.HttpStatusCode.OK) {
+         Loading loading = new Loading();
+         loading.task = new Task(new Action(() => {
+            bool result = buscarRemessas(cedente.id);
+            
+            loading.terminou = true;
+            loading.terminouBem = result;
+         }));
+
+         var res = loading.ShowDialog();
+      
+         if (res == DialogResult.OK) {
             buscaCompleta = true;
             atualizarCards(remessas);
             atualizarFlow(remessas);
@@ -221,7 +231,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          };
          panelInfoData.Controls.Add(new Label() {
-            Text = "DARA DA REMESSAS",
+            Text = "DATA DA REMESSA",
             BackColor = Colors.bg2,
             ForeColor = Colors.primaryText,
             Font = Fonts.mainBold10,
@@ -505,8 +515,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
          };
          mb3.Click += new EventHandler((object s1, EventArgs e1) => {
-            bool res = setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"));
-            if (res) {
+            Loading loading = new Loading();
+            loading.task = new Task(new Action(() => {
+               bool result = setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"));
+
+               loading.terminou = true;
+               loading.terminouBem = result;
+            }));
+
+            var res = loading.ShowDialog();
+
+            if (res == DialogResult.OK) {
                updatePage();
             }
          });
@@ -525,7 +544,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                var res = enviarRemessaDialog.ShowDialog();
 
                if (res == DialogResult.OK) {
-                  if (setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"))) {
+                  Loading loading = new Loading();
+                  loading.task = new Task(new Action(() => {
+                     bool result = setarRemessasEnviada(remessa.id, !remessa.enviado.Equals("1"));
+
+                     loading.terminou = true;
+                     loading.terminouBem = result;
+                  }));
+
+                  var res1 = loading.ShowDialog();
+
+                  if (res1 == DialogResult.OK) {
                      updatePage();
                   }
                }
@@ -537,7 +566,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          return panel;
       }
 
-      private System.Net.HttpStatusCode buscarRemessas(string idCedente) {
+      private bool buscarRemessas(string idCedente) {
          //loading1.Visible = true;
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getDadosRemessa.php");
@@ -557,11 +586,11 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             if (!content.Equals("erro")) {
                remessas = JsonConvert.DeserializeObject<List<Remessa>>(content);
 
-               return response.StatusCode;
+               return true;
             } else {
                remessas = new List<Remessa>();
 
-               return response.StatusCode;
+               return false;
             }
          } else {
             MessageBox.Show("Houve um erro ao resgatar as remessas. Http status Code: " + response.StatusCode);
@@ -576,7 +605,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          //login.Closed += (s, args) => this.Close();
          login.Show();*/
 
-         return response.StatusCode;
+         return false;
       }
 
       private bool setarRemessasEnviada(string idRemessa, bool enviada) {

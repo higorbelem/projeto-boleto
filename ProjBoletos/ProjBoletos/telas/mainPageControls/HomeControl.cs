@@ -20,6 +20,7 @@ namespace ProjBoletos.telas.mainPageControls {
       private void HomeControl_Load(object sender, EventArgs e) {
          //Console.WriteLine("onload: " + Width);
          //int cardWidth = (this.Width / quantCards) - (spaceBetweenCards / 2);
+         tabMedicoesWindow.updateCustomViewList();
          bringClickedTab("medicoes");
 
          tabMenu.BackColor = Colors.bg3;

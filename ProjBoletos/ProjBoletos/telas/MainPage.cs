@@ -157,6 +157,7 @@ namespace ProjBoletos.telas {
       }
 
       public void btnCliente_click(object sender, EventArgs e) {
+         clientControl.updateCustomViewList();
          bringClickedControl("cliente");
       }
 

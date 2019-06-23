@@ -43,7 +43,7 @@ namespace ProjBoletos.telas.mainPageControls {
          btnAdicionar.title = "ADICIONAR";
          btnAdicionar.cornerRadius = 20;
 
-         updateCustomViewList();
+         //updateCustomViewList();
 
          customListView.update += () => {
             updateCustomViewList();

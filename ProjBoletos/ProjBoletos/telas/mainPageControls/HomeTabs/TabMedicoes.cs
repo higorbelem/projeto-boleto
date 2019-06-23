@@ -29,6 +29,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       Cedente cedente;
       List<Medicao> medicoes;
 
+      int totalMedicoesMes = 0;
+
       public TabMedicoes() {
          InitializeComponent();
 
@@ -45,7 +47,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Application.Exit();
          }
 
-         updateCustomViewList();
+         //updateCustomViewList();
 
          customListView.update += () => {
             updateCustomViewList();
@@ -56,9 +58,31 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
       }
 
       public void updateCustomViewList() {
-         buscarMedicoes(cedente.id);
+         Loading loading = new Loading();
+         loading.task = new Task(new Action(() => {
+            var result = buscarMedicoes(cedente.id);
+
+            string medicoesSum = getMedicoesMes(cedente.id);
+
+            if (medicoesSum != null) {
+               int number;
+               bool success = Int32.TryParse(medicoesSum, out number);
+               if (success) {
+                  totalMedicoesMes = number;
+               } else {
+                  //MessageBox.Show(medicoesSum);
+               }
+            }
+
+            loading.terminou = true;
+            loading.terminouBem = result;
+         }));
+
+         var res = loading.ShowDialog();
+
          atualizarCards(medicoes);
 
+         labelMedicaoGeral.Text = totalMedicoesMes + " M³ DE ÁGUA MEDIDOS DESDE 01/" + DateTime.Now.Month.ToString("d2");
          customListView.vazioText = "Não há medições";
          List<CustomListViewItem> items = new List<CustomListViewItem>();
 
@@ -119,6 +143,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             items.Add(customListViewItem);
          }
          customListView.UpdateList(items);
+
       }
 
       private void TabMedicoes_Resize(object sender, EventArgs e) {
@@ -140,8 +165,15 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          mainCard3.Location = new Point(newSize.X + cardWidth * 2 + spaceBetweenCards * 2, newSize.Y);
          mainCard3.Size = new Size(cardWidth, cardHeight);
 
+         labelMedicaoGeral.Size = new Size(newSize.Width, 30);
+         labelMedicaoGeral.Location = new Point((newSize.Width / 2) - (labelMedicaoGeral.Width / 2), mainCard1.Location.Y + mainCard1.Height + 10);
+         //labelMedicaoGeral.Text = "240 m³ de água medidos desde 01/" + DateTime.Now.Month.ToString("d2");
+         labelMedicaoGeral.TextAlign = ContentAlignment.MiddleCenter;
+         labelMedicaoGeral.Font = Fonts.mainBold12;
+         labelMedicaoGeral.ForeColor = Colors.primaryText;
+
          gerarTodasBtn.Size = new Size(170, 40);
-         gerarTodasBtn.Location = new Point((newSize.Width / 2) - (gerarTodasBtn.Width / 2), mainCard1.Location.Y + mainCard1.Height + 20);
+         gerarTodasBtn.Location = new Point((newSize.Width / 2) - (gerarTodasBtn.Width / 2), labelMedicaoGeral.Location.Y + labelMedicaoGeral.Height + 10);
 
          //medicoesFlowLayout.Controls.Add();
          customListView.Size = new Size(newSize.Width, 80); //0
@@ -163,10 +195,17 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          if (resultMessageBox == DialogResult.OK) {
 
             //Console.WriteLine(gerarBoletoDialog.contaSelecionadaIndex + " " + gerarBoletoDialog.carteiraSelecionada);
+            Loading loading = new Loading();
+            loading.task = new Task(new Action(() => {
+               var result = gerarMedicoes(cedente.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
 
-            var result = gerarMedicoes(cedente.id, gerarBoletoDialog.contaSelecionadaIndex, gerarBoletoDialog.carteiraSelecionada);
+               loading.terminou = true;
+               loading.terminouBem = result;
+            }));
 
-            if (result) {
+            var res = loading.ShowDialog();
+
+            if (res == DialogResult.OK) {
                customListView.update();
             }
          }
@@ -289,6 +328,30 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          login.Show();
 
          return false;
+      }
+
+      private string getMedicoesMes(string idCedente) {
+
+         var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getTotalMedicoesMes.php");
+         // client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+         var request = new RestRequest("text/plain");
+         request.AddParameter("cedente-id", idCedente);
+
+         var response = client.Post(request);
+
+         var content = response.Content; // raw content as string
+
+         if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+
+            if (!content.Equals("erro")) {
+               return content;
+            } else {
+               return null;
+            }
+         }
+
+         return null;
       }
 
       private bool gerarMedicoes(string idCedente, string contaIndex, string carteira) {

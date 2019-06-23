@@ -1,5 +1,6 @@
 ﻿using Impactro.Cobranca;
 using Newtonsoft.Json;
+using ProjBoletos.components;
 using ProjBoletos.utils;
 using RestSharp;
 using System;
@@ -61,31 +62,38 @@ namespace ProjBoletos.telas {
 
                return true;
             } else {
-               labelErroLogin.Visible = true;
-               labelErroConexao.Visible = false;
-               labelErroVazio.Visible = false;
+               return false;
             }
          } else {
-            labelErroConexao.Visible = true;
-            labelErroLogin.Visible = false;
-            labelErroVazio.Visible = false;
+            return false;
          }
-
-         Properties.Settings.Default["cedenteAtual"] = "";
-         Properties.Settings.Default["logado"] = false;
-         Properties.Settings.Default.Save();
-         return false;
       }
 
       public void buttonTeste1_click(object sender, EventArgs e) {
          if (!meuTextboxCnpj.isEmpty && !meuTextboxSenha.isEmpty) {
-            bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
+            Loading loading = new Loading();
+            loading.task = new Task(new Action(() => {
+               bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
 
-            if (result) {
+               loading.terminou = true;
+               loading.terminouBem = result;
+            }));
+
+            var res = loading.ShowDialog();
+
+            if (res == DialogResult.OK) {
                this.Hide();
                MainPage mainPage = new MainPage();
                mainPage.Closed += (s, args) => this.Close();
                mainPage.Show();
+            } else {
+               labelErroLogin.Visible = true;
+               labelErroConexao.Visible = false;
+               labelErroVazio.Visible = false;
+
+               Properties.Settings.Default["cedenteAtual"] = "";
+               Properties.Settings.Default["logado"] = false;
+               Properties.Settings.Default.Save();
             }
          } else {
             labelErroVazio.Visible = true;
