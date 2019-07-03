@@ -141,6 +141,8 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("casa-id", casaId);
          request.AddParameter("data-medicao", dataMedicao);
 
@@ -152,8 +154,8 @@ namespace ProjBoletos.components.ParteCimaBoleto {
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
-            if (!content.Equals("erro")) {
-               medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content);
+            if (content.Split(';')[0].Trim().Equals("ok")) {
+               medicoes = JsonConvert.DeserializeObject<List<Medicao>>(content.Trim().Remove(0, 3));
 
                return medicoes;
             } else {

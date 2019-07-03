@@ -307,6 +307,8 @@ namespace ProjBoletos.telas.dialogs {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("arquivo-remessa", remessa);
 
          foreach (Medicao medicao in medicoes) {
@@ -320,7 +322,7 @@ namespace ProjBoletos.telas.dialogs {
          
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
-            if (!content.Equals("erro")) {
+            if (content.Trim().Equals("ok")) {
                return true;
             } else {
                return false;

@@ -128,6 +128,8 @@ namespace ProjBoletos.telas.mainPageControls {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("busca", busca);
          request.AddParameter("buscar-todos", txtBoxSearch.isEmpty ? "1" : "0");
          request.AddParameter("id-cedente", idCedente);
@@ -139,8 +141,9 @@ namespace ProjBoletos.telas.mainPageControls {
          //loading1.Visible = false;
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-            if (!content.Equals("erro")) {
-               sacados = JsonConvert.DeserializeObject<List<Sacado>>(content);
+
+            if (content.Split(';')[0].Trim().Equals("ok")) {
+               sacados = JsonConvert.DeserializeObject<List<Sacado>>(content.Trim().Remove(0, 3));
                /*foreach (Casa casa in sacados[0].casas) {
                   Console.WriteLine(casa.id + " " + casa.numero + " " + casa.bairro + " " + casa.cep + " " + casa.cidade + " " + casa.diaVencimento);
                }*/

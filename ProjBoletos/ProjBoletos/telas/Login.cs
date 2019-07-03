@@ -45,6 +45,8 @@ namespace ProjBoletos.telas {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("cnpj", cnpj);
          request.AddParameter("senha", senha);
 
@@ -54,9 +56,10 @@ namespace ProjBoletos.telas {
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
             //CedenteInfo cedente = JsonConvert.DeserializeObject<CedenteInfo>(content);
 
-            if (!content.Contains("erro-login")) {
+            //if (!content.Contains("erro-login")) {
+            if (content.Split(';')[0].Contains("ok")) {
                //MessageBox.Show(content);
-               Properties.Settings.Default["cedenteAtual"] = content;
+               Properties.Settings.Default["cedenteAtual"] = content.Trim().Remove(0, 3);
                Properties.Settings.Default["logado"] = true;
                Properties.Settings.Default.Save();
 

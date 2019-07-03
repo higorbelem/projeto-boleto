@@ -573,6 +573,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("cedente-id", idCedente);
 
          var response = client.Post(request);
@@ -583,8 +585,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
-            if (!content.Equals("erro")) {
-               remessas = JsonConvert.DeserializeObject<List<Remessa>>(content);
+            if (content.Split(';')[0].Trim().Equals("ok")) {
+               remessas = JsonConvert.DeserializeObject<List<Remessa>>(content.Trim().Remove(0, 3));
 
                return true;
             } else {
@@ -614,6 +616,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("id-remessa", idRemessa);
          request.AddParameter("enviada", enviada ? 1 : 0);
 
@@ -623,8 +627,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-
-            if (!content.Equals("erro")) {
+            if (content.Trim().Equals("ok")) {
                return true;
             } else {
                return false;

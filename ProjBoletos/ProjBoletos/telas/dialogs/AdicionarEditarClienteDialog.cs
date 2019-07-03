@@ -195,6 +195,8 @@ namespace ProjBoletos.telas.dialogs {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
          
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("id-cedente", cedente.id);
          if (sacado != null) {
             request.AddParameter("id-sacado", sacado.id);
@@ -254,7 +256,7 @@ namespace ProjBoletos.telas.dialogs {
          Console.WriteLine(content);
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-            if (!content.Equals("erro")) {
+            if (content.Trim().Equals("ok")) {
                return true;
             } else {
                return false;
@@ -271,6 +273,8 @@ namespace ProjBoletos.telas.dialogs {
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
          var request = new RestRequest("text/plain");
+         request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
+         request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
          request.AddParameter("id-casa", idCasa);
 
          var response = client.Post(request);
@@ -280,7 +284,7 @@ namespace ProjBoletos.telas.dialogs {
          //loading1.Visible = false;
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-            if (!content.Equals("erro")) {
+            if (content.Trim().Equals("ok")) {
                return true;
             } else {
                return false;
