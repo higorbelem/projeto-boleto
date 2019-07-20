@@ -12,6 +12,7 @@ namespace ProjBoletos.modelos {
       public string cidade { get; set; }
       public string diaVencimento { get; set; }
       public string numHidrometro { get; set; }
+      public string maxHidrometro { get; set; }
       public string numero { get; set; }
       public string rua { get; set; }
       public string uf { get; set; }

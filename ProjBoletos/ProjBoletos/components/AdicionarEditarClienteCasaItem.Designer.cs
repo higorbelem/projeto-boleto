@@ -24,6 +24,8 @@
       /// </summary>
       private void InitializeComponent() {
          this.labelFechado = new System.Windows.Forms.Label();
+         this.txtBoxMaxHidrometro = new ProjBoletos.components.MeuTextbox();
+         this.btnDeletar = new ProjBoletos.testes.MeuButton();
          this.btnBuscarCep = new ProjBoletos.testes.MeuButton();
          this.txtBoxVencimento = new ProjBoletos.components.MeuTextbox();
          this.txtBoxHidrometro = new ProjBoletos.components.MeuTextbox();
@@ -35,7 +37,6 @@
          this.txtBoxNumero = new ProjBoletos.components.MeuTextbox();
          this.txtBoxCep = new ProjBoletos.components.MeuTextbox();
          this.imgBtnOpenClose = new PictureBoxWithInterpolationMode();
-         this.btnDeletar = new ProjBoletos.testes.MeuButton();
          ((System.ComponentModel.ISupportInitialize)(this.imgBtnOpenClose)).BeginInit();
          this.SuspendLayout();
          // 
@@ -47,6 +48,21 @@
          this.labelFechado.TabIndex = 1;
          this.labelFechado.Text = "label1";
          // 
+         // txtBoxMaxHidrometro
+         // 
+         this.txtBoxMaxHidrometro.BackColor = System.Drawing.Color.White;
+         this.txtBoxMaxHidrometro.Location = new System.Drawing.Point(342, 404);
+         this.txtBoxMaxHidrometro.Name = "txtBoxMaxHidrometro";
+         this.txtBoxMaxHidrometro.Size = new System.Drawing.Size(111, 45);
+         this.txtBoxMaxHidrometro.TabIndex = 11;
+         // 
+         // btnDeletar
+         // 
+         this.btnDeletar.Location = new System.Drawing.Point(239, 455);
+         this.btnDeletar.Name = "btnDeletar";
+         this.btnDeletar.Size = new System.Drawing.Size(150, 31);
+         this.btnDeletar.TabIndex = 12;
+         // 
          // btnBuscarCep
          // 
          this.btnBuscarCep.Location = new System.Drawing.Point(353, 111);
@@ -57,10 +73,10 @@
          // txtBoxVencimento
          // 
          this.txtBoxVencimento.BackColor = System.Drawing.Color.White;
-         this.txtBoxVencimento.Location = new System.Drawing.Point(353, 404);
+         this.txtBoxVencimento.Location = new System.Drawing.Point(482, 404);
          this.txtBoxVencimento.Name = "txtBoxVencimento";
-         this.txtBoxVencimento.Size = new System.Drawing.Size(240, 45);
-         this.txtBoxVencimento.TabIndex = 11;
+         this.txtBoxVencimento.Size = new System.Drawing.Size(111, 45);
+         this.txtBoxVencimento.TabIndex = 12;
          // 
          // txtBoxHidrometro
          // 
@@ -138,17 +154,11 @@
          this.imgBtnOpenClose.TabStop = false;
          this.imgBtnOpenClose.Click += new System.EventHandler(this.imgBtnOpen_Click);
          // 
-         // btnDeletar
-         // 
-         this.btnDeletar.Location = new System.Drawing.Point(239, 455);
-         this.btnDeletar.Name = "btnDeletar";
-         this.btnDeletar.Size = new System.Drawing.Size(150, 31);
-         this.btnDeletar.TabIndex = 12;
-         // 
          // AdicionarEditarClienteCasaItem
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Controls.Add(this.txtBoxMaxHidrometro);
          this.Controls.Add(this.btnDeletar);
          this.Controls.Add(this.btnBuscarCep);
          this.Controls.Add(this.txtBoxVencimento);
@@ -186,5 +196,6 @@
       public MeuTextbox txtBoxVencimento;
       private testes.MeuButton btnBuscarCep;
       public testes.MeuButton btnDeletar;
+      public MeuTextbox txtBoxMaxHidrometro;
    }
 }

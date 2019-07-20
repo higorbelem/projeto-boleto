@@ -100,7 +100,7 @@ namespace ProjBoletos.telas.dialogs {
             txtBoxEmail.txtBox.Text = sacado.email;
 
             foreach (Casa casa in sacado.casas) {
-               AdicionarEditarClienteCasaItem item = new AdicionarEditarClienteCasaItem(casa.id, casa.diaVencimento,casa.bairro, casa.cep, casa.cidade, casa.numHidrometro, casa.numero, casa.referencia, casa.rua, casa.uf) {
+               AdicionarEditarClienteCasaItem item = new AdicionarEditarClienteCasaItem(casa.id, casa.diaVencimento,casa.bairro, casa.cep, casa.cidade, casa.numHidrometro, casa.maxHidrometro,casa.numero, casa.referencia, casa.rua, casa.uf) {
                   Location = new Point(0, 0),
                   Size = new Size(flowCasas.Width - 35, 50)
                };
@@ -184,6 +184,13 @@ namespace ProjBoletos.telas.dialogs {
             if (resDialog == DialogResult.OK) {
                this.Close();
                this.DialogResult = DialogResult.OK;
+               if (dialogMode == DIALOG_MODE_ADICIONAR) {
+                  MessageBox.Show("Cliente inserido com sucesso.");
+               }else if (dialogMode == DIALOG_MODE_EDITAR) {
+                  MessageBox.Show("Cliente editado com sucesso.");
+               }
+            } else {
+               MessageBox.Show("Houve algum erro, tente novamente.");
             }
          }
       }
@@ -201,7 +208,7 @@ namespace ProjBoletos.telas.dialogs {
          if (sacado != null) {
             request.AddParameter("id-sacado", sacado.id);
          } else {
-            request.AddParameter("id-sacado", "");
+            request.AddParameter("id-sacado", "-1");
          }
          request.AddParameter("nome", nome);
          request.AddParameter("documento", documento);
@@ -225,7 +232,9 @@ namespace ProjBoletos.telas.dialogs {
                   item.txtBoxReferencia.txtBox.Text + ";" +
                   item.txtBoxRua.txtBox.Text + ";" +
                   item.txtBoxUf.txtBox.Text + ";" +
-                  item.txtBoxVencimento.txtBox.Text);
+                  item.txtBoxVencimento.txtBox.Text + ";" +
+                  item.txtBoxMaxHidrometro.txtBox.Text
+                  );
             } else {
                entrouAdd = true;
                request.AddParameter("casas-add[]",
@@ -237,7 +246,9 @@ namespace ProjBoletos.telas.dialogs {
                   item.txtBoxReferencia.txtBox.Text + ";" +
                   item.txtBoxRua.txtBox.Text + ";" +
                   item.txtBoxUf.txtBox.Text + ";" +
-                  item.txtBoxVencimento.txtBox.Text);
+                  item.txtBoxVencimento.txtBox.Text + ";" +
+                  item.txtBoxMaxHidrometro.txtBox.Text
+                  );
             }
          }
 
@@ -256,6 +267,8 @@ namespace ProjBoletos.telas.dialogs {
          Console.WriteLine(content);
 
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+
+            //MessageBox.Show(content);
             if (content.Trim().Equals("ok")) {
                return true;
             } else {

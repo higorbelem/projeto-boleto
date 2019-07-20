@@ -27,6 +27,7 @@ namespace ProjBoletos.components {
       string cep = null;
       string cidade = null;
       string numHidrometro = null;
+      string maxHidrometro = null;
       string numero = null;
       string referencia = null;
       string rua = null;
@@ -40,6 +41,7 @@ namespace ProjBoletos.components {
          txtBoxCep.hint = "CEP";
          txtBoxCidade.hint = "CIDADE";
          txtBoxHidrometro.hint = "NÚMERO DO HIDRÔMETRO";
+         txtBoxMaxHidrometro.hint = "VALOR MAX. HIDRO.";
          txtBoxNumero.hint = "NÚMERO";
          txtBoxReferencia.hint = "REFERÊNCIA";
          txtBoxRua.hint = "RUA";
@@ -52,7 +54,7 @@ namespace ProjBoletos.components {
          labelFechado.Text = "ALGUM CAMPO VAZIO";
       }
 
-      public AdicionarEditarClienteCasaItem(string id, string vencimento, string bairro, string cep, string cidade, string numHidrometro, string numero, string referencia, string rua, string uf) {
+      public AdicionarEditarClienteCasaItem(string id, string vencimento, string bairro, string cep, string cidade, string numHidrometro, string maxHidrometro,string numero, string referencia, string rua, string uf) {
          InitializeComponent();
 
          isItemToEdit = true;
@@ -62,6 +64,7 @@ namespace ProjBoletos.components {
          txtBoxCep.useHint = false;
          txtBoxCidade.useHint = false;
          txtBoxHidrometro.useHint = false;
+         txtBoxMaxHidrometro.useHint = false;
          txtBoxNumero.useHint = false;
          txtBoxReferencia.useHint = false;
          txtBoxRua.useHint = false;
@@ -73,6 +76,7 @@ namespace ProjBoletos.components {
          this.cep = cep;
          this.cidade = cidade;
          this.numHidrometro = numHidrometro;
+         this.maxHidrometro = maxHidrometro;
          this.numero = numero;
          this.referencia = referencia;
          this.rua = rua;
@@ -83,6 +87,7 @@ namespace ProjBoletos.components {
          txtBoxCep.hint = "CEP";
          txtBoxCidade.hint = "CIDADE";
          txtBoxHidrometro.hint = "NÚMERO DO HIDRÔMETRO";
+         txtBoxMaxHidrometro.hint = "VALOR MAX. HIDRO.";
          txtBoxNumero.hint = "NÚMERO";
          txtBoxReferencia.hint = "REFERÊNCIA";
          txtBoxRua.hint = "RUA";
@@ -103,6 +108,7 @@ namespace ProjBoletos.components {
          txtBoxCep.BackColor = Colors.bg3;
          txtBoxCidade.BackColor = Colors.bg3;
          txtBoxHidrometro.BackColor = Colors.bg3;
+         txtBoxMaxHidrometro.BackColor = Colors.bg3;
          txtBoxNumero.BackColor = Colors.bg3;
          txtBoxReferencia.BackColor = Colors.bg3;
          txtBoxRua.BackColor = Colors.bg3;
@@ -114,6 +120,7 @@ namespace ProjBoletos.components {
             txtBoxCep.txtBox.Text = cep;
             txtBoxCidade.txtBox.Text = cidade;
             txtBoxHidrometro.txtBox.Text = numHidrometro;
+            txtBoxMaxHidrometro.txtBox.Text = maxHidrometro;
             txtBoxNumero.txtBox.Text = numero;
             txtBoxReferencia.txtBox.Text = referencia;
             txtBoxRua.txtBox.Text = rua;
@@ -194,6 +201,9 @@ namespace ProjBoletos.components {
          if (txtBoxHidrometro.isEmpty) {
             return true;
          }
+         if (txtBoxMaxHidrometro.isEmpty) {
+            return true;
+         }
          if (txtBoxNumero.isEmpty) {
             return true;
          }
@@ -250,10 +260,13 @@ namespace ProjBoletos.components {
          txtBoxReferencia.Size = new Size(ClientRectangle.Width - padding * 2, txtBoxHeight);
 
          txtBoxHidrometro.Location = new Point(padding, txtBoxReferencia.Location.Y + txtBoxReferencia.Height + padding);
-         txtBoxHidrometro.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.7), txtBoxHeight);
+         txtBoxHidrometro.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.5), txtBoxHeight);
 
-         txtBoxVencimento.Location = new Point(txtBoxHidrometro.Location.X + txtBoxHidrometro.Width, txtBoxHidrometro.Location.Y);
-         txtBoxVencimento.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.3), txtBoxHeight);
+         txtBoxMaxHidrometro.Location = new Point(txtBoxHidrometro.Location.X + txtBoxHidrometro.Width, txtBoxHidrometro.Location.Y);
+         txtBoxMaxHidrometro.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.25), txtBoxHeight);
+
+         txtBoxVencimento.Location = new Point(txtBoxMaxHidrometro.Location.X + txtBoxMaxHidrometro.Width, txtBoxMaxHidrometro.Location.Y);
+         txtBoxVencimento.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.25), txtBoxHeight);
 
          btnDeletar.Size = new Size(200, txtBoxHeight);
          btnDeletar.Location = new Point(ClientRectangle.Width / 2 - btnDeletar.Width / 2, txtBoxHidrometro.Location.Y + txtBoxHidrometro.Height + padding + 10);

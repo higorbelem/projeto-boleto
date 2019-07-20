@@ -109,12 +109,12 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
          var res = loading.ShowDialog();
       
-         if (res == DialogResult.OK) {
+         //if (res == DialogResult.OK) {
             buscaCompleta = true;
             atualizarCards(remessas);
             atualizarFlow(remessas);
             //customListView.UpdateList(medicoes);
-         }
+         //}
       }
 
       public void atualizarFlow(List<Remessa> remessas) {
