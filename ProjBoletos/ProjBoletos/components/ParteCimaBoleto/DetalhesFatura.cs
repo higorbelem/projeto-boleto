@@ -47,7 +47,7 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          rect5Padding = new Rectangle(rect4.X + rect4.Width + paddingLeftRight, rect.Y + paddingTopBottom, (rect.Width / 5) - paddingLeftRight * 2, rect.Height - paddingTopBottom * 2);
       }
 
-      public DetalhesFatura(int radius, float lineWidth, Cedente cedente, Medicao medicao, Medicao medicaoAnterior) {
+      public DetalhesFatura(int radius, float lineWidth, Cedente cedente, Medicao medicao) {
          InitializeComponent();
 
          this.radius = radius;
@@ -57,7 +57,7 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          valor2 = medicao.id;
          valor3 = medicao.dataMedicao.ToString("MM/yyyy");
 
-         int diaVencimento = Int32.Parse(medicao.casa.diaVencimento);
+         int diaVencimento = Int32.Parse(medicao.casa.diaVencimento); 
          DateTime vencimento = medicao.dataMedicao;
          if (diaVencimento < medicao.dataMedicao.Day) {
             vencimento = new DateTime(vencimento.Year, vencimento.AddMonths(1).Month, diaVencimento, vencimento.Hour, vencimento.Minute, vencimento.Second);
@@ -66,11 +66,9 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          }
          valor4 = vencimento.ToString("dd/MM/yyyy");
 
-         if (medicaoAnterior != null) {
-            valor5 = "R$ " + cedente.getValor(Int32.Parse(medicao.medicao) - Int32.Parse(medicaoAnterior.medicao));
-         } else {
-            valor5 = "R$ " + cedente.getValor(Int32.Parse(medicao.medicao));
-         }
+         //Console.WriteLine(cedente.getValor(FaturaUtils.calculaValorMedicao(medicao)));
+
+         valor5 = "R$ " + cedente.getValor(FaturaUtils.calculaValorMedicao(medicao));
       }
 
       public void setRect(Rectangle rect) {

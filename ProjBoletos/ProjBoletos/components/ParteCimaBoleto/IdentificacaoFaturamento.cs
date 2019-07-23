@@ -63,21 +63,18 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          rect3_2Padding = new Rectangle(rect3_1.X + rect3_1.Width + paddingLeftRight, rect2_1.Y + rect2_1.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
       }
 
-      public IdentificacaoFaturamento(int radius, float lineWidth, Medicao medicao, Medicao medicaoAnterior, Cedente cedente) {
+      public IdentificacaoFaturamento(int radius, float lineWidth, Medicao medicao, Cedente cedente) {
          InitializeComponent();
 
          this.radius = radius;
          this.lineWidth = lineWidth;
 
+         int medicaoAnterior = Int32.Parse(medicao.medicaoAnterior);
+
          valor1_1 = medicao.medicao;
 
-         if (medicaoAnterior != null) {
-            valor1_2 = medicaoAnterior.medicao;
-            valor1_3 = "" + (Int32.Parse(medicao.medicao) - Int32.Parse(medicaoAnterior.medicao));
-         } else {
-            valor1_2 = "0";
-            valor1_3 = "" + (Int32.Parse(medicao.medicao));
-         }
+         valor1_2 = ""+medicaoAnterior;
+         valor1_3 = "" + FaturaUtils.calculaValorMedicao(medicao);
          
          valor1_4 = ""+cedente.esgoto;
          valor2_1 = medicao.dataMedicao.ToString("dd/MM/yyyy");

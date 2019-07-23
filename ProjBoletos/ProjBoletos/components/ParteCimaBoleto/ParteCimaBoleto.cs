@@ -31,15 +31,11 @@ namespace ProjBoletos {
          InitializeComponent();
 
          //setSizes(ClientRectangle);
-         Medicao medicaoAnterior = null;
-         if (medicoesAnteriores != null) {
-            medicaoAnterior = medicoesAnteriores.First();
-         }
 
          boletoHeader = new BoletoHeader(cedente);
-         detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth, cedente, medicao, medicaoAnterior);
+         detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth, cedente, medicao);
          detalhesEndereco = new DetalhesEndereco(cornersRadius, lineWidth, medicao);
-         identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth, medicao, medicaoAnterior, cedente);
+         identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth, medicao, cedente);
          barrasBoleto = new GraficoBarrasBoleto(medicao, medicoesAnteriores, cornersRadius, lineWidth);
          detalhesCobrancas = new DetalhesCobrancas(cornersRadius, lineWidth);
       }

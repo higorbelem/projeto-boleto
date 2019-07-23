@@ -1,4 +1,5 @@
 ﻿using Impactro.Cobranca;
+using ProjBoletos.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ProjBoletos.modelos {
    public static class Boleto {
 
       public static BoletoInfo makeBoleto(Cedente cedente, Medicao medicao) {
-         double valor = cedente.getValor((Int32.Parse(medicao.medicao) - Int32.Parse(medicao.medicaoAnterior)));
+         double valor = cedente.getValor(FaturaUtils.calculaValorMedicao(medicao)); 
 
          int diaVencimento = Int32.Parse(medicao.casa.diaVencimento);
          DateTime vencimento = medicao.dataMedicao;

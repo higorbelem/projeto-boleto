@@ -319,6 +319,7 @@
       <DependentUpon>TESTE.cs</DependentUpon>
     </Compile>
     <Compile Include="utils\Colors.cs" />
+    <Compile Include="utils\FaturaUtils.cs" />
     <Compile Include="utils\Fonts.cs" />
     <Compile Include="utils\ServerConfig.cs" />
     <EmbeddedResource Include="components\AccountButton.resx">
