@@ -38,10 +38,11 @@ namespace ProjBoletos.telas.mainPageControls {
          panelTop.BackColor = Colors.bg3;
          txtBoxSearch.BackColor = Colors.bg3;
 
-         btnSearch.title = "PESQUISAR";
+         btnSearch.img = new Bitmap(Properties.Resources.search_white);
 
          btnAdicionar.title = "ADICIONAR";
          btnAdicionar.cornerRadius = 20;
+         btnAdicionar.img = new Bitmap(Properties.Resources.person_add_white);
 
          //updateCustomViewList();
 
@@ -81,7 +82,7 @@ namespace ProjBoletos.telas.mainPageControls {
             customListViewItem.addValor(sacado.email, "4");
             //customListViewItem.medicao = medicao;
             customListViewItem.circleColor = Color.Transparent;
-            customListViewItem.btnVer.title = "EDITAR";
+            customListViewItem.btnVer.img = new Bitmap(Properties.Resources.edit_white);
             customListViewItem.btnGerar.Size = new Size(0, 0);
             customListViewItem.btnGerar.Visible = false;
 
@@ -107,10 +108,10 @@ namespace ProjBoletos.telas.mainPageControls {
          int panelTopPaddingTopBottom = 10;
 
          txtBoxSearch.Location = new Point(panelTopPaddingLeftRight, panelTopPaddingTopBottom);
-         txtBoxSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.8), panelTop.Height - panelTopPaddingTopBottom * 2);
+         txtBoxSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.9), panelTop.Height - panelTopPaddingTopBottom * 2);
 
          btnSearch.Location = new Point(txtBoxSearch.Location.X + txtBoxSearch.Width, panelTopPaddingTopBottom);
-         btnSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.2), panelTop.Height - panelTopPaddingTopBottom * 2);
+         btnSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.1), panelTop.Height - panelTopPaddingTopBottom * 2);
 
          btnAdicionar.Size = new Size(300, 40);
          btnAdicionar.Location = new Point(ClientRectangle.Width/2 - btnAdicionar.Width/2, panelTop.Location.Y + panelTop.Height + 20);

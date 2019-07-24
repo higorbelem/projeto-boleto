@@ -516,5 +516,41 @@
   <ItemGroup>
     <None Include="resources\arrow_up .png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baseline_edit_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baseline_home_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baseline_search_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baseline_settings_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\edit-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\home-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\search-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\settings-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\baseline_person_add_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\person-add-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\house-add-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\delete-white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

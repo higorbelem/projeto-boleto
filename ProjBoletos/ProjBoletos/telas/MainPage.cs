@@ -47,11 +47,11 @@ namespace ProjBoletos.telas {
          accountButton.dropIcon.Image = new Bitmap(Properties.Resources.icon_drop_arrow);
          accountButton.title = cedente.nome;
 
-         btnHome.icon.Image = new Bitmap(Properties.Resources.icon_person1);
+         btnHome.icon.Image = new Bitmap(Properties.Resources.home_white);
          btnHome.title = "HOME";
 
 
-         btnConfig.icon.Image = new Bitmap(Properties.Resources.icon_person1);
+         btnConfig.icon.Image = new Bitmap(Properties.Resources.settings_white);
          btnConfig.title = "CONFIGURAÇÕES";
 
          btnCliente.icon.Image = new Bitmap(Properties.Resources.icon_person1);

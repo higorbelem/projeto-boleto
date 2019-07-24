@@ -23,18 +23,18 @@
         /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent() {
-            this.SuspendLayout();
-            // 
-            // ButtonTeste
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "ButtonTeste";
-            this.Load += new System.EventHandler(this.ButtonTeste_Load);
-            this.ResumeLayout(false);
+         this.SuspendLayout();
+         // 
+         // MeuButton
+         // 
+         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Name = "MeuButton";
+         this.Load += new System.EventHandler(this.ButtonTeste_Load);
+         this.ResumeLayout(false);
 
         }
 
-        #endregion
-    }
+      #endregion
+   }
 }

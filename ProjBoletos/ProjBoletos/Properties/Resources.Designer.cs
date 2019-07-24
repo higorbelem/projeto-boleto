@@ -103,6 +103,46 @@ namespace ProjBoletos.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete_white {
+            get {
+                object obj = ResourceManager.GetObject("delete_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_white {
+            get {
+                object obj = ResourceManager.GetObject("edit_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap home_white {
+            get {
+                object obj = ResourceManager.GetObject("home_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap house_add_white {
+            get {
+                object obj = ResourceManager.GetObject("house_add_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_boleto {
             get {
                 object obj = ResourceManager.GetObject("icon_boleto", resourceCulture);
@@ -181,6 +221,16 @@ namespace ProjBoletos.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap person_add_white {
+            get {
+                object obj = ResourceManager.GetObject("person_add_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Byte[].
         /// </summary>
         internal static byte[] Roboto_Bold {
@@ -197,6 +247,26 @@ namespace ProjBoletos.Properties {
             get {
                 object obj = ResourceManager.GetObject("Roboto_Regular", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_white {
+            get {
+                object obj = ResourceManager.GetObject("search_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_white {
+            get {
+                object obj = ResourceManager.GetObject("settings_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

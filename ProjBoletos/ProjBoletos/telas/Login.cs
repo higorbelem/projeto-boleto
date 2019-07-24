@@ -22,6 +22,8 @@ namespace ProjBoletos.telas {
          meuTextboxSenha.hint = "SENHA";
          meuTextboxSenha.isPassword = true;
 
+         buttonTeste1.title = "LOGAR";
+
          box1.radius = 3;
          box1.shadowSize = 5;
 

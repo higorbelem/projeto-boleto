@@ -49,7 +49,7 @@ namespace ProjBoletos.components {
 
          btnBuscarCep.title = "BUSCAR";
 
-         btnDeletar.title = "DELETAR";
+         btnDeletar.img = new Bitmap(Properties.Resources.delete_white);
 
          labelFechado.Text = "ALGUM CAMPO VAZIO";
       }
@@ -268,7 +268,7 @@ namespace ProjBoletos.components {
          txtBoxVencimento.Location = new Point(txtBoxMaxHidrometro.Location.X + txtBoxMaxHidrometro.Width, txtBoxMaxHidrometro.Location.Y);
          txtBoxVencimento.Size = new Size((int)((ClientRectangle.Width - padding * 2) * 0.25), txtBoxHeight);
 
-         btnDeletar.Size = new Size(200, txtBoxHeight);
+         btnDeletar.Size = new Size(120, txtBoxHeight);
          btnDeletar.Location = new Point(ClientRectangle.Width / 2 - btnDeletar.Width / 2, txtBoxHidrometro.Location.Y + txtBoxHidrometro.Height + padding + 10);
 
       }

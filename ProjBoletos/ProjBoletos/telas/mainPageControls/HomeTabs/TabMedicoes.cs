@@ -117,7 +117,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             }
 
             customListViewItem.btnGerar.title = "GERAR";
-            customListViewItem.btnVer.title = "VER";
+            //customListViewItem.btnVer.title = "VER";
+            customListViewItem.btnVer.img = new Bitmap(Properties.Resources.search_white);
 
             customListViewItem.btnGerar.Click += new EventHandler((object sender, EventArgs e) => {
                GerarBoletoDialog gerarBoletoDialog = new GerarBoletoDialog(cedente);

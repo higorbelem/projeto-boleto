@@ -57,7 +57,7 @@ namespace ProjBoletos.telas.dialogs {
          }
 
          btnOk.title = "CONCLUIR";
-         btnAddCasa.title = "ADICIONAR";
+         btnAddCasa.img = new Bitmap(Properties.Resources.house_add_white);
       }
 
       private void AdicionarClienteDialog_Load(object sender, EventArgs e) {
@@ -119,7 +119,8 @@ namespace ProjBoletos.telas.dialogs {
             }
          }
 
-         btnAddCasa.Size = new Size(flowCasas.Width - 35, 40);
+         btnAddCasa.Size = new Size(120, 40);
+         btnAddCasa.Margin = new Padding((flowCasas.Width /2) - (btnAddCasa.Width/2) - itemCasaPadding*2, 0,0,0);
 
          txtBoxDocumento.BackColor = Colors.bg3;
          txtBoxEmail.BackColor = Colors.bg3;
