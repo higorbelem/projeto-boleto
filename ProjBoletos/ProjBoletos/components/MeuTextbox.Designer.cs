@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
          this.components = new System.ComponentModel.Container();
-         this.textBox1 = new System.Windows.Forms.TextBox();
+         this.textBox1 = new System.Windows.Forms.MaskedTextBox();
          this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
          this.SuspendLayout();
          // 
@@ -36,6 +36,7 @@
          this.textBox1.Name = "textBox1";
          this.textBox1.Size = new System.Drawing.Size(314, 13);
          this.textBox1.TabIndex = 0;
+         this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
          // 
          // MeuTextbox
          // 
@@ -53,7 +54,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.MaskedTextBox textBox1;
       private System.Windows.Forms.ToolTip toolTip1;
    }
 }

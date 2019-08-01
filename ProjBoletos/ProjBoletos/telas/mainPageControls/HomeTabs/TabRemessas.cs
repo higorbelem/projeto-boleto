@@ -414,6 +414,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
             pDoc.PrintPage += new PrintPageEventHandler((object s2, PrintPageEventArgs e2) => {
                try {
+                  //MessageBox.Show(e2.PageBounds.Size.Width + " " + e2.Graphics.SmoothingMode.ToString());
                   new FullBoletoLayout(cedente, remessa.medicoes[indexMedicao]).print(e2.Graphics, e2.PageBounds);
 
                   bool hasMorePages = false;
@@ -454,7 +455,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                   }  
                } catch (Exception ex) {
-                  MessageBox.Show(ex.Message);
+                  MessageBox.Show("Erro: " + ex.Message);
                }
             });
 

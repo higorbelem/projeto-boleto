@@ -44,6 +44,7 @@ namespace ProjBoletos.telas.dialogs {
          labelTitle.Select();
 
          txtBoxDocumento.hint = "CPF";
+         txtBoxDocumento.mask = "000,000,000-00";
          txtBoxEmail.hint = "EMAIL";
          txtBoxNome.hint = "NOME";
          if (dialogMode == DIALOG_MODE_ADICIONAR) {

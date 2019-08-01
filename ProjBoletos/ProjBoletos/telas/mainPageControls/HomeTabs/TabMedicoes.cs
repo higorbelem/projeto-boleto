@@ -132,6 +132,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
 
                   if (result) {
                      customListView.update();
+                  } else {
+                     MessageBox.Show("Ocorreu algum erro.\nA medicao deve ter sido exculida.");
+                     customListView.update();
                   }
                }
             });

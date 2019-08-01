@@ -37,8 +37,10 @@ namespace ProjBoletos.components {
          InitializeComponent();
 
          txtBoxVencimento.hint = "VENCIMENTO";
+         txtBoxVencimento.mask = "99";
          txtBoxBairro.hint = "BAIRRO";
          txtBoxCep.hint = "CEP";
+         txtBoxCep.mask = "00000-000";
          txtBoxCidade.hint = "CIDADE";
          txtBoxHidrometro.hint = "NÚMERO DO HIDRÔMETRO";
          txtBoxMaxHidrometro.hint = "VALOR MAX. HIDRO.";
@@ -46,6 +48,7 @@ namespace ProjBoletos.components {
          txtBoxReferencia.hint = "REFERÊNCIA";
          txtBoxRua.hint = "RUA";
          txtBoxUf.hint = "UF";
+         txtBoxUf.mask = "LL";
 
          btnBuscarCep.title = "BUSCAR";
 
@@ -83,8 +86,10 @@ namespace ProjBoletos.components {
          this.uf = uf;
 
          txtBoxVencimento.hint = "VENCIMENTO";
+         txtBoxVencimento.mask = "99";
          txtBoxBairro.hint = "BAIRRO";
          txtBoxCep.hint = "CEP";
+         txtBoxCep.mask = "00000-000";
          txtBoxCidade.hint = "CIDADE";
          txtBoxHidrometro.hint = "NÚMERO DO HIDRÔMETRO";
          txtBoxMaxHidrometro.hint = "VALOR MAX. HIDRO.";
@@ -92,6 +97,7 @@ namespace ProjBoletos.components {
          txtBoxReferencia.hint = "REFERÊNCIA";
          txtBoxRua.hint = "RUA";
          txtBoxUf.hint = "UF";
+         txtBoxUf.mask = "LL";
 
          btnBuscarCep.title = "BUSCAR";
 

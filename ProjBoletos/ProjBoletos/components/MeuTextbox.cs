@@ -14,7 +14,7 @@ using ProjBoletos.utils;
 namespace ProjBoletos.components {
    public partial class MeuTextbox : UserControl {
 
-      public TextBox txtBox;
+      public MaskedTextBox txtBox;
 
       public bool isPassword = false;
 
@@ -27,6 +27,7 @@ namespace ProjBoletos.components {
       Font fontNormal = Fonts.main10;
 
       public string hint = "";
+      public string mask = "";
       public bool useHint = true;
 
       public bool isEmpty = true;
@@ -45,8 +46,11 @@ namespace ProjBoletos.components {
       private void MeuTextbox_Load(object sender, EventArgs e) {
          BackColor = Color.White;
 
+         textBox1.PromptChar = '_';
+
          if (!useHint) {
             isEmpty = false;
+            textBox1.Mask = mask;
          }
 
          toolTip1.AutoPopDelay = 2000;
@@ -90,6 +94,17 @@ namespace ProjBoletos.components {
          drawBackLine(e, rect, new SolidBrush(backColor));
       }
 
+      public string getValue() {
+         if (!mask.Equals("")) {
+            txtBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            string value = txtBox.Text;
+            txtBox.TextMaskFormat = MaskFormat.IncludePromptAndLiterals;
+            return value;
+         } else {
+            return txtBox.Text;
+         }
+      }
+
       private void drawBackLine(PaintEventArgs e, Rectangle rect, Brush brush) {
          GraphicsPath p = new GraphicsPath();
          p.AddArc(new Rectangle(rect.X, rect.Y, rect.Height, rect.Height), 90, 180);
@@ -104,32 +119,44 @@ namespace ProjBoletos.components {
          e.Graphics.DrawArc(pen, new Rectangle(rect.Width - rect.Height, rect.Y, rect.Height, rect.Height), 90, -180);*/
       }
 
-      public void RemoveText(object sender, EventArgs e) {
-         if (useHint || txtBox.ReadOnly == false) {
-            if (textBox1.Text == hint) {
-               textBox1.Text = "";
-               textBox1.ForeColor = colorNormal;
-               textBox1.Font = fontNormal;
+      public void RemoveText(object sender, EventArgs e) {      
+         if (txtBox.Text == hint) {
+            if (!mask.Equals("")) {
+               txtBox.Mask = mask;
+            }
+
+            if (useHint || txtBox.ReadOnly == false) {
+               txtBox.Text = "";
+               txtBox.ForeColor = colorNormal;
+               txtBox.Font = fontNormal;
 
                isEmpty = false;
 
-               if (isPassword) textBox1.PasswordChar = '*';
+               if (isPassword) txtBox.PasswordChar = '*';
             }
          }
       }
 
       public void AddText(object sender, EventArgs e) {
-         if (useHint || txtBox.ReadOnly == false) {
-            if (string.IsNullOrWhiteSpace(textBox1.Text)) {
-               textBox1.Text = hint;
-               textBox1.ForeColor = colorHint;
-               textBox1.Font = fontHint;
+         if (string.IsNullOrWhiteSpace(getValue())) {
+            if (!mask.Equals("")) {
+               txtBox.Mask = "";
+            }
+
+            if (useHint || txtBox.ReadOnly == false) {
+               txtBox.Text = hint;
+               txtBox.ForeColor = colorHint;
+               txtBox.Font = fontHint;
 
                isEmpty = true;
 
-               if (isPassword) textBox1.PasswordChar = '\0';
+               if (isPassword) txtBox.PasswordChar = '\0';
             }
          }
+      }
+
+      private void textBox1_TextChanged(object sender, EventArgs e) {
+
       }
    }
 }

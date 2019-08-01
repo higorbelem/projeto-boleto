@@ -19,6 +19,7 @@ namespace ProjBoletos.telas {
          InitializeComponent();
 
          meuTextboxCnpj.hint = "CNPJ";
+         meuTextboxCnpj.mask = "00,000,000/0000-00";
          meuTextboxSenha.hint = "SENHA";
          meuTextboxSenha.isPassword = true;
 
@@ -31,6 +32,8 @@ namespace ProjBoletos.telas {
       }
 
       private void Login_Load(object sender, EventArgs e) {
+         //meuTextboxCnpj.txtBox.Mask = "00,000,000/0000-00";
+         //meuTextboxCnpj.txtBox.Mask = "99.999.999/9999-99";
          //meuTextboxCnpj.Focus();
       }
 
@@ -43,6 +46,7 @@ namespace ProjBoletos.telas {
       }
 
       private bool logar(string cnpj, string senha) {
+         //MessageBox.Show(cnpj + " " + senha);
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/getCedente.php");
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
@@ -76,9 +80,13 @@ namespace ProjBoletos.telas {
 
       public void buttonTeste1_click(object sender, EventArgs e) {
          if (!meuTextboxCnpj.isEmpty && !meuTextboxSenha.isEmpty) {
+
+            string cnpj = meuTextboxCnpj.getValue();
+            string senha = meuTextboxSenha.getValue();
+
             Loading loading = new Loading();
             loading.task = new Task(new Action(() => {
-               bool result = logar(meuTextboxCnpj.txtBox.Text, meuTextboxSenha.txtBox.Text);
+               bool result = logar(cnpj, senha);
 
                loading.terminou = true;
                loading.terminouBem = result;

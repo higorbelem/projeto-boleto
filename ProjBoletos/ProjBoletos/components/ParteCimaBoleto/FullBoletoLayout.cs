@@ -114,7 +114,7 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          boletoForm1.Invalidate();
       }
 
-      public void print(Graphics g, Rectangle rect) {
+      public void print(Graphics g, Rectangle rect) { 
          Rectangle rectParteCima = new Rectangle(0, 0, rect.Width, (int)(rect.Height * 0.57));
          parteCimaBoleto1.print(g, rectParteCima);
 
