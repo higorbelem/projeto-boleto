@@ -409,18 +409,25 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
          };
          mb2.Click += new EventHandler((object s1, EventArgs e1) => {
+
+            FullBoletoLayout fullBoleto;
+
             PrintDocument pDoc = new PrintDocument();
             //pDoc.DefaultPageSettings.PaperSize = new PaperSize("A4",850, (int)(850 * Math.Sqrt(2)));
 
             pDoc.PrintPage += new PrintPageEventHandler((object s2, PrintPageEventArgs e2) => {
                try {
                   //MessageBox.Show(e2.PageBounds.Size.Width + " " + e2.Graphics.SmoothingMode.ToString());
-                  new FullBoletoLayout(cedente, remessa.medicoes[indexMedicao]).print(e2.Graphics, e2.PageBounds);
+                  fullBoleto = new FullBoletoLayout(cedente, remessa.medicoes[indexMedicao]);
+
+                  fullBoleto.setSizes();
+
+                  fullBoleto.print(e2.Graphics, e2.PageBounds);
 
                   bool hasMorePages = false;
 
                   if (agrupado) {
-
+ 
                      indexMedicao++;
                      if (indexMedicao < remessa.medicoes.Count && indexMedicao <= indexMax) {
                         hasMorePages = true;
@@ -453,7 +460,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                         indexMedicao = indexInicial;
                      }
 
-                  }  
+                  }
                } catch (Exception ex) {
                   MessageBox.Show("Erro: " + ex.Message);
                }
@@ -508,6 +515,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             ((ToolStrip)(ppw.Controls[1])).Items.Insert(0, b);
 
             ppw.ShowDialog();
+
          });
          panelButtons.Controls.Add(mb2);
          MeuButton mb3 = new MeuButton() {
