@@ -24,6 +24,7 @@ namespace ProjBoletos.modelos {
       public double valorPorMetroCubico { get; set; }
       public float esgoto { get; set; }
       public string email { get; set; }
+      public string logo { get; set; }
 
       public List<Conta> contas { get; set; }
 
@@ -63,6 +64,7 @@ namespace ProjBoletos.modelos {
          double valor = consumo * valorPorMetroCubico;
          double valorComEsgoto = valor + (valor * esgoto / 100);
 
+         //Console.WriteLine("Consumo: " + consumo + "Valor: " + valorComEsgoto);
          return valorComEsgoto;
       }
 

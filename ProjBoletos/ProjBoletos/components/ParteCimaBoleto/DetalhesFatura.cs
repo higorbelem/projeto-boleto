@@ -68,7 +68,7 @@ namespace ProjBoletos.components.ParteCimaBoleto {
 
          //Console.WriteLine(cedente.getValor(FaturaUtils.calculaValorMedicao(medicao)));
 
-         valor5 = "R$ " + cedente.getValor(FaturaUtils.calculaValorMedicao(medicao));
+         valor5 = "R$ " + cedente.getValor(FaturaUtils.calculaValorMedicao(medicao)); 
       }
 
       public void setRect(Rectangle rect) {

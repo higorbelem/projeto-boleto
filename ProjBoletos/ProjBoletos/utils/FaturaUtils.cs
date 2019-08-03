@@ -9,7 +9,7 @@ namespace ProjBoletos.utils {
    public class FaturaUtils {
 
       public static int calculaValorMedicao(Medicao medicaoAtual) {
-         Console.WriteLine("medicao id: " + medicaoAtual.id);
+         //Console.WriteLine("medicao id: " + medicaoAtual.id);
          int valorMedicaoAtual = Int32.Parse(medicaoAtual.medicao);
          int valorMedicaoAnterior = Int32.Parse(medicaoAtual.medicaoAnterior);
          int valorMaximoMedidor = Int32.Parse(medicaoAtual.casa.maxHidrometro);
@@ -22,6 +22,8 @@ namespace ProjBoletos.utils {
             valor = Int32.Parse(medicaoAtual.medicao) - valorMedicaoAnterior;
          }
          //Console.WriteLine("medicaoAtual: " + valorMedicaoAtual + " medicaoAnterior: " + valorMedicaoAnterior + " valorMaximoMedidor: " + valorMaximoMedidor + " valor: " +valor);
+
+         //Console.WriteLine("medicao valor: " + valor);
          return valor;
       }
 

@@ -4,6 +4,7 @@ using ProjBoletos.modelos;
 using ProjBoletos.utils;
 using System;
 using System.Drawing;
+using System.Net;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -32,6 +33,12 @@ namespace ProjBoletos.telas {
 
       private void Main_Load(object sender, EventArgs e) {
          bringClickedControl("home");
+
+         var request = WebRequest.Create(cedente.logo);
+         using (var response = request.GetResponse())
+         using (var stream = response.GetResponseStream()) {
+            logoImage.Image = Bitmap.FromStream(stream);
+         }
 
          btnCliente.icon.Click += new EventHandler(btnCliente_click);
          btnConfig.icon.Click += new EventHandler(btnConfig_click);

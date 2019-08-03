@@ -10,7 +10,7 @@ namespace ProjBoletos.modelos {
    public static class Boleto {
 
       public static BoletoInfo makeBoleto(Cedente cedente, Medicao medicao) {
-         double valor = cedente.getValor(FaturaUtils.calculaValorMedicao(medicao)); 
+         double valor = cedente.getValor(FaturaUtils.calculaValorMedicao(medicao));  
 
          int diaVencimento = Int32.Parse(medicao.casa.diaVencimento);
          DateTime vencimento = medicao.dataMedicao;
