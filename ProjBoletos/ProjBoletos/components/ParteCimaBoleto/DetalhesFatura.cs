@@ -55,7 +55,8 @@ namespace ProjBoletos.components.ParteCimaBoleto {
 
          valor1 = medicao.sacado.id;
          valor2 = medicao.id;
-         valor3 = medicao.dataMedicao.ToString("MM/yyyy");
+         valor3 = medicao.dataReferencia.ToString("MM/yyyy");
+         //valor3 = medicao.dataMedicao.ToString("MM/yyyy");
 
          int diaVencimento = Int32.Parse(medicao.casa.diaVencimento); 
          DateTime vencimento = medicao.dataMedicao;

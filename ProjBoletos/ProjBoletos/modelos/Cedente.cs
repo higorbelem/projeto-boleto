@@ -22,6 +22,7 @@ namespace ProjBoletos.modelos {
       public string numero { get; set; }
       public string cep { get; set; }
       public double valorPorMetroCubico { get; set; }
+      public double valorMinimo { get; set; }
       public float esgoto { get; set; }
       public string email { get; set; }
       public string logo { get; set; }
@@ -63,9 +64,14 @@ namespace ProjBoletos.modelos {
       public double getValor(int consumo) {
          double valor = consumo * valorPorMetroCubico;
          double valorComEsgoto = valor + (valor * esgoto / 100);
+         double valorFinal = Math.Round((Double)valorComEsgoto, 2);
+
+         if (valorFinal < valorMinimo) {
+            valorFinal = valorMinimo;
+         }
 
          //Console.WriteLine("Consumo: " + consumo + "Valor: " + valorComEsgoto);
-         return valorComEsgoto;
+         return valorFinal;
       }
 
       public static CedenteInfo makeCedenteInfo(Cedente cedente, Conta conta, string carteira, string carteiraTipo) {

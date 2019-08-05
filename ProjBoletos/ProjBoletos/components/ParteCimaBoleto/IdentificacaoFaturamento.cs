@@ -63,7 +63,7 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          rect3_2Padding = new Rectangle(rect3_1.X + rect3_1.Width + paddingLeftRight, rect2_1.Y + rect2_1.Height + paddingTopBottom, rect.Width / 2 - paddingLeftRight * 2, (rect.Height - rectHeader.Height) / 3 - paddingTopBottom * 2);
       }
 
-      public IdentificacaoFaturamento(int radius, float lineWidth, Medicao medicao, Cedente cedente) {
+      public IdentificacaoFaturamento(int radius, float lineWidth, Medicao medicao, Cedente cedente, List<Medicao> medicoesAnteriores) {
          InitializeComponent();
 
          this.radius = radius;
@@ -78,6 +78,17 @@ namespace ProjBoletos.components.ParteCimaBoleto {
          
          valor1_4 = ""+cedente.esgoto;
          valor2_1 = medicao.dataMedicao.ToString("dd/MM/yyyy");
+
+         if (medicoesAnteriores != null) {
+            float media = float.Parse(medicao.medicao);
+            foreach (Medicao m in medicoesAnteriores) {
+               media += float.Parse(m.medicao);
+            }
+
+            valor2_3 = "" + (media / (medicoesAnteriores.Count + 1));
+         } else {
+            valor2_3 = medicao.medicao;
+         }
 
          valor3_1 = medicao.casa.numHidrometro;
       }

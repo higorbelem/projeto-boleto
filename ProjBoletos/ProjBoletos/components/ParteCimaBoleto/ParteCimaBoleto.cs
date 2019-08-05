@@ -35,7 +35,7 @@ namespace ProjBoletos {
          boletoHeader = new BoletoHeader(cedente);
          detalhesFatura = new DetalhesFatura(cornersRadius, lineWidth, cedente, medicao);
          detalhesEndereco = new DetalhesEndereco(cornersRadius, lineWidth, medicao);
-         identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth, medicao, cedente);
+         identificacaoFaturamento = new IdentificacaoFaturamento(cornersRadius, lineWidth, medicao, cedente, medicoesAnteriores);
          barrasBoleto = new GraficoBarrasBoleto(medicao, medicoesAnteriores, cornersRadius, lineWidth);
          detalhesCobrancas = new DetalhesCobrancas(cornersRadius, lineWidth);
       }

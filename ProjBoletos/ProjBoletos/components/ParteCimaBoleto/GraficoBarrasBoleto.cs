@@ -90,8 +90,8 @@ namespace ProjBoletos.components.ParteCimaBoleto {
                {
                    x = Int32.Parse(medicoesAnteriores[i + 1].medicao);
                }*/
-               Console.WriteLine(medicoesAnteriores[i].medicao + " " + medicoesAnteriores[i].medicaoAnterior);
-               valores.Add(new string[] { "" + FaturaUtils.calculaValorMedicao(medicoesAnteriores[i])/*(Int32.Parse(medicoesAnteriores[i].medicao) - x)*/, vencimento.Month + "/" + vencimento.Year });
+               //Console.WriteLine(medicoesAnteriores[i].medicao + " " + medicoesAnteriores[i].medicaoAnterior);
+               valores.Add(new string[] { "" + FaturaUtils.calculaValorMedicao(medicoesAnteriores[i]), medicoesAnteriores[i].dataReferencia.ToString("MM/yy") });
             }
          }
       }

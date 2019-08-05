@@ -12,6 +12,7 @@ namespace ProjBoletos.modelos {
       public string medicao { get; set; }
       public string medicaoAnterior { get; set; }
       public DateTime dataMedicao { get; set; }
+      public DateTime dataReferencia { get; set; }
       public string boletoGerado { get; set; }
 
       //[JsonIgnore]
