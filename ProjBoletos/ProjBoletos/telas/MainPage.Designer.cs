@@ -32,6 +32,7 @@ namespace ProjBoletos.telas {
          this.btnHome = new ProjBoletos.components.SidebarButton();
          this.btnConfig = new ProjBoletos.components.SidebarButton();
          this.btnCliente = new ProjBoletos.components.SidebarButton();
+         this.btnMedidorVisual = new ProjBoletos.components.SidebarButton();
          this.topBarFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
          this.accountButton = new ProjBoletos.components.AccountButton();
          this.dropMenu = new System.Windows.Forms.FlowLayoutPanel();
@@ -39,6 +40,7 @@ namespace ProjBoletos.telas {
          this.configControl = new ProjBoletos.telas.mainPageControls.ConfigControl();
          this.homeControl = new ProjBoletos.telas.mainPageControls.HomeControl();
          this.clientControl = new ProjBoletos.telas.mainPageControls.ClienteControl();
+         this.medidorVisualControl = new ProjBoletos.telas.mainPageControls.MedidorVisualControl();
          this.sideBarFlowPanel.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.logoImage)).BeginInit();
          this.topBarFlowLayout.SuspendLayout();
@@ -53,6 +55,7 @@ namespace ProjBoletos.telas {
          this.sideBarFlowPanel.Controls.Add(this.label1);
          this.sideBarFlowPanel.Controls.Add(this.btnHome);
          this.sideBarFlowPanel.Controls.Add(this.btnCliente);
+         this.sideBarFlowPanel.Controls.Add(this.btnMedidorVisual);
          this.sideBarFlowPanel.Controls.Add(this.btnConfig);
          this.sideBarFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
          this.sideBarFlowPanel.Location = new System.Drawing.Point(0, 0);
@@ -121,6 +124,15 @@ namespace ProjBoletos.telas {
          this.btnCliente.TabIndex = 2;
          this.btnCliente.Click += new System.EventHandler(this.btnCliente_click);
          // 
+         // btnMedidorVisual
+         // 
+         this.btnMedidorVisual.Location = new System.Drawing.Point(0, 183);
+         this.btnMedidorVisual.Margin = new System.Windows.Forms.Padding(0);
+         this.btnMedidorVisual.Name = "btnMedidorVisual";
+         this.btnMedidorVisual.Size = new System.Drawing.Size(172, 50);
+         this.btnMedidorVisual.TabIndex = 10;
+         this.btnMedidorVisual.Click += new System.EventHandler(this.btnMedidorVisual_click);
+         // 
          // topBarFlowLayout
          // 
          this.topBarFlowLayout.BackColor = System.Drawing.Color.Gray;
@@ -188,6 +200,15 @@ namespace ProjBoletos.telas {
          this.clientControl.Size = new System.Drawing.Size(503, 498);
          this.clientControl.TabIndex = 20;
          // 
+         // medidorVisualControl
+         // 
+         this.medidorVisualControl.BackColor = System.Drawing.Color.Snow;
+         this.medidorVisualControl.Location = new System.Drawing.Point(260, 89);
+         this.medidorVisualControl.Margin = new System.Windows.Forms.Padding(0);
+         this.medidorVisualControl.Name = "medidorVisualControl";
+         this.medidorVisualControl.Size = new System.Drawing.Size(503, 498);
+         this.medidorVisualControl.TabIndex = 20;
+         // 
          // MainPage
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -198,6 +219,7 @@ namespace ProjBoletos.telas {
          this.Controls.Add(this.configControl);
          this.Controls.Add(this.homeControl);
          this.Controls.Add(this.clientControl);
+         this.Controls.Add(this.medidorVisualControl);
          this.Controls.Add(this.sideBarFlowPanel);
          this.Name = "MainPage";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -217,12 +239,14 @@ namespace ProjBoletos.telas {
       #endregion
 
       private System.Windows.Forms.FlowLayoutPanel sideBarFlowPanel;
-      private components.SidebarButton btnHome;
       private System.Windows.Forms.Label label1;
+      private components.SidebarButton btnHome;
       private components.SidebarButton btnConfig;
       private components.SidebarButton btnCliente;
+      private components.SidebarButton btnMedidorVisual;
       private mainPageControls.HomeControl homeControl;
       private mainPageControls.ClienteControl clientControl;
+      private mainPageControls.MedidorVisualControl medidorVisualControl;
       private mainPageControls.ConfigControl configControl;
       private System.Windows.Forms.FlowLayoutPanel topBarFlowLayout;
       private components.AccountButton accountButton;

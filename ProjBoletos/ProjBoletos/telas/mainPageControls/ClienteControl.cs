@@ -32,7 +32,7 @@ namespace ProjBoletos.telas.mainPageControls {
             Application.Exit();
          }
 
-      }
+      }  
 
       private void ClienteControl_Load(object sender, EventArgs e) {
          panelTop.BackColor = Colors.bg3;

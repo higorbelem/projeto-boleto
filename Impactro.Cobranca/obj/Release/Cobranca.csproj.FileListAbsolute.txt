@@ -1,2 +1,4 @@
 C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Cobranca.csprojAssemblyReference.cache
 C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Cobranca.csproj.CoreCompileInputs.cache
+C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Impactro.WindowsControls.BoletoForm.resources
+C:\Users\Higor\Documents\proj boletos\Impactro.Cobranca\obj\Release\Cobranca.csproj.GenerateResource.cache

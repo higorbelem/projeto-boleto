@@ -111,6 +111,18 @@
     <Compile Include="components\MainCard.Designer.cs">
       <DependentUpon>MainCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="components\MeuComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="components\MeuComboBox.Designer.cs">
+      <DependentUpon>MeuComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="components\MeuComboBoxRound.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\MeuComboBoxRound.Designer.cs">
+      <DependentUpon>MeuComboBoxRound.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\MeuTextbox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,6 +203,7 @@
     <Compile Include="modelos\Conta.cs" />
     <Compile Include="modelos\Medicao.cs" />
     <Compile Include="modelos\medidor.cs" />
+    <Compile Include="modelos\MedidorVisualizador.cs" />
     <Compile Include="modelos\parteCimaBoletoModel.cs" />
     <Compile Include="modelos\Remessa.cs" />
     <Compile Include="modelos\RemessaModelDialog.cs" />
@@ -207,6 +220,12 @@
     </Compile>
     <Compile Include="telas\dialogs\AdicionarEditarClienteDialog.Designer.cs">
       <DependentUpon>AdicionarEditarClienteDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\dialogs\AdicionarEditarMedidorVisualizador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="telas\dialogs\AdicionarEditarMedidorVisualizador.Designer.cs">
+      <DependentUpon>AdicionarEditarMedidorVisualizador.cs</DependentUpon>
     </Compile>
     <Compile Include="telas\dialogs\EnviarEmailDialog.cs">
       <SubType>Form</SubType>
@@ -300,6 +319,12 @@
     <Compile Include="telas\mainPageControls\HomeTabs\TabRemessas.Designer.cs">
       <DependentUpon>TabRemessas.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\MedidorVisualControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\MedidorVisualControl.Designer.cs">
+      <DependentUpon>MedidorVisualControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\MedicaoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -346,6 +371,12 @@
     <EmbeddedResource Include="components\MainCard.resx">
       <DependentUpon>MainCard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="components\MeuComboBox.resx">
+      <DependentUpon>MeuComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\MeuComboBoxRound.resx">
+      <DependentUpon>MeuComboBoxRound.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="components\MeuTextbox.resx">
       <DependentUpon>MeuTextbox.cs</DependentUpon>
     </EmbeddedResource>
@@ -387,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\dialogs\AdicionarEditarClienteDialog.resx">
       <DependentUpon>AdicionarEditarClienteDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\dialogs\AdicionarEditarMedidorVisualizador.resx">
+      <DependentUpon>AdicionarEditarMedidorVisualizador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\dialogs\EnviarEmailDialog.resx">
       <DependentUpon>EnviarEmailDialog.cs</DependentUpon>
@@ -442,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\HomeTabs\TabRemessas.resx">
       <DependentUpon>TabRemessas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\MedidorVisualControl.resx">
+      <DependentUpon>MedidorVisualControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\MedicaoForm.resx">
       <DependentUpon>MedicaoForm.cs</DependentUpon>
@@ -551,6 +588,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\delete-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\group_add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
