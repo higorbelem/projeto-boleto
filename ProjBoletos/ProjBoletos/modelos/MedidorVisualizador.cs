@@ -11,6 +11,7 @@ namespace ProjBoletos.modelos {
       public string nome { get; set; }
       public string cpf { get; set; }
       public string tipo { get; set; }
+      public string senha { get; set; }
 
    }
 }

@@ -73,7 +73,7 @@ namespace ProjBoletos.telas.mainPageControls {
       public void updateCustomViewList() {
          Loading loading = new Loading();
          loading.task = new Task(new Action(() => {
-            var res = getMedidoresVisualizadores(txtBoxSearch.txtBox.Text, cedente.id);
+            var res = getMedidoresVisualizadores(txtBoxSearch.getValue().Trim(), cedente.id);
 
             loading.terminou = true;
             loading.terminouBem = res;
@@ -106,12 +106,12 @@ namespace ProjBoletos.telas.mainPageControls {
             customListViewItem.btnGerar.Visible = false;
 
             customListViewItem.btnVer.Click += new EventHandler((object sender, EventArgs e) => {
-               /*AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, sacado, AdicionarEditarClienteDialog.DIALOG_MODE_EDITAR);
-               var resDialog = adicionarClienteDialog.ShowDialog();
+               AdicionarEditarMedidorVisualizador adicionarEditarMedidorVisualizador = new AdicionarEditarMedidorVisualizador(cedente, medidor, AdicionarEditarMedidorVisualizador.DIALOG_MODE_EDITAR);
+               var resDialog = adicionarEditarMedidorVisualizador.ShowDialog();
 
                if (resDialog == DialogResult.OK) {
                   updateCustomViewList();
-               }*/
+               }
             });
 
             items.Add(customListViewItem);

@@ -66,7 +66,7 @@ namespace ProjBoletos.telas {
          btnCliente.title = "CLIENTES";
 
          btnMedidorVisual.icon.Image = new Bitmap(Properties.Resources.group);
-         btnMedidorVisual.title = "MED/VISU";
+         btnMedidorVisual.title = "CONTAS";
 
          dropMenu.Visible = false;
 

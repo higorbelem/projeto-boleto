@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using ProjBoletos.utils;
 
 namespace ProjBoletos.components {
    public partial class MeuComboBoxRound : UserControl {
@@ -23,6 +24,10 @@ namespace ProjBoletos.components {
       private void MeuComboBoxRound_Load(object sender, EventArgs e) {
          meuComboBox1.Location = new Point(10, (Size.Height / 2) - (meuComboBox1.Size.Height / 2));
          meuComboBox1.Size = new Size(this.Size.Width - 20, this.Size.Height - 20);
+         meuComboBox1.FlatStyle = FlatStyle.Flat;
+
+         meuComboBox1.Font = Fonts.main12;
+         meuComboBox1.ForeColor = Colors.primaryText;
 
          meuComboBox1.BackColor = backColor;
       }
