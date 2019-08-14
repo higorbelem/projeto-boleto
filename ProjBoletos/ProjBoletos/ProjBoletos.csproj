@@ -99,6 +99,12 @@
     <Compile Include="components\CustomScrollbar.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="components\ExpandableItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\ExpandableItem.Designer.cs">
+      <DependentUpon>ExpandableItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="components\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\CustomScrollbar.resx">
       <DependentUpon>CustomScrollbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\ExpandableItem.resx">
+      <DependentUpon>ExpandableItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>

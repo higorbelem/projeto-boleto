@@ -23,33 +23,32 @@
         /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent() {
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(336, 148);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "config control";
-            // 
-            // ConfigControl
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.label1);
-            this.Name = "ConfigControl";
-            this.Size = new System.Drawing.Size(451, 410);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+         this.expandableItem1 = new ProjBoletos.components.ExpandableItem(100,300);
+         this.SuspendLayout();
+         // 
+         // expandableItem1
+         // 
+         this.expandableItem1.Location = new System.Drawing.Point(3, 59);
+         this.expandableItem1.Name = "expandableItem1";
+         this.expandableItem1.Size = new System.Drawing.Size(419, 105);
+         this.expandableItem1.TabIndex = 0;
+         // 
+         // ConfigControl
+         // 
+         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.BackColor = System.Drawing.SystemColors.Control;
+         this.Controls.Add(this.expandableItem1);
+         this.Name = "ConfigControl";
+         this.Size = new System.Drawing.Size(451, 410);
+         this.Load += new System.EventHandler(this.ConfigControl_Load);
+         this.Resize += new System.EventHandler(this.ConfigControl_Resize);
+         this.ResumeLayout(false);
 
         }
 
-        #endregion
+      #endregion
 
-        private System.Windows.Forms.Label label1;
-    }
+      private components.ExpandableItem expandableItem1;
+   }
 }
