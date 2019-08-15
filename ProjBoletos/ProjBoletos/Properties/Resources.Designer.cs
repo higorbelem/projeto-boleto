@@ -73,9 +73,29 @@ namespace ProjBoletos.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_down_high_res {
+            get {
+                object obj = ResourceManager.GetObject("arrow_down_high_res", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_up {
             get {
                 object obj = ResourceManager.GetObject("arrow_up", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_up_high_res {
+            get {
+                object obj = ResourceManager.GetObject("arrow_up_high_res", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

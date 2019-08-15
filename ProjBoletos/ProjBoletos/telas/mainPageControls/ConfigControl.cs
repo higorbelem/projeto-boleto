@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjBoletos.utils;
 using ProjBoletos.telas.mainPageControls.HomeTabs;
+using ProjBoletos.telas.mainPageControls.configItems;
 
 namespace ProjBoletos.telas.mainPageControls {
     public partial class ConfigControl : UserControl {
@@ -17,22 +18,54 @@ namespace ProjBoletos.telas.mainPageControls {
         }
 
       private void ConfigControl_Load(object sender, EventArgs e) {
-         expandableItem1.labelTitle.Font = Fonts.mainBold14;
-         expandableItem1.labelTitle.ForeColor = Colors.primaryText;
-         expandableItem1.labelTitle.Text = "PERFIL";
+         //ConfigControl_Resize(sender, e);
 
-         expandableItem1.labelDescription.Font = Fonts.mainBold10;
-         expandableItem1.labelDescription.ForeColor = Colors.secondaryText;
-         expandableItem1.labelDescription.Text = "Nome, ads...";
+         BackColor = Colors.bg;
 
-         TabBoletos tabBoletos = new TabBoletos();
-         expandableItem1.setHeightAberto(tabBoletos.Height);
-         expandableItem1.bodyPanel.Controls.Add(tabBoletos);
+         expandableItemPerfil.labelTitle.Font = Fonts.mainBold14;
+         expandableItemPerfil.labelTitle.ForeColor = Colors.primaryText;
+         expandableItemPerfil.labelTitle.Text = "PERFIL";
+         expandableItemPerfil.labelDescription.Font = Fonts.mainBold10;
+         expandableItemPerfil.labelDescription.ForeColor = Colors.secondaryText;
+         expandableItemPerfil.labelDescription.Text = "Nome, ads...";
+         expandableItemPerfil.BackColor = Colors.bg;
+         expandableItemPerfil.arrowPanel.BackColor = Colors.bg;
+         expandableItemPerfil.arrowImg.BackColor = Colors.bg;
+         PerfilItem perfilItem = new PerfilItem();
+         perfilItem.Size = new Size(expandableItemPerfil.Width,perfilItem.Height);
+         expandableItemPerfil.setHeightAberto(perfilItem.Height);
+         expandableItemPerfil.setHeightFechado(70);
+         expandableItemPerfil.bodyPanel.Controls.Add(perfilItem);
+
+         expandableItemBoletos.labelTitle.Font = Fonts.mainBold14;
+         expandableItemBoletos.labelTitle.ForeColor = Colors.primaryText;
+         expandableItemBoletos.labelTitle.Text = "BOLETOS";
+         expandableItemBoletos.labelDescription.Font = Fonts.mainBold10;
+         expandableItemBoletos.labelDescription.ForeColor = Colors.secondaryText;
+         expandableItemBoletos.labelDescription.Text = "Coisas, coisas, coisas...";
+         expandableItemBoletos.BackColor = Colors.bg;
+         expandableItemBoletos.arrowPanel.BackColor = Colors.bg;
+         expandableItemBoletos.arrowImg.BackColor = Colors.bg;
+         BoletosItem boletosItem = new BoletosItem();
+         boletosItem.Size = new Size(expandableItemBoletos.Width, boletosItem.Height);
+         expandableItemBoletos.setHeightAberto(boletosItem.Height);
+         expandableItemBoletos.setHeightFechado(70);
+         expandableItemBoletos.bodyPanel.Controls.Add(boletosItem);
+
+         separator1.color = Colors.secondaryText;
       }
 
       private void ConfigControl_Resize(object sender, EventArgs e) {
-         expandableItem1.Location = new Point(0, 0);
-         expandableItem1.Size = new Size(ClientRectangle.Width, 200);
+         flowLayoutPanel.Location = new Point(0, 0);
+         flowLayoutPanel.Size = new Size(ClientRectangle.Width,ClientRectangle.Height);
+
+         expandableItemPerfil.Location = new Point(0, 0);
+         expandableItemPerfil.Size = new Size(flowLayoutPanel.Width, 200);
+
+         separator1.Size = new Size(flowLayoutPanel.Width, 10);
+
+         expandableItemBoletos.Location = new Point(0, 0);
+         expandableItemBoletos.Size = new Size(flowLayoutPanel.Width, 200);
       }
    }
 }

@@ -26,12 +26,14 @@
          this.labelTitle1 = new System.Windows.Forms.Label();
          this.labelDescription1 = new System.Windows.Forms.Label();
          this.headerFlow = new System.Windows.Forms.FlowLayoutPanel();
-         this.arrowImg = new PictureBoxWithInterpolationMode();
          this.headerPanel = new System.Windows.Forms.Panel();
+         this.arrowPanel1 = new System.Windows.Forms.Panel();
+         this.arrowImg1 = new PictureBoxWithInterpolationMode();
          this.bodyPanel1 = new System.Windows.Forms.Panel();
          this.headerFlow.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.arrowImg)).BeginInit();
          this.headerPanel.SuspendLayout();
+         this.arrowPanel1.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.arrowImg1)).BeginInit();
          this.SuspendLayout();
          // 
          // labelTitle1
@@ -64,25 +66,36 @@
          this.headerFlow.TabIndex = 4;
          this.headerFlow.Click += new System.EventHandler(this.arrowImg_Click);
          // 
-         // arrowImg
-         // 
-         this.arrowImg.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-         this.arrowImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-         this.arrowImg.Location = new System.Drawing.Point(273, 47);
-         this.arrowImg.Name = "arrowImg";
-         this.arrowImg.Size = new System.Drawing.Size(100, 50);
-         this.arrowImg.TabIndex = 3;
-         this.arrowImg.TabStop = false;
-         this.arrowImg.Click += new System.EventHandler(this.arrowImg_Click);
-         // 
          // headerPanel
          // 
-         this.headerPanel.Controls.Add(this.arrowImg);
+         this.headerPanel.Controls.Add(this.arrowPanel1);
          this.headerPanel.Controls.Add(this.headerFlow);
          this.headerPanel.Location = new System.Drawing.Point(3, 18);
          this.headerPanel.Name = "headerPanel";
          this.headerPanel.Size = new System.Drawing.Size(395, 132);
          this.headerPanel.TabIndex = 3;
+         // 
+         // arrowPanel1
+         // 
+         this.arrowPanel1.Controls.Add(this.arrowImg1);
+         this.arrowPanel1.Location = new System.Drawing.Point(285, 13);
+         this.arrowPanel1.Name = "arrowPanel1";
+         this.arrowPanel1.Size = new System.Drawing.Size(200, 100);
+         this.arrowPanel1.TabIndex = 5;
+         this.arrowPanel1.Click += new System.EventHandler(this.arrowImg_Click);
+         // 
+         // arrowImg1
+         // 
+         this.arrowImg1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+         this.arrowImg1.Image = global::ProjBoletos.Properties.Resources.arrow_down_high_res;
+         this.arrowImg1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+         this.arrowImg1.Location = new System.Drawing.Point(10, 16);
+         this.arrowImg1.Name = "arrowImg1";
+         this.arrowImg1.Size = new System.Drawing.Size(100, 50);
+         this.arrowImg1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+         this.arrowImg1.TabIndex = 3;
+         this.arrowImg1.TabStop = false;
+         this.arrowImg1.Click += new System.EventHandler(this.arrowImg_Click);
          // 
          // bodyPanel1
          // 
@@ -106,19 +119,21 @@
          this.Resize += new System.EventHandler(this.ExpandableItem_Resize);
          this.headerFlow.ResumeLayout(false);
          this.headerFlow.PerformLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.arrowImg)).EndInit();
          this.headerPanel.ResumeLayout(false);
+         this.arrowPanel1.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.arrowImg1)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
       }
 
       #endregion
-      private PictureBoxWithInterpolationMode arrowImg;
+      private PictureBoxWithInterpolationMode arrowImg1;
       private System.Windows.Forms.Label labelDescription1;
       private System.Windows.Forms.Label labelTitle1;
       private System.Windows.Forms.FlowLayoutPanel headerFlow;
       private System.Windows.Forms.Panel headerPanel;
       private System.Windows.Forms.Panel bodyPanel1;
+      private System.Windows.Forms.Panel arrowPanel1;
    }
 }

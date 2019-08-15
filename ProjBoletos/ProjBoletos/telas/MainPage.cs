@@ -96,7 +96,7 @@ namespace ProjBoletos.telas {
          medidorVisualControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
          medidorVisualControl.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
          configControl.Location = new Point(sideBarFlowPanel.Width, topBarFlowLayout.Height);
-         configControl.Size = new Size(Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
+         configControl.Size = new Size(ClientRectangle.Width - sideBarFlowPanel.Width, ClientRectangle.Height - topBarFlowLayout.Height);
 
          btnHome.Width = sideBarFlowPanel.Width;
 

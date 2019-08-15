@@ -301,6 +301,18 @@
     <Compile Include="telas\mainPageControls\ConfigControl.Designer.cs">
       <DependentUpon>ConfigControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\configItems\BoletosItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\configItems\BoletosItem.Designer.cs">
+      <DependentUpon>BoletosItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="telas\mainPageControls\configItems\PerfilItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\configItems\PerfilItem.Designer.cs">
+      <DependentUpon>PerfilItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\mainPageControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -474,6 +486,9 @@
     <EmbeddedResource Include="telas\mainPageControls\ConfigControl.resx">
       <DependentUpon>ConfigControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\configItems\PerfilItem.resx">
+      <DependentUpon>PerfilItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -603,6 +618,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\group_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\32195.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\arrow_down_high_res.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\arrow_up_high_res.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
