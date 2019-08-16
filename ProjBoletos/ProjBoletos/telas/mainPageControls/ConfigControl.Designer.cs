@@ -33,6 +33,7 @@
          // 
          // flowLayoutPanel
          // 
+         this.flowLayoutPanel.AutoScroll = true;
          this.flowLayoutPanel.Controls.Add(this.label1);
          this.flowLayoutPanel.Controls.Add(this.expandableItemPerfil);
          this.flowLayoutPanel.Controls.Add(this.separator1);
@@ -75,7 +76,7 @@
          this.expandableItemBoletos.BackColor = System.Drawing.SystemColors.Control;
          this.expandableItemBoletos.Location = new System.Drawing.Point(3, 76);
          this.expandableItemBoletos.Name = "expandableItemBoletos";
-         this.expandableItemBoletos.Size = new System.Drawing.Size(419, 271);
+         this.expandableItemBoletos.Size = new System.Drawing.Size(419, 50);
          this.expandableItemBoletos.TabIndex = 3;
          // 
          // ConfigControl

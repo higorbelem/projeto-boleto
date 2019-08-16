@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
 using ProjBoletos.utils;
+using ProjBoletos.telas.mainPageControls;
+using ProjBoletos.telas.mainPageControls.configItems;
 
 namespace ProjBoletos.components {
    public partial class ExpandableItem : UserControl {
@@ -47,7 +49,7 @@ namespace ProjBoletos.components {
       private void timer_Elapsed(object sender, ElapsedEventArgs e) {
          if (aberto) {
             if (Height > heightFechado) {
-               Height -= 20;
+               Height -= 40;
             } else {
                timer.Stop();
                Height = heightFechado;
@@ -57,7 +59,7 @@ namespace ProjBoletos.components {
             }
          } else {
             if (Height < heightAberto) {
-               Height += 20;
+               Height += 40;
             } else {
                timer.Stop();
                Height = heightAberto;
@@ -67,7 +69,7 @@ namespace ProjBoletos.components {
       }
 
       private void ExpandableItem_Resize(object sender, EventArgs e) {
-         headerPanel.Location = new Point(0,0);
+         headerPanel.Location = new Point(0, 0);
          headerPanel.Size = new Size(ClientRectangle.Width, heightFechado);
 
          headerFlow.Location = new Point(0, 0);
@@ -87,9 +89,10 @@ namespace ProjBoletos.components {
          bodyPanel1.Location = new Point(0, heightFechado);
          bodyPanel1.Size = new Size(ClientRectangle.Width, 0);
 
-         foreach(Control control in bodyPanel1.Controls) {
+         foreach (Control control in bodyPanel1.Controls) {
             control.Location = new Point(0, 0);
             control.Size = new Size(ClientRectangle.Width, control.Height);
+            ((PerfilItem)control).resize();
          }
       }
 

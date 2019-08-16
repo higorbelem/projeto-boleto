@@ -12,15 +12,19 @@ using ProjBoletos.telas.mainPageControls.HomeTabs;
 using ProjBoletos.telas.mainPageControls.configItems;
 
 namespace ProjBoletos.telas.mainPageControls {
-    public partial class ConfigControl : UserControl {
-        public ConfigControl() {
-            InitializeComponent();
-        }
+   public partial class ConfigControl : UserControl {
+      public ConfigControl() {
+         InitializeComponent();
+      }
 
       private void ConfigControl_Load(object sender, EventArgs e) {
          //ConfigControl_Resize(sender, e);
 
          BackColor = Colors.bg;
+
+         label1.Text = "CONFIGURAÇÕES";
+         label1.Font = Fonts.mainBold20;
+         label1.ForeColor = Colors.accent1;
 
          expandableItemPerfil.labelTitle.Font = Fonts.mainBold14;
          expandableItemPerfil.labelTitle.ForeColor = Colors.primaryText;
@@ -32,7 +36,7 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemPerfil.arrowPanel.BackColor = Colors.bg;
          expandableItemPerfil.arrowImg.BackColor = Colors.bg;
          PerfilItem perfilItem = new PerfilItem();
-         perfilItem.Size = new Size(expandableItemPerfil.Width,perfilItem.Height);
+         perfilItem.Size = new Size(expandableItemPerfil.Width, perfilItem.Height);
          expandableItemPerfil.setHeightAberto(perfilItem.Height);
          expandableItemPerfil.setHeightFechado(70);
          expandableItemPerfil.bodyPanel.Controls.Add(perfilItem);
@@ -57,15 +61,22 @@ namespace ProjBoletos.telas.mainPageControls {
 
       private void ConfigControl_Resize(object sender, EventArgs e) {
          flowLayoutPanel.Location = new Point(0, 0);
-         flowLayoutPanel.Size = new Size(ClientRectangle.Width,ClientRectangle.Height);
+         flowLayoutPanel.Size = new Size(ClientRectangle.Width, ClientRectangle.Height);
+
+         label1.Margin = new Padding((flowLayoutPanel.Width / 2) - (label1.Width / 2), 20, 20, 0);
 
          expandableItemPerfil.Location = new Point(0, 0);
-         expandableItemPerfil.Size = new Size(flowLayoutPanel.Width, 200);
+         expandableItemPerfil.Size = new Size(flowLayoutPanel.Width, expandableItemPerfil.Height);
 
          separator1.Size = new Size(flowLayoutPanel.Width, 10);
 
          expandableItemBoletos.Location = new Point(0, 0);
-         expandableItemBoletos.Size = new Size(flowLayoutPanel.Width, 200);
+         expandableItemBoletos.Size = new Size(flowLayoutPanel.Width, expandableItemBoletos.Height);
       }
+
+      public void resize() {
+         ConfigControl_Resize(null, null);
+      }
+
    }
 }

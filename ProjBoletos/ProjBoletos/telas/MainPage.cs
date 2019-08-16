@@ -34,11 +34,7 @@ namespace ProjBoletos.telas {
       private void Main_Load(object sender, EventArgs e) {
          bringClickedControl("home");
 
-         var request = WebRequest.Create(cedente.logo);
-         using (var response = request.GetResponse())
-         using (var stream = response.GetResponseStream()) {
-            logoImage.Image = Bitmap.FromStream(stream);
-         }
+         resetLogo();
 
          btnCliente.icon.Click += new EventHandler(btnCliente_click);
          btnMedidorVisual.icon.Click += new EventHandler(btnMedidorVisual_click);
@@ -78,6 +74,14 @@ namespace ProjBoletos.telas {
          timer.AutoReset = true;
          timer.SynchronizingObject = this;
          timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+      }
+
+      public void resetLogo() {
+         var request = WebRequest.Create(cedente.logo);
+         using (var response = request.GetResponse())
+         using (var stream = response.GetResponseStream()) {
+            logoImage.Image = Bitmap.FromStream(stream);
+         }
       }
 
       private void Main_Resize(object sender, EventArgs e) {
@@ -168,6 +172,7 @@ namespace ProjBoletos.telas {
       }
 
       public void btnConfig_click(object sender, EventArgs e) {
+         configControl.resize();
          bringClickedControl("config");
       }
 
