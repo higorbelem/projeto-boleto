@@ -13,5 +13,27 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
       public BoletosItem() {
          InitializeComponent();
       }
+
+      private void BoletosItem_Load(object sender, EventArgs e) {
+
+      }
+
+      private void BoletosItem_Resize(object sender, EventArgs e) {
+
+      }
+
+      public void resize() {
+         BoletosItem_Resize(null, null);
+      }
+
+      public static BoletosItem tryParse(Control control) {
+         BoletosItem boletosItem;
+         try {
+            boletosItem = (BoletosItem)control;
+         } catch (Exception e) {
+            return null;
+         }
+         return boletosItem;
+      }
    }
 }

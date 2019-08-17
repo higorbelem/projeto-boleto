@@ -18,7 +18,7 @@ namespace ProjBoletos.components {
       private System.Timers.Timer timer;
 
       private bool aberto = false;
-      public int heightFechado = 50;
+      public int heightFechado = 70;
       public int heightAberto = 200;
 
       public Label labelTitle, labelDescription;
@@ -38,6 +38,8 @@ namespace ProjBoletos.components {
       private void ExpandableItem_Load(object sender, EventArgs e) {
          ExpandableItem_Resize(sender, e);
 
+         BackColor = Colors.bg2;
+
          Height = heightFechado;
 
          timer = new System.Timers.Timer(8); //~60 FPS
@@ -49,7 +51,8 @@ namespace ProjBoletos.components {
       private void timer_Elapsed(object sender, ElapsedEventArgs e) {
          if (aberto) {
             if (Height > heightFechado) {
-               Height -= 40;
+               Height -= 50;
+               Application.DoEvents();
             } else {
                timer.Stop();
                Height = heightFechado;
@@ -59,7 +62,8 @@ namespace ProjBoletos.components {
             }
          } else {
             if (Height < heightAberto) {
-               Height += 40;
+               Height += 50;
+               Application.DoEvents();
             } else {
                timer.Stop();
                Height = heightAberto;
@@ -92,8 +96,31 @@ namespace ProjBoletos.components {
          foreach (Control control in bodyPanel1.Controls) {
             control.Location = new Point(0, 0);
             control.Size = new Size(ClientRectangle.Width, control.Height);
-            ((PerfilItem)control).resize();
+
+            PerfilItem perfilItem;
+            if ((perfilItem = PerfilItem.tryParse(control)) != null) {
+               perfilItem.resize();
+            } else {
+               BoletosItem boletosItem;
+               if ((boletosItem = BoletosItem.tryParse(control)) != null) {
+                  boletosItem.resize();
+               }
+            }
          }
+
+         //PerfilItem perfilItem = (PerfilItem)bodyPanel1.Controls[0];
+         //perfilItem.Location = new Point(0, 0);
+         //perfilItem.Size = new Size(ClientRectangle.Width, perfilItem.Height);
+         //perfilItem.resize();
+
+         //BoletosItem boletosItem = (BoletosItem)bodyPanel1.Controls[1];
+         //boletosItem.Location = new Point(0, 0);
+         //boletosItem.Size = new Size(ClientRectangle.Width, boletosItem.Height);
+         //boletosItem.resize();
+      }
+
+      public void resize() {
+         ExpandableItem_Resize(null, null);
       }
 
       private void headerPanel_Paint(object sender, PaintEventArgs e) {
@@ -101,12 +128,23 @@ namespace ProjBoletos.components {
       }
 
       private void arrowImg_Click(object sender, EventArgs e) {
-         timer.Start();
-
-         if (!aberto) {
-            arrowImg1.Image = new Bitmap(Properties.Resources.arrow_up_high_res);
-         } else {
+         //timer.Start();
+         if (aberto) {
             arrowImg1.Image = new Bitmap(Properties.Resources.arrow_down_high_res);
+            while (Height >= heightFechado) {
+               Height -= 40;
+               Application.DoEvents();
+            }
+            Height = heightFechado;
+            aberto = false;
+         } else {
+            arrowImg1.Image = new Bitmap(Properties.Resources.arrow_up_high_res);
+            while (Height <= heightAberto) {
+               Height += 40;
+               Application.DoEvents();
+            }
+            Height = heightAberto;
+            aberto = true;
          }
       }
 

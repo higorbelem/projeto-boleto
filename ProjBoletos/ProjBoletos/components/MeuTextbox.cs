@@ -75,7 +75,7 @@ namespace ProjBoletos.components {
 
          textBox1.GotFocus += RemoveText;
          textBox1.LostFocus += AddText;
-         
+
          textBox1.BackColor = backColor;
 
          if (isPassword) textBox1.PasswordChar = '\0';
@@ -87,7 +87,7 @@ namespace ProjBoletos.components {
 
       protected override void OnPaint(PaintEventArgs e) {
          base.OnPaint(e);
-         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+         //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
          Rectangle rect = new Rectangle(1, 1, Size.Width - 2, Size.Height - 2);
 
@@ -119,7 +119,7 @@ namespace ProjBoletos.components {
          e.Graphics.DrawArc(pen, new Rectangle(rect.Width - rect.Height, rect.Y, rect.Height, rect.Height), 90, -180);*/
       }
 
-      public void RemoveText(object sender, EventArgs e) {      
+      public void RemoveText(object sender, EventArgs e) {
          if (txtBox.Text == hint) {
             if (!mask.Equals("")) {
                txtBox.Mask = mask;

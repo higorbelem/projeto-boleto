@@ -16,14 +16,34 @@ using ProjBoletos.components;
 
 namespace ProjBoletos.telas.mainPageControls.configItems {
    public partial class PerfilItem : UserControl {
+
+      Cedente cedente;
+
       public PerfilItem() {
          InitializeComponent();
+
+         var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
+         cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
+
+         if (cedente == null) {
+            Application.Exit();
+         }
+
+         txtBoxBairro.useHint = false;
+         txtBoxRua.useHint = false;
+         txtBoxNumero.useHint = false;
+         txtBoxCep.useHint = false;
+         txtBoxCidade.useHint = false;
+         txtBoxUf.useHint = false;
+         txtBoxCnpj.useHint = false;
+         txtBoxNome.useHint = false;
+         txtBoxEmail.useHint = false;
+         txtBoxContato.useHint = false;
 
          txtBoxNome.hint = "Nome";
          txtBoxCnpj.hint = "Cnpj";
          txtBoxCnpj.mask = "00,000,000/0000-00";
          txtBoxContato.hint = "Contato";
-         txtBoxContato.mask = "(00) 00000-0000";
          txtBoxEmail.hint = "Email";
          txtBoxCep.hint = "CEP";
          txtBoxCep.mask = "00000-000";
@@ -35,6 +55,7 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
          txtBoxUf.mask = "LL";
 
          btnSalvar.title = "SALVAR";
+         btnFile.title = "ALTERAR LOGO";
       }
 
       private void PerfilItem_Load(object sender, EventArgs e) {
@@ -43,6 +64,28 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
          labelEndereco.Text = "Endereço";
          labelEndereco.Font = Fonts.mainBold12;
          labelEndereco.ForeColor = Colors.primaryText;
+
+         txtBoxBairro.BackColor = Colors.bg2;
+         txtBoxRua.BackColor = Colors.bg2;
+         txtBoxNumero.BackColor = Colors.bg2;
+         txtBoxCep.BackColor = Colors.bg2;
+         txtBoxCidade.BackColor = Colors.bg2;
+         txtBoxUf.BackColor = Colors.bg2;
+         txtBoxCnpj.BackColor = Colors.bg2;
+         txtBoxNome.BackColor = Colors.bg2;
+         txtBoxEmail.BackColor = Colors.bg2;
+         txtBoxContato.BackColor = Colors.bg2;
+
+         txtBoxBairro.txtBox.Text = cedente.bairro;
+         txtBoxRua.txtBox.Text = cedente.rua;
+         txtBoxNumero.txtBox.Text = cedente.numero;
+         txtBoxCep.txtBox.Text = cedente.cep;
+         txtBoxCidade.txtBox.Text = cedente.cidade;
+         txtBoxUf.txtBox.Text = cedente.uf;
+         txtBoxCnpj.txtBox.Text = cedente.cnpj;
+         txtBoxNome.txtBox.Text = cedente.nome;
+         txtBoxEmail.txtBox.Text = cedente.email;
+         txtBoxContato.txtBox.Text = cedente.contato;
 
       }
 
@@ -81,6 +124,12 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
 
          txtBoxCep.Location = new Point(txtBoxUf.Location.X + txtBoxUf.Width + 5, txtBoxRua.Location.Y + txtBoxRua.Height + 5);
          txtBoxCep.Size = new Size((int)(rectWithPadding.Width * 0.8) - 5, 50);
+
+         btnFile.Size = new Size(270, 50);
+         btnFile.Location = new Point((rectWithPadding.Width / 4) - (btnFile.Width / 2), txtBoxUf.Location.Y + txtBoxUf.Height + 15);
+
+         btnSalvar.Size = new Size(270, 50);
+         btnSalvar.Location = new Point(((rectWithPadding.Width / 4) * 3) - (btnSalvar.Width / 2), txtBoxUf.Location.Y + txtBoxUf.Height + 15);
       }
 
       private void panel1_Paint(object sender, PaintEventArgs e) {
@@ -91,14 +140,18 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
          PerfilItem_Resize(null, null);
       }
 
+      public static PerfilItem tryParse(Control control) {
+         PerfilItem perfilItem;
+         try {
+            perfilItem = (PerfilItem)control;
+         } catch (Exception e) {
+            return null;
+         }
+         return perfilItem;
+      }
+
       public bool uploadImage(string imagePath) {
          try {
-            var cedenteJson = Properties.Settings.Default["cedenteAtual"].ToString();
-            Cedente cedente = JsonConvert.DeserializeObject<Cedente>(cedenteJson);
-
-            if (cedente == null) {
-               Application.Exit();
-            }
 
             FtpWebRequest ftpReq = (FtpWebRequest)WebRequest.Create("ftp://localhost/imgs/logos/logo-cedente-" + cedente.id + ".png");
 
@@ -143,20 +196,28 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
             Stream fileStream = fileDialog.OpenFile();
             if (fileStream != null) {
                string fileName = fileDialog.FileName;
+               string extension = fileName.Split('.').Last();
+               if (extension.Equals("png") || extension.Equals("jpg")) {
+                  if (fileStream.Length <= 100000) {
+                     Loading loading = new Loading();
+                     loading.task = new Task(new Action(() => {
+                        bool result = uploadImage(fileName);
 
-               Loading loading = new Loading();
-               loading.task = new Task(new Action(() => {
-                  bool result = uploadImage(fileName);
+                        loading.terminou = true;
+                        loading.terminouBem = result;
+                     }));
 
-                  loading.terminou = true;
-                  loading.terminouBem = result;
-               }));
+                     var res = loading.ShowDialog();
 
-               var res = loading.ShowDialog();
-
-               if (res == DialogResult.OK) {
-                  MainPage mainPage = (MainPage)FindForm();
-                  mainPage.resetLogo();
+                     if (res == DialogResult.OK) {
+                        MainPage mainPage = (MainPage)FindForm();
+                        mainPage.resetLogo();
+                     }
+                  } else {
+                     MessageBox.Show("Imagem muito grande.\nMáximo : 100KB\nImagem escolhida : " + fileStream.Length / 1000.0 + "KB");
+                  }
+               } else {
+                  MessageBox.Show("Extensão inválida.\nSomente jpg e png são aceitos.");
                }
             }
          }

@@ -31,10 +31,10 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemPerfil.labelTitle.Text = "PERFIL";
          expandableItemPerfil.labelDescription.Font = Fonts.mainBold10;
          expandableItemPerfil.labelDescription.ForeColor = Colors.secondaryText;
-         expandableItemPerfil.labelDescription.Text = "Nome, ads...";
-         expandableItemPerfil.BackColor = Colors.bg;
-         expandableItemPerfil.arrowPanel.BackColor = Colors.bg;
-         expandableItemPerfil.arrowImg.BackColor = Colors.bg;
+         expandableItemPerfil.labelDescription.Text = "Nome, Cnpj, Contato, Email, Endereço...";
+         expandableItemPerfil.BackColor = Colors.bg2;
+         expandableItemPerfil.arrowPanel.BackColor = Colors.bg2;
+         expandableItemPerfil.arrowImg.BackColor = Colors.bg2;
          PerfilItem perfilItem = new PerfilItem();
          perfilItem.Size = new Size(expandableItemPerfil.Width, perfilItem.Height);
          expandableItemPerfil.setHeightAberto(perfilItem.Height);
@@ -47,31 +47,31 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemBoletos.labelDescription.Font = Fonts.mainBold10;
          expandableItemBoletos.labelDescription.ForeColor = Colors.secondaryText;
          expandableItemBoletos.labelDescription.Text = "Coisas, coisas, coisas...";
-         expandableItemBoletos.BackColor = Colors.bg;
-         expandableItemBoletos.arrowPanel.BackColor = Colors.bg;
-         expandableItemBoletos.arrowImg.BackColor = Colors.bg;
+         expandableItemBoletos.BackColor = Colors.bg2;
+         expandableItemBoletos.arrowPanel.BackColor = Colors.bg2;
+         expandableItemBoletos.arrowImg.BackColor = Colors.bg2;
          BoletosItem boletosItem = new BoletosItem();
          boletosItem.Size = new Size(expandableItemBoletos.Width, boletosItem.Height);
          expandableItemBoletos.setHeightAberto(boletosItem.Height);
          expandableItemBoletos.setHeightFechado(70);
          expandableItemBoletos.bodyPanel.Controls.Add(boletosItem);
 
-         separator1.color = Colors.secondaryText;
       }
 
       private void ConfigControl_Resize(object sender, EventArgs e) {
          flowLayoutPanel.Location = new Point(0, 0);
          flowLayoutPanel.Size = new Size(ClientRectangle.Width, ClientRectangle.Height);
 
-         label1.Margin = new Padding((flowLayoutPanel.Width / 2) - (label1.Width / 2), 20, 20, 0);
+         label1.Margin = new Padding((flowLayoutPanel.Width / 2) - (label1.Width / 2), 20, 0, 20);
 
          expandableItemPerfil.Location = new Point(0, 0);
          expandableItemPerfil.Size = new Size(flowLayoutPanel.Width, expandableItemPerfil.Height);
-
-         separator1.Size = new Size(flowLayoutPanel.Width, 10);
+         expandableItemPerfil.resize();
 
          expandableItemBoletos.Location = new Point(0, 0);
          expandableItemBoletos.Size = new Size(flowLayoutPanel.Width, expandableItemBoletos.Height);
+         expandableItemBoletos.Margin = new Padding(0, 5, 0, 0);
+         expandableItemBoletos.resize();
       }
 
       public void resize() {

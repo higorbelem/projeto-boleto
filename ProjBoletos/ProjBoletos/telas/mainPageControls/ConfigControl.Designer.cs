@@ -26,7 +26,6 @@
          this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
          this.label1 = new System.Windows.Forms.Label();
          this.expandableItemPerfil = new ProjBoletos.components.ExpandableItem();
-         this.separator1 = new ProjBoletos.components.Separator();
          this.expandableItemBoletos = new ProjBoletos.components.ExpandableItem();
          this.flowLayoutPanel.SuspendLayout();
          this.SuspendLayout();
@@ -36,7 +35,6 @@
          this.flowLayoutPanel.AutoScroll = true;
          this.flowLayoutPanel.Controls.Add(this.label1);
          this.flowLayoutPanel.Controls.Add(this.expandableItemPerfil);
-         this.flowLayoutPanel.Controls.Add(this.separator1);
          this.flowLayoutPanel.Controls.Add(this.expandableItemBoletos);
          this.flowLayoutPanel.Location = new System.Drawing.Point(11, 34);
          this.flowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -60,23 +58,15 @@
          this.expandableItemPerfil.Location = new System.Drawing.Point(0, 13);
          this.expandableItemPerfil.Margin = new System.Windows.Forms.Padding(0);
          this.expandableItemPerfil.Name = "expandableItemPerfil";
-         this.expandableItemPerfil.Size = new System.Drawing.Size(419, 50);
+         this.expandableItemPerfil.Size = new System.Drawing.Size(419, 70);
          this.expandableItemPerfil.TabIndex = 0;
-         // 
-         // separator1
-         // 
-         this.separator1.Location = new System.Drawing.Point(0, 63);
-         this.separator1.Margin = new System.Windows.Forms.Padding(0);
-         this.separator1.Name = "separator1";
-         this.separator1.Size = new System.Drawing.Size(150, 10);
-         this.separator1.TabIndex = 2;
          // 
          // expandableItemBoletos
          // 
-         this.expandableItemBoletos.BackColor = System.Drawing.SystemColors.Control;
-         this.expandableItemBoletos.Location = new System.Drawing.Point(3, 76);
+         this.expandableItemBoletos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+         this.expandableItemBoletos.Location = new System.Drawing.Point(3, 86);
          this.expandableItemBoletos.Name = "expandableItemBoletos";
-         this.expandableItemBoletos.Size = new System.Drawing.Size(419, 50);
+         this.expandableItemBoletos.Size = new System.Drawing.Size(419, 70);
          this.expandableItemBoletos.TabIndex = 3;
          // 
          // ConfigControl
@@ -101,7 +91,6 @@
       private components.ExpandableItem expandableItemPerfil;
       private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
       private System.Windows.Forms.Label label1;
-      private components.Separator separator1;
       private components.ExpandableItem expandableItemBoletos;
    }
 }

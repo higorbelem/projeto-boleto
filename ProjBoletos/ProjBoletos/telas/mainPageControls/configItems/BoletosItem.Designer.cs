@@ -23,8 +23,17 @@
       /// o conteúdo deste método com o editor de código.
       /// </summary>
       private void InitializeComponent() {
-         components = new System.ComponentModel.Container();
+         this.SuspendLayout();
+         // 
+         // BoletosItem
+         // 
+         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Name = "BoletosItem";
+         this.Load += new System.EventHandler(this.BoletosItem_Load);
+         this.Resize += new System.EventHandler(this.BoletosItem_Resize);
+         this.ResumeLayout(false);
+
       }
 
       #endregion
