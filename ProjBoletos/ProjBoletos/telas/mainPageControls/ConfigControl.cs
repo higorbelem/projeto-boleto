@@ -56,6 +56,21 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemBoletos.setHeightFechado(70);
          expandableItemBoletos.bodyPanel.Controls.Add(boletosItem);
 
+         expandableItemContas.labelTitle.Font = Fonts.mainBold14;
+         expandableItemContas.labelTitle.ForeColor = Colors.primaryText;
+         expandableItemContas.labelTitle.Text = "CONTAS";
+         expandableItemContas.labelDescription.Font = Fonts.mainBold10;
+         expandableItemContas.labelDescription.ForeColor = Colors.secondaryText;
+         expandableItemContas.labelDescription.Text = "Adicionar, remover ou editar contas bancárias";
+         expandableItemContas.BackColor = Colors.bg2;
+         expandableItemContas.arrowPanel.BackColor = Colors.bg2;
+         expandableItemContas.arrowImg.BackColor = Colors.bg2;
+         ContasItem contasItem = new ContasItem();
+         boletosItem.Size = new Size(expandableItemContas.Width, contasItem.Height);
+         expandableItemContas.setHeightAberto(contasItem.Height);
+         expandableItemContas.setHeightFechado(70);
+         expandableItemContas.bodyPanel.Controls.Add(contasItem);
+
          expandableItemSenha.labelTitle.Font = Fonts.mainBold14;
          expandableItemSenha.labelTitle.ForeColor = Colors.primaryText;
          expandableItemSenha.labelTitle.Text = "SENHA";
@@ -88,10 +103,16 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemBoletos.Margin = new Padding(0, 5, 0, 0);
          expandableItemBoletos.resize();
 
+         expandableItemContas.Location = new Point(0, 0);
+         expandableItemContas.Size = new Size(flowLayoutPanel.Width, expandableItemContas.Height);
+         expandableItemContas.Margin = new Padding(0, 5, 0, 0);
+         expandableItemContas.resize();
+
          expandableItemSenha.Location = new Point(0, 0);
          expandableItemSenha.Size = new Size(flowLayoutPanel.Width, expandableItemSenha.Height);
          expandableItemSenha.Margin = new Padding(0, 5, 0, 0);
          expandableItemSenha.resize();
+
       }
 
       public void resize() {

@@ -87,7 +87,7 @@ namespace ProjBoletos.components {
 
       protected override void OnPaint(PaintEventArgs e) {
          base.OnPaint(e);
-         //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
          Rectangle rect = new Rectangle(1, 1, Size.Width - 2, Size.Height - 2);
 

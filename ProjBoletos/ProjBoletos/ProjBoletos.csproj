@@ -311,6 +311,12 @@
     <Compile Include="telas\mainPageControls\configItems\BoletosItem.Designer.cs">
       <DependentUpon>BoletosItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\configItems\ContasItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\configItems\ContasItem.Designer.cs">
+      <DependentUpon>ContasItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\mainPageControls\configItems\PerfilItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -498,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\configItems\BoletosItem.resx">
       <DependentUpon>BoletosItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\configItems\ContasItem.resx">
+      <DependentUpon>ContasItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\configItems\PerfilItem.resx">
       <DependentUpon>PerfilItem.cs</DependentUpon>

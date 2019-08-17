@@ -249,6 +249,10 @@ namespace ProjBoletos.telas {
 
       }
 
+      private void MainPage_FormClosed(object sender, FormClosedEventArgs e) {
+         Application.Exit();
+      }
+
       protected override CreateParams CreateParams {
          get {
             CreateParams cp = base.CreateParams;

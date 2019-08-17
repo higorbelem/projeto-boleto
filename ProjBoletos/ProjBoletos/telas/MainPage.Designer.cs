@@ -227,6 +227,7 @@ namespace ProjBoletos.telas {
          this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
          this.Load += new System.EventHandler(this.Main_Load);
          this.Resize += new System.EventHandler(this.Main_Resize);
+         this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainPage_FormClosed);
          this.sideBarFlowPanel.ResumeLayout(false);
          this.sideBarFlowPanel.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.logoImage)).EndInit();
