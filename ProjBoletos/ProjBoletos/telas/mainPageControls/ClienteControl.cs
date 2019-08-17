@@ -32,7 +32,7 @@ namespace ProjBoletos.telas.mainPageControls {
             Application.Exit();
          }
 
-      }  
+      }
 
       private void ClienteControl_Load(object sender, EventArgs e) {
          panelTop.BackColor = Colors.bg3;
@@ -90,6 +90,8 @@ namespace ProjBoletos.telas.mainPageControls {
                AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, sacado, AdicionarEditarClienteDialog.DIALOG_MODE_EDITAR);
                var resDialog = adicionarClienteDialog.ShowDialog();
 
+               Parent.FindForm().Activate();
+
                if (resDialog == DialogResult.OK) {
                   updateCustomViewList();
                }
@@ -114,7 +116,7 @@ namespace ProjBoletos.telas.mainPageControls {
          btnSearch.Size = new Size((int)((panelTop.Width - panelTopPaddingLeftRight * 2) * 0.1), panelTop.Height - panelTopPaddingTopBottom * 2);
 
          btnAdicionar.Size = new Size(300, 40);
-         btnAdicionar.Location = new Point(ClientRectangle.Width/2 - btnAdicionar.Width/2, panelTop.Location.Y + panelTop.Height + 20);
+         btnAdicionar.Location = new Point(ClientRectangle.Width / 2 - btnAdicionar.Width / 2, panelTop.Location.Y + panelTop.Height + 20);
 
          customListView.Size = new Size(ClientRectangle.Width - 40, 80); //0
          customListView.MinimumSize = new Size(ClientRectangle.Width - 40, 0); //0
@@ -165,6 +167,8 @@ namespace ProjBoletos.telas.mainPageControls {
       public void btnAdicionar_Click(object sender, EventArgs e) {
          AdicionarEditarClienteDialog adicionarClienteDialog = new AdicionarEditarClienteDialog(cedente, null, AdicionarEditarClienteDialog.DIALOG_MODE_ADICIONAR);
          var resDialog = adicionarClienteDialog.ShowDialog();
+
+         Parent.FindForm().Activate();
 
          if (resDialog == DialogResult.OK) {
             updateCustomViewList();

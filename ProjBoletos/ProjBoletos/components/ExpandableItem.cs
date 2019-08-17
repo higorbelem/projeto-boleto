@@ -57,8 +57,6 @@ namespace ProjBoletos.components {
                timer.Stop();
                Height = heightFechado;
                aberto = false;
-               //labelFechado.Visible = true;
-               //labelFechado.Text = txtBoxRua.txtBox.Text + ", " + txtBoxNumero.txtBox.Text + " " + txtBoxBairro.txtBox.Text;
             }
          } else {
             if (Height < heightAberto) {
@@ -88,7 +86,6 @@ namespace ProjBoletos.components {
 
          arrowImg1.Size = new Size(50, 50);
          arrowImg1.Location = new Point((arrowPanel1.Width / 2) - (arrowImg1.Width / 2), (arrowPanel1.Height / 2) - (arrowImg1.Height / 2));
-         //arrowImg.Location = new Point(0,0);
 
          bodyPanel1.Location = new Point(0, heightFechado);
          bodyPanel1.Size = new Size(ClientRectangle.Width, 0);
@@ -104,19 +101,14 @@ namespace ProjBoletos.components {
                BoletosItem boletosItem;
                if ((boletosItem = BoletosItem.tryParse(control)) != null) {
                   boletosItem.resize();
+               } else {
+                  SenhaItem senhaItem;
+                  if ((senhaItem = SenhaItem.tryParse(control)) != null) {
+                     senhaItem.resize();
+                  }
                }
             }
          }
-
-         //PerfilItem perfilItem = (PerfilItem)bodyPanel1.Controls[0];
-         //perfilItem.Location = new Point(0, 0);
-         //perfilItem.Size = new Size(ClientRectangle.Width, perfilItem.Height);
-         //perfilItem.resize();
-
-         //BoletosItem boletosItem = (BoletosItem)bodyPanel1.Controls[1];
-         //boletosItem.Location = new Point(0, 0);
-         //boletosItem.Size = new Size(ClientRectangle.Width, boletosItem.Height);
-         //boletosItem.resize();
       }
 
       public void resize() {

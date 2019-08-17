@@ -28,12 +28,14 @@
          this.panelTopBar = new System.Windows.Forms.Panel();
          this.radioButtonMedidor = new System.Windows.Forms.RadioButton();
          this.radioButtonVisualizador = new System.Windows.Forms.RadioButton();
+         this.labelErro = new System.Windows.Forms.Label();
          this.txtBoxSenhaConfirma = new ProjBoletos.components.MeuTextbox();
          this.btnOk = new ProjBoletos.testes.MeuButton();
          this.txtBoxSenha = new ProjBoletos.components.MeuTextbox();
          this.txtBoxCpf = new ProjBoletos.components.MeuTextbox();
          this.txtBoxNome = new ProjBoletos.components.MeuTextbox();
          this.backButtonImg = new PictureBoxWithInterpolationMode();
+         this.labelErroPost = new System.Windows.Forms.Label();
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
@@ -79,6 +81,20 @@
          this.radioButtonVisualizador.TabStop = true;
          this.radioButtonVisualizador.Text = "Visualizador";
          this.radioButtonVisualizador.UseVisualStyleBackColor = true;
+         // 
+         // labelErro
+         // 
+         this.labelErro.AutoSize = true;
+         this.labelErro.BackColor = System.Drawing.Color.White;
+         this.labelErro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErro.ForeColor = System.Drawing.Color.Red;
+         this.labelErro.Location = new System.Drawing.Point(179, 391);
+         this.labelErro.Name = "labelErro";
+         this.labelErro.Size = new System.Drawing.Size(135, 13);
+         this.labelErro.TabIndex = 14;
+         this.labelErro.Text = "Campo de senha vazio";
+         this.labelErro.Visible = false;
+         this.labelErro.Click += new System.EventHandler(this.labelErro_Click);
          // 
          // txtBoxSenhaConfirma
          // 
@@ -132,11 +148,26 @@
          this.backButtonImg.TabStop = false;
          this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
          // 
+         // labelErroPost
+         // 
+         this.labelErroPost.AutoSize = true;
+         this.labelErroPost.BackColor = System.Drawing.Color.White;
+         this.labelErroPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErroPost.ForeColor = System.Drawing.Color.Red;
+         this.labelErroPost.Location = new System.Drawing.Point(145, 391);
+         this.labelErroPost.Name = "labelErroPost";
+         this.labelErroPost.Size = new System.Drawing.Size(210, 13);
+         this.labelErroPost.TabIndex = 15;
+         this.labelErroPost.Text = "Houve algum erro, tente novamente";
+         this.labelErroPost.Visible = false;
+         // 
          // AdicionarEditarMedidorVisualizador
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(500, 413);
+         this.Controls.Add(this.labelErroPost);
+         this.Controls.Add(this.labelErro);
          this.Controls.Add(this.txtBoxSenhaConfirma);
          this.Controls.Add(this.radioButtonVisualizador);
          this.Controls.Add(this.radioButtonMedidor);
@@ -169,5 +200,7 @@
       private System.Windows.Forms.RadioButton radioButtonMedidor;
       private System.Windows.Forms.RadioButton radioButtonVisualizador;
       private components.MeuTextbox txtBoxSenhaConfirma;
+      private System.Windows.Forms.Label labelErro;
+      private System.Windows.Forms.Label labelErroPost;
    }
 }

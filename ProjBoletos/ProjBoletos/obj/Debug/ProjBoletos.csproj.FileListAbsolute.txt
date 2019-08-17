@@ -66,3 +66,4 @@ C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBole
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.components.ExpandableItem.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.configItems.PerfilItem.resources
 C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.configItems.BoletosItem.resources
+C:\Users\Higor\Documents\proj boletos\ProjBoletos\ProjBoletos\obj\Debug\ProjBoletos.telas.mainPageControls.configItems.SenhaItem.resources

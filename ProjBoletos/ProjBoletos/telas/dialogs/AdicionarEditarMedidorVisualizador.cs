@@ -65,6 +65,8 @@ namespace ProjBoletos.telas.dialogs {
 
       private void AdicionarEditarMedidorVisualizador_Load(object sender, EventArgs e) {
          BackColor = Colors.bg3;
+         labelErro.BackColor = Colors.bg3;
+         labelErroPost.BackColor = Colors.bg3;
 
          panelTopBar.BackColor = Colors.bgDark2;
          panelTopBar.Location = new Point(ClientRectangle.X, ClientRectangle.Y);
@@ -95,7 +97,7 @@ namespace ProjBoletos.telas.dialogs {
             txtBoxSenhaConfirma.txtBox.PasswordChar = '*';
             if (medidorVisualizador.tipo.Equals("medidor")) {
                radioButtonMedidor.Checked = true;
-            }else if (medidorVisualizador.tipo.Equals("visualizador")) {
+            } else if (medidorVisualizador.tipo.Equals("visualizador")) {
                radioButtonVisualizador.Checked = true;
             }
             //txtBoxSenha.isPassword = false;
@@ -143,7 +145,7 @@ namespace ProjBoletos.telas.dialogs {
             StringBuilder stringBuilder = new StringBuilder();
             if (camposVazios) {
                stringBuilder.Append("campos vazios");
-            } else if(cpfNaoCompleto) {
+            } else if (cpfNaoCompleto) {
                stringBuilder.Append("cpf não completo");
             }
             if (senhasDivergem) {
@@ -164,9 +166,12 @@ namespace ProjBoletos.telas.dialogs {
             stringBuilder[0] = (stringBuilder[0] + "").ToUpper().ToCharArray()[0];
 
             string message = stringBuilder.ToString();
-            
-            MessageBox.Show(message);
 
+            //MessageBox.Show(message);
+            labelErroPost.Visible = false;
+            labelErro.Text = message;
+            labelErro.Visible = true;
+            labelErro.Location = new Point((ClientRectangle.Width / 2) - (labelErro.Width / 2), labelErro.Location.Y);
          } else {
             string tipo = radioButtonMedidor.Checked ? radioButtonMedidor.Text.ToLower() : radioButtonVisualizador.Checked ? radioButtonVisualizador.Text.ToLower() : "erro";
             Loading loading = new Loading();
@@ -182,17 +187,19 @@ namespace ProjBoletos.telas.dialogs {
                this.Close();
                this.DialogResult = DialogResult.OK;
                if (dialogMode == DIALOG_MODE_ADICIONAR) {
-                  MessageBox.Show("Inserido com sucesso.");
+                  //MessageBox.Show("Inserido com sucesso.");
                } else if (dialogMode == DIALOG_MODE_EDITAR) {
-                  MessageBox.Show("Editado com sucesso.");
+                  //MessageBox.Show("Editado com sucesso.");
                }
             } else {
-               MessageBox.Show("Houve algum erro, tente novamente.");
+               //MessageBox.Show("Houve algum erro, tente novamente.");
+               labelErroPost.Visible = true;
+               labelErro.Visible = false;
             }
          }
       }
 
-      private bool sendPhp(string nome, string cpf, string senha,string tipo , int dialogMode) {
+      private bool sendPhp(string nome, string cpf, string senha, string tipo, int dialogMode) {
          //loading1.Visible = true;
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/adicionarMedidorVisualizador.php");
@@ -231,6 +238,21 @@ namespace ProjBoletos.telas.dialogs {
          }
 
          return false;
+      }
+
+      protected override void WndProc(ref Message m) {
+         const UInt32 WM_NCACTIVATE = 0x0086;
+
+         if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+         } else {
+            base.WndProc(ref m);
+         }
+      }
+
+      private void labelErro_Click(object sender, EventArgs e) {
+
       }
    }
 }

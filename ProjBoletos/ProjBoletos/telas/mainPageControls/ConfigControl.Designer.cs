@@ -27,6 +27,7 @@
          this.label1 = new System.Windows.Forms.Label();
          this.expandableItemPerfil = new ProjBoletos.components.ExpandableItem();
          this.expandableItemBoletos = new ProjBoletos.components.ExpandableItem();
+         this.expandableItemSenha = new ProjBoletos.components.ExpandableItem();
          this.flowLayoutPanel.SuspendLayout();
          this.SuspendLayout();
          // 
@@ -36,6 +37,7 @@
          this.flowLayoutPanel.Controls.Add(this.label1);
          this.flowLayoutPanel.Controls.Add(this.expandableItemPerfil);
          this.flowLayoutPanel.Controls.Add(this.expandableItemBoletos);
+         this.flowLayoutPanel.Controls.Add(this.expandableItemSenha);
          this.flowLayoutPanel.Location = new System.Drawing.Point(11, 34);
          this.flowLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
          this.flowLayoutPanel.Name = "flowLayoutPanel";
@@ -69,6 +71,14 @@
          this.expandableItemBoletos.Size = new System.Drawing.Size(419, 70);
          this.expandableItemBoletos.TabIndex = 3;
          // 
+         // expandableItemSenha
+         // 
+         this.expandableItemSenha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+         this.expandableItemSenha.Location = new System.Drawing.Point(3, 162);
+         this.expandableItemSenha.Name = "expandableItemSenha";
+         this.expandableItemSenha.Size = new System.Drawing.Size(419, 70);
+         this.expandableItemSenha.TabIndex = 4;
+         // 
          // ConfigControl
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,5 +102,6 @@
       private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
       private System.Windows.Forms.Label label1;
       private components.ExpandableItem expandableItemBoletos;
+      private components.ExpandableItem expandableItemSenha;
    }
 }

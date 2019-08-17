@@ -26,19 +26,24 @@
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdicionarEditarClienteDialog));
          this.labelTitle = new System.Windows.Forms.Label();
          this.panelTopBar = new System.Windows.Forms.Panel();
+         this.backButtonImg = new PictureBoxWithInterpolationMode();
          this.flowCasas = new System.Windows.Forms.FlowLayoutPanel();
+         this.btnAddCasa = new ProjBoletos.testes.MeuButton();
          this.labelCasas = new System.Windows.Forms.Label();
          this.panel1 = new System.Windows.Forms.Panel();
-         this.btnAddCasa = new ProjBoletos.testes.MeuButton();
          this.btnOk = new ProjBoletos.testes.MeuButton();
          this.txtBoxDocumento = new ProjBoletos.components.MeuTextbox();
          this.txtBoxEmail = new ProjBoletos.components.MeuTextbox();
          this.txtBoxNome = new ProjBoletos.components.MeuTextbox();
-         this.backButtonImg = new PictureBoxWithInterpolationMode();
+         this.labelErroExcluirCasa = new System.Windows.Forms.Label();
+         this.labelCampoVazioNenhumaCasa = new System.Windows.Forms.Label();
+         this.labelCampoVazio = new System.Windows.Forms.Label();
+         this.labelSemCasa = new System.Windows.Forms.Label();
+         this.labelErroPost = new System.Windows.Forms.Label();
          this.panelTopBar.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.flowCasas.SuspendLayout();
          this.panel1.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
          // 
          // labelTitle
@@ -60,6 +65,18 @@
          this.panelTopBar.TabIndex = 4;
          this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
          // 
+         // backButtonImg
+         // 
+         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
+         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
+         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
+         this.backButtonImg.Name = "backButtonImg";
+         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
+         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+         this.backButtonImg.TabIndex = 0;
+         this.backButtonImg.TabStop = false;
+         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
+         // 
          // flowCasas
          // 
          this.flowCasas.AutoScroll = true;
@@ -69,6 +86,14 @@
          this.flowCasas.Name = "flowCasas";
          this.flowCasas.Size = new System.Drawing.Size(444, 274);
          this.flowCasas.TabIndex = 9;
+         // 
+         // btnAddCasa
+         // 
+         this.btnAddCasa.Location = new System.Drawing.Point(3, 3);
+         this.btnAddCasa.Name = "btnAddCasa";
+         this.btnAddCasa.Size = new System.Drawing.Size(150, 43);
+         this.btnAddCasa.TabIndex = 0;
+         this.btnAddCasa.Click += new System.EventHandler(this.btnAddCasa_Click);
          // 
          // labelCasas
          // 
@@ -87,17 +112,9 @@
          this.panel1.Size = new System.Drawing.Size(444, 274);
          this.panel1.TabIndex = 10;
          // 
-         // btnAddCasa
-         // 
-         this.btnAddCasa.Location = new System.Drawing.Point(3, 3);
-         this.btnAddCasa.Name = "btnAddCasa";
-         this.btnAddCasa.Size = new System.Drawing.Size(150, 43);
-         this.btnAddCasa.TabIndex = 0;
-         this.btnAddCasa.Click += new System.EventHandler(this.btnAddCasa_Click);
-         // 
          // btnOk
          // 
-         this.btnOk.Location = new System.Drawing.Point(83, 533);
+         this.btnOk.Location = new System.Drawing.Point(83, 535);
          this.btnOk.Name = "btnOk";
          this.btnOk.Size = new System.Drawing.Size(335, 45);
          this.btnOk.TabIndex = 8;
@@ -127,23 +144,81 @@
          this.txtBoxNome.Size = new System.Drawing.Size(476, 40);
          this.txtBoxNome.TabIndex = 5;
          // 
-         // backButtonImg
+         // labelErroExcluirCasa
          // 
-         this.backButtonImg.Image = ((System.Drawing.Image)(resources.GetObject("backButtonImg.Image")));
-         this.backButtonImg.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Default;
-         this.backButtonImg.Location = new System.Drawing.Point(0, 3);
-         this.backButtonImg.Name = "backButtonImg";
-         this.backButtonImg.Size = new System.Drawing.Size(51, 43);
-         this.backButtonImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-         this.backButtonImg.TabIndex = 0;
-         this.backButtonImg.TabStop = false;
-         this.backButtonImg.Click += new System.EventHandler(this.backButtonImg_Click);
+         this.labelErroExcluirCasa.AutoSize = true;
+         this.labelErroExcluirCasa.BackColor = System.Drawing.Color.White;
+         this.labelErroExcluirCasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErroExcluirCasa.ForeColor = System.Drawing.Color.Red;
+         this.labelErroExcluirCasa.Location = new System.Drawing.Point(134, 590);
+         this.labelErroExcluirCasa.Name = "labelErroExcluirCasa";
+         this.labelErroExcluirCasa.Size = new System.Drawing.Size(232, 13);
+         this.labelErroExcluirCasa.TabIndex = 14;
+         this.labelErroExcluirCasa.Text = "Algum erro aconteceu ao excluir a casa";
+         this.labelErroExcluirCasa.Visible = false;
+         // 
+         // labelCampoVazioNenhumaCasa
+         // 
+         this.labelCampoVazioNenhumaCasa.AutoSize = true;
+         this.labelCampoVazioNenhumaCasa.BackColor = System.Drawing.Color.White;
+         this.labelCampoVazioNenhumaCasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelCampoVazioNenhumaCasa.ForeColor = System.Drawing.Color.Red;
+         this.labelCampoVazioNenhumaCasa.Location = new System.Drawing.Point(123, 590);
+         this.labelCampoVazioNenhumaCasa.Name = "labelCampoVazioNenhumaCasa";
+         this.labelCampoVazioNenhumaCasa.Size = new System.Drawing.Size(254, 13);
+         this.labelCampoVazioNenhumaCasa.TabIndex = 15;
+         this.labelCampoVazioNenhumaCasa.Text = "Campos vazios e nenhuma casa adicionada";
+         this.labelCampoVazioNenhumaCasa.Visible = false;
+         // 
+         // labelCampoVazio
+         // 
+         this.labelCampoVazio.AutoSize = true;
+         this.labelCampoVazio.BackColor = System.Drawing.Color.White;
+         this.labelCampoVazio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelCampoVazio.ForeColor = System.Drawing.Color.Red;
+         this.labelCampoVazio.Location = new System.Drawing.Point(178, 590);
+         this.labelCampoVazio.Name = "labelCampoVazio";
+         this.labelCampoVazio.Size = new System.Drawing.Size(144, 13);
+         this.labelCampoVazio.TabIndex = 16;
+         this.labelCampoVazio.Text = "Algum campo esta vazio";
+         this.labelCampoVazio.Visible = false;
+         // 
+         // labelSemCasa
+         // 
+         this.labelSemCasa.AutoSize = true;
+         this.labelSemCasa.BackColor = System.Drawing.Color.White;
+         this.labelSemCasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelSemCasa.ForeColor = System.Drawing.Color.Red;
+         this.labelSemCasa.Location = new System.Drawing.Point(162, 590);
+         this.labelSemCasa.Name = "labelSemCasa";
+         this.labelSemCasa.Size = new System.Drawing.Size(176, 13);
+         this.labelSemCasa.TabIndex = 17;
+         this.labelSemCasa.Text = "Adicione no mínimo uma casa";
+         this.labelSemCasa.Visible = false;
+         // 
+         // labelErroPost
+         // 
+         this.labelErroPost.AutoSize = true;
+         this.labelErroPost.BackColor = System.Drawing.Color.White;
+         this.labelErroPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErroPost.ForeColor = System.Drawing.Color.Red;
+         this.labelErroPost.Location = new System.Drawing.Point(145, 590);
+         this.labelErroPost.Name = "labelErroPost";
+         this.labelErroPost.Size = new System.Drawing.Size(210, 13);
+         this.labelErroPost.TabIndex = 18;
+         this.labelErroPost.Text = "Houve algum erro, tente novamente";
+         this.labelErroPost.Visible = false;
          // 
          // AdicionarEditarClienteDialog
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(500, 588);
+         this.ClientSize = new System.Drawing.Size(500, 610);
+         this.Controls.Add(this.labelErroPost);
+         this.Controls.Add(this.labelSemCasa);
+         this.Controls.Add(this.labelCampoVazio);
+         this.Controls.Add(this.labelCampoVazioNenhumaCasa);
+         this.Controls.Add(this.labelErroExcluirCasa);
          this.Controls.Add(this.panel1);
          this.Controls.Add(this.labelCasas);
          this.Controls.Add(this.btnOk);
@@ -157,10 +232,11 @@
          this.Text = "AdicionarClienteDialog";
          this.Load += new System.EventHandler(this.AdicionarClienteDialog_Load);
          this.panelTopBar.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).EndInit();
          this.flowCasas.ResumeLayout(false);
          this.panel1.ResumeLayout(false);
-         ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).EndInit();
          this.ResumeLayout(false);
+         this.PerformLayout();
 
       }
 
@@ -177,5 +253,10 @@
       private System.Windows.Forms.Label labelCasas;
       private System.Windows.Forms.Panel panel1;
       private testes.MeuButton btnAddCasa;
+      private System.Windows.Forms.Label labelErroExcluirCasa;
+      private System.Windows.Forms.Label labelCampoVazioNenhumaCasa;
+      private System.Windows.Forms.Label labelCampoVazio;
+      private System.Windows.Forms.Label labelSemCasa;
+      private System.Windows.Forms.Label labelErroPost;
    }
 }

@@ -56,6 +56,21 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemBoletos.setHeightFechado(70);
          expandableItemBoletos.bodyPanel.Controls.Add(boletosItem);
 
+         expandableItemSenha.labelTitle.Font = Fonts.mainBold14;
+         expandableItemSenha.labelTitle.ForeColor = Colors.primaryText;
+         expandableItemSenha.labelTitle.Text = "SENHA";
+         expandableItemSenha.labelDescription.Font = Fonts.mainBold10;
+         expandableItemSenha.labelDescription.ForeColor = Colors.secondaryText;
+         expandableItemSenha.labelDescription.Text = "Alteração da senha";
+         expandableItemSenha.BackColor = Colors.bg2;
+         expandableItemSenha.arrowPanel.BackColor = Colors.bg2;
+         expandableItemSenha.arrowImg.BackColor = Colors.bg2;
+         SenhaItem senhaItem = new SenhaItem();
+         senhaItem.Size = new Size(expandableItemSenha.Width, senhaItem.Height);
+         expandableItemSenha.setHeightAberto(senhaItem.Height);
+         expandableItemSenha.setHeightFechado(70);
+         expandableItemSenha.bodyPanel.Controls.Add(senhaItem);
+
       }
 
       private void ConfigControl_Resize(object sender, EventArgs e) {
@@ -72,6 +87,11 @@ namespace ProjBoletos.telas.mainPageControls {
          expandableItemBoletos.Size = new Size(flowLayoutPanel.Width, expandableItemBoletos.Height);
          expandableItemBoletos.Margin = new Padding(0, 5, 0, 0);
          expandableItemBoletos.resize();
+
+         expandableItemSenha.Location = new Point(0, 0);
+         expandableItemSenha.Size = new Size(flowLayoutPanel.Width, expandableItemSenha.Height);
+         expandableItemSenha.Margin = new Padding(0, 5, 0, 0);
+         expandableItemSenha.resize();
       }
 
       public void resize() {

@@ -63,6 +63,11 @@ namespace ProjBoletos.telas.dialogs {
 
       private void AdicionarClienteDialog_Load(object sender, EventArgs e) {
          BackColor = Colors.bg3;
+         labelErroPost.BackColor = Colors.bg3;
+         labelCampoVazio.BackColor = Colors.bg3;
+         labelCampoVazioNenhumaCasa.BackColor = Colors.bg3;
+         labelErroExcluirCasa.BackColor = Colors.bg3;
+         labelSemCasa.BackColor = Colors.bg3;
 
          panelTopBar.BackColor = Colors.bgDark2;
          panelTopBar.Location = new Point(ClientRectangle.X, ClientRectangle.Y);
@@ -101,7 +106,7 @@ namespace ProjBoletos.telas.dialogs {
             txtBoxEmail.txtBox.Text = sacado.email;
 
             foreach (Casa casa in sacado.casas) {
-               AdicionarEditarClienteCasaItem item = new AdicionarEditarClienteCasaItem(casa.id, casa.diaVencimento,casa.bairro, casa.cep, casa.cidade, casa.numHidrometro, casa.maxHidrometro,casa.numero, casa.referencia, casa.rua, casa.uf) {
+               AdicionarEditarClienteCasaItem item = new AdicionarEditarClienteCasaItem(casa.id, casa.diaVencimento, casa.bairro, casa.cep, casa.cidade, casa.numHidrometro, casa.maxHidrometro, casa.numero, casa.referencia, casa.rua, casa.uf) {
                   Location = new Point(0, 0),
                   Size = new Size(flowCasas.Width - 35, 50)
                };
@@ -112,7 +117,12 @@ namespace ProjBoletos.telas.dialogs {
                   if (res) {
                      flowCasas.Controls.Remove(item);
                   } else {
-                     MessageBox.Show("Algum erro aconteceu ao excluir a casa");
+                     //MessageBox.Show("Algum erro aconteceu ao excluir a casa");
+                     labelErroPost.Visible = false;
+                     labelCampoVazio.Visible = false;
+                     labelCampoVazioNenhumaCasa.Visible = false;
+                     labelErroExcluirCasa.Visible = true;
+                     labelSemCasa.Visible = false;
                   }
                });
                flowCasas.Controls.Add(item);
@@ -121,7 +131,7 @@ namespace ProjBoletos.telas.dialogs {
          }
 
          btnAddCasa.Size = new Size(120, 40);
-         btnAddCasa.Margin = new Padding((flowCasas.Width /2) - (btnAddCasa.Width/2) - itemCasaPadding*2, 0,0,0);
+         btnAddCasa.Margin = new Padding((flowCasas.Width / 2) - (btnAddCasa.Width / 2) - itemCasaPadding * 2, 0, 0, 0);
 
          txtBoxDocumento.BackColor = Colors.bg3;
          txtBoxEmail.BackColor = Colors.bg3;
@@ -163,13 +173,28 @@ namespace ProjBoletos.telas.dialogs {
 
          if (camposVazios || flowCasas.Controls.Count <= 1) {
             if (camposVazios && flowCasas.Controls.Count <= 1) {
-               MessageBox.Show("Campos vazios e nenhuma casa adicionada");
+               //MessageBox.Show("Campos vazios e nenhuma casa adicionada");
+               labelErroPost.Visible = false;
+               labelCampoVazio.Visible = false;
+               labelCampoVazioNenhumaCasa.Visible = true;
+               labelErroExcluirCasa.Visible = false;
+               labelSemCasa.Visible = false;
             } else {
                if (camposVazios) {
-                  MessageBox.Show("Algum campo esta vazio");
+                  //MessageBox.Show("Algum campo esta vazio");
+                  labelErroPost.Visible = false;
+                  labelCampoVazio.Visible = true;
+                  labelCampoVazioNenhumaCasa.Visible = false;
+                  labelErroExcluirCasa.Visible = false;
+                  labelSemCasa.Visible = false;
                }
                if (flowCasas.Controls.Count <= 1) {
-                  MessageBox.Show("Adicione no mínimo uma casa");
+                  //MessageBox.Show("Adicione no mínimo uma casa");
+                  labelErroPost.Visible = false;
+                  labelCampoVazio.Visible = false;
+                  labelCampoVazioNenhumaCasa.Visible = false;
+                  labelErroExcluirCasa.Visible = false;
+                  labelSemCasa.Visible = true;
                }
             }
 
@@ -187,12 +212,17 @@ namespace ProjBoletos.telas.dialogs {
                this.Close();
                this.DialogResult = DialogResult.OK;
                if (dialogMode == DIALOG_MODE_ADICIONAR) {
-                  MessageBox.Show("Cliente inserido com sucesso.");
-               }else if (dialogMode == DIALOG_MODE_EDITAR) {
-                  MessageBox.Show("Cliente editado com sucesso.");
+                  //MessageBox.Show("Cliente inserido com sucesso");
+               } else if (dialogMode == DIALOG_MODE_EDITAR) {
+                  //MessageBox.Show("Cliente editado com sucesso");
                }
             } else {
-               MessageBox.Show("Houve algum erro, tente novamente.");
+               //MessageBox.Show("Houve algum erro, tente novamente");
+               labelErroPost.Visible = true;
+               labelCampoVazio.Visible = false;
+               labelCampoVazioNenhumaCasa.Visible = false;
+               labelErroExcluirCasa.Visible = false;
+               labelSemCasa.Visible = false;
             }
          }
       }
@@ -202,7 +232,7 @@ namespace ProjBoletos.telas.dialogs {
 
          var client = new RestClient(ServerConfig.ipServer + "projeto-boletos-server/adicionarEditarSacado.php");
          // client.Authenticator = new HttpBasicAuthenticator(username, password);
-         
+
          var request = new RestRequest("text/plain");
          request.AddParameter("auth-usr", ServerConfig.serverAuthUsr);
          request.AddParameter("auth-psw", ServerConfig.serverAuthPsw);
@@ -319,6 +349,17 @@ namespace ProjBoletos.telas.dialogs {
          });
          flowCasas.Controls.Add(adicionarEditarClienteCasaItem);
          flowCasas.Controls.SetChildIndex(adicionarEditarClienteCasaItem, flowCasas.Controls.IndexOf(btnAddCasa));
+      }
+
+      protected override void WndProc(ref Message m) {
+         const UInt32 WM_NCACTIVATE = 0x0086;
+
+         if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+         } else {
+            base.WndProc(ref m);
+         }
       }
    }
 }

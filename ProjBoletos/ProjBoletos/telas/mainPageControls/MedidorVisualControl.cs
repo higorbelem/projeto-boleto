@@ -109,6 +109,8 @@ namespace ProjBoletos.telas.mainPageControls {
                AdicionarEditarMedidorVisualizador adicionarEditarMedidorVisualizador = new AdicionarEditarMedidorVisualizador(cedente, medidor, AdicionarEditarMedidorVisualizador.DIALOG_MODE_EDITAR);
                var resDialog = adicionarEditarMedidorVisualizador.ShowDialog();
 
+               Parent.FindForm().Activate();
+
                if (resDialog == DialogResult.OK) {
                   updateCustomViewList();
                }
@@ -160,8 +162,10 @@ namespace ProjBoletos.telas.mainPageControls {
       }
 
       public void btnAdicionar_Click(object sender, EventArgs e) {
-         AdicionarEditarMedidorVisualizador adicionarEditarMedidorVisualizador = new AdicionarEditarMedidorVisualizador(cedente,null,AdicionarEditarMedidorVisualizador.DIALOG_MODE_ADICIONAR);
+         AdicionarEditarMedidorVisualizador adicionarEditarMedidorVisualizador = new AdicionarEditarMedidorVisualizador(cedente, null, AdicionarEditarMedidorVisualizador.DIALOG_MODE_ADICIONAR);
          var resDialog = adicionarEditarMedidorVisualizador.ShowDialog();
+
+         Parent.FindForm().Activate();
 
          if (resDialog == DialogResult.OK) {
             updateCustomViewList();

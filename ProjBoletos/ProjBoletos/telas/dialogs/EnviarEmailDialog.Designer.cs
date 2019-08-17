@@ -30,7 +30,8 @@
          this.label1 = new System.Windows.Forms.Label();
          this.btnEnviar = new ProjBoletos.testes.MeuButton();
          this.txtBoxSenha = new ProjBoletos.components.MeuTextbox();
-         this.txtBoxEmail = new ProjBoletos.components.MeuTextbox(false);
+         this.txtBoxEmail = new ProjBoletos.components.MeuTextbox();
+         this.labelErro = new System.Windows.Forms.Label();
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
@@ -68,7 +69,7 @@
          // 
          // label1
          // 
-         this.label1.Location = new System.Drawing.Point(41, 78);
+         this.label1.Location = new System.Drawing.Point(41, 76);
          this.label1.Name = "label1";
          this.label1.Size = new System.Drawing.Size(418, 45);
          this.label1.TabIndex = 8;
@@ -76,7 +77,7 @@
          // 
          // btnEnviar
          // 
-         this.btnEnviar.Location = new System.Drawing.Point(57, 238);
+         this.btnEnviar.Location = new System.Drawing.Point(57, 236);
          this.btnEnviar.Name = "btnEnviar";
          this.btnEnviar.Size = new System.Drawing.Size(386, 50);
          this.btnEnviar.TabIndex = 7;
@@ -85,7 +86,7 @@
          // txtBoxSenha
          // 
          this.txtBoxSenha.BackColor = System.Drawing.Color.White;
-         this.txtBoxSenha.Location = new System.Drawing.Point(12, 182);
+         this.txtBoxSenha.Location = new System.Drawing.Point(12, 180);
          this.txtBoxSenha.Name = "txtBoxSenha";
          this.txtBoxSenha.Size = new System.Drawing.Size(476, 41);
          this.txtBoxSenha.TabIndex = 6;
@@ -93,16 +94,30 @@
          // txtBoxEmail
          // 
          this.txtBoxEmail.BackColor = System.Drawing.Color.White;
-         this.txtBoxEmail.Location = new System.Drawing.Point(12, 135);
+         this.txtBoxEmail.Location = new System.Drawing.Point(12, 133);
          this.txtBoxEmail.Name = "txtBoxEmail";
          this.txtBoxEmail.Size = new System.Drawing.Size(476, 41);
          this.txtBoxEmail.TabIndex = 5;
+         // 
+         // labelErro
+         // 
+         this.labelErro.AutoSize = true;
+         this.labelErro.BackColor = System.Drawing.Color.White;
+         this.labelErro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErro.ForeColor = System.Drawing.Color.Red;
+         this.labelErro.Location = new System.Drawing.Point(183, 297);
+         this.labelErro.Name = "labelErro";
+         this.labelErro.Size = new System.Drawing.Size(135, 13);
+         this.labelErro.TabIndex = 13;
+         this.labelErro.Text = "Campo de senha vazio";
+         this.labelErro.Visible = false;
          // 
          // EnviarEmailDialog
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(500, 302);
+         this.ClientSize = new System.Drawing.Size(500, 324);
+         this.Controls.Add(this.labelErro);
          this.Controls.Add(this.label1);
          this.Controls.Add(this.btnEnviar);
          this.Controls.Add(this.txtBoxSenha);
@@ -117,6 +132,7 @@
          this.panelTopBar.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).EndInit();
          this.ResumeLayout(false);
+         this.PerformLayout();
 
       }
 
@@ -129,5 +145,6 @@
       private components.MeuTextbox txtBoxSenha;
       private testes.MeuButton btnEnviar;
       private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.Label labelErro;
    }
 }

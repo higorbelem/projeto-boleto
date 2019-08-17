@@ -63,14 +63,15 @@ namespace ProjBoletos.telas.dialogs {
             caminhoArquivo = Path.GetDirectoryName(Application.ExecutablePath) + "\\remessas\\";
 
          } catch (Exception e) {
-            MessageBox.Show(e.ToString(), "Erro ao criar o arquivo");
+            //MessageBox.Show(e.ToString(), "Erro ao criar o arquivo");
+            labelErro.Visible = true;
          }
 
       }
 
       private void EnviarRemessaDialog_Load(object sender, EventArgs e) {
          BackColor = Colors.bg3;
-         
+
          toolTip1.AutoPopDelay = 5000;
          toolTip1.InitialDelay = 1000;
          toolTip1.ReshowDelay = 500;
@@ -136,7 +137,7 @@ namespace ProjBoletos.telas.dialogs {
       }
 
       private void btnAbrirSite_Click(object sender, EventArgs e) {
-         if(cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("001")) {
+         if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("001")) {
             Process.Start("https://www.bb.com.br");
          } else if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("341")) {
             Process.Start("https://www.itau.com.br/index.html");
@@ -152,6 +153,17 @@ namespace ProjBoletos.telas.dialogs {
       private void btnJaEnviei_Click(object sender, EventArgs e) {
          this.Close();
          this.DialogResult = DialogResult.OK;
+      }
+
+      protected override void WndProc(ref Message m) {
+         const UInt32 WM_NCACTIVATE = 0x0086;
+
+         if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+         } else {
+            base.WndProc(ref m);
+         }
       }
    }
 }

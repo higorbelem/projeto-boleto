@@ -75,7 +75,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             if (remessas[i].enviado.Equals("1")) {
                remessasEnviada++;
                if (DateTime.Today.Year == remessas[i].data.Year && DateTime.Today.Month == remessas[i].data.Month && DateTime.Today.Day == remessas[i].data.Day) { // se a medição é atrasada e foi feita hoje pode ser que seja a medição do mes seguinte
-                  remessasEnviadaHoje++;     
+                  remessasEnviadaHoje++;
                }
             } else {
                remessasNaoEnviada++;
@@ -102,25 +102,25 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          Loading loading = new Loading();
          loading.task = new Task(new Action(() => {
             bool result = buscarRemessas(cedente.id);
-            
+
             loading.terminou = true;
             loading.terminouBem = result;
          }));
 
          var res = loading.ShowDialog();
-      
+
          //if (res == DialogResult.OK) {
-            buscaCompleta = true;
-            atualizarCards(remessas);
-            atualizarFlow(remessas);
-            //customListView.UpdateList(medicoes);
+         buscaCompleta = true;
+         atualizarCards(remessas);
+         atualizarFlow(remessas);
+         //customListView.UpdateList(medicoes);
          //}
       }
 
       public void atualizarFlow(List<Remessa> remessas) {
 
          if (buscaCompleta && atualizacaoFlowCompleta) {
-            
+
             atualizacaoFlowCompleta = false;
 
             flowRemessas.Controls.Clear();
@@ -147,7 +147,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                   BackColor = Colors.bg,
                   ForeColor = Colors.primaryText,
                   Font = Fonts.mainBold10,
-                  Location = new Point(0,0),
+                  Location = new Point(0, 0),
                   Size = new Size(flowRemessas.Width, 50),
                   TextAlign = ContentAlignment.MiddleCenter,
                   AutoSize = false,
@@ -167,7 +167,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          };
 
-         System.Drawing.Rectangle rectLabelTop = new System.Drawing.Rectangle(0,0,size.Width,20);
+         System.Drawing.Rectangle rectLabelTop = new System.Drawing.Rectangle(0, 0, size.Width, 20);
          string labelText = "";
          Color labelBackColor;
          if (remessa.enviado.Equals("1")) {
@@ -189,7 +189,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             Margin = new Padding(0)
          });
 
-         System.Drawing.Rectangle outsidePadding = new System.Drawing.Rectangle(padding,rectLabelTop.Y + rectLabelTop.Height, size.Width - padding*2, 0);
+         System.Drawing.Rectangle outsidePadding = new System.Drawing.Rectangle(padding, rectLabelTop.Y + rectLabelTop.Height, size.Width - padding * 2, 0);
 
          System.Drawing.Rectangle rectLabelId = new System.Drawing.Rectangle(outsidePadding.X, outsidePadding.Y, 80, 60);
          panel.Controls.Add(new Label() {
@@ -208,9 +208,9 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          string labelBancoText = "";
          if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("001")) {
             labelBancoText = "BANCO DO BRASIL";
-         } else if(cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("341")){
+         } else if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("341")) {
             labelBancoText = "ITAÚ";
-         } else if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("237")){
+         } else if (cedente.getContaById(remessa.medicoes[0].contaSelecionadaIndex).banco.Equals("237")) {
             labelBancoText = "BRADESCO";
          }
          panel.Controls.Add(new Label() {
@@ -236,7 +236,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             ForeColor = Colors.primaryText,
             Font = Fonts.mainBold10,
             Location = new Point(0, 0),
-            Size = new Size(panelInfoData.Width/2, panelInfoData.Height),
+            Size = new Size(panelInfoData.Width / 2, panelInfoData.Height),
             TextAlign = ContentAlignment.MiddleLeft,
             AutoSize = false,
             Margin = new Padding(0)
@@ -393,7 +393,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          MeuButton mb1 = new MeuButton() {
             title = btnTxt1,
             Location = new Point(0, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2),
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height / 2),
             Margin = new Padding(0)
          };
          mb1.Click += new EventHandler((object s1, EventArgs e1) => {
@@ -401,12 +401,14 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
             EnviarEmailDialog enviarEmailDialog = new EnviarEmailDialog(cedente, remessa);
             enviarEmailDialog.ShowDialog();
 
+            Parent.FindForm().Activate();
+
          });
          panelButtons.Controls.Add(mb1);
          MeuButton mb2 = new MeuButton() {
             title = btnTxt2,
             Location = new Point(panelButtons.Width / 3, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height / 2)
          };
          mb2.Click += new EventHandler((object s1, EventArgs e1) => {
 
@@ -427,7 +429,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                   bool hasMorePages = false;
 
                   if (agrupado) {
- 
+
                      indexMedicao++;
                      if (indexMedicao < remessa.medicoes.Count && indexMedicao <= indexMax) {
                         hasMorePages = true;
@@ -521,7 +523,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          MeuButton mb3 = new MeuButton() {
             title = btnTxt3,
             Location = new Point((panelButtons.Width / 3) * 2, 0),
-            Size = new Size(panelButtons.Width / 3, panelButtons.Height/2)
+            Size = new Size(panelButtons.Width / 3, panelButtons.Height / 2)
          };
          mb3.Click += new EventHandler((object s1, EventArgs e1) => {
             Loading loading = new Loading();
@@ -542,7 +544,7 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
          MeuButton mb4 = new MeuButton() {
             title = btnTxt4,
             Location = new Point(0, mb3.Location.Y + mb3.Height),
-            Size = new Size(panelButtons.Width, panelButtons.Height/2)
+            Size = new Size(panelButtons.Width, panelButtons.Height / 2)
          };
          mb4.Click += new EventHandler((object s1, EventArgs e1) => {
             if (remessa.enviado.Equals("1")) {
@@ -551,6 +553,8 @@ namespace ProjBoletos.telas.mainPageControls.HomeTabs {
                //MessageBox.Show(remessa.arquivoRemessa);
                EnviarRemessaDialog enviarRemessaDialog = new EnviarRemessaDialog(remessa, cedente);
                var res = enviarRemessaDialog.ShowDialog();
+
+               Parent.FindForm().Activate();
 
                if (res == DialogResult.OK) {
                   Loading loading = new Loading();

@@ -317,6 +317,12 @@
     <Compile Include="telas\mainPageControls\configItems\PerfilItem.Designer.cs">
       <DependentUpon>PerfilItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="telas\mainPageControls\configItems\SenhaItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="telas\mainPageControls\configItems\SenhaItem.Designer.cs">
+      <DependentUpon>SenhaItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="telas\mainPageControls\HomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -495,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\configItems\PerfilItem.resx">
       <DependentUpon>PerfilItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="telas\mainPageControls\configItems\SenhaItem.resx">
+      <DependentUpon>SenhaItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="telas\mainPageControls\HomeControl.resx">
       <DependentUpon>HomeControl.cs</DependentUpon>

@@ -44,6 +44,7 @@ namespace ProjBoletos.telas.dialogs {
 
       private void EnviarEmailDialog_Load(object sender, EventArgs e) {
          BackColor = Colors.bg3;
+         labelErro.BackColor = Colors.bg3;
 
          panelTopBar.BackColor = Colors.bgDark2;
          panelTopBar.Location = new Point(ClientRectangle.X, ClientRectangle.Y);
@@ -101,6 +102,7 @@ namespace ProjBoletos.telas.dialogs {
 
       private void btnEnviar_Click(object sender, EventArgs e) {
          if (!txtBoxSenha.isEmpty) {
+
             Loading loading = new Loading();
             loading.task = new Task(new Action(() => {
                MailAddress from = new MailAddress(cedente.email, cedente.nome);
@@ -110,7 +112,7 @@ namespace ProjBoletos.telas.dialogs {
                mailClient.UseDefaultCredentials = false;
                mailClient.EnableSsl = true;
                mailClient.Credentials = new System.Net.NetworkCredential(cedente.email, txtBoxSenha.txtBox.Text);
-               
+
                bool resultEmail = SendEmail(mailClient, from, remessa, loading);
                loading.terminou = true;
                loading.terminouBem = resultEmail;
@@ -121,9 +123,16 @@ namespace ProjBoletos.telas.dialogs {
             if (res == DialogResult.OK) {
                this.Close();
                this.DialogResult = DialogResult.OK;
+            } else {
+               labelErro.Text = "sdasd";
+               labelErro.Location = new Point((ClientRectangle.Width / 2) - (labelErro.Width / 2), labelErro.Location.Y);
+               labelErro.Visible = true;
             }
          } else {
-            MessageBox.Show("Campo de senha vazio");
+            //MessageBox.Show("Campo de senha vazio");
+            labelErro.Text = "Campo de senha vazio";
+            labelErro.Location = new Point((ClientRectangle.Width / 2) - (labelErro.Width / 2), labelErro.Location.Y);
+            labelErro.Visible = true;
          }
       }
 
@@ -141,19 +150,31 @@ namespace ProjBoletos.telas.dialogs {
             msgMail.Body = "asdadasd";
             msgMail.IsBodyHtml = true;
             msgMail.Attachments.Add(new Attachment(criarPdf(medicao)));
-            
+
             try {
                mailClient.Send(msgMail);
-            }catch (SmtpException ex) {
+            } catch (SmtpException ex) {
                Console.WriteLine("{0}", ex.StatusCode);
                if (ex.StatusCode == SmtpStatusCode.MustIssueStartTlsFirst) {
                   MessageBox.Show("Senha e/ou email incorretos", "Falha ao mandar email");
-               }else if (ex.StatusCode == SmtpStatusCode.GeneralFailure) {
-                  MessageBox.Show("Verifique sua internet","Falha ao mandar email");
+                  /*labelErro1.Text = "Senha e/ou email incorretos";
+                  labelErro1.Location = new Point((ClientRectangle.Width / 2) - (labelErro1.Width / 2), labelErro1.Location.Y);
+                  labelErro1.Visible = true;*/
+                  msgMail.Dispose();
+               } else if (ex.StatusCode == SmtpStatusCode.GeneralFailure) {
+                  MessageBox.Show("Verifique sua internet", "Falha ao mandar email");
+                  /*labelErro1.Text = "Verifique sua internet";
+                  labelErro1.Location = new Point((ClientRectangle.Width / 2) - (labelErro1.Width / 2), labelErro1.Location.Y);
+                  labelErro1.Visible = true;*/
+                  msgMail.Dispose();
                } else {
                   MessageBox.Show(ex.Message, "Falha ao mandar email");
+                  /*labelErro1.Text = ex.Message;
+                  labelErro1.Location = new Point((ClientRectangle.Width / 2) - (labelErro1.Width / 2), labelErro1.Location.Y);
+                  labelErro1.Visible = true;*/
+                  msgMail.Dispose();
                }
-               msgMail.Dispose();
+
                return false;
             } catch (Exception ex) {
                Console.WriteLine("{0} / {1}", ex.HResult, SmtpStatusCode.ClientNotPermitted);
@@ -201,7 +222,10 @@ namespace ProjBoletos.telas.dialogs {
             outputFile = Path.GetDirectoryName(Application.ExecutablePath) + "\\boletos\\" + nomeArquivo;
 
          } catch (Exception e) {
-            MessageBox.Show(e.ToString(), "Erro ao criar o arquivo");
+            //MessageBox.Show(e.ToString(), "Erro ao criar o arquivo");
+            labelErro.Text = e.ToString();
+            labelErro.Location = new Point((ClientRectangle.Width / 2) - (labelErro.Width / 2), labelErro.Location.Y);
+            labelErro.Visible = true;
             return null;
          }
 
@@ -222,6 +246,17 @@ namespace ProjBoletos.telas.dialogs {
          }
 
          return outputFile;
+      }
+
+      protected override void WndProc(ref Message m) {
+         const UInt32 WM_NCACTIVATE = 0x0086;
+
+         if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
+            this.Close();
+            this.DialogResult = DialogResult.Cancel;
+         } else {
+            base.WndProc(ref m);
+         }
       }
 
    }

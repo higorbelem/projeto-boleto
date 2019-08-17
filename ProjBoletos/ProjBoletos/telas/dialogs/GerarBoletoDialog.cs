@@ -100,6 +100,7 @@ namespace ProjBoletos.telas.dialogs {
       private void GerarBoletoDialog_Load(object sender, EventArgs e) {
 
          BackColor = Colors.bg3;
+         labelErroVazio.BackColor = Colors.bg3;
 
          panelTopBar.BackColor = Colors.bgDark2;
          panelTopBar.Location = new Point(ClientRectangle.X, ClientRectangle.Y);
@@ -115,7 +116,7 @@ namespace ProjBoletos.telas.dialogs {
          labelTitle.TextAlign = ContentAlignment.MiddleCenter;
          labelTitle.Font = Fonts.mainBold14;
          labelTitle.ForeColor = Colors.bg;
-         
+
          btnOk.title = "OK";
          btnOk.cornerRadius = 5;
 
@@ -155,7 +156,8 @@ namespace ProjBoletos.telas.dialogs {
       }
       private void btnOk_Click(object sender, EventArgs e) {
          if (comboBoxContas.SelectedIndex == 0 || comboBoxCarteiras.SelectedIndex == 0) {
-            MessageBox.Show("Alguma opção ficou vazia", "Atenção", MessageBoxButtons.OK);
+            labelErroVazio.Visible = true;
+            //MessageBox.Show(this, "Alguma opção ficou vazia", "Atenção", MessageBoxButtons.OK);
          } else {
 
             if (cedente.contas[comboBoxContas.SelectedIndex - 1].banco.Equals("001")) {
@@ -216,7 +218,7 @@ namespace ProjBoletos.telas.dialogs {
          }
       }
 
-      /*protected override void WndProc(ref Message m) {
+      protected override void WndProc(ref Message m) {
          const UInt32 WM_NCACTIVATE = 0x0086;
 
          if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
@@ -225,6 +227,6 @@ namespace ProjBoletos.telas.dialogs {
          } else {
             base.WndProc(ref m);
          }
-      }*/
+      }
    }
 }

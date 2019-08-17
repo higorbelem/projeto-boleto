@@ -130,6 +130,8 @@ namespace ProjBoletos.telas.mainPageControls.configItems {
 
          btnSalvar.Size = new Size(270, 50);
          btnSalvar.Location = new Point(((rectWithPadding.Width / 4) * 3) - (btnSalvar.Width / 2), txtBoxUf.Location.Y + txtBoxUf.Height + 15);
+
+         this.Height = btnSalvar.Location.Y + btnSalvar.Height + 20;
       }
 
       private void panel1_Paint(object sender, PaintEventArgs e) {

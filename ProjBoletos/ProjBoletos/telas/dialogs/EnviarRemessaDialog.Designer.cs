@@ -33,8 +33,9 @@
          this.btnAbrirArquivo = new ProjBoletos.testes.MeuButton();
          this.btnAbrirSite = new ProjBoletos.testes.MeuButton();
          this.btnJaEnviei = new ProjBoletos.testes.MeuButton();
-         this.textBoxCaminho = new ProjBoletos.components.MeuTextbox(false);
+         this.textBoxCaminho = new ProjBoletos.components.MeuTextbox();
          this.btnCopiar = new ProjBoletos.testes.MeuButton();
+         this.labelErro = new System.Windows.Forms.Label();
          this.panelTopBar.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.backButtonImg)).BeginInit();
          this.SuspendLayout();
@@ -119,11 +120,25 @@
          this.btnCopiar.TabIndex = 6;
          this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
          // 
+         // labelErro
+         // 
+         this.labelErro.AutoSize = true;
+         this.labelErro.BackColor = System.Drawing.Color.White;
+         this.labelErro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+         this.labelErro.ForeColor = System.Drawing.Color.Red;
+         this.labelErro.Location = new System.Drawing.Point(181, 595);
+         this.labelErro.Name = "labelErro";
+         this.labelErro.Size = new System.Drawing.Size(134, 13);
+         this.labelErro.TabIndex = 14;
+         this.labelErro.Text = "Erro ao criar o arquivo";
+         this.labelErro.Visible = false;
+         // 
          // EnviarRemessaDialog
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(500, 600);
+         this.ClientSize = new System.Drawing.Size(500, 614);
+         this.Controls.Add(this.labelErro);
          this.Controls.Add(this.btnAbrirArquivo);
          this.Controls.Add(this.btnAbrirSite);
          this.Controls.Add(this.btnJaEnviei);
@@ -155,5 +170,6 @@
       private testes.MeuButton btnJaEnviei;
       private testes.MeuButton btnAbrirSite;
       private testes.MeuButton btnAbrirArquivo;
+      private System.Windows.Forms.Label labelErro;
    }
 }

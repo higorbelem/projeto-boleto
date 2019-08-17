@@ -319,7 +319,7 @@ namespace ProjBoletos.telas.dialogs {
          var response = client.Post(request);
 
          var content = response.Content; // raw content as string
-         
+
          if (response.StatusCode == System.Net.HttpStatusCode.OK) {
 
             if (content.Trim().Equals("ok")) {
@@ -332,7 +332,7 @@ namespace ProjBoletos.telas.dialogs {
          return false;
       }
 
-      /*protected override void WndProc(ref Message m) {
+      protected override void WndProc(ref Message m) {
          const UInt32 WM_NCACTIVATE = 0x0086;
 
          if (m.Msg == WM_NCACTIVATE && m.WParam.ToInt32() == 0) {
@@ -341,6 +341,6 @@ namespace ProjBoletos.telas.dialogs {
          } else {
             base.WndProc(ref m);
          }
-      }*/
+      }
    }
 }
